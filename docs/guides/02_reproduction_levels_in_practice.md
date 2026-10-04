@@ -18,8 +18,8 @@ lineage, configuration, and initial field used by each supported replay.
 
 | Example | Distributed here | External | Can be regenerated here | Cannot be obtained from this tree alone |
 |---|---|---|---|---|
-| Scalar shrinkage | Benchmark configuration, expected metrics, and reference solver | Nothing | Reference fields and reviewed scalar metrics | A PINN rollout, which is not part of this reference-solver benchmark |
-| N25 prospective score | 40 compact arrays, manifest, expected score, and public replay weights | Full 12,000-step model and reference fields | The reviewed score from the compact arrays | The original full trajectories through this score command |
+| Scalar shrinkage | Benchmark configuration, expected metrics, and reference solver | Nothing | Reference fields and accepted scalar metrics | A PINN rollout, which is not part of this reference-solver benchmark |
+| N25 prospective score | 40 compact arrays, manifest, expected score, and public replay weights | Full 12,000-step model and reference fields | The accepted score from the compact arrays | The original full trajectories through this score command |
 | N25 development replay | Derived public weights, lineage, model configuration, initial field, and rollout code | Accepted reference trajectory | An autonomous model replay and its admissibility checks | The reported comparison percentage without the reference |
 | N16 prospective record | Compact score record, external-asset manifest, benchmark description, and media | Six sets of t0, model, and reference arrays | The public record and criteria checks | The six-case campaign and array-level verification when those assets are absent |
 
@@ -42,7 +42,7 @@ from the public tree alone.
 ## Score recomputation
 
 The following command recomputes the N25 prospective score from shipped compact
-arrays and checks it against the reviewed record. It does not rerun inference.
+arrays and checks it against the accepted record. It does not rerun inference.
 
 **Classification:** `EXECUTED_AND_PASSING`
 
@@ -51,9 +51,9 @@ python scripts/reproduce_n25_transfer.py --output <outside-tree>/n25_transfer_sc
 ```
 
 This recomputes the campaign metrics from the shipped compact arrays and
-compares them, field by field, against the reviewed `expected_score.json`.
+compares them, field by field, against the accepted `expected_score.json`.
 It runs on Windows as well as POSIX platforms and raises if the recomputed
-score differs from the reviewed record in any way.
+score differs from the accepted record in any way.
 
 ## Full recomputation
 

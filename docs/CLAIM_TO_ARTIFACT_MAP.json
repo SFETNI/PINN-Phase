@@ -234,7 +234,7 @@
     {
       "id": "reference_isolation",
       "source": "README.md",
-      "claim": "On the training path that produced every model distributed here -- pinn_phase.training.explicit_mpf_trainer -- training uses only the initial condition; reference frames after t0 are used solely for offline audit, never for training, early stopping, or checkpoint selection.",
+      "claim": "On the training path that produced every model distributed here except the native 128^3 model -- pinn_phase.training.explicit_mpf_trainer -- training uses only the initial condition; reference frames after t0 are used solely for offline audit, never for training, early stopping, or checkpoint selection. The native 128^3 model was trained by a later trainer revision that is not distributed; its declared policy is the same and is disclosed by digest in docs/TRAINING_PATH_DISCLOSURE.json.",
       "benchmark": "code_property",
       "level": "FULL_RECOMPUTATION",
       "supporting_paths": [
@@ -249,7 +249,7 @@
       "scope": "Verified for the explicit-MPF training path, which produced every model whose weights are distributed here. It is a claim about THAT path, not about every module in the shipped source. It does NOT hold for the historical scalar 64^3 spherical rung, whose warm-start lineage was selected with a score containing post-t0 reference terms; that rung is retained on the page, disclosed in README 'Scope and limitations' and beside the result itself, classified PROVENANCE_ONLY, and no weights for it are distributed.",
       "benchmark_note": "Not a benchmark. This is a property of the shipped training source, verified by the test suite, not a result derived from any benchmark's fields.",
       "verification_coverage": "tests/test_training_path_disclosure.py replays the disclosed policy of the four runs that carry one through the shipped guard and mutates each. The two 3D cube runs take their policy from benchmark adapter configurations that are identified by digest and not distributed, so their policies are recorded but not replayed. What the guard establishes, and what it does not, is stated in docs/TRAINING_PATH_DISCLOSURE.json 'guard_scope'; the data-flow property itself is established by reading explicit_mpf_trainer.py, not by the guard.",
-      "other_training_modules_present": "The shipped source also contains generic supervised training utilities that DO compare a prediction against a post-t0 reference frame in a differentiable loss: pinn_phase.training.baseline.train_autoregressive_surrogate and the SUPERVISED / WEAKLY_SUPERVISED modes in pinn_phase.training.modes. They are reviewed generic code, they are exported from the package, and they will run if a caller supplies reference frames. No model distributed here was trained with them, no benchmark in this archive invokes them, and they are outside the scope of the claim above -- which is why the claim names its path explicitly rather than speaking of 'the shipped code'. See docs/TRAINING_PATH_DISCLOSURE.json 'supervised_modules_present'."
+      "other_training_modules_present": "The shipped source also contains generic supervised training utilities that DO compare a prediction against a post-t0 reference frame in a differentiable loss: pinn_phase.training.baseline.train_autoregressive_surrogate and the SUPERVISED / WEAKLY_SUPERVISED modes in pinn_phase.training.modes. They are generic code, they are exported from the package, and they will run if a caller supplies reference frames. No model distributed here was trained with them, no benchmark in this archive invokes them, and they are outside the scope of the claim above -- which is why the claim names its path explicitly rather than speaking of 'the shipped code'. See docs/TRAINING_PATH_DISCLOSURE.json 'supervised_modules_present'."
     },
     {
       "id": "multigrain_n44_component_count",
@@ -263,6 +263,95 @@
       ],
       "digests": {},
       "not_supported_here": "No checkpoint, configuration or field for this run is distributed or identified in the evidence ledger. The animation is a retained earlier-public asset; component counts describe the topology of a thresholded field and are not persistent grain labels."
+    },
+    {
+      "id": "n8_128_training_case",
+      "source": "README.md",
+      "claim": "98.79% label agreement on a training initial condition at step 24,000 = 5.86 H, against 69.48% for persistence; exact five-grain survivor set.",
+      "benchmark": "n8_128_cube",
+      "level": "PROVENANCE_ONLY",
+      "supporting_paths": [
+        "benchmarks/n8_128_transfer/expected_score.json",
+        "checkpoints/n8_128_cube_multi_ic_hybrid.weights.npz",
+        "configs/models/n8_128_cube_multi_ic_hybrid.yaml"
+      ],
+      "digests": {
+        "accepted_parent_checkpoint": "0b04afab56139ecb13071396c7ca10777575add22d73949c0abeaaaeb0a4ed6b",
+        "public_weights": "4e94254e4694c9e0ed54b07019d3333cbd33c13293cfa560267ce139149a8462",
+        "record": "df3ef40418e903476d9bc4781f4e3b1211f7259e4fec3937b5d455fed1f69575",
+        "model_trajectory": "3e8081392b4723df762de0f452acd85015d7aa45229ae5e5c31d713d41da51f5",
+        "reference_trajectory": "e7309486c58568569f463bfe18b00ef96390de6b382bab9589e709dcec39e063",
+        "training_config": "4bfa4ea8759073dd492d730733486bf36a60646cb8a19c966a007a964232e71f"
+      },
+      "not_supported_here": "The model weights are distributed and verified, but the 128^3 initial fields and trajectories are external, so this number cannot be recomputed from the archive."
+    },
+    {
+      "id": "n8_128_unseen_near_horizon",
+      "source": "README.md",
+      "claim": "Across six blind initial conditions, 0.72-2.11% label disagreement at step 4,000 against 6.69-7.90% for persistence (analysis carried out after the full-horizon evaluation).",
+      "benchmark": "n8_128_transfer",
+      "level": "PROVENANCE_ONLY",
+      "supporting_paths": [
+        "benchmarks/n8_128_transfer/expected_score.json",
+        "benchmarks/n8_128_transfer/manifest.json"
+      ],
+      "digests": {
+        "accepted_parent_checkpoint": "0b04afab56139ecb13071396c7ca10777575add22d73949c0abeaaaeb0a4ed6b",
+        "public_weights": "4e94254e4694c9e0ed54b07019d3333cbd33c13293cfa560267ce139149a8462",
+        "record": "df3ef40418e903476d9bc4781f4e3b1211f7259e4fec3937b5d455fed1f69575"
+      },
+      "not_supported_here": "The model weights are distributed and verified, but the 128^3 initial fields and trajectories are external, so this number cannot be recomputed from the archive."
+    },
+    {
+      "id": "n8_128_unseen_full_horizon",
+      "source": "README.md",
+      "claim": "At step 24,000, two of six blind cases satisfy all six criteria and five of six keep the exact terminal survivor set; one retains an additional grain.",
+      "benchmark": "n8_128_transfer",
+      "level": "PROVENANCE_ONLY",
+      "supporting_paths": [
+        "benchmarks/n8_128_transfer/expected_score.json",
+        "benchmarks/n8_128_transfer/manifest.json",
+        "scripts/verify_n8_128_transfer.py"
+      ],
+      "digests": {
+        "accepted_parent_checkpoint": "0b04afab56139ecb13071396c7ca10777575add22d73949c0abeaaaeb0a4ed6b",
+        "public_weights": "4e94254e4694c9e0ed54b07019d3333cbd33c13293cfa560267ce139149a8462",
+        "record": "df3ef40418e903476d9bc4781f4e3b1211f7259e4fec3937b5d455fed1f69575"
+      },
+      "not_supported_here": "The model weights are distributed and verified, but the 128^3 initial fields and trajectories are external, so this number cannot be recomputed from the archive."
+    },
+    {
+      "id": "n8_128_development_cohort",
+      "source": "README.md",
+      "claim": "Four of six development cases satisfy all six criteria; all six keep the exact survivor set.",
+      "benchmark": "n8_128_transfer",
+      "level": "PROVENANCE_ONLY",
+      "supporting_paths": [
+        "benchmarks/n8_128_transfer/expected_score.json",
+        "benchmarks/n8_128_transfer/manifest.json"
+      ],
+      "digests": {
+        "accepted_parent_checkpoint": "0b04afab56139ecb13071396c7ca10777575add22d73949c0abeaaaeb0a4ed6b",
+        "public_weights": "4e94254e4694c9e0ed54b07019d3333cbd33c13293cfa560267ce139149a8462",
+        "record": "df3ef40418e903476d9bc4781f4e3b1211f7259e4fec3937b5d455fed1f69575"
+      },
+      "not_supported_here": "The model weights are distributed and verified, but the 128^3 initial fields and trajectories are external, so this number cannot be recomputed from the archive."
+    },
+    {
+      "id": "n8_128_case_specialization",
+      "source": "README.md",
+      "claim": "A fixed physics-only specialization brings the final-event residual from +1,460 to +520 steps and from +1,340 to +320 steps in two development cases, and keeps all criteria in a third.",
+      "benchmark": "n8_128_transfer",
+      "level": "PROVENANCE_ONLY",
+      "supporting_paths": [
+        "benchmarks/n8_128_transfer/expected_score.json"
+      ],
+      "digests": {
+        "accepted_parent_checkpoint": "0b04afab56139ecb13071396c7ca10777575add22d73949c0abeaaaeb0a4ed6b",
+        "public_weights": "4e94254e4694c9e0ed54b07019d3333cbd33c13293cfa560267ce139149a8462",
+        "record": "df3ef40418e903476d9bc4781f4e3b1211f7259e4fec3937b5d455fed1f69575"
+      },
+      "not_supported_here": "The model weights are distributed and verified, but the 128^3 initial fields and trajectories are external, so this number cannot be recomputed from the archive."
     }
   ],
   "n16_96_prospective_transfer": {
@@ -272,5 +361,13 @@
     "public_records": "benchmarks/n16_96_transfer/expected_score.json",
     "external_assets": "benchmarks/n16_96_transfer/manifest.json",
     "renderer": "scripts/render_n16_96_transfer.py"
+  },
+  "n8_128_transfer": {
+    "level": "PROVENANCE_ONLY",
+    "checkpoint_sha256": "0b04afab56139ecb13071396c7ca10777575add22d73949c0abeaaaeb0a4ed6b",
+    "no_new_training": true,
+    "public_records": "benchmarks/n8_128_transfer/expected_score.json",
+    "external_assets": "benchmarks/n8_128_transfer/manifest.json",
+    "renderer": "scripts/render_n8_128_transfer.py"
   }
 }

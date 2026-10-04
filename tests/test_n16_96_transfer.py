@@ -153,6 +153,10 @@ def test_all_six_media_bindings_frame_order_and_outputs() -> None:
     assert media["checkpoint_sha256"] == CHECKPOINT
     assert media["cohort_score_sha256"] == _records()["sealed_sources"]["cohort_score_sha256"]
     assert media["cohort_manifest_sha256"] == _records()["sealed_sources"]["cohort_manifest_sha256"]
+    assert media["schema"] == "pinn-phase-n16-96-media-v2"
+    assert media["synthetic"] is False
+    assert media["terminal_step"] == 1600
+    assert media["record_sha256"] == hashlib.sha256(RECORD_PATH.read_bytes()).hexdigest()
     environment = media["renderer_environment"]
     assert environment["freetype"] == "2.14.3"
     assert environment["font_file"] == "DejaVuSans.ttf"
@@ -161,25 +165,36 @@ def test_all_six_media_bindings_frame_order_and_outputs() -> None:
     poster = MEDIA_PATH.parent / "n16_96_unseen_cohort_reference_vs_pinn_phase_poster.png"
     with Image.open(gif) as image:
         frames = [frame.convert("RGBA").tobytes() for frame in ImageSequence.Iterator(image)]
-        assert image.size == (1500, 800)
+        assert image.size == (1360, 1060)
     assert len(frames) == 17
-    assert len(set(frames)) > 1
+    assert len(set(frames)) == 17
     with Image.open(poster) as image:
-        assert image.size == (1500, 860)
+        assert image.size == (1360, 1060)
     for name, entry in media["outputs"].items():
         payload = (MEDIA_PATH.parent / name).read_bytes()
         assert len(payload) == entry["bytes"]
         assert hashlib.sha256(payload).hexdigest() == entry["sha256"]
     assert media["outputs"] == {
         "n16_96_unseen_cohort_reference_vs_pinn_phase.gif": {
-            "bytes": 745191,
-            "sha256": "2334e8f880be27e1f16bef30a793ab3176cee180cd46a3b7d3d3679524cf4feb",
+            "bytes": 869427,
+            "sha256": "aad2401548208db3ad875671547aa01b1f646daac3232d5e4913b79a5d295970",
         },
         "n16_96_unseen_cohort_reference_vs_pinn_phase_poster.png": {
-            "bytes": 56948,
-            "sha256": "d692ad1d439039293769906f5f8f9d1d3ce1eaedc34731edfe4a4e4aaacf59f4",
+            "bytes": 146428,
+            "sha256": "aa7102ef7a3ca8940aeabb0a83da1d893dc38369940c47033b451a80136c5afc",
         },
     }
+
+
+def test_recomputed_cohort_values_in_the_media_manifest_equal_the_record() -> None:
+    """The plotted numbers, recomputed at render time, agree with the accepted record."""
+    media = _json(MEDIA_PATH)
+    renderer = runpy.run_path(str(ROOT / "scripts/render_n16_96_transfer.py"))
+    for case in _records()["cases"]:
+        recomputed = media["recomputed"][case["public_name"]]
+        renderer["check_against_record"](case, recomputed)
+        assert recomputed["reference_active"][-1] == 13
+    assert set(media["view"]["section_index"]) == {case["public_name"] for case in _records()["cases"]}
 
 
 def test_exact_media_environment_and_non_skipping_ci_job_are_declared() -> None:
@@ -219,6 +234,7 @@ def test_whole_tree_renderer_discovery_covers_every_renderer_manifest() -> None:
         "media/n16_96_interior/asset_manifest.json",
         "media/n16_96_transfer/asset_manifest.json",
         "media/n25_transfer/asset_manifest.json",
+        "media/n8_128_transfer/asset_manifest.json",
     ]
 
 
@@ -244,19 +260,24 @@ def test_manifest_covers_release_payload_without_inspecting_mutable_caches() -> 
     assert not list(ROOT.rglob("*.tar.gz"))
 
 
-def test_renderer_camera_metadata_matches_the_implemented_affine_mapping() -> None:
+def test_section_rule_uses_the_reference_alone_and_the_record_check_refuses_drift() -> None:
     renderer = runpy.run_path(str(ROOT / "scripts/render_n16_96_transfer.py"))
-    assert renderer["camera_metadata"](96) == {
-        "projection": "custom affine parallel voxel mapping",
-        "image_u": "x - y + (n - 1)",
-        "image_v": "integer rasterization of (x + y - z) / 2 + floor(n / 2)",
-        "raster_overwrite_order": "ascending x + y + z before raster overwrite",
-        "cutaway": "removed octant x,y,z >= 48",
-    }
-    source = (ROOT / "scripts/render_n16_96_transfer.py").read_text(encoding="utf-8")
-    assert "u=((x-y)+(n-1)).astype(np.int16)" in source
-    assert "v=((x+y)/2-z/2+n//2).astype(np.int16); depth=x+y+z" in source
-    assert "45°" not in source and "30°" not in source and "orthographic" not in source
+    # Grain 3 occupies plane 5 at step 0 and is gone by the scored step; the rule
+    # must pick that plane from the reference, whatever the model array holds.
+    reference = np.zeros((17, 8, 8, 8), dtype=np.uint8)
+    reference[:, :, :4, :] = 1
+    reference[:8, 5, 4:, 4:] = 3
+    assert renderer["section_index"](reference) == 5
+    still = np.ones((17, 8, 8, 8), dtype=np.uint8)
+    assert renderer["section_index"](still) == 4
+    case = _records()["cases"][0]
+    recomputed = _json(MEDIA_PATH)["recomputed"][case["public_name"]]
+    renderer["check_against_record"](case, recomputed)
+    drifted = dict(recomputed)
+    drifted["disagreement_percent"] = list(recomputed["disagreement_percent"])
+    drifted["disagreement_percent"][8] += 0.001
+    with pytest.raises(renderer["SourceConflict"]):
+        renderer["check_against_record"](case, drifted)
 
 
 def test_generated_benchmark_readme_lists_the_six_frozen_conditions() -> None:
@@ -393,22 +414,27 @@ def test_renderer_executes_end_to_end_with_synthetic_inputs(tmp_path: Path) -> N
     output = tmp_path / "rendered"
     completed = subprocess.run(
         [sys.executable, "-B", str(ROOT / "scripts/render_n16_96_transfer.py"),
-         "--science-root", str(science), "--out", str(output)],
+         "--science-root", str(science), "--out", str(output), "--synthetic-test"],
         cwd=ROOT, capture_output=True, text=True,
     )
     assert completed.returncode == 0, completed.stderr
     manifest = _json(output / "asset_manifest.json")
+    assert manifest["synthetic"] is True
     assert len(manifest["inputs"]) == 12
     assert manifest["steps"] == list(range(0, 3201, 200))
-    assert manifest["camera"] == {
-        "projection": "custom affine parallel voxel mapping",
-        "image_u": "x - y + (n - 1)",
-        "image_v": "integer rasterization of (x + y - z) / 2 + floor(n / 2)",
-        "raster_overwrite_order": "ascending x + y + z before raster overwrite",
-        "cutaway": "removed octant x,y,z >= 2",
-    }
+    assert manifest["view"]["selection_rule"] == _json(MEDIA_PATH)["view"]["selection_rule"]
+    assert len(manifest["view"]["section_index"]) == 6
     with Image.open(output / "n16_96_unseen_cohort_reference_vs_pinn_phase.gif") as image:
-        assert image.size == (1500, 800)
+        assert image.size == (1360, 1060)
         assert sum(1 for _ in ImageSequence.Iterator(image)) == 17
     with Image.open(output / "n16_96_unseen_cohort_reference_vs_pinn_phase_poster.png") as image:
-        assert image.size == (1500, 860)
+        assert image.size == (1360, 1060)
+
+    # Without the synthetic flag the shipped digests are enforced before drawing.
+    refused = subprocess.run(
+        [sys.executable, "-B", str(ROOT / "scripts/render_n16_96_transfer.py"),
+         "--science-root", str(science), "--out", str(tmp_path / "refused")],
+        cwd=ROOT, capture_output=True, text=True,
+    )
+    assert refused.returncode != 0
+    assert "SourceConflict" in refused.stderr

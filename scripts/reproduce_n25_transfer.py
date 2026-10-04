@@ -97,7 +97,7 @@ def main() -> int:
         (benchmark_root / "expected_score.json").read_text(encoding="utf-8")
     )
     if result != expected:
-        raise RuntimeError("recomputed N25 score differs from the reviewed expected score")
+        raise RuntimeError("recomputed N25 score differs from the accepted expected score")
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8")
     for label in ("Z", "G"):
@@ -106,7 +106,7 @@ def main() -> int:
             f"{label}: {campaign['id_pass_count']}/8 ID, "
             f"{campaign['stress_pass_count']}/2 stress, {campaign['disposition']}"
         )
-    print("Reviewed expected score: exact match")
+    print("Accepted expected score: exact match")
     return 0
 
 

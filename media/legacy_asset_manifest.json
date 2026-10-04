@@ -234,5 +234,5 @@
   },
   "license": "CC-BY-4.0",
   "schema": "pinn-phase-retained-media-v1",
-  "source": "earlier_public_candidate"
+  "source": "prior_public_snapshot"
 }

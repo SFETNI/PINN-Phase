@@ -1,0 +1,296 @@
+{
+ "schema": "pinn-phase-public-weight-lineage-v1",
+ "benchmark": "n8_128_cube",
+ "artifact": "n8_128_cube_multi_ic_hybrid",
+ "statement": "This artifact carries derived public replay weights. It is a repackaging of the model state of the accepted parent scientific checkpoint: every tensor name, dtype, shape and raw value is preserved exactly. The derivation changes packaging only, not model parameters, and is not new scientific evidence. The parent checkpoint is identified below by digest; it is not distributed in this archive.",
+ "accepted_parent_checkpoint": {
+  "sha256": "0b04afab56139ecb13071396c7ca10777575add22d73949c0abeaaaeb0a4ed6b",
+  "distributed": false,
+  "role": "accepted scientific checkpoint; identity of record"
+ },
+ "public_weights": {
+  "path": "checkpoints/n8_128_cube_multi_ic_hybrid.weights.npz",
+  "sha256": "4e94254e4694c9e0ed54b07019d3333cbd33c13293cfa560267ce139149a8462",
+  "bytes": 7657520,
+  "format": "pinn-phase-public-replay-weights-v1",
+  "container": "zip, stored members, fixed timestamps and permissions, no pickle",
+  "carries": "model-state tensors only",
+  "excludes": [
+   "optimizer state",
+   "scheduler or other training state",
+   "run identifiers",
+   "paths, usernames, timestamps",
+   "object or string arrays",
+   "free-form text of any kind"
+  ]
+ },
+ "model_state_fingerprint_sha256": "99f726448b856bba3d664f15cae000f5f2e21161f59d59c442765c4abd442ec9",
+ "digest_recipes": {
+  "note": "Stated here so that the identities below can be recomputed by anyone holding the parent checkpoint and this record, without reading the archive's source. A digest you can only obtain by running our code is weaker evidence than one you can derive from a specification.",
+  "value_sha256": "SHA-256 over: str(dtype) + b'\\0' + str(tuple(shape)) + b'\\0' + the array's C-contiguous raw bytes. dtype and shape are rendered exactly as NumPy's str() produces them, e.g. 'float32' and '(32, 1)'; a zero-dimensional array renders as '()' and contributes its scalar bytes.",
+  "model_state_fingerprint_sha256": "SHA-256 over the concatenation, for each tensor name in ascending lexicographic order, of: name + b'\\0' + str(dtype) + b'\\0' + str(tuple(shape)) + b'\\0' + raw bytes + b'\\0'. Note the trailing separator after every tensor, including the last.",
+  "public_weights_sha256": "SHA-256 over the artifact file's bytes.",
+  "accepted_parent_checkpoint.sha256": "SHA-256 over the parent file's bytes."
+ },
+ "tensor_count": 21,
+ "parameter_count": 1913034,
+ "tensor_key_order": [
+  "ann.head.bias",
+  "ann.head.weight",
+  "ann.hidden.0.bias",
+  "ann.hidden.0.weight",
+  "ann.hidden.2.bias",
+  "ann.hidden.2.weight",
+  "blend_logit",
+  "recurrent_cell.W_hf.weight",
+  "recurrent_cell.W_hg.weight",
+  "recurrent_cell.W_hi.weight",
+  "recurrent_cell.W_ho.weight",
+  "recurrent_cell.W_xf.bias",
+  "recurrent_cell.W_xf.weight",
+  "recurrent_cell.W_xg.bias",
+  "recurrent_cell.W_xg.weight",
+  "recurrent_cell.W_xi.bias",
+  "recurrent_cell.W_xi.weight",
+  "recurrent_cell.W_xo.bias",
+  "recurrent_cell.W_xo.weight",
+  "recurrent_head.bias",
+  "recurrent_head.weight"
+ ],
+ "tensors": [
+  {
+   "name": "ann.head.bias",
+   "dtype": "float32",
+   "shape": [
+    1
+   ],
+   "bytes": 4,
+   "value_sha256": "a21313d46f562216e64cfd81aaf6782cf59b8484ddd44bfa37595a6db58daef3"
+  },
+  {
+   "name": "ann.head.weight",
+   "dtype": "float32",
+   "shape": [
+    1,
+    64
+   ],
+   "bytes": 256,
+   "value_sha256": "0e784ea715f4b647b4407c09ef0f89a95fcc28d612739c7feec66090d77ace4d"
+  },
+  {
+   "name": "ann.hidden.0.bias",
+   "dtype": "float32",
+   "shape": [
+    64
+   ],
+   "bytes": 256,
+   "value_sha256": "5079bf5ed47443dfdcf6e9e40c830afbb533f1104d159457f91c881d70e1184b"
+  },
+  {
+   "name": "ann.hidden.0.weight",
+   "dtype": "float32",
+   "shape": [
+    64,
+    8
+   ],
+   "bytes": 2048,
+   "value_sha256": "b53191d6515327975a4cc04903a59861829691260be730bc2d6de5dd8b62266d"
+  },
+  {
+   "name": "ann.hidden.2.bias",
+   "dtype": "float32",
+   "shape": [
+    64
+   ],
+   "bytes": 256,
+   "value_sha256": "f89505d5ba98a51f4945fb47625b6c445dc73e7eb7975900027b07d706923d88"
+  },
+  {
+   "name": "ann.hidden.2.weight",
+   "dtype": "float32",
+   "shape": [
+    64,
+    64
+   ],
+   "bytes": 16384,
+   "value_sha256": "33ac3873acc802878561f149993a02d853c8daea665f51a4b8a9ed5df1adf9ee"
+  },
+  {
+   "name": "blend_logit",
+   "dtype": "float32",
+   "shape": [],
+   "bytes": 4,
+   "value_sha256": "b2628ef201ffff33e9630e91401710707c69ecbc9e22378fd723b0efa25fe139"
+  },
+  {
+   "name": "recurrent_cell.W_hf.weight",
+   "dtype": "float32",
+   "shape": [
+    128,
+    128,
+    3,
+    3,
+    3
+   ],
+   "bytes": 1769472,
+   "value_sha256": "9f46e13e4ccb072fa6736f061384ef9ddc9446565176e914170e1ff22fd48c74"
+  },
+  {
+   "name": "recurrent_cell.W_hg.weight",
+   "dtype": "float32",
+   "shape": [
+    128,
+    128,
+    3,
+    3,
+    3
+   ],
+   "bytes": 1769472,
+   "value_sha256": "97a063b7bfdbd8fe8bf2f7839dafa51cda36b19dfe25f385d5f17a5fd458e62d"
+  },
+  {
+   "name": "recurrent_cell.W_hi.weight",
+   "dtype": "float32",
+   "shape": [
+    128,
+    128,
+    3,
+    3,
+    3
+   ],
+   "bytes": 1769472,
+   "value_sha256": "5fd2fd8d014d4b63ee26863d7581b4a1b248e733094f25f6517ae30738db1f9e"
+  },
+  {
+   "name": "recurrent_cell.W_ho.weight",
+   "dtype": "float32",
+   "shape": [
+    128,
+    128,
+    3,
+    3,
+    3
+   ],
+   "bytes": 1769472,
+   "value_sha256": "91d8a779d98dbdf5239c7cf45e12b937d03e41872169a82e048f07c23c105070"
+  },
+  {
+   "name": "recurrent_cell.W_xf.bias",
+   "dtype": "float32",
+   "shape": [
+    128
+   ],
+   "bytes": 512,
+   "value_sha256": "330642d446ffc178c65477ff9564e7452b2410891a56ab1aaede2b3287922bb0"
+  },
+  {
+   "name": "recurrent_cell.W_xf.weight",
+   "dtype": "float32",
+   "shape": [
+    128,
+    8,
+    3,
+    3,
+    3
+   ],
+   "bytes": 110592,
+   "value_sha256": "b23bb028de16c776a5cdfbb522485e6d177f52342105e65407fe5c2ae3bbf24c"
+  },
+  {
+   "name": "recurrent_cell.W_xg.bias",
+   "dtype": "float32",
+   "shape": [
+    128
+   ],
+   "bytes": 512,
+   "value_sha256": "5d912d0d76fa62873cb717d21c8634f8d17dad52799b7bd429a26b0d34375831"
+  },
+  {
+   "name": "recurrent_cell.W_xg.weight",
+   "dtype": "float32",
+   "shape": [
+    128,
+    8,
+    3,
+    3,
+    3
+   ],
+   "bytes": 110592,
+   "value_sha256": "44719989f604579731b31a6b4fbac32495b1f1389306b7876e37073ab1b1934e"
+  },
+  {
+   "name": "recurrent_cell.W_xi.bias",
+   "dtype": "float32",
+   "shape": [
+    128
+   ],
+   "bytes": 512,
+   "value_sha256": "68b534960f88621aeef6743f555100edd07dd8c2b5d4991cfe32828429030c42"
+  },
+  {
+   "name": "recurrent_cell.W_xi.weight",
+   "dtype": "float32",
+   "shape": [
+    128,
+    8,
+    3,
+    3,
+    3
+   ],
+   "bytes": 110592,
+   "value_sha256": "d21df623eded4c91ee0b0d7dfdbfe9178f9b82daf8c713a90f362e3951a887d6"
+  },
+  {
+   "name": "recurrent_cell.W_xo.bias",
+   "dtype": "float32",
+   "shape": [
+    128
+   ],
+   "bytes": 512,
+   "value_sha256": "5a3d09eeb52663c3a316e44333e3c098a1eed8e2f1fd14da819adb74c8fb1425"
+  },
+  {
+   "name": "recurrent_cell.W_xo.weight",
+   "dtype": "float32",
+   "shape": [
+    128,
+    8,
+    3,
+    3,
+    3
+   ],
+   "bytes": 110592,
+   "value_sha256": "f89b0aa13124c044b9b7bc107cb84dcfbb57487706c6f2e565494218b352dd16"
+  },
+  {
+   "name": "recurrent_head.bias",
+   "dtype": "float32",
+   "shape": [
+    8
+   ],
+   "bytes": 32,
+   "value_sha256": "fcc32f8f18cbe4cf8ce37ec7c64c5f7dfbcd731f1e56876740a7ac70a5f44ed5"
+  },
+  {
+   "name": "recurrent_head.weight",
+   "dtype": "float32",
+   "shape": [
+    8,
+    128,
+    3,
+    3,
+    3
+   ],
+   "bytes": 110592,
+   "value_sha256": "d813619920201cd9b6a7231b01978b832413878a561595197fa11a3baf506512"
+  }
+ ],
+ "derivation": {
+  "script": "scripts/derive_public_weights.py",
+  "script_sha256": "345baa60a8a372d66eab984e17fae293ffa44441b87523cc0cb4afd7faba8fba",
+  "model_config": "configs/models/n8_128_cube_multi_ic_hybrid.yaml",
+  "model_config_sha256": "5781e8ec86c7230ced8630e2de075057b1ddecf15fd480c07c915572176b5272",
+  "transformation": "packaging only",
+  "verification": "Tensor keys, dtypes, shapes, raw values and the model-state fingerprint were compared against the accepted parent checkpoint before this record was written, and the artifact was built twice in separate directories and required to be byte-identical."
+ }
+}

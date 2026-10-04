@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Verify the release-candidate manifest."""
+"""Verify the release manifest."""
 
 from __future__ import annotations
 

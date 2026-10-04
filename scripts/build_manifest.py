@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Regenerate the non-self-referential release-candidate manifest."""
+"""Regenerate the non-self-referential release manifest."""
 
 from __future__ import annotations
 

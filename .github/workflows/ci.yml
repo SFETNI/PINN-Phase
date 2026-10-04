@@ -9,10 +9,9 @@ permissions:
 
 jobs:
   exact-media:
-    # This is deliberately a non-skipping environment gate.  The large accepted
+    # This is deliberately a non-skipping environment check.  The large accepted
     # renderer inputs remain documented external assets, so this job verifies the
-    # shipped all-six binding/output contract under the producer stack; the local
-    # release receipt additionally records the two full external-input re-renders.
+    # shipped all-six binding/output contract under the producer stack.
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2

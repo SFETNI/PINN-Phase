@@ -2,7 +2,7 @@
 
 This package records six prospectively fixed unseen initial microstructures evaluated with the same fixed development checkpoint. The terminal scored state is step 1600; saved states are monitored through step 3200.
 
-The public reproduction level is **PROVENANCE_ONLY** because frozen t0, model and reference arrays are documented external assets, not distributed here. `expected_score.json` is a compact, sanitized record derived from sealed score records; it is not a replacement for the arrays.
+The public reproduction level is **PROVENANCE_ONLY** because frozen t0, model and reference arrays are documented external assets, not distributed here. `expected_score.json` is a compact public record derived from the accepted score records; it is not a replacement for the arrays.
 
 ## Complete predefined qualification
 

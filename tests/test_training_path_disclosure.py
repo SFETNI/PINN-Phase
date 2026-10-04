@@ -154,6 +154,9 @@ def test_every_distributed_checkpoint_has_a_disclosed_training_path() -> None:
     ledger = json.loads((ROOT / "docs/ARTIFACT_IDENTITY_LEDGER.json").read_text(encoding="utf-8"))
     disclosed = {run["name"] for run in DISCLOSURE["runs"]}
     disclosed |= {row["name"] for row in DISCLOSURE["benchmark_adapter_policies"]["adapters"]}
+    # The native 128^3 model's policy was read by a trainer revision that is not
+    # distributed, so it is disclosed in its own section rather than replayed.
+    disclosed.add(DISCLOSURE["n8_128_transfer"]["training_path"]["model"])
     missing = {entry["name"] for entry in ledger["artifacts"]} - disclosed
     assert not missing, f"checkpoints distributed with no disclosed training path: {sorted(missing)}"
 

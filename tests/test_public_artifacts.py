@@ -218,7 +218,7 @@ def test_retained_media_manifest_covers_every_legacy_asset() -> None:
         if path.is_file() and path.name != "legacy_asset_manifest.json"
     }
     assert set(manifest["assets"]) == actual
-    assert manifest["source"] == "earlier_public_candidate"
+    assert manifest["source"] == "prior_public_snapshot"
     for name, record in manifest["assets"].items():
         path = media / name
         assert _sha256(path) == record["sha256"]
@@ -388,6 +388,7 @@ def test_readme_headings_follow_the_required_ladder() -> None:
     )
     headings = [line[3:].strip() for line in readme.splitlines() if line.startswith("## ")]
     expected = [
+        "Related Paper",
         "Rollout, temporal extrapolation, and generalisation",
         "How PINN-Phase advances a phase field",
         "Scalar interface motion and topology change",

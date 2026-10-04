@@ -328,6 +328,67 @@
         }
       ],
       "note": "Qualitative demonstration. Component counts describe the topology of a thresholded field; they are not persistent grain labels."
+    },
+    {
+      "id": "n8_128_cube",
+      "title": "Native 128^3 eight-grain training initial condition",
+      "level": "PROVENANCE_ONLY",
+      "reported": "98.79% label agreement at step 24,000 = 5.86 H against 69.48% for persistence; exact five-grain survivor set; extinction residuals -20, -100 and +40 steps.",
+      "artifacts_present": [
+        "checkpoints/n8_128_cube_multi_ic_hybrid.weights.npz",
+        "checkpoints/n8_128_cube_multi_ic_hybrid.lineage.json",
+        "configs/models/n8_128_cube_multi_ic_hybrid.yaml",
+        "benchmarks/n8_128_transfer/expected_score.json",
+        "benchmarks/n8_128_transfer/manifest.json"
+      ],
+      "artifacts_absent": [
+        {
+          "what": "initial field",
+          "sha256": "4c3132e0ba50933d174e626ed11f6b57ecc532901c658dcbab5876f1f6ff2b6f",
+          "requirement": "Large 3D field; not distributed in this release."
+        },
+        {
+          "what": "model trajectory",
+          "sha256": "3e8081392b4723df762de0f452acd85015d7aa45229ae5e5c31d713d41da51f5",
+          "requirement": "Large 3D trajectory; not distributed in this release."
+        },
+        {
+          "what": "reference trajectory",
+          "sha256": "e7309486c58568569f463bfe18b00ef96390de6b382bab9589e709dcec39e063",
+          "requirement": "Large 3D trajectory; not distributed in this release."
+        }
+      ],
+      "note": "Same-initial-condition temporal extrapolation: this field is one of the four training initial conditions. It is not transfer evidence.",
+      "level_rationale": "The derived public replay weights and their model-reconstruction configuration are distributed and verified, but no 128^3 initial field or trajectory is, so neither the rollout nor the reported metric can be regenerated here."
+    },
+    {
+      "id": "n8_128_transfer",
+      "title": "Native 128^3 development and blind cohorts, and case specialization",
+      "level": "PROVENANCE_ONLY",
+      "reported": "Blind cohort: 2 of 6 satisfy all six criteria at step 24,000 and 5 of 6 keep the exact terminal survivor set; secondary near-horizon disagreement 0.72-2.11% against 6.69-7.90% for persistence. Development cohort: 4 of 6.",
+      "artifacts_present": [
+        "checkpoints/n8_128_cube_multi_ic_hybrid.weights.npz",
+        "checkpoints/n8_128_cube_multi_ic_hybrid.lineage.json",
+        "configs/models/n8_128_cube_multi_ic_hybrid.yaml",
+        "benchmarks/n8_128_transfer/expected_score.json",
+        "benchmarks/n8_128_transfer/manifest.json",
+        "scripts/render_n8_128_transfer.py",
+        "scripts/verify_n8_128_transfer.py",
+        "scripts/package_n8_128_transfer.py"
+      ],
+      "artifacts_absent": [
+        {
+          "what": "initial fields and model and reference trajectories of the twelve cohort cases",
+          "manifest": "benchmarks/n8_128_transfer/manifest.json",
+          "requirement": "Large 3D fields; each is identified by SHA-256 in the asset manifest."
+        },
+        {
+          "what": "specialized model weights and trajectories",
+          "requirement": "Not distributed; the specialized trajectories are identified by digest in the record."
+        }
+      ],
+      "note": "The two cohorts are never pooled. The step-4,000 values come from an analysis carried out after the full-horizon evaluation and are descriptive.",
+      "level_rationale": "The score record is compact and self-consistent, and verify_n8_128_transfer.py re-derives every criterion outcome from its measured fields, but the arrays it was computed from are external, so the scores cannot be recomputed here."
     }
   ],
   "assignment_rule": "A benchmark carries CHECKPOINT_AND_CODE_REPLAY only when the archive contains and tests five things: a registered t0 initial field; the derived public replay weights with their lineage record; the matching model-reconstruction configuration; executable replay code; and an evaluation that can be recomputed locally on the rollout the replay writes. That level asserts REPLAY CAPABILITY, not metric recomputation: the large reference trajectory may remain external, and where it does the published number cannot be regenerated from this archive. FULL_RECOMPUTATION is used only where the reported metric can be regenerated entirely from archive contents. SCORE_RECOMPUTATION is used where a frozen score recomputes from shipped arrays without rerunning inference. PROVENANCE_ONLY means identities only, and never implies recomputability. No accepted parent checkpoint is distributed, and no level here depends on one being distributed.",
@@ -357,5 +418,13 @@
     "public_records": "benchmarks/n16_96_transfer/expected_score.json",
     "external_assets": "benchmarks/n16_96_transfer/manifest.json",
     "renderer": "scripts/render_n16_96_transfer.py"
+  },
+  "n8_128_transfer": {
+    "level": "PROVENANCE_ONLY",
+    "checkpoint_sha256": "0b04afab56139ecb13071396c7ca10777575add22d73949c0abeaaaeb0a4ed6b",
+    "no_new_training": true,
+    "public_records": "benchmarks/n8_128_transfer/expected_score.json",
+    "external_assets": "benchmarks/n8_128_transfer/manifest.json",
+    "renderer": "scripts/render_n8_128_transfer.py"
   }
 }

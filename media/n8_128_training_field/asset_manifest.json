@@ -1,0 +1,13 @@
+{
+  "alt_text": "Native 128-cubed evolution on a training initial condition: paired phase-field reference and PINN-Phase cubes at steps 0, 3,200, 5,600, 8,800 and 24,000 on a timeline marking the training horizon H = 4,096 and the autonomous extrapolation to 5.86 H; terminal orthogonal sections with differing voxels; label agreement against persistence; and signed extinction-time differences.",
+  "license": "CC-BY-4.0",
+  "outputs": {
+    "n8_128_training_field_figure.png": {
+      "bytes": 190411,
+      "sha256": "395969c0213adf26fe31623786be64e54fa5b81e1bf813422b0a34e6d87664f0"
+    }
+  },
+  "record": "benchmarks/n8_128_transfer/expected_score.json",
+  "schema": "pinn-phase-static-figure-v1",
+  "source": "accepted main-text figure of the paper (native 128^3 training initial condition), unchanged"
+}

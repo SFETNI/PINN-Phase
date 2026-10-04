@@ -32,6 +32,7 @@ the tutorials.
 - [`MEDIA_GALLERY.md`](MEDIA_GALLERY.md), the complete figure and animation map;
 - [`benchmarks/n25_transfer/README.md`](../benchmarks/n25_transfer/README.md),
   [`benchmarks/n16_96_transfer/README.md`](../benchmarks/n16_96_transfer/README.md),
+  [`benchmarks/n8_128_transfer/README.md`](../benchmarks/n8_128_transfer/README.md),
   [`benchmarks/initial_conditions/README.md`](../benchmarks/initial_conditions/README.md),
   and [`benchmarks/scalar_shrinkage_2d/README.md`](../benchmarks/scalar_shrinkage_2d/README.md);
 - [N16 96^3 prospective evidence](case-studies/n16_prospective_evidence.md), a
@@ -39,6 +40,9 @@ the tutorials.
 
 ## Reproduce and verify
 
+- [Using this archive](USING_THIS_ARCHIVE.md): what each verification command checks,
+  reproduction levels, model weights, model replay, and the exact scope of the
+  training-path claims
 - [Reproduction levels in practice](guides/02_reproduction_levels_in_practice.md)
 - [Integrity and provenance](guides/03_integrity_and_provenance.md)
 - [`REPRODUCTION_LEVELS.json`](REPRODUCTION_LEVELS.json) and
