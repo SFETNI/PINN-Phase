@@ -102,6 +102,9 @@ All notable changes to this project are documented here. This project follows
   marked. The section is chosen from the reference alone. It was rendered from the
   same digest-verified arrays, and the renderer now requires its recomputed values
   to equal the cohort record. No science, scores or arrays changed.
+- The continuous-integration test environment pins `imageio==2.37.3`, the version
+  of the `media` extra, because the renderer tests of the new animations load
+  their renderers.
 - The README describes the native 128³ study in the three-dimensional section and
   the results table, and its training-path statement now names the one model
   trained by a later trainer revision that is not distributed.
