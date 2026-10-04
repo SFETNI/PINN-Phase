@@ -13,7 +13,7 @@ publishing a mutable research working tree.
 
 The remaining generic modules came from the same accepted six-initial-condition
 training source snapshot.
-The earlier public candidate supplied compatibility tests and the retained
+The previous public snapshot supplied compatibility tests and the retained
 public media listed in `media/legacy_asset_manifest.json`. Scientific source
 modules still follow the accepted-source lineage above.
 
@@ -33,7 +33,7 @@ Public changes are limited to:
 - architecture-family and checkpoint-identity helpers;
 - public packaging, tests, documentation, and release controls.
 
-The release adds the public transfer scorer as a reviewed extraction of the frozen
+The release adds the public transfer scorer as a faithful extraction of the frozen
 metric and gate definitions. Compact fixture archives retain only arrays needed
 for scoring; their manifest binds each frozen source artifact to the public
 archive and every retained array value.
@@ -41,7 +41,7 @@ archive and every retained array value.
 Deterministic rate equivalence, phase-permutation equivariance, periodic
 translation equivariance, and phase-count-independent state loading are tested
 at the model boundary. The shipped N25 arrays additionally reproduce the full
-reviewed confirmation score without private execution metadata.
+accepted confirmation score without private execution metadata.
 
 ## Front-page result media
 
@@ -65,3 +65,18 @@ sensitivity run, are recorded in
 ## N16/96 prospective transfer
 
 Six unseen fixed-family initial conditions use the existing N16 checkpoint; no weight is duplicated and no training occurs. Public score records are PROVENANCE_ONLY; external arrays and the all-six renderer are hash-bound in `benchmarks/n16_96_transfer/manifest.json` and `media/n16_96_transfer/asset_manifest.json`.
+
+## Native 128^3 study
+
+No source module changed. The 128^3 evaluation trajectories were produced by a
+model module that differs from `models/explicit_mpf.py` only in options that are
+disabled for this model; loaded with the distributed weights, the public class
+reproduces that code's rollout bit for bit (recorded under `replay_equivalence`
+in [`ARTIFACT_IDENTITY_LEDGER.json`](ARTIFACT_IDENTITY_LEDGER.json)). The model
+was trained by a later trainer revision that is not distributed; its digest and
+reference-usage policy are in
+[`TRAINING_PATH_DISCLOSURE.json`](TRAINING_PATH_DISCLOSURE.json). Three public
+scripts are new: `package_n8_128_transfer.py` builds the compact record from the
+accepted score records, found by digest; `verify_n8_128_transfer.py` re-derives
+every verdict from it; and `render_n8_128_transfer.py` draws the animation from
+digest-verified trajectories and requires every plotted value to equal the record.

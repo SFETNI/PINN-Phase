@@ -34,6 +34,7 @@ RENDERERS = {
     "media/current_results/asset_manifest.json": "scripts/render_current_results.py",
     "media/n16_96_transfer/asset_manifest.json": "scripts/render_n16_96_transfer.py",
     "media/n16_96_interior/asset_manifest.json": "scripts/render_n16_96_interior.py",
+    "media/n8_128_transfer/asset_manifest.json": "scripts/render_n8_128_transfer.py",
 }
 
 #: Manifests that record rendered files under ``outputs`` rather than ``assets``.
@@ -42,6 +43,7 @@ OUTPUT_KEYED_MANIFESTS = frozenset(
     {
         "media/n16_96_transfer/asset_manifest.json",
         "media/n16_96_interior/asset_manifest.json",
+        "media/n8_128_transfer/asset_manifest.json",
     }
 )
 
@@ -55,6 +57,9 @@ INPUT_MANIFESTS = {
     "media/current_results/asset_manifest.json": {},
     "media/n16_96_transfer/asset_manifest.json": {},
     "media/n16_96_interior/asset_manifest.json": {},
+    # The 128^3 renderer binds the distributed score record as record_sha256; that
+    # binding and the trajectory digests are checked by test_n8_128_transfer.
+    "media/n8_128_transfer/asset_manifest.json": {},
 }
 
 # The N16 renderers bind sealed external JSON identities.  They are not shipped
@@ -72,6 +77,7 @@ EXTERNAL_MANIFEST_IDENTITIES = {
     "media/n16_96_interior/asset_manifest.json": {
         "cohort_manifest_sha256",
     },
+    "media/n8_128_transfer/asset_manifest.json": set(),
 }
 EXTERNAL_SEALED_IDENTITIES = {
     "media/n25_transfer/asset_manifest.json": set(),
@@ -82,6 +88,7 @@ EXTERNAL_SEALED_IDENTITIES = {
     "media/n16_96_interior/asset_manifest.json": {
         "cohort_manifest_sha256", "cohort_score_sha256", "case_score_sha256",
     },
+    "media/n8_128_transfer/asset_manifest.json": set(),
 }
 
 N25_MEDIA = (

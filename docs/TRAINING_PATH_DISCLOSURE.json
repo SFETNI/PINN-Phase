@@ -4,7 +4,7 @@
   "verified_properties": {
     "training_loads_t0_only": {
       "holds": true,
-      "evidence": "physics/explicit_mpf.py load_explicit_mpf_initial_reference returns ExplicitMPFReference, whose dataclass fields contain phi0 and no trajectory-like field; the loader rejects any archive whose key set differs from the reviewed t0-only schema before reading any member.",
+      "evidence": "physics/explicit_mpf.py load_explicit_mpf_initial_reference returns ExplicitMPFReference, whose dataclass fields contain phi0 and no trajectory-like field; the loader rejects any archive whose key set differs from the fixed t0-only schema before reading any member.",
       "test": "tests/test_no_reference_leakage.py"
     },
     "no_post_t0_reference_in_the_loss": {
@@ -17,8 +17,8 @@
     },
     "no_reference_metric_selects_a_checkpoint": {
       "holds": true,
-      "scope": "Verified for every selection mechanism PRESENT in this archive. Two of the six accepted parent checkpoints were written by the per-review save path and are named for mid-run epochs; which of those was deployed is established by the accepted completion and freeze record, and the selector that made that choice is not part of this archive. Those parents are not distributed here in any case: what ships is the derived public replay weights, which carry model state only. This property is therefore verified for the shipped code, and attested rather than proven for the historical run.",
-      "evidence": "The string best_physical does not occur anywhere in src/pinn_phase/training/. Early stopping reads only model-internal review-row fields (active_phase_count, projection_correction_l1, cap saturation). The one reference-comparing branch of evaluate_early_stop_gates is guarded by zero_rate_baseline, which the sole call site (explicit_mpf_trainer.py:1928) does not pass, and its input field learned_vs_zero_rate_disagree has no producer in the shipped source.",
+      "scope": "Verified for every selection mechanism PRESENT in this archive. Two of the six accepted parent checkpoints were written by the periodic checkpoint-save path and are named for mid-run epochs; which of those was deployed is established by the run's recorded final-checkpoint identity, and the selector that made that choice is not part of this archive. Those parents are not distributed here in any case: what ships is the derived public replay weights, which carry model state only. This property is therefore verified for the shipped code, and attested rather than proven for the historical run.",
+      "evidence": "The string best_physical does not occur anywhere in src/pinn_phase/training/. Early stopping reads only model-internal periodic-evaluation fields (active_phase_count, projection_correction_l1, cap saturation). The one reference-comparing branch of evaluate_early_stop_gates is guarded by zero_rate_baseline, which the sole call site (explicit_mpf_trainer.py:1928) does not pass, and its input field learned_vs_zero_rate_disagree has no producer in the shipped source.",
       "test": "tests/test_training_path_disclosure.py"
     },
     "no_hidden_label_cache_bundled": {
@@ -249,12 +249,12 @@
       }
     ],
     "relation_to_the_distributed_models": "No model whose weights are distributed here was trained with either module. All six were produced by pinn_phase.training.explicit_mpf_trainer, whose data flow is the subject of the reference-isolation claim. Neither module is invoked by any script, benchmark or test in this archive, and neither is called by the explicit-MPF trainer.",
-    "why_they_ship": "They are part of the reviewed generic source released for inspection. Removing them would make the released source differ from the accepted source, which is the thing the source-lineage map exists to rule out."
+    "why_they_ship": "They are part of the generic source released for inspection. Removing them would make the released source differ from the accepted source, which is the thing the source-lineage map exists to rule out."
   },
   "guard_scope": {
     "what_the_guard_is": "pinn_phase.training.assert_no_reference_leakage validates the reference-usage declaration in a training configuration. It runs at entry to explicit-MPF training, before any data, model, checkpoint or output is touched.",
-    "contract": "Fail closed. It requires the complete reviewed policy key set with exact value types; the three post-t0 reference flags must be the literal False; graph features must come from the model's own field; the initial-condition mode must be one of the two reviewed values and the multi-initial-condition contract must hold in both directions; and training_policy must declare initial-condition-only supervision with its three no-reference flags literally True. A missing block, an empty block, a missing key, an unreviewed extra key, a string or numeric stand-in for a boolean, a misspelled key, or a non-mapping argument is refused with ReferenceLeakageError.",
-    "what_it_proves": "That a run's declared policy matches the reviewed contract exactly, and that a run declaring anything else does not start.",
+    "contract": "Fail closed. It requires the complete required policy key set with exact value types; the three post-t0 reference flags must be the literal False; graph features must come from the model's own field; the initial-condition mode must be one of the two permitted values and the multi-initial-condition contract must hold in both directions; and training_policy must declare initial-condition-only supervision with its three no-reference flags literally True. A missing block, an empty block, a missing key, an unrecognized extra key, a string or numeric stand-in for a boolean, a misspelled key, or a non-mapping argument is refused with ReferenceLeakageError.",
+    "what_it_proves": "That a run's declared policy matches the required contract exactly, and that a run declaring anything else does not start.",
     "what_it_does_not_establish": "What the training loop actually did. This is configuration validation: it reads a mapping. It does not read a tensor, open a data file, or watch the loop execute. The evidence that no post-t0 reference reaches model input, the loss, checkpoint selection or early stopping is the data-flow audit of src/pinn_phase/training/explicit_mpf_trainer.py, which can be read here in full.",
     "required_policy_keys": [
       "audit_uses_reference_frames_after_t0",
@@ -282,5 +282,43 @@
     "public_records": "benchmarks/n16_96_transfer/expected_score.json",
     "external_assets": "benchmarks/n16_96_transfer/manifest.json",
     "renderer": "scripts/render_n16_96_transfer.py"
+  },
+  "n8_128_transfer": {
+    "level": "PROVENANCE_ONLY",
+    "checkpoint_sha256": "0b04afab56139ecb13071396c7ca10777575add22d73949c0abeaaaeb0a4ed6b",
+    "no_new_training": true,
+    "public_records": "benchmarks/n8_128_transfer/expected_score.json",
+    "external_assets": "benchmarks/n8_128_transfer/manifest.json",
+    "renderer": "scripts/render_n8_128_transfer.py",
+    "training_path": {
+      "model": "n8_128_cube_multi_ic_hybrid",
+      "training_config_sha256": "4bfa4ea8759073dd492d730733486bf36a60646cb8a19c966a007a964232e71f",
+      "training_config_distributed": false,
+      "trainer_revision_sha256": "a34a47cb51f54b52879a2b86ce5ebbfc14ff1b98b241c21ba70c62637e771659",
+      "trainer_revision_distributed": false,
+      "trainer_revision_note": "A later revision of the explicit-MPF trainer than the one distributed here. It adds the four-field combined-gradient schedule described below; it is identified by digest and not distributed.",
+      "reference_usage_policy": {
+        "training_initial_condition": "four_t0_fields_epoch_round_robin",
+        "training_uses_reference_frames_after_t0": false,
+        "reference_after_t0_use": "audit_only",
+        "graph_features_from": "model_phi_only",
+        "no_training_labels_after_t0": true,
+        "no_reference_graph_after_t0": true
+      },
+      "training_policy": {
+        "supervision": "initial_condition_only",
+        "no_training_labels_after_t0": true
+      },
+      "schedule": "Four initial fields. Each optimizer update accumulates the mean gradient of four independent four-step truncated-backpropagation windows, one per field; field and recurrent states are kept separately per field and are never averaged. 25 epochs of 1,024 updates represent H = 4,096 steps per field. Learning rate 1e-6, constant; seed 42; Adam restarted from a weights-only initialization; terminal epoch selected by position.",
+      "initialization": "Continued, weights only, from earlier physics-only training on the first of the four fields. The single-initial-condition model reported in the paper is a separate continuation from the same earlier initialization, not a predecessor of these weights.",
+      "training_initial_fields_sha256": [
+        "4c3132e0ba50933d174e626ed11f6b57ecc532901c658dcbab5876f1f6ff2b6f",
+        "f5596ceec78949208908647c818bb140ef2d7d7eff0a9b43c5949720ff1bbac8",
+        "fed45c0c53a514fd883d6977d63e177ea32eee7c9344598ee76e02a1acbac34c",
+        "6858473fb8743a12707c679296f27d3a5c0b1668d31af519f24aeedd2b8041cc"
+      ],
+      "replayed_through_guard": false,
+      "why_not_replayed": "The trainer revision that read this policy is not distributed, and the shipped guard does not know its four-field initial-condition mode. The policy is therefore disclosed here, bound to its configuration by digest, and not replayed."
+    }
   }
 }

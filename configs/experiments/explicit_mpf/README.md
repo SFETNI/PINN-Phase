@@ -1,14 +1,14 @@
 # Retained experiment configuration
 
 `voronoi_3d_cube_64x64x64_n8_h256_tbptt16_c2_launch.yaml` is carried here
-byte-for-byte from the earlier public candidate so that the configuration digest
+byte-for-byte from the previous public snapshot so that the configuration digest
 recorded for the 64³ eight-phase cube in
 [`../../docs/ARTIFACT_IDENTITY_LEDGER.json`](../../../docs/ARTIFACT_IDENTITY_LEDGER.json)
 can be verified against distributed bytes rather than asserted. It is the only
 training-side configuration in this archive whose digest is checkable from the
 archive itself; every other training configuration is an identity only.
 
-Its header names three things from the earlier candidate that this release does not
+Its header names three things from that snapshot that this release does not
 carry — a `scripts/rollout_n8_64.py` rollout entry point, a
 `tests/test_n8_config_strict_load.py` compatibility test, and a
 `checkpoints/n8_64_c2.pt` training checkpoint. Their function is served here by

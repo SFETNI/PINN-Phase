@@ -452,5 +452,15 @@
     "public_records": "benchmarks/n16_96_transfer/expected_score.json",
     "external_assets": "benchmarks/n16_96_transfer/manifest.json",
     "renderer": "scripts/render_n16_96_transfer.py"
+  },
+  "n8_128_transfer": {
+    "level": "PROVENANCE_ONLY",
+    "checkpoint_sha256": "0b04afab56139ecb13071396c7ca10777575add22d73949c0abeaaaeb0a4ed6b",
+    "no_new_training": true,
+    "public_records": "benchmarks/n8_128_transfer/expected_score.json",
+    "external_assets": "benchmarks/n8_128_transfer/manifest.json",
+    "renderer": "scripts/render_n8_128_transfer.py",
+    "replay_entry_point": null,
+    "why_none": "No 128^3 initial field is distributed. The weights are verified, constructed and advanced one admissible step by scripts/verify_checkpoint_identities.py."
   }
 }

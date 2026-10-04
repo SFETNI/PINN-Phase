@@ -1,6 +1,6 @@
 # Media and benchmark gallery
 
-This release keeps the public visual record from the earlier candidate and adds
+This release keeps the public visual record from the previous public snapshot and adds
 the figures for the held-out 25-grain transfer study. Every asset is covered by
 a SHA-256 manifest. Media visualize completed runs or the method architecture;
 they do not replace the quantitative records in
@@ -92,8 +92,8 @@ supplied to both the reference and the model.
 Each animation has a static poster with the same stem. The retained files are
 licensed under the media terms in [`ASSET_LICENSE.md`](../ASSET_LICENSE.md), and
 `media/legacy_asset_manifest.json` records byte identities, dimensions, frame
-counts, and continuity roles for the assets carried over from the earlier
-candidate.
+counts, and continuity roles for the assets carried over from the previous
+public snapshot.
 
 ## Interpretation rules
 
@@ -112,8 +112,8 @@ candidate.
 
 ## Superseded model variants (gallery only)
 
-These animations come from earlier model variants of the earlier public
-candidate. They are retained so the visual record stays complete. **They are not
+These animations come from earlier model variants in the previous public
+snapshot. They are retained so the visual record stays complete. **They are not
 the present model of record**, they do not appear on the front page, and their
 values do not appear in "Results at a glance".
 

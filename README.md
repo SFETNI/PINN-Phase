@@ -6,14 +6,16 @@ evolution.**
 PINN-Phase advances an initial phase field one admissible neural step at a time,
 capturing growth, shrinkage, extinction, and topology change in two- and
 three-dimensional designed benchmarks. The two-dimensional evaluations extend
-to 12,000 autonomous steps. For the reported explicit-MPF models, the physical
+to 12,000 autonomous steps, and the native 128³ evaluations to 24,000 steps,
+5.86 times the represented training horizon. For the reported explicit-MPF models, the physical
 training target is evaluated on the model's own evolving field; post-initial
 reference states are reserved for evaluation rather than used as step targets.
 
 The benchmarks below form a **progressive ladder**, in the order the study was
 built: a single scalar interface, then multiphase relaxation and 2D coarsening,
 then a dense 64-grain field, then a prospectively fixed test on microstructures
-the model has never seen, and finally three dimensions. Each rung adds one kind
+the model has never seen, and finally three dimensions, up to native 128³
+evolution with transfer to blind initial conditions. Each rung adds one kind
 of difficulty — a dimension, a phase count, a topology event, or an unseen
 initial condition.
 
@@ -404,10 +406,10 @@ claimed at the resolution of the saved frames.
 
 <p align="center">
   <img src="media/n16_96_transfer/n16_96_unseen_cohort_reference_vs_pinn_phase.gif" width="900"
-       alt="Six unseen 96-cubed microstructures arranged in a three-by-two grid, each comparing the reference simulation with the same frozen PINN-Phase model over saved steps 0 to 3200.">
+       alt="Six unseen 96-cubed sixteen-grain microstructures, each advanced by the same fixed PINN-Phase model from its own initial field. For each one, the same interior section of the phase-field reference and of the prediction evolve side by side over saved steps 0 to 3200, through the loss of three grains, next to a strip comparing label disagreement with static persistence. Step 1600 is the scored terminal step; later steps are monitored continuation.">
 </p>
 
-On six prospectively fixed unseen N=16, 96³ initial microstructures, the same fixed model reaches 95.06–95.83% label agreement at step 1600, recovers the exact 13-grain terminal active set and all three extinction identities in all six cases, and meets the complete predefined qualification in five of six. This is within-family initial-condition transfer at fixed phase count and resolution, not evidence of transfer across materials, resolutions or phase counts. The animation shows all six cases and all 17 saved states; step 1600 is the terminal evaluation and later frames are monitored continuation. See [`benchmarks/n16_96_transfer/README.md`](benchmarks/n16_96_transfer/README.md) for the complete contract and the narrowly defined two unmet conditions for Unseen microstructure 5.
+On six prospectively fixed unseen N=16, 96³ initial microstructures, the same fixed model reaches 95.06–95.83% label agreement at step 1600, recovers the exact 13-grain terminal active set and all three extinction identities in all six cases, and meets the complete predefined qualification in five of six. This is within-family initial-condition transfer at fixed phase count and resolution, not evidence of transfer across materials, resolutions or phase counts. The animation shows all six cases and all 17 saved states as one interior section per case, reference beside prediction, with the section chosen from the reference alone as the plane cutting the most volume of the grains it loses. All three extinctions fall between steps 1000 and 1400; step 1600 is the terminal evaluation, and later frames are monitored continuation, played faster because the microstructure changes slowly there. The final frame shows the one place Unseen microstructure 5 falls behind persistence, at step 3200. See [`benchmarks/n16_96_transfer/README.md`](benchmarks/n16_96_transfer/README.md) for the complete contract and the narrowly defined two unmet conditions for Unseen microstructure 5.
 
 **Inside one unseen cube:** one case from the cohort, selected by a fixed rule.
 
@@ -416,9 +418,87 @@ On six prospectively fixed unseen N=16, 96³ initial microstructures, the same f
        alt="One unseen 96-cubed microstructure, Unseen microstructure 3, shown as paired reference and PINN-Phase rows over saved steps 0 to 3200. Each row pairs an exterior view of the intact cube with an interior view in which only the three disappearing grains are rendered inside a wireframe outline. The three grains shrink and vanish inside the volume, and at its last saved appearance each grain has no voxels on any rendered face of the cube. Step 1600 is the terminal evaluation and later frames are monitored continuation.">
 </p>
 
-In the cohort grid above, each case occupies a small paired view with a fixed corner cutaway, and interior topology events are hard to read at that scale. Here one case — Unseen microstructure 3, selected by a fixed rule as the case whose three disappearing grains all have zero voxels on the rendered faces at their last saved appearance — is shown at full size: each row pairs the intact exterior of the cube with an interior view in which only the three disappearing grains are rendered, inside a wireframe outline (Grain 1-3 denotes reference disappearance order; Grains 2 and 3 are first absent at the same saved step in the reference). Two of the three grains appear on the rendered faces early in the run and withdraw from them as they shrink; at its last saved appearance each grain has zero voxels on any rendered face, so the disappearances themselves are not visible from outside. The model recovers all three of this case's extinction identities at the 200-step saved-frame resolution, with the final saved appearance of Grain 2 one save interval earlier than the reference, within the ±200-step tolerance; terminal agreement for this case is 95.83% at step 1600. Later frames are monitored continuation through the last saved state at step 3200, during which the interior view remains empty on both sides and the 13-grain active set persists in both. The animation renders the sealed cohort arrays as saved — no re-runs, no re-scoring, no interpolated frames.
+The cohort animation above follows one plane per case, so the three-dimensional shape of each disappearing grain is not visible there. Here one case — Unseen microstructure 3, selected by a fixed rule as the case whose three disappearing grains all have zero voxels on the rendered faces at their last saved appearance — is shown at full size: each row pairs the intact exterior of the cube with an interior view in which only the three disappearing grains are rendered, inside a wireframe outline (Grain 1-3 denotes reference disappearance order; Grains 2 and 3 are first absent at the same saved step in the reference). Two of the three grains appear on the rendered faces early in the run and withdraw from them as they shrink; at its last saved appearance each grain has zero voxels on any rendered face, so the disappearances themselves are not visible from outside. The model recovers all three of this case's extinction identities at the 200-step saved-frame resolution, with the final saved appearance of Grain 2 one save interval earlier than the reference, within the ±200-step tolerance; terminal agreement for this case is 95.83% at step 1600. Later frames are monitored continuation through the last saved state at step 3200, during which the interior view remains empty on both sides and the 13-grain active set persists in both. The animation renders the accepted cohort arrays as saved — no re-runs, no re-scoring, no interpolated frames.
 
-Superseded model variants from the earlier public candidate are kept for
+### Native 128³: one model, four training fields, twelve unseen initial conditions
+
+The last step removes the designed single case. One eight-phase model of the
+first-generation hybrid family was trained on four initial fields
+at the native 128³ grid (2,097,152 voxels), with a represented training horizon
+of H = 4,096 steps, under a recorded physics-only training policy; the trainer
+revision and its configuration are identified by digest and not distributed.
+H is a property of that training: it is the horizon the model
+was trained over on its four training fields. Every evaluation below starts from
+its own initial field and advances autonomously to step 24,000 = 5.86 H; nothing
+is coarsened, upsampled or corrected by a reference along the way.
+
+**On a training field.** At step 24,000 the prediction agrees with the reference
+on **98.79%** of voxels, against **69.48%** for the unchanged initial field
+(persistence). It keeps the exact five-grain survivor set and the reference
+extinction order, with signed event residuals of −20, −100 and +40 steps. This
+field was one of the four used in training, so here the 19,904 steps beyond H are
+temporal extrapolation on a trained field: retained fidelity, not transfer.
+
+<p align="center">
+  <img src="media/n8_128_training_field/n8_128_training_field_figure.png" width="760"
+       alt="Native 128-cubed evolution on a training initial condition: paired phase-field reference and PINN-Phase cubes at steps 0, 3,200, 5,600, 8,800 and 24,000 on a timeline marking the training horizon H = 4,096 and the autonomous extrapolation to 5.86 H; terminal orthogonal sections with differing voxels; label agreement against persistence; and signed extinction-time differences.">
+</p>
+
+This is the paper's figure for this case. Only here does H describe the evaluated
+field itself: the blue band is the horizon this field was trained over, and every
+later step is autonomous extrapolation on it.
+
+**On unseen initial conditions.** The same weights, with no retraining or
+adaptation, were run on six *development* initial conditions, absent from training
+but examined in an earlier evaluation, and on six *blind* ones, whose initial
+fields, criteria and evaluation procedure were fixed before any outcome was
+opened. None of these twelve fields was ever trained on, so for them there is no
+"inside the training horizon": every step, from the first, is direct autonomous
+rollout from an unseen initial field. H is shown only as a reference mark for how
+far the model's training on other fields reached. The two cohorts are reported
+separately and never pooled.
+
+<p align="center">
+  <img src="media/n8_128_transfer/n8_128_unseen_reference_vs_pinn_phase.gif" width="900"
+       alt="Three unseen 128-cubed eight-grain microstructures, one per row, each advanced by the same trained PINN-Phase model from its own initial field to step 24,000. Each row shows fixed cubes of the phase-field reference and the PINN-Phase prediction at step 24,000 with the section plane marked, the same section of both evolving over time, and a strip comparing label disagreement with static persistence. These microstructures were never used in training: every step is direct autonomous rollout. The mark H = 4,096 is the horizon the model was trained over on four other initial fields.">
+</p>
+
+Each row fixes the final state as two cubes, in the view and palette of the paper's 128³ figures, and animates one interior section of the reference and the prediction side by side, so the evolution inside the volume can be followed step by step. Three of the six blind cases, chosen by a fixed rule: the two that satisfy every
+criterion and the survivor-correct case with the largest timing error. Up to the
+model's training horizon, all six blind cases stay close to the reference: at step
+4,000, the last saved state below H, label disagreement is **0.72–2.11%**
+against **6.69–7.90%** for persistence. That near-horizon view comes from an
+analysis carried out after the full-horizon evaluation and is descriptive.
+
+The 24,000-step endpoint combines transfer with nearly sixfold extrapolation and
+is the harder test. Six criteria were fixed in advance: terminal disagreement at
+most 5%, below persistence at every saved state, equal terminal grain count,
+identical survivor set, every extinction matched within ±800 steps, and the
+realized fate of one designated small grain. **Two of six** blind cases satisfy
+all six, so the predefined cohort rule is **not met**. Five of six keep the exact
+terminal survivor set, at 2.84–4.72% disagreement. Three of those five miss only
+on event timing, and their out-of-tolerance residuals are both premature and
+delayed (−840 and +980 steps in one case, −1,020 and +1,240 in the other two),
+not a common clock offset. The sixth case, Unseen microstructure 4, ends at
+11.30% and retains one grain that has disappeared in the reference. All six stay closer to the reference than
+persistence at every saved state. Among the development cases, four of six
+satisfy every criterion and all six keep the exact survivor set.
+
+The only 128³ cases that received any case-specific training are three development
+cases in a separate study. A short physics-only specialization from the same weights,
+using only that case's own initial field over a 1,024-step window, brings the final-event residual of two development cases from
++1,460 to +520 and from +1,340 to +320 steps, and keeps all criteria in a third
+case that already satisfied them. It is a bounded result on development cases,
+not an adaptation policy.
+
+The trained weights are distributed
+([`checkpoints/n8_128_cube_multi_ic_hybrid.weights.npz`](checkpoints/)), verified
+and executable; the 128³ initial fields and trajectories are not, so every
+number in this section is **provenance only** here. All twelve cases, the
+criteria and the verification commands are in
+[`benchmarks/n8_128_transfer/README.md`](benchmarks/n8_128_transfer/README.md).
+
+Superseded model variants from the previous public snapshot are kept for
 continuity in [`docs/MEDIA_GALLERY.md`](docs/MEDIA_GALLERY.md). They are not the
 present model of record and none of their values appear above.
 
@@ -440,12 +520,17 @@ The ladder, in order:
 | Single-extinction cube | 64³, 8 phases | First-generation hybrid | 99.533% agreement; exact 7-grain survivor set | Model replayable; reference external |
 | Three-extinction cube | 96³, 16 phases | First-generation hybrid | 99.668% agreement; exact 13-grain survivor set; 3 extinctions matched | Model replayable; reference external |
 | Unseen N16 transfer | 96³, 16 phases | Same fixed development model | 95.06–95.83%; topology and extinction identities 6/6; complete qualification 5/6 | Provenance only; arrays external |
+| Native training field | 128³, 8 grains | First-generation hybrid, four training fields | 98.79% agreement at 5.86 H vs 69.48% persistence; exact survivor set | Weights distributed; provenance only |
+| Native development cohort | 128³, 8 grains | Same model, no retraining | 4 of 6 meet all six criteria at 5.86 H; survivor sets exact 6/6 | Provenance only; arrays external |
+| Native blind cohort | 128³, 8 grains | Same model, no retraining | 0.72–2.11% vs 6.69–7.90% persistence near H (post-evaluation analysis); 2 of 6 meet all six criteria at 5.86 H, survivor sets exact 5/6 | Provenance only; arrays external |
 
 Each non-transfer row is an individual designed benchmark evaluated with one
 model seed. The N25 transfer row comprises eight unseen initial conditions and
 two stress cases, scored against criteria fixed before those cases existed. The
 N16 transfer row comprises six prospectively fixed unseen 96³ microstructures,
-evaluated with the same fixed development model.
+evaluated with the same fixed development model. The native 128³ rows share one
+model trained on four initial fields; the training-field row is same-field
+extrapolation, and the two cohorts are separate and never pooled.
 
 ---
 
@@ -453,32 +538,34 @@ evaluated with the same fixed development model.
 
 Every command below runs from the root of a fresh extraction, in this order, with no
 environment variables to set and nothing to clean up in between. The suite needs no
-installation: `pyproject.toml` puts `src/` on the path for pytest, and the one test
-that starts a child interpreter passes the path to it explicitly.
+installation.
 
 ```bash
 python -m pytest -q                              # the full public suite
 python scripts/verify_manifest.py                # every payload file, hashed
 python scripts/verify_source_lineage.py          # every module, against its source digest
 python scripts/check_public_tree.py              # the archive's content rules
-python scripts/verify_checkpoint_identities.py   # all six weight artifacts, loaded and stepped
+python scripts/verify_checkpoint_identities.py   # all seven weight artifacts, loaded and stepped
 python scripts/smoke_test.py                     # physics, admissibility map, equivariance
 python scripts/reproduce_scalar_reference.py     # curvature-driven shrinkage
 python scripts/reproduce_n25_transfer.py         # the full frozen transfer score
+python scripts/verify_n8_128_transfer.py --records benchmarks/n8_128_transfer/expected_score.json
+                                                 # native 128³ record, every verdict re-derived
 ```
 
-Then run them again in any order you like. The result does not change, because the
-verifier and the packaging tests ask the manifest what shipped rather than asking the
-filesystem what is there — and by then the filesystem also holds your `outputs/`
-directory and your interpreter's bytecode cache, neither of which was ever part of
-this archive.
+Each result above carries exactly one reproduction level, recorded in
+[`docs/REPRODUCTION_LEVELS.json`](docs/REPRODUCTION_LEVELS.json):
 
-Two scan modes exist, and the difference is worth knowing:
-
-| Command | Question it answers |
+| Level | What you can do here |
 |---|---|
-| `python scripts/check_public_tree.py` | *Is the archive clean?* Scans exactly the files `MANIFEST.sha256` lists. This is the one to run. |
-| `python scripts/check_public_tree.py --mode staging` | *Is this tree ready to package?* Walks everything and refuses generated material. Used when building a release; it will fail in your checkout as soon as you have run anything, which is correct. |
+| `FULL_RECOMPUTATION` | Regenerate the reported metric |
+| `SCORE_RECOMPUTATION` | Recompute the score from shipped arrays; the model is not rerun |
+| `CHECKPOINT_AND_CODE_REPLAY` | Rerun the model; the reference it is scored against is external |
+| `PROVENANCE_ONLY` | Check identities by digest; the result is not recomputable here |
+
+What each command checks, how the weights are packaged and loaded, how to rerun a
+model, and the exact scope of the training-path claims are in
+[`docs/USING_THIS_ARCHIVE.md`](docs/USING_THIS_ARCHIVE.md).
 
 ## Tutorials
 
@@ -515,140 +602,6 @@ Installing creates `src/pinn_phase.egg-info`, and the reproductions write under
 `outputs/`. Both are yours, not ours: they are git-ignored, excluded from the
 manifest, excluded from the sdist and wheel, and absent from the distributed archive.
 
-## What each command verifies
-
-| Tier | What it verifies |
-|---|---|
-| Public suite | Every property below, plus the strict loaders, the reference-usage guard, the packaging rules and the content scanner, exercised against the payload |
-| Manifest | Each of the payload files hashes to its recorded digest, and the payload is exactly what the manifest lists |
-| Source lineage | Every shipped module matches its recorded public digest, and its accepted-source digest is recorded beside it |
-| Content scan | No private path, credential, authorization token, internal decision reference or agent-routing language, over every payload byte, including inside compressed members |
-| Weight-artifact identity | Every distributed weight artifact hashed before it is opened, checked tensor by tensor against its registered lineage, reconstructed into its declared class, strict-loaded, and advanced one admissible step |
-| Smoke check | Periodic multiphase-field physics, the admissibility map, a forward pass, and both phase-permutation and translation equivariance |
-| Compact physics | Deterministic circular-grain shrinkage, energy descent, and the radius-squared law |
-| Frozen result | All 40 archive hashes, every per-case metric, the strict gates, aggregation, and the expected score |
-
-## What each benchmark is reproducible *from*
-
-The rungs above are not supported equally, and the difference matters more than
-the numbers. Each benchmark carries exactly one of four levels, recorded
-machine-readably in [`docs/REPRODUCTION_LEVELS.json`](docs/REPRODUCTION_LEVELS.json):
-
-| Level | Meaning |
-|---|---|
-| `FULL_RECOMPUTATION` | Everything needed to regenerate the reported metric is here |
-| `SCORE_RECOMPUTATION` | Frozen arrays are here and the published score recomputes from them; model inference is not rerun |
-| `CHECKPOINT_AND_CODE_REPLAY` | The public replay weights and their lineage record, the configuration, the initial field, the rollout code and an evaluation that runs locally on the rollout are all here, so **you can rerun the model** — but the large reference trajectory is not, so **you cannot regenerate the published number** from this repository alone |
-| `PROVENANCE_ONLY` | Only immutable identities are here. The result is **not** independently recomputable from this repository |
-
-The middle two levels are the ones most easily misread, so to be plain about it:
-`SCORE_RECOMPUTATION` means the arithmetic is checkable but the model is not rerun;
-`CHECKPOINT_AND_CODE_REPLAY` means the model *is* rerun but the published percentage
-is not reproduced, because the reference it would be compared against lives outside
-this archive. Replay capability and metric recomputation are different things, and
-no row here claims both unless it has both.
-
-A digest-only result is never described as reproducible. Where a field is
-omitted it is named with its digest and with what would be needed to obtain it.
-[`docs/CLAIM_TO_ARTIFACT_MAP.json`](docs/CLAIM_TO_ARTIFACT_MAP.json) binds every
-quantitative statement above to its supporting artifact and its level. The test
-suite refuses a claim pitched above the level its benchmark carries, except for two
-claims about the shipped code rather than about any benchmark's fields — the
-parameter count and the training-path property — which are named explicitly in
-`tests/test_claim_to_artifact_map.py` and verified there directly.
-
-## Model weights
-
-`checkpoints/` carries six **derived public replay-weight artifacts** — one per model
-behind the permutation-equivariant and 3D-cube results — and a lineage record for
-each. It does not carry a training checkpoint, and nothing in the replay or
-verification path loads one. The single exception is
-[`scripts/derive_public_weights.py`](scripts/derive_public_weights.py), which exists
-so that you can re-derive a weight artifact from an accepted parent **you** hold and
-compare it with what shipped; it reads a path you pass it, and there is nothing in
-this archive for it to read.
-
-Two different objects are involved, and this archive keeps them apart everywhere:
-
-| | accepted parent checkpoint | derived public replay weights |
-|---|---|---|
-| what it is | the scientific training payload | a repackaging of that payload's model state |
-| carries | model state, and for some runs optimizer state and free-form run metadata written at training time | model-state tensors only |
-| format | a pickled PyTorch payload | a NumPy archive; no pickle |
-| distributed here | **no** — identified by SHA-256 only | yes |
-| its digest is | the identity of record for the scientific artifact | a *packaging* digest, never the parent's identity |
-
-The derivation changed packaging only: every tensor name, dtype, shape and raw value
-is the parent's, unchanged, and no model parameter differs. Each
-`checkpoints/*.lineage.json` records the parent digest, the derived digest, a
-fingerprint over the whole model state, and the dtype, shape, byte count and
-raw-value digest of every individual tensor, so the claim is checkable rather than
-asserted. [`checkpoints/README.md`](checkpoints/README.md) explains the format and
-how to re-derive it from a parent you hold.
-
-One consequence is worth stating plainly: the two 64-grain parents were written by
-the per-review save path and also contain optimizer state, but those parents are not
-distributed and the optimizer state was never read during derivation, so it does not
-exist in anything shipped here. Which checkpoint was deployed is established by the
-accepted completion and freeze record, not by the shape of a payload, and this
-archive makes no claim to the contrary.
-
-Each artifact is paired with a model-reconstruction configuration in `configs/models/`
-that carries only what is needed to rebuild the class before a strict load. Those
-files are **not** the training configurations: the training configuration of each run
-is identified by SHA-256 in
-[`docs/ARTIFACT_IDENTITY_LEDGER.json`](docs/ARTIFACT_IDENTITY_LEDGER.json) and, with
-one exception, is not distributed here. What each training path was permitted to read
-is recorded in
-[`docs/TRAINING_PATH_DISCLOSURE.json`](docs/TRAINING_PATH_DISCLOSURE.json) and
-replayed through the shipped fail-closed guard by the test suite.
-
-## Rerunning the model
-
-`benchmarks/initial_conditions/` carries the initial field for each supported
-replay. Given a field, a weight artifact, its configuration and the rollout code, you
-can run the model yourself:
-
-```bash
-# bounded, a few steps, enough to prove the pair is executable
-python scripts/replay_rollout.py --benchmark n64_dense_primary --smoke \
-    --output-dir outputs/replay
-
-# the documented rollout, run deliberately and separately
-python scripts/replay_rollout.py --benchmark n64_dense_primary --steps 12000 \
-    --output-dir outputs/replay
-```
-
-`docs/REPLAY_ENTRYPOINTS.json` lists every supported replay, including the ten
-prospective cohort cases under both arms, so the generalization *inference* can be
-rerun and not merely its frozen score.
-
-This command runs the model and nothing else. It verifies the weight-artifact,
-lineage, configuration and initial-field digests against the bytes before loading
-anything, opens no reference trajectory, computes no score, and selects no
-checkpoint. The weights go through a loader that requires exactly the registered
-tensor key set — checked before any array is decoded — and then verifies each
-tensor's dtype, shape, byte count, raw-value digest and finiteness. The initial field
-goes through a loader that accepts an archive **only** if its member set is exactly
-`{phi0}` — a label map, a target, a per-phase weight or a stored trajectory is
-refused before a single array is read.
-
-That the replay is model-only is checked by observation rather than by assertion:
-`tests/test_replay_entrypoints.py` runs a real replay with every file open recorded
-and fails if any reference trajectory or score fixture is opened. The
-`reference_opened` and `scored` fields the command writes into its report are
-statements of intent; the instrumented test is the evidence.
-
-Scoring is deliberately a different command,
-[`scripts/evaluate_rollout.py`](scripts/evaluate_rollout.py), which runs afterwards
-on files and never loads a model. A reference can reach that command; it cannot
-reach the model.
-
-The 25-grain cascade and 64-grain animations are rendered by
-`scripts/render_current_results.py` from frozen arrays that are too large to
-distribute here. The script verifies every source against a pinned SHA-256 before
-drawing, and recomputes every number it prints.
-
 ## Repository structure
 
 ```
@@ -667,7 +620,7 @@ tests/            public test suite
 | Family | Public class | Used for |
 |---|---|---|
 | Permutation-equivariant | `PermEquivariantMPFRollout` | 25-grain cascade, dense 64-grain coarsening, unseen-case transfer |
-| First-generation hybrid | `ExplicitMPFHybridRollout` | The four-phase junction and both 3D cubes |
+| First-generation hybrid | `ExplicitMPFHybridRollout` | The four-phase junction, both 3D cubes and the native 128³ model |
 | Scalar | Allen-Cahn reference and rollout utilities | Compact physics checks and method foundations |
 
 These are named separately because their guarantees differ: only the
@@ -675,110 +628,34 @@ permutation-equivariant family is claimed to be equivariant under relabelling of
 the phases. Boundaries and machine identifiers:
 [`docs/METHOD_OVERVIEW.md`](docs/METHOD_OVERVIEW.md).
 
-## Safety and provenance
-
-Nothing distributed here is a pickle. The model weights are NumPy archives:
-hash-checked before the container is opened, required to carry exactly their
-registered tensor keys, verified tensor by tensor against a recorded dtype, shape,
-byte count and raw-value digest, and loaded with pickling disabled. Every other
-NumPy archive is likewise hash-verified, container-validated and loaded with pickle
-disabled. The shipped transfer fixtures carry no execution
-metadata, and every retained array records its dtype, shape, value digest, public
-archive digest, and frozen source digest. Every displayed result traces to an
-accepted artifact by SHA-256 through the evidence ledger.
-
-- [Scientific source lineage](docs/SOURCE_LINEAGE.md)
-- [Release scope](docs/RELEASE_SCOPE.md)
-- [Completed evidence ledger](docs/COMPLETED_EVIDENCE_LEDGER.md)
-- [Media and benchmark gallery](docs/MEDIA_GALLERY.md)
-- [Security policy](SECURITY.md)
-
 ## Scope and limitations
 
-PINN-Phase is a research surrogate validated on designed benchmarks. It does not
-claim statistical grain growth, universal kinetics, or scaling.
+- PINN-Phase is a research surrogate validated on designed benchmarks. It does not
+  claim statistical grain growth, universal kinetics, or scaling.
+- This archive supports inference replay and code audit, not training reproduction:
+  no training command, training configuration or accepted parent checkpoint is
+  distributed.
+- On the training path that produced every model distributed here except the native
+  128³ model, `pinn_phase.training.explicit_mpf_trainer`, training uses only the
+  initial condition; post-`t0` references are used solely for offline evaluation,
+  never for the loss, model input, early stopping or checkpoint selection. The native
+  128³ model was trained by a later trainer revision that is not distributed; its
+  declared policy is the same and is disclosed by digest in
+  [`docs/TRAINING_PATH_DISCLOSURE.json`](docs/TRAINING_PATH_DISCLOSURE.json).
+- The scalar 64³ spherical rung followed a different protocol (its warm-start
+  lineage was selected with post-`t0` reference terms) and is provenance only.
+- Extinction timing is reported at saved-frame resolution; the pre-registered timing
+  anchor on the 25-grain cascade is not met.
+- For the native 128³ study, the trained weights and a compact score record are
+  distributed; its initial fields, trajectories and training configuration are
+  identified by digest and are not.
 
-**What this archive supports.** Inference replay and code audit. You can rerun the
-distributed models, examine what they produce, and read every line of the training
-code.
-
-You cannot reproduce **the training runs behind these models**. No training command
-ships — there is no console entry point, no `__main__`, and no script here starts a
-run — though the training functions themselves are importable and will execute if you
-call them with data of your own. What is missing is the data and the identities: the
-training configurations are recorded by digest rather than distributed, the training
-initial-condition archives are not distributed, and the accepted parent checkpoints
-are not distributed. So the training path is something you audit by reading it and by
-replaying its recorded policies through the shipped guard, not something you
-re-execute here.
-
-**How references were used, stated exactly.** On the training path that produced every
-model distributed here — `pinn_phase.training.explicit_mpf_trainer` — training uses
-initial conditions only. Post-`t0` phase-field references do not enter model input, do
-not enter the loss, and do not enter early stopping or checkpoint selection; they are
-read only by offline audit after a run has finished.
-
-That statement names its path deliberately. The shipped source also contains generic
-supervised training utilities — `training/baseline.py` and the supervised modes in
-`training/modes.py` — which *do* put a post-`t0` reference frame into a differentiable
-loss. They are reviewed generic code, released for inspection; no model distributed
-here was trained with them, nothing in this archive invokes them, and they are outside
-the scope of the claim above. They are named here rather than left to be found, and
-`docs/TRAINING_PATH_DISCLOSURE.json` records them under `supervised_modules_present`.
-
-That statement is supported by two different kinds of evidence, and they are worth
-separating, because only one of them is an execution result:
-
-- *Executed here.* The public replay path is walled off from reference material, and
-  the wall is demonstrated by running it: `tests/test_replay_entrypoints.py`
-  instruments file opens during a real replay and fails if any reference trajectory
-  or score fixture is opened, and `tests/test_no_reference_leakage.py` exercises the
-  fail-closed guard directly. `docs/TRAINING_PATH_DISCLOSURE.json` records what each
-  training path was permitted to read, and `tests/test_training_path_disclosure.py`
-  replays those policies through the same guard the trainer uses, then mutates them
-  to confirm the guard actually refuses.
-- *Established by reading, not by running.* The data-flow property itself — that no
-  post-`t0` state reaches the loss, the model input, checkpoint selection or early
-  stopping — is established by reading `explicit_mpf_trainer.py`, where each loss
-  term, the model input, the checkpoint writer and the early-stopping test can be
-  traced to what they consume. It is not re-established by any run in this archive,
-  because the runs that produced these models cannot be re-executed here.
-
-  What the guard adds, stated precisely: it validates a **declaration**. At entry to
-  explicit-MPF training it requires the complete reviewed reference-usage policy —
-  every key present, each of the three post-`t0` reference flags the literal `False`,
-  graph features from the model's own field, a reviewed initial-condition mode with
-  its multi-initial-condition contract holding in both directions, and a
-  `training_policy` declaring initial-condition-only supervision. A missing block, an
-  empty one, a misspelled key, an unreviewed extra key or a string standing in for a
-  boolean is refused. So a run that declares anything other than the reviewed policy
-  does not start.
-
-  It reads a mapping. It does not read a tensor, open a data file, or watch the loop
-  run, and it is called at one of the package's training entry points rather than all
-  of them — which is why the data-flow audit above, not the guard, is the evidence
-  for reference isolation. Four of the six models carry a policy in their training
-  configuration and are replayed through the guard by the test suite; the two 3D
-  cubes take their policy from benchmark adapter configurations recorded by digest
-  and not distributed, so their policies are disclosed but not replayed.
-  `docs/TRAINING_PATH_DISCLOSURE.json` states all of this under `guard_scope`, and
-  `tests/test_reference_policy_guard.py` is the mutation matrix that holds the
-  contract in place.
-
-The one exception is historical and is on this page. The scalar `64³` spherical
-feasibility rung followed a different protocol: its warm-start lineage was selected
-using a physical-audit score that included post-`t0` reference terms. **That result
-is therefore provenance-only, and it is not evidence for the scoped
-physics-training claim above.** It is retained because it is a real earlier result and removing it to
-make the general statement tidier would be the wrong trade — but it should be read
-as a feasibility demonstration from a different protocol, not as part of the
-post-initial-condition physics-training line of evidence.
-
-Extinction timing is reported at saved-frame resolution, and the pre-registered
-timing anchor on the 25-grain cascade is not met. The admissibility map is
-configuration-specific, and a caption or manifest always states which one
-applies. Native `128^3` campaign artifacts are outside the frozen v0.1 scope and
-are deliberately excluded for separate evaluation and release.
+The full statement, including what the reference-usage guard does and does not
+establish, is in [`docs/USING_THIS_ARCHIVE.md`](docs/USING_THIS_ARCHIVE.md#scope-and-limitations).
+Provenance records: [source lineage](docs/SOURCE_LINEAGE.md),
+[release scope](docs/RELEASE_SCOPE.md),
+[evidence ledger](docs/COMPLETED_EVIDENCE_LEDGER.md),
+[media gallery](docs/MEDIA_GALLERY.md), [security policy](SECURITY.md).
 
 ## Predecessor work
 

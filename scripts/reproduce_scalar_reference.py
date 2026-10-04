@@ -41,12 +41,12 @@ def linear_fit(x: np.ndarray, y: np.ndarray) -> dict[str, float]:
     }
 
 
-def matches_reviewed(expected: object, observed: object) -> bool:
+def matches_expected(expected: object, observed: object) -> bool:
     """Compare fit results portably while keeping discrete outcomes exact."""
 
     if isinstance(expected, dict) and isinstance(observed, dict):
         return expected.keys() == observed.keys() and all(
-            matches_reviewed(expected[key], observed[key]) for key in expected
+            matches_expected(expected[key], observed[key]) for key in expected
         )
     if isinstance(expected, float) and isinstance(observed, float):
         return math.isclose(expected, observed, rel_tol=1.0e-12, abs_tol=1.0e-14)
@@ -91,8 +91,8 @@ def reproduce(
         "phi_max": float(np.max(result.states)),
     }
     expected = json.loads(expected_path.read_text(encoding="utf-8"))
-    if not matches_reviewed(expected, metrics):
-        raise RuntimeError("scalar reference metrics differ from the reviewed expected values")
+    if not matches_expected(expected, metrics):
+        raise RuntimeError("scalar reference metrics differ from the accepted expected values")
     output_dir.mkdir(parents=True, exist_ok=True)
     np.savez_compressed(
         output_dir / "reference.npz",
@@ -127,7 +127,7 @@ def main() -> int:
         args.config.resolve(), args.output.resolve(), args.expected.resolve()
     )
     print(
-        "scalar reference: reviewed expected match; "
+        "scalar reference: accepted expected match; "
         f"relative slope error={metrics['relative_slope_error']:.4%}"
     )
     return 0

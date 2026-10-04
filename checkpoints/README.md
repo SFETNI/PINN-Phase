@@ -1,6 +1,6 @@
 # Derived public replay weights
 
-This directory does **not** contain training checkpoints. It contains six derived
+This directory does **not** contain training checkpoints. It contains seven derived
 public replay-weight artifacts, one per model, each with a lineage record beside it.
 
 The distinction is load-bearing and is kept everywhere in this archive:
@@ -47,7 +47,7 @@ each tensor's dtype, shape, byte count, raw-value digest and finiteness, then th
 fingerprint of the whole state. An artifact that has been edited, truncated,
 extended, re-typed or re-ordered does not load.
 
-Verify all six, end to end, with:
+Verify all seven, end to end, with:
 
 ```bash
 python scripts/verify_checkpoint_identities.py

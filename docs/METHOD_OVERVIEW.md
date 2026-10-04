@@ -46,8 +46,9 @@ supports the 25-grain and dense 64-grain results. Its machine identifier is
 convolutional recurrent branch. Accepted configurations can include phase-index
 and periodic coordinate encodings, so this family is not claimed to be
 phase-permutation equivariant. It nevertheless uses circular spatial treatment
-where configured. It supports the retained 8-grain 64^3 and N16 96^3 evidence.
-Its machine identifier is `legacy_pa_hybrid_mpf`.
+where configured. It supports the retained 8-grain 64^3 and N16 96^3 evidence,
+and the native 128^3 eight-grain model trained on four initial fields with the
+clip-and-renormalize map. Its machine identifier is `legacy_pa_hybrid_mpf`.
 
 ### Scalar family
 

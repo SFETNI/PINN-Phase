@@ -7,7 +7,7 @@ cube — while the model families are named in
 [`METHOD_OVERVIEW.md`](METHOD_OVERVIEW.md). A digest identifies an
 accepted artifact but is not a substitute for publishing it.
 
-The method and benchmark animations from the earlier public candidate remain
+The method and benchmark animations from the previous public snapshot remain
 available in `media/`. Their byte identities and continuity roles are recorded
 in `media/legacy_asset_manifest.json`; historical N25 and N64 visuals are not
 used as substitutes for the newer permutation-equivariant results.
@@ -108,15 +108,15 @@ for the stated evidence level.
 The four names below are historical record paths. None is distributed here, and
 none exists in this archive; they are written as plain text rather than links.
 Each digest, not its path, is the provenance identity — that is what makes the
-record locatable without the candidate tree.
+record locatable without that snapshot.
 
-- non-distributed path in the earlier public candidate, `docs/BENCHMARK_CATALOG.md`:
+- non-distributed path in the previous public snapshot, `docs/BENCHMARK_CATALOG.md`:
   `dfe8a4ab5ef18c84107a407681aee2649046878302397563244d1c12322f6c35`
-- non-distributed path in the earlier public candidate, `docs/BENCHMARKS.md`:
+- non-distributed path in the previous public snapshot, `docs/BENCHMARKS.md`:
   `dbf5b81df25eb22df8796eacf87e3484afca892a847970b3e5c6a0cb296cca9f`
-- non-distributed path in the earlier public candidate, `examples/n8_64/EXPECTED_METRICS.yaml`:
+- non-distributed path in the previous public snapshot, `examples/n8_64/EXPECTED_METRICS.yaml`:
   `f0ad608a3f228c70f078c3f00b9fd00be741b6dc810bf223278ce3b51fdfdf1d`
-- non-distributed path in the earlier public candidate,
+- non-distributed path in the previous public snapshot,
   `examples/scalar_3d_spherical/EXPECTED_METRICS.yaml`:
   `c9b8d0d4c7c53bc7cd4f96100b35c70ca265b5e0a0f6b271053743ebd56c7c09`
 
@@ -234,3 +234,33 @@ licensed public evidence package exists and its digest is verified here.
 ## N16/96 prospective transfer
 
 Six unseen fixed-family initial conditions use the existing N16 checkpoint; no weight is duplicated and no training occurs. Public score records are PROVENANCE_ONLY; external arrays and the all-six renderer are hash-bound in `benchmarks/n16_96_transfer/manifest.json` and `media/n16_96_transfer/asset_manifest.json`.
+
+## Native N8 `128^3`
+
+- Architecture: first-generation hybrid multiphase-field model, eight phases,
+  1,913,034 parameters, trained on four `128^3` initial fields under a recorded
+  physics-only training policy, with
+  a represented horizon of 4,096 steps and the clip-and-renormalize map.
+- Accepted parent checkpoint: `0b04afab56139ecb13071396c7ca10777575add22d73949c0abeaaaeb0a4ed6b` — the identity of
+  record. **Not distributed.**
+- Derived public replay weights: `4e94254e4694c9e0ed54b07019d3333cbd33c13293cfa560267ce139149a8462`,
+  distributed as `checkpoints/n8_128_cube_multi_ic_hybrid.weights.npz`. Model-state tensors only;
+  a packaging digest, not the identity of the accepted parent.
+- Training configuration: `4bfa4ea8759073dd492d730733486bf36a60646cb8a19c966a007a964232e71f`.
+  **Not distributed.**
+- Training field, model trajectory:
+  `3e8081392b4723df762de0f452acd85015d7aa45229ae5e5c31d713d41da51f5`; reference:
+  `e7309486c58568569f463bfe18b00ef96390de6b382bab9589e709dcec39e063`.
+- Result, training field: 98.79% agreement at step 24,000 = 5.86 H against 69.48%
+  for persistence; exact five-grain survivor set; extinction residuals −20, −100
+  and +40 steps. Same-field extrapolation, not transfer.
+- Result, development cohort: four of six cases satisfy all six criteria at step
+  24,000; all six keep the exact survivor set.
+- Result, blind cohort: two of six cases satisfy all six criteria and the cohort
+  rule is not met; five of six keep the exact survivor set. At step 4,000, in an
+  analysis carried out after the full-horizon evaluation, disagreement is
+  0.72–2.11% against 6.69–7.90% for persistence.
+- Every case's measurements, criteria and trajectory digests are in
+  `benchmarks/n8_128_transfer/expected_score.json`, together with the digests of
+  the score records it was built from; the animation is hash-bound in
+  `media/n8_128_transfer/asset_manifest.json`. All PROVENANCE_ONLY.

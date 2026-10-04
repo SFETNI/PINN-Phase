@@ -98,7 +98,7 @@
         "distributed": false,
         "carries_optimizer_state": true,
         "read_by_public_code": false,
-        "note": "The accepted parent checkpoint was written by the per-review save path and also contains optimizer state. That parent is not distributed. The derived public replay weights carry model-state tensors only: the optimizer state was never read during derivation and does not exist in the distributed artifact. The epoch and final-deployment role of each parent is established by the accepted completion and freeze record, NOT by the shape of its payload."
+        "note": "The accepted parent checkpoint was written by the periodic checkpoint-save path and also contains optimizer state. That parent is not distributed. The derived public replay weights carry model-state tensors only: the optimizer state was never read during derivation and does not exist in the distributed artifact. The epoch and final-deployment role of each parent is established by the run's recorded final-checkpoint identity, NOT by the shape of its payload."
       },
       "parent_checkpoint_sha256": "301d2431fec9fd75171888ce9635f5dcef1c200f9a7121f3cff3a29976785813",
       "parent_checkpoint_distributed": false,
@@ -145,7 +145,7 @@
         "distributed": false,
         "carries_optimizer_state": true,
         "read_by_public_code": false,
-        "note": "The accepted parent checkpoint was written by the per-review save path and also contains optimizer state. That parent is not distributed. The derived public replay weights carry model-state tensors only: the optimizer state was never read during derivation and does not exist in the distributed artifact. The epoch and final-deployment role of each parent is established by the accepted completion and freeze record, NOT by the shape of its payload."
+        "note": "The accepted parent checkpoint was written by the periodic checkpoint-save path and also contains optimizer state. That parent is not distributed. The derived public replay weights carry model-state tensors only: the optimizer state was never read during derivation and does not exist in the distributed artifact. The epoch and final-deployment role of each parent is established by the run's recorded final-checkpoint identity, NOT by the shape of its payload."
       },
       "parent_checkpoint_sha256": "d1fbef94e363b8fff49416f996854849c8d443c4f94a0fee4c34634752e597dd",
       "parent_checkpoint_distributed": false,
@@ -276,6 +276,62 @@
           96
         ]
       }
+    },
+    {
+      "name": "n8_128_cube_multi_ic_hybrid",
+      "benchmark": "n8_128_cube",
+      "role": "multi_initial_condition_model",
+      "architecture_family": "legacy_pa_hybrid_mpf",
+      "class_name": "ExplicitMPFHybridRollout",
+      "accepted_parent_checkpoint": {
+        "sha256": "0b04afab56139ecb13071396c7ca10777575add22d73949c0abeaaaeb0a4ed6b",
+        "distributed": false,
+        "carries_optimizer_state": false,
+        "read_by_public_code": false,
+        "note": "The accepted parent checkpoint carries model state and a small block of scalar training metadata, and no optimizer state. That parent is not distributed; the derived public replay weights carry model-state tensors only."
+      },
+      "parent_checkpoint_sha256": "0b04afab56139ecb13071396c7ca10777575add22d73949c0abeaaaeb0a4ed6b",
+      "parent_checkpoint_distributed": false,
+      "public_weights_path": "checkpoints/n8_128_cube_multi_ic_hybrid.weights.npz",
+      "public_weights_sha256": "4e94254e4694c9e0ed54b07019d3333cbd33c13293cfa560267ce139149a8462",
+      "public_weights_bytes": 7657520,
+      "public_weights_distributed": true,
+      "weight_lineage_path": "checkpoints/n8_128_cube_multi_ic_hybrid.lineage.json",
+      "weight_lineage_sha256": "2482be54bde09ddd82b02289c4c2b91d522d7c6a0659a0fd5003f4b0abcbf372",
+      "model_state_fingerprint_sha256": "99f726448b856bba3d664f15cae000f5f2e21161f59d59c442765c4abd442ec9",
+      "tensor_count": 21,
+      "parameter_count": 1913034,
+      "derivation": {
+        "transformation": "packaging only",
+        "script": "scripts/derive_public_weights.py",
+        "script_sha256": "345baa60a8a372d66eab984e17fae293ffa44441b87523cc0cb4afd7faba8fba",
+        "statement": "The derived artifact is not the accepted scientific checkpoint. Its digest is a packaging digest and must never be quoted as the identity of the accepted parent."
+      },
+      "model_reconstruction_config": "configs/models/n8_128_cube_multi_ic_hybrid.yaml",
+      "training_config_sha256": "4bfa4ea8759073dd492d730733486bf36a60646cb8a19c966a007a964232e71f",
+      "training_config_bytes": 17119,
+      "training_config_distributed": false,
+      "training_config_note": "The training configuration is identified by digest and is not distributed. It was run by a later revision of the explicit-MPF trainer that adds the four-field combined-gradient schedule; that revision is identified in docs/TRAINING_PATH_DISCLOSURE.json and is not distributed either.",
+      "initial_field": null,
+      "initial_field_note": "No 128^3 initial field is distributed, so this model has no replay entry point here. The four training fields are identified by digest under training_initial_fields_sha256; every evaluation trajectory is identified in benchmarks/n8_128_transfer/manifest.json.",
+      "training_initial_fields_sha256": [
+        "4c3132e0ba50933d174e626ed11f6b57ecc532901c658dcbab5876f1f6ff2b6f",
+        "f5596ceec78949208908647c818bb140ef2d7d7eff0a9b43c5949720ff1bbac8",
+        "fed45c0c53a514fd883d6977d63e177ea32eee7c9344598ee76e02a1acbac34c",
+        "6858473fb8743a12707c679296f27d3a5c0b1668d31af519f24aeedd2b8041cc"
+      ],
+      "replay_equivalence": {
+        "statement": "The public ExplicitMPFHybridRollout, loaded with these derived weights, reproduced bit for bit the 24-step rollout of the model code that produced the 128^3 evaluation trajectories on a deterministic 24^3 eight-phase field. The two code versions differ only in options that are disabled for this model.",
+        "steps": 24,
+        "field": [
+          8,
+          24,
+          24,
+          24
+        ],
+        "max_abs_difference": 0.0,
+        "trajectory_sha256": "b02bde9037eb94f82aaf1e028764ae4d545864eed4f650998084b60f8bed244b"
+      }
     }
   ],
   "payload_disclosure": "Where a checkpoint carries more than model weights, the extra content is named here and its treatment during replay is stated. No checkpoint's bytes were altered to tidy this up: altering them would change the identity that makes them evidence.",
@@ -286,5 +342,13 @@
     "public_records": "benchmarks/n16_96_transfer/expected_score.json",
     "external_assets": "benchmarks/n16_96_transfer/manifest.json",
     "renderer": "scripts/render_n16_96_transfer.py"
+  },
+  "n8_128_transfer": {
+    "level": "PROVENANCE_ONLY",
+    "checkpoint_sha256": "0b04afab56139ecb13071396c7ca10777575add22d73949c0abeaaaeb0a4ed6b",
+    "no_new_training": true,
+    "public_records": "benchmarks/n8_128_transfer/expected_score.json",
+    "external_assets": "benchmarks/n8_128_transfer/manifest.json",
+    "renderer": "scripts/render_n8_128_transfer.py"
   }
 }

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build the public N16/96 prospective-cohort records from sealed score JSON.
+"""Build the public N16/96 prospective-cohort records from the accepted score JSON.
 
 This packs already accepted measurements; it never evaluates a model or reference.
 """
@@ -30,7 +30,7 @@ def benchmark_readme(contract: dict[str, str]) -> str:
 
 This package records six prospectively fixed unseen initial microstructures evaluated with the same fixed development checkpoint. The terminal scored state is step 1600; saved states are monitored through step 3200.
 
-The public reproduction level is **PROVENANCE_ONLY** because frozen t0, model and reference arrays are documented external assets, not distributed here. `expected_score.json` is a compact, sanitized record derived from sealed score records; it is not a replacement for the arrays.
+The public reproduction level is **PROVENANCE_ONLY** because frozen t0, model and reference arrays are documented external assets, not distributed here. `expected_score.json` is a compact public record derived from the accepted score records; it is not a replacement for the arrays.
 
 ## Complete predefined qualification
 

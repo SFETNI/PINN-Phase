@@ -1,7 +1,7 @@
 # Held-out 25-grain initial-condition transfer
 
 This package is a compact, offline reproduction of the frozen confirmation
-score. It contains the exact arrays needed by the reviewed metric and gate
+score. It contains the exact arrays needed by the frozen metric and gate
 definitions, copied without numerical transformation from ten reference
 trajectories and two autonomous model arms.
 
@@ -65,7 +65,7 @@ The command:
 2. verifies each retained array's dtype, shape, and value digest;
 3. recomputes all per-case metrics for both arms;
 4. applies the frozen gate and aggregation logic;
-5. compares the complete result with the reviewed expected score;
+5. compares the complete result with the accepted expected score;
 6. writes a new report to the ignored `outputs/` directory.
 
 The public fixture is compact because soft cadence fields and embedded
