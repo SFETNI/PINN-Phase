@@ -3,9 +3,18 @@
 All notable changes to this project are documented here. This project follows
 [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## Unreleased
+## 3.0.0
+
+Everything since the first public snapshot (v0.1.0). The version number follows
+the paper's release naming.
 
 ### Added
+
+- Phase-local shared-rule model with 2,160 parameters and derived public replay weights, reconstructed by `configs/models/phase_local_48_n8.yaml`.
+- `benchmarks/phaselocal_transfer/`: four separate transfer regimes with initial label arrays, a compact score record, and a verifier that re-derives the criteria.
+- Per-step volume tables and saved labels for all twelve phase-local cases as v3.0.0 release assets, bound by SHA-256.
+- Paired reference and PINN-Phase media for the 38-grain and 150-grain regimes, with renderer and asset manifests.
+- Version 3.0.0 in package metadata and citation information.
 
 - Native 128³ study. Derived public replay weights of the eight-phase
   first-generation hybrid model trained on four 128³ initial fields under a
@@ -57,6 +66,8 @@ All notable changes to this project are documented here. This project follows
   scanning, and source-lineage verification.
 
 ### Changed
+
+- The README adds the phase-local transfer results and updates the Related Paper title and authors.
 
 - Documentation now names model families in plain language and states, for each
   result, whether it is development evidence or a prospectively fixed evaluation.
@@ -118,7 +129,9 @@ All notable changes to this project are documented here. This project follows
   by digest, not distributed.
 
 - Results come from designed benchmarks. The project makes no claim of
-  statistical grain growth, universal kinetics, or scaling.
+  statistical grain growth or universal kinetics. Phase-local transfer covers one
+  synthetic geometry family at fixed grid spacing, from 64^3 to 128^3 and up to
+  150 grains.
 - The pre-registered extinction-timing anchor on the 25-grain cascade is not met;
   extinction events are predominantly premature.
 - The prospective cohort passes 7 of 8 unseen cases; the single strict failure is

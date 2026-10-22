@@ -80,3 +80,13 @@ scripts are new: `package_n8_128_transfer.py` builds the compact record from the
 accepted score records, found by digest; `verify_n8_128_transfer.py` re-derives
 every verdict from it; and `render_n8_128_transfer.py` draws the animation from
 digest-verified trajectories and requires every plotted value to equal the record.
+
+## Phase-local transfer
+
+The public `PhaseLocalRule` and obstacle reference implementation are clean
+reconstructions of the recorded model and physical map. The derived replay weights
+preserve the three recorded state tensors; `checkpoints/phase_local_48_n8.lineage.json`
+binds their parent by digest. The benchmark package binds source records by digest,
+ships initial labels, and lists per-step tables and saved labels as release assets.
+`scripts/verify_phaselocal_transfer.py` re-derives the four separate regime summaries.
+The source-to-public module map is in `SOURCE_TRANSFORM_MAP.tsv`.

@@ -21,6 +21,7 @@ to pass ``release_files`` first, and that function has no knowledge of the manif
 
 from __future__ import annotations
 
+import os
 from pathlib import Path
 
 
@@ -64,14 +65,21 @@ def is_generated(relative: Path) -> bool:
 
 def release_files(root: Path, *, manifest_name: str = MANIFEST_NAME) -> set[Path]:
     """Return regular, non-generated files relative to ``root``."""
-    return {
-        path.relative_to(root)
-        for path in root.rglob("*")
-        if path.is_file()
-        and not path.is_symlink()
-        and path.name != manifest_name
-        and not is_generated(path.relative_to(root))
-    }
+    paths: set[Path] = set()
+    for current, directories, filenames in os.walk(root, followlinks=False):
+        directory = Path(current)
+        directories[:] = [
+            name for name in directories
+            if not is_generated((directory / name).relative_to(root))
+            and not (directory / name).is_symlink()
+        ]
+        for name in filenames:
+            path = directory / name
+            relative = path.relative_to(root)
+            if (name != manifest_name and not is_generated(relative)
+                    and not path.is_symlink() and path.is_file()):
+                paths.add(relative)
+    return paths
 
 
 def manifest_payload(root: Path, *, manifest_name: str = MANIFEST_NAME) -> list[Path]:

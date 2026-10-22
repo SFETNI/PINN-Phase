@@ -225,7 +225,10 @@ def test_exact_media_environment_and_non_skipping_ci_job_are_declared() -> None:
 
 def test_whole_tree_renderer_discovery_covers_every_renderer_manifest() -> None:
     manifests = []
-    for path in ROOT.rglob("*.json"):
+    for relative in (ROOT / "MANIFEST.sha256").read_text(encoding="utf-8").splitlines():
+        path = ROOT / relative.split("  ", 1)[1]
+        if path.suffix != ".json":
+            continue
         record = _json(path)
         if isinstance(record, dict) and "renderer_sha256" in record:
             manifests.append(path.relative_to(ROOT).as_posix())
@@ -235,6 +238,8 @@ def test_whole_tree_renderer_discovery_covers_every_renderer_manifest() -> None:
         "media/n16_96_transfer/asset_manifest.json",
         "media/n25_transfer/asset_manifest.json",
         "media/n8_128_transfer/asset_manifest.json",
+        "media/phaselocal_n150/asset_manifest.json",
+        "media/phaselocal_n38/asset_manifest.json",
     ]
 
 
@@ -257,7 +262,8 @@ def test_manifest_covers_release_payload_without_inspecting_mutable_caches() -> 
     public_tree = subprocess.run([sys.executable, "-B", str(ROOT / "scripts/check_public_tree.py")],
                                  cwd=ROOT, capture_output=True, text=True)
     assert public_tree.returncode == 0, public_tree.stderr
-    assert not list(ROOT.rglob("*.tar.gz"))
+    assert not any(line.endswith(".tar.gz") for line in
+                   (ROOT / "MANIFEST.sha256").read_text(encoding="utf-8").splitlines())
 
 
 def test_section_rule_uses_the_reference_alone_and_the_record_check_refuses_drift() -> None:

@@ -352,6 +352,44 @@
         "record": "df3ef40418e903476d9bc4781f4e3b1211f7259e4fec3937b5d455fed1f69575"
       },
       "not_supported_here": "The model weights are distributed and verified, but the 128^3 initial fields and trajectories are external, so this number cannot be recomputed from the archive."
+    },
+    {
+      "id": "phaselocal_domain_and_grain_transfer",
+      "source": "README.md",
+      "claim": "The same 2,160-parameter phase-local weights, trained at 48^3 with eight grains, meet all five criteria in all three cases at each of 64^3/16, 96^3/16 and 128^3/38. All 10/10, 10/10 and 12/12 reference extinctions are reproduced; signed residual ranges are +1 to +9, +1 to +14 and -26 to +21 steps, respectively.",
+      "benchmark": "phaselocal_transfer",
+      "level": "SCORE_RECOMPUTATION",
+      "supporting_paths": [
+        "benchmarks/phaselocal_transfer/expected_score.json",
+        "benchmarks/phaselocal_transfer/manifest.json",
+        "scripts/verify_phaselocal_transfer.py",
+        "checkpoints/phase_local_48_n8.weights.npz"
+      ],
+      "digests": {
+        "accepted_parent_checkpoint": "764f22a548e4372e7627e71f4680bf6c806608ff90b75e8d389a1fcc98afc6e4",
+        "public_weights": "7501369550e55774592be0aad835f07cacbcd5305e2f02a83481ef68c18e2f14",
+        "record": "71cbdea70a8df44bbe7876b4dd98a8fc20d634bb4f99f571815c6361cf472662"
+      },
+      "note": "The compact record is verified in-tree. Recomputing array-derived scores requires the checksummed release assets; continuous-field errors remain measurements of record because full continuous fields are not distributed."
+    },
+    {
+      "id": "phaselocal_150_grain_transfer",
+      "source": "README.md",
+      "claim": "At 128^3 with 150 grains, all 368 reference extinctions are reproduced by identity, with no spurious extinction or return. Terminal label disagreement is 0.51/0.70/0.88 percent at t = 135 and the field-error ratio is at most 0.0107. The grain-volume criterion is met through t = 80 in all three microstructures and through t = 135 in microstructure 1; terminal errors are 0.0407/0.0922/0.2665. One-grain alive-set offsets occur at t = 50 in microstructure 1 and t = 40 in microstructure 3.",
+      "benchmark": "phaselocal_transfer",
+      "level": "SCORE_RECOMPUTATION",
+      "supporting_paths": [
+        "benchmarks/phaselocal_transfer/expected_score.json",
+        "benchmarks/phaselocal_transfer/manifest.json",
+        "scripts/verify_phaselocal_transfer.py",
+        "checkpoints/phase_local_48_n8.weights.npz"
+      ],
+      "digests": {
+        "accepted_parent_checkpoint": "764f22a548e4372e7627e71f4680bf6c806608ff90b75e8d389a1fcc98afc6e4",
+        "public_weights": "7501369550e55774592be0aad835f07cacbcd5305e2f02a83481ef68c18e2f14",
+        "record": "71cbdea70a8df44bbe7876b4dd98a8fc20d634bb4f99f571815c6361cf472662"
+      },
+      "note": "The compact record is verified in-tree. Recomputing array-derived scores requires the checksummed release assets; continuous-field errors remain measurements of record because full continuous fields are not distributed."
     }
   ],
   "n16_96_prospective_transfer": {
@@ -369,5 +407,14 @@
     "public_records": "benchmarks/n8_128_transfer/expected_score.json",
     "external_assets": "benchmarks/n8_128_transfer/manifest.json",
     "renderer": "scripts/render_n8_128_transfer.py"
+  },
+  "phaselocal_transfer": {
+    "level": "SCORE_RECOMPUTATION",
+    "checkpoint_sha256": "764f22a548e4372e7627e71f4680bf6c806608ff90b75e8d389a1fcc98afc6e4",
+    "public_records": "benchmarks/phaselocal_transfer/expected_score.json",
+    "release_assets": "benchmarks/phaselocal_transfer/manifest.json",
+    "verifier": "scripts/verify_phaselocal_transfer.py",
+    "initial_labels": "benchmarks/phaselocal_transfer/initial_labels/",
+    "public_weights": "checkpoints/phase_local_48_n8.weights.npz"
   }
 }

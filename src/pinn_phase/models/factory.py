@@ -14,6 +14,7 @@ class ArchitectureFamily(StrEnum):
     N3_EQUIVARIANT_MPF = "n3_permutation_equivariant_mpf"
     LEGACY_PA_HYBRID_MPF = "legacy_pa_hybrid_mpf"
     SCALAR = "scalar"
+    PHASE_LOCAL = "phase_local"
 
 
 def architecture_family_from_config(settings: dict[str, Any]) -> ArchitectureFamily:
@@ -21,6 +22,10 @@ def architecture_family_from_config(settings: dict[str, Any]) -> ArchitectureFam
 
     model = settings.get("model") or {}
     architecture = str(model.get("architecture", ""))
+    if architecture == "phase_local_rule":
+        if model.get("arch_variant") is not None:
+            raise ValueError("the phase-local rule has no architecture variants")
+        return ArchitectureFamily.PHASE_LOCAL
     if model.get("arch_variant") == "perm_equivariant_v1":
         if architecture != "explicit_mpf_ann_convlstm_hybrid":
             raise ValueError(

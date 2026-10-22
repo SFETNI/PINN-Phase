@@ -157,6 +157,8 @@ def test_every_distributed_checkpoint_has_a_disclosed_training_path() -> None:
     # The native 128^3 model's policy was read by a trainer revision that is not
     # distributed, so it is disclosed in its own section rather than replayed.
     disclosed.add(DISCLOSURE["n8_128_transfer"]["training_path"]["model"])
+    # The phase-local model likewise: its training recipe is documented, its trainer is not distributed.
+    disclosed.add(DISCLOSURE["phaselocal_transfer"]["training_path"]["model"])
     missing = {entry["name"] for entry in ledger["artifacts"]} - disclosed
     assert not missing, f"checkpoints distributed with no disclosed training path: {sorted(missing)}"
 

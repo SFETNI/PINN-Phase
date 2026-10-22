@@ -31,6 +31,15 @@ The 128^3 initial fields, the model and reference trajectories, the specialized
 model weights and the training configuration are identified by digest and are not
 distributed, so every native 128^3 result is `PROVENANCE_ONLY` here.
 
+## Phase-local transfer (v3.0.0)
+
+- An eighth derived public replay-weight artifact, the 2,160-parameter phase-local rule trained at 48³ with eight grains, with its lineage and reconstruction configuration.
+- Initial label arrays for twelve unseen microstructures across four separate regimes, plus a compact score record and verifier.
+- Per-step volume tables and saved label arrays as v3.0.0 release assets, identified by the benchmark manifest and SHA-256 sums.
+- A 38-grain terminal figure and a 150-grain paired-state animation, with source-bound manifests and a distributed renderer.
+
+The transfer covers one synthetic geometry family at fixed grid spacing. The phase-local training recipe is documented in the benchmark README; no training command ships.
+
 ## Excluded
 
 - native 128^3 initial fields, trajectories and specialized weights (identified

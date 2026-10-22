@@ -48,14 +48,26 @@ from pinn_phase.io.public_weights import (  # noqa: E402
     load_weight_lineage,
 )
 from pinn_phase.models import (  # noqa: E402
+    ArchitectureFamily,
     ExplicitMPFHybridRollout,
     PermEquivariantMPFRollout,
     architecture_family_from_config,
 )
+from pinn_phase.models.phase_local import PhaseLocalRule, phase_local_step  # noqa: E402
+from pinn_phase.physics import obstacle_reference  # noqa: E402
 
 CLASSES = {
     "PermEquivariantMPFRollout": PermEquivariantMPFRollout,
     "ExplicitMPFHybridRollout": ExplicitMPFHybridRollout,
+    "PhaseLocalRule": PhaseLocalRule,
+}
+# The phase-local rule takes no physics arguments; its constants live in the
+# reference module, and the config must state the same values.
+PHASE_LOCAL_CONSTANTS = {
+    "kappa_o": obstacle_reference.KAPPA_O,
+    "beta_o": obstacle_reference.BETA_O,
+    "dx": obstacle_reference.DX_O,
+    "dt_o": obstacle_reference.DT_O,
 }
 # Constructor keys that are documentation rather than arguments.
 NON_CONSTRUCTOR = frozenset({"architecture", "arch_variant"})
@@ -73,6 +85,11 @@ def _build(settings: dict):
         )
     model_block = {k: v for k, v in settings["model"].items() if k not in NON_CONSTRUCTOR}
     physics = settings["physics"]
+    if family is ArchitectureFamily.PHASE_LOCAL:
+        for key, value in PHASE_LOCAL_CONSTANTS.items():
+            if float(physics[key]) != value:
+                raise ValueError(f"config {key}={physics[key]!r} differs from the code ({value!r})")
+        return CLASSES[class_name](**model_block), family
     kwargs = dict(
         model_dt=float(physics["model_dt"]),
         eta_px=float(physics["eta_px"]),
@@ -85,6 +102,19 @@ def _build(settings: dict):
 
 def _one_step(model, settings: dict) -> dict:
     """Advance one admissible step on a small periodic field."""
+    if isinstance(model, PhaseLocalRule):
+        phases = int(settings["num_phases"])
+        slabs = (torch.arange(8) * phases) // 8
+        labels = slabs.reshape(8, 1, 1).expand(8, 8, 8)
+        with torch.no_grad():
+            phi_next = phase_local_step(model, obstacle_reference.one_hot_from_labels(labels, phases))
+        return {
+            "step_shape": list(phi_next.shape),
+            "max_abs_phase_sum_error": float((phi_next.sum(dim=1) - 1.0).abs().max()),
+            "phi_min": float(phi_next.min()),
+            "phi_max": float(phi_next.max()),
+            "finite": bool(torch.isfinite(phi_next).all()),
+        }
     torch.manual_seed(0)
     phases = int(settings["model"]["num_phases"])
     dims = int(settings["model"].get("spatial_dims", 2))

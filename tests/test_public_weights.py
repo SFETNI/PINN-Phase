@@ -190,9 +190,12 @@ def test_distributed_artifact_strict_loads_into_its_declared_class(entry: dict) 
         architecture_family_from_config,
     )
 
+    from pinn_phase.models.phase_local import PhaseLocalRule
+
     classes = {
         "PermEquivariantMPFRollout": PermEquivariantMPFRollout,
         "ExplicitMPFHybridRollout": ExplicitMPFHybridRollout,
+        "PhaseLocalRule": PhaseLocalRule,
     }
     settings = yaml.safe_load(
         (ROOT / entry["model_reconstruction_config"]).read_text(encoding="utf-8")
@@ -201,10 +204,14 @@ def test_distributed_artifact_strict_loads_into_its_declared_class(entry: dict) 
     block = {k: v for k, v in settings["model"].items()
              if k not in {"architecture", "arch_variant"}}
     physics = settings["physics"]
-    model = classes[settings["class_name"]](
-        model_dt=float(physics["model_dt"]), eta_px=float(physics["eta_px"]),
-        mu=float(physics["mu"]), sigma=float(physics["sigma"]), **block,
-    )
+    if settings["class_name"] == "PhaseLocalRule":
+        # The phase-local rule takes no physics arguments; its constants are fixed.
+        model = PhaseLocalRule(**block)
+    else:
+        model = classes[settings["class_name"]](
+            model_dt=float(physics["model_dt"]), eta_px=float(physics["eta_px"]),
+            mu=float(physics["mu"]), sigma=float(physics["sigma"]), **block,
+        )
     lineage = load_weight_lineage(ROOT / entry["weight_lineage_path"])
     state = load_public_weights(ROOT / entry["public_weights_path"], lineage=lineage)
     model.load_state_dict(as_torch_state_dict(state), strict=True)

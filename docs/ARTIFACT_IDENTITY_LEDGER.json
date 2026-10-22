@@ -332,6 +332,75 @@
         "max_abs_difference": 0.0,
         "trajectory_sha256": "b02bde9037eb94f82aaf1e028764ae4d545864eed4f650998084b60f8bed244b"
       }
+    },
+    {
+      "name": "phase_local_48_n8",
+      "benchmark": "phaselocal_transfer",
+      "role": "phase_local_model",
+      "architecture_family": "phase_local",
+      "class_name": "PhaseLocalRule",
+      "accepted_parent_checkpoint": {
+        "sha256": "764f22a548e4372e7627e71f4680bf6c806608ff90b75e8d389a1fcc98afc6e4",
+        "distributed": false,
+        "carries_optimizer_state": false,
+        "read_by_public_code": false,
+        "note": "The accepted parent checkpoint is a bare model state of three float32 convolution tensors (c1.weight, c2.weight, c3.weight) with no optimizer state and no metadata. It is not distributed; the derived public replay weights carry the same three tensors, unchanged. The same parent digest is the model of every phase-local result: the 48^3 training regime and the r64_n16, r96_n16, r128_n38 and r128_n150 evaluation regimes."
+      },
+      "parent_checkpoint_sha256": "764f22a548e4372e7627e71f4680bf6c806608ff90b75e8d389a1fcc98afc6e4",
+      "parent_checkpoint_distributed": false,
+      "public_weights_path": "checkpoints/phase_local_48_n8.weights.npz",
+      "public_weights_sha256": "7501369550e55774592be0aad835f07cacbcd5305e2f02a83481ef68c18e2f14",
+      "public_weights_bytes": 9352,
+      "public_weights_distributed": true,
+      "weight_lineage_path": "checkpoints/phase_local_48_n8.lineage.json",
+      "weight_lineage_sha256": "b3542de1c78637d7b2b0578f005ceb4cd34137ccc85252f7581839f2c1487770",
+      "model_state_fingerprint_sha256": "f9c868f172d5596056ff6ddf50f7e451949683a0382413602b9f7afe9f34f6d7",
+      "tensor_count": 3,
+      "parameter_count": 2160,
+      "derivation": {
+        "transformation": "packaging only",
+        "script": "scripts/derive_public_weights_state_dict.py",
+        "script_sha256": "d7b8e264c8b99d0e8018964e9c47344c3c96b4b5950f47f7ef56f517dd90620b",
+        "statement": "The derived artifact is not the accepted scientific checkpoint. Its digest is a packaging digest and must never be quoted as the identity of the accepted parent. The parent is a bare state dict, so it was packaged by the state-dict counterpart of scripts/derive_public_weights.py, which performs the same steps."
+      },
+      "model_reconstruction_config": "configs/models/phase_local_48_n8.yaml",
+      "training_config_sha256": "320a61129b0cd20cde73b6b25495c205c6513a4e4c8bec32e52169771ba25435",
+      "training_config_bytes": 15893,
+      "training_config_distributed": false,
+      "training_config_note": "The training constants of this run are set in its trainer script, which is identified by this digest and is not distributed; no training command ships. The training recipe (four 48^3 eight-grain microstructures, own-state buffer, one-step targets of the reference map on crops) is documented in the paper's supplement. The training record is identified by digest under training_record_sha256.",
+      "training_record_sha256": "4d224b19aa7823ec3ee74c907e0d6b796155bc7ce72710e3c7f29732b3584717",
+      "initial_field": null,
+      "initial_field_note": "No initial field ships with the weights. Phase-local initial fields are sharp one-hot periodic Voronoi partitions and are rebuilt exactly from uint8 label arrays (pinn_phase.physics.obstacle_reference.one_hot_from_labels). The four 48^3 training microstructures were generated at training time and no digest of them was stored.",
+      "replay_equivalence": {
+        "statement": "The public PhaseLocalRule, phase_local_step, project_simplex_euclidean and obstacle_reference_step, loaded with these derived weights, reproduced bit for bit the model step, the reference step and 200-step model and reference rollouts of the code that produced every phase-local result, on a 48^3 eight-grain and a 64^3 sixteen-grain periodic Voronoi field, under the PyTorch version of the recorded runs.",
+        "steps": 200,
+        "fields": [
+          [
+            8,
+            48,
+            48,
+            48
+          ],
+          [
+            16,
+            64,
+            64,
+            64
+          ]
+        ],
+        "max_abs_difference": 0.0
+      },
+      "recorded_output_replay": {
+        "statement": "Started from the distributed initial labels of microstructure 1 of r96_n16, 200 learned steps of the public code with these weights reproduce the recorded grain volumes and argmax label arrays of the published evaluation at steps 100 and 200 exactly. The check is tests/test_phaselocal_model.py with its fixture tests/fixtures/phaselocal_replay_r96_n16_m1.json.",
+        "regime": "r96_n16",
+        "case": "microstructure 1",
+        "steps": [
+          100,
+          200
+        ],
+        "max_abs_volume_difference": 0.0,
+        "differing_label_voxels": 0
+      }
     }
   ],
   "payload_disclosure": "Where a checkpoint carries more than model weights, the extra content is named here and its treatment during replay is stated. No checkpoint's bytes were altered to tidy this up: altering them would change the identity that makes them evidence.",

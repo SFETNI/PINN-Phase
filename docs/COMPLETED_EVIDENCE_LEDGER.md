@@ -264,3 +264,25 @@ Six unseen fixed-family initial conditions use the existing N16 checkpoint; no w
   `benchmarks/n8_128_transfer/expected_score.json`, together with the digests of
   the score records it was built from; the animation is hash-bound in
   `media/n8_128_transfer/asset_manifest.json`. All PROVENANCE_ONLY.
+
+## Phase-local model
+
+- Architecture: one shared single-channel rule, three bias-free 3x3x3
+  convolutions with widths 1 -> 8 -> 8 -> 1 and periodic padding, 2,160
+  parameters independent of the number of phases, followed by margin repair and
+  the Euclidean simplex projection; trained once at 48^3 with eight grains on four
+  initial microstructures against the projected obstacle reference map.
+- Accepted parent checkpoint: `764f22a548e4372e7627e71f4680bf6c806608ff90b75e8d389a1fcc98afc6e4`, the identity of
+  record and the model of every phase-local result. **Not distributed.**
+- Derived public replay weights: `7501369550e55774592be0aad835f07cacbcd5305e2f02a83481ef68c18e2f14`,
+  distributed as `checkpoints/phase_local_48_n8.weights.npz`. Model-state tensors only;
+  a packaging digest, not the identity of the accepted parent.
+- Trainer of record: `320a61129b0cd20cde73b6b25495c205c6513a4e4c8bec32e52169771ba25435`.
+  **Not distributed**; no training command ships.
+- Matched comparator weights: `8491d9c94d91913093bdd5c2915bdf77307af6da648a547b486c15a380d6107b`.
+  Reported by digest only; **not distributed.**
+- Code: the public model and reference map match the recorded implementations
+  bit for bit on short CPU rollouts. The recorded-output check runs 200 steps
+  from microstructure 1 of the 96^3 sixteen-grain regime and checks exact label
+  digests and grain volumes within an absolute tolerance of 1e-6 at steps 100
+  and 200 (`tests/test_phaselocal_model.py`).

@@ -1,0 +1,63 @@
+{
+ "description": "Recorded output of the published 96^3 evaluation for microstructure 1 of r96_n16: grain volumes and the SHA-256 of the uint8 argmax label arrays after 100 and 200 learned steps of the phase-local model with the distributed weights, started from the one-hot field of the distributed initial labels. Used by tests/test_phaselocal_model.py.",
+ "regime": "r96_n16",
+ "case": "microstructure 1",
+ "grid": [
+  96,
+  96,
+  96
+ ],
+ "phases": 16,
+ "initial_labels": "benchmarks/phaselocal_transfer/initial_labels/r96_n16_microstructure_1.npz",
+ "initial_labels_value_sha256": "907197f91ce595856875a1f85c88a2958433669f4f2b20e571aa7dfa4bc55829",
+ "label_digest_recipe": "SHA-256 over the C-contiguous raw bytes of the (96, 96, 96) uint8 array",
+ "parent_checkpoint_sha256": "764f22a548e4372e7627e71f4680bf6c806608ff90b75e8d389a1fcc98afc6e4",
+ "steps": [
+  100,
+  200
+ ],
+ "model_volumes": {
+  "100": [
+   84473.39737696374,
+   75395.91576388107,
+   81000.81116870887,
+   60552.68656206383,
+   36858.083317850964,
+   47693.2942671857,
+   23588.992585455202,
+   76739.28974809482,
+   33289.26586470947,
+   43830.19281390232,
+   80800.36423561726,
+   19111.057790907136,
+   60715.07824199197,
+   54198.691230970246,
+   38530.9636647088,
+   67957.91536698866
+  ],
+  "200": [
+   84656.79922624501,
+   75938.78203732938,
+   81775.44833620945,
+   60739.64779486028,
+   36277.8041489959,
+   47831.15057354407,
+   22843.492877776986,
+   76955.65570024088,
+   32340.161003278263,
+   44488.37129277575,
+   81461.66762571578,
+   18191.929922445644,
+   61126.31220867318,
+   53566.011876115925,
+   37968.4607836972,
+   68574.30459209629
+  ]
+ },
+ "model_labels_sha256": {
+  "100": "1186215938b27fffb6767b4922c5777d9828a6a150e450081e2dd34414cbcb32",
+  "200": "d5204ba1c6e55f2d061cd6933ea274ab7558df8a0f440a34c0e25c59fb712200"
+ },
+ "volume_tolerance": 1e-06,
+ "label_tolerance_voxels": 0
+}
