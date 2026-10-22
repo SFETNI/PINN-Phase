@@ -1,0 +1,91 @@
+{
+ "schema": "pinn-phase-public-weight-lineage-v1",
+ "benchmark": "phaselocal_transfer",
+ "artifact": "phase_local_48_n8",
+ "statement": "This artifact carries derived public replay weights. It is a repackaging of the model state of the accepted parent scientific checkpoint: every tensor name, dtype, shape and raw value is preserved exactly. The derivation changes packaging only, not model parameters, and is not new scientific evidence. The parent checkpoint is identified below by digest; it is not distributed in this archive.",
+ "accepted_parent_checkpoint": {
+  "sha256": "764f22a548e4372e7627e71f4680bf6c806608ff90b75e8d389a1fcc98afc6e4",
+  "distributed": false,
+  "role": "accepted scientific checkpoint; identity of record"
+ },
+ "public_weights": {
+  "path": "checkpoints/phase_local_48_n8.weights.npz",
+  "sha256": "7501369550e55774592be0aad835f07cacbcd5305e2f02a83481ef68c18e2f14",
+  "bytes": 9352,
+  "format": "pinn-phase-public-replay-weights-v1",
+  "container": "zip, stored members, fixed timestamps and permissions, no pickle",
+  "carries": "model-state tensors only",
+  "excludes": [
+   "optimizer state",
+   "scheduler or other training state",
+   "run identifiers",
+   "paths, usernames, timestamps",
+   "object or string arrays",
+   "free-form text of any kind"
+  ]
+ },
+ "model_state_fingerprint_sha256": "f9c868f172d5596056ff6ddf50f7e451949683a0382413602b9f7afe9f34f6d7",
+ "digest_recipes": {
+  "note": "Stated here so that the identities below can be recomputed by anyone holding the parent checkpoint and this record, without reading the archive's source. A digest you can only obtain by running our code is weaker evidence than one you can derive from a specification.",
+  "value_sha256": "SHA-256 over: str(dtype) + b'\\0' + str(tuple(shape)) + b'\\0' + the array's C-contiguous raw bytes. dtype and shape are rendered exactly as NumPy's str() produces them, e.g. 'float32' and '(32, 1)'; a zero-dimensional array renders as '()' and contributes its scalar bytes.",
+  "model_state_fingerprint_sha256": "SHA-256 over the concatenation, for each tensor name in ascending lexicographic order, of: name + b'\\0' + str(dtype) + b'\\0' + str(tuple(shape)) + b'\\0' + raw bytes + b'\\0'. Note the trailing separator after every tensor, including the last.",
+  "public_weights_sha256": "SHA-256 over the artifact file's bytes.",
+  "accepted_parent_checkpoint.sha256": "SHA-256 over the parent file's bytes."
+ },
+ "tensor_count": 3,
+ "parameter_count": 2160,
+ "tensor_key_order": [
+  "c1.weight",
+  "c2.weight",
+  "c3.weight"
+ ],
+ "tensors": [
+  {
+   "name": "c1.weight",
+   "dtype": "float32",
+   "shape": [
+    8,
+    1,
+    3,
+    3,
+    3
+   ],
+   "bytes": 864,
+   "value_sha256": "4818eea8d5c2a20feb5d044ff4968f6e45bdb1a2853acdaac8124218e59997db"
+  },
+  {
+   "name": "c2.weight",
+   "dtype": "float32",
+   "shape": [
+    8,
+    8,
+    3,
+    3,
+    3
+   ],
+   "bytes": 6912,
+   "value_sha256": "42cb0413a6dbef264f9f5e619c8edeb9372726a4e6b224efacf2d74e79ba3b13"
+  },
+  {
+   "name": "c3.weight",
+   "dtype": "float32",
+   "shape": [
+    1,
+    8,
+    3,
+    3,
+    3
+   ],
+   "bytes": 864,
+   "value_sha256": "234bb84ce19a8d019e073e88b8cdb934e16349e70c88121546282368045c6b01"
+  }
+ ],
+ "derivation": {
+  "script": "scripts/derive_public_weights_state_dict.py",
+  "script_sha256": "d7b8e264c8b99d0e8018964e9c47344c3c96b4b5950f47f7ef56f517dd90620b",
+  "model_config": "configs/models/phase_local_48_n8.yaml",
+  "model_config_sha256": "f2e613eed04fffaea906e18779a91512c380f8746e5aa2b76cdde644ba02ba6d",
+  "transformation": "packaging only",
+  "verification": "Tensor keys, dtypes, shapes, raw values and the model-state fingerprint were compared against the accepted parent checkpoint before this record was written, and the artifact was built twice in separate directories and required to be byte-identical."
+ }
+}

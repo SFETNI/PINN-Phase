@@ -11,6 +11,8 @@ to 12,000 autonomous steps, and the native 128³ evaluations to 24,000 steps,
 training target is evaluated on the model's own evolving field; post-initial
 reference states are reserved for evaluation rather than used as step targets.
 
+The phase-local realization uses the same 2,160-parameter weights across unseen microstructures from 64³ to 128³ and from 16 to 150 grains at fixed grid spacing.
+
 The benchmarks below form a **progressive ladder**, in the order the study was
 built: a single scalar interface, then multiphase relaxation and 2D coarsening,
 then a dense 64-grain field, then a prospectively fixed test on microstructures
@@ -32,9 +34,9 @@ rest of the scientific and reproducibility documentation.
 
 ## Related Paper
 
-**PINN-Phase: A physics-informed neural network for curvature-driven multiphase-field evolution**
+**PINN-Phase: Physics-informed neural integration for accurate, generalizable, and scalable multiphase-field evolution**
 
-S. Elfetni, P. H. Seeberger, T. Tyrikos-Ergas
+S. Elfetni, S. Thinius, P. H. Seeberger, T. Tyrikos-Ergas
 [arXiv:2608.29413](https://arxiv.org/abs/2608.29413) ·
 [DOI: 10.48550/arXiv.2608.29413](https://doi.org/10.48550/arXiv.2608.29413)
 
@@ -502,6 +504,75 @@ Superseded model variants from the previous public snapshot are kept for
 continuity in [`docs/MEDIA_GALLERY.md`](docs/MEDIA_GALLERY.md). They are not the
 present model of record and none of their values appear above.
 
+### Phase-local: one 2,160-parameter model across domain sizes and grain counts
+
+The models above learn one network per phase count. The phase-local realization
+instead applies one shared rule to each phase field separately: a bias-free
+three-layer convolution with **2,160 learned parameters, independent of the
+number of grains**, followed by a margin repair and a joint Euclidean projection
+onto the simplex, so every state stays admissible. It was trained once, at 48³
+with eight grains on four initial microstructures, with one-step targets of the
+physical map evaluated on its own generated states. The same weights were then
+applied, unchanged and at fixed grid spacing, to unseen microstructures in four
+separate regimes:
+
+| Regime | Grains | Steps | Unseen microstructures | Outcome |
+|---|---|---|---|---|
+| 64³ | 16 | 3,000 | 3 | all acceptance criteria met in 3 of 3; 10 of 10 extinctions by identity |
+| 96³ | 16 | 6,750 | 3 | all acceptance criteria met in 3 of 3; 10 of 10 extinctions by identity |
+| 128³ | 38 | 6,750 | 3 | all acceptance criteria met in 3 of 3; 12 of 12 extinctions by identity |
+| 128³ | 150 | 13,500 | 3 | all 368 extinctions by identity; 0.51 to 0.88% label disagreement at t = 135; grain-volume criterion met up to t = 80 |
+
+Across the first three regimes the signed extinction-time residuals stay within
+−26 to +21 steps (tolerance at least 100), the largest normalized grain-volume
+error is at most 0.0110 (limit 0.05), and the field error is at most 0.0114 times
+that of static persistence.
+
+**128³ with 38 grains.** The three unseen microstructures at the final time,
+t = 67.5, reference above and PINN-Phase below.
+
+<p align="center">
+  <img src="media/phaselocal_n38/phaselocal_n38_reference_vs_pinn_phase.png" width="900"
+       alt="Two rows of terminal 128³ cubes for microstructures 1, 2 and 3 at t = 67.5: reference above, PINN-Phase below, with matching alive sets of 35, 32 and 35 grains.">
+</p>
+
+At t = 67.5 the label disagreement is 0.356%, 0.334% and 0.405% for microstructures 1, 2 and 3, respectively. All 12 reference extinctions match by identity, and all three cases meet the five criteria.
+
+**128³ with 150 grains.** The fourth regime keeps the mean initial grain volume
+comparable to training (13,981 against 13,824 voxels) while the grain count grows
+almost nineteenfold. Each frame below pairs the saved reference and PINN-Phase
+states of all three microstructures at the same time; there are no interpolated
+frames.
+
+<p align="center">
+  <img src="media/phaselocal_n150/phaselocal_n150_reference_vs_pinn_phase.gif" width="900"
+       alt="Animation with two rows, reference above and PINN-Phase below, and three columns for microstructures 1, 2 and 3. Thirteen saved times from t = 0 to 135 show paired cubes and counters for alive grains and label disagreement; the final counters show 24, 28 and 30 alive grains and 0.51%, 0.70% and 0.88% disagreement.">
+</p>
+
+Over 13,500 steps (t = 135) the reference eliminates 126, 122 and 120 grains; the
+model reproduces all 368 extinctions by identity, with no spurious extinction or
+return, and extinction-time residuals with absolute medians of 6, 5 and 7 steps.
+Label disagreement is 0.51, 0.70 and 0.88% at t = 135, and the field error stays
+at most 0.0107 times that of persistence at every evaluation time. The per-grain
+volume criterion holds up to t = 80 in all three microstructures and up to t = 135
+in microstructure 1; beyond t = 80 the largest individual grain-volume errors grow
+to 0.092 and 0.27 in microstructures 2 and 3, which defines the accuracy range at
+this population size. Two one-grain differences in the alive set, at t = 40 and
+t = 50, come from extinctions 5 and 17 steps apart that fall on either side of an
+evaluation time; both match in identity and within tolerance.
+
+The phase-local weights are distributed
+([`checkpoints/phase_local_48_n8.weights.npz`](checkpoints/)), with the model and
+rollout code. The initial microstructures of all twelve cases ship as label
+arrays, so every rollout can be rerun from its initial state; the per-step volume
+tables and saved label arrays are attached to the v3.0.0 release, and with them
+every criterion is recomputed by
+[`scripts/verify_phaselocal_transfer.py`](scripts/verify_phaselocal_transfer.py).
+The full record, criteria and commands are in
+[`benchmarks/phaselocal_transfer/README.md`](benchmarks/phaselocal_transfer/README.md).
+The matched comparator trained on reference-trajectory states is reported there
+by weight digest; its weights are not distributed.
+
 ---
 
 ## Results at a glance
@@ -523,6 +594,10 @@ The ladder, in order:
 | Native training field | 128³, 8 grains | First-generation hybrid, four training fields | 98.79% agreement at 5.86 H vs 69.48% persistence; exact survivor set | Weights distributed; provenance only |
 | Native development cohort | 128³, 8 grains | Same model, no retraining | 4 of 6 meet all six criteria at 5.86 H; survivor sets exact 6/6 | Provenance only; arrays external |
 | Native blind cohort | 128³, 8 grains | Same model, no retraining | 0.72–2.11% vs 6.69–7.90% persistence near H (post-evaluation analysis); 2 of 6 meet all six criteria at 5.86 H, survivor sets exact 5/6 | Provenance only; arrays external |
+| Phase-local transfer | 64³, 16 grains | Phase-local, 2,160 parameters, same weights | All five criteria met in 3 of 3; 10 of 10 extinctions by identity | Initial labels shipped; model replayable; per-step data as release assets |
+| Phase-local transfer | 96³, 16 grains | Phase-local, 2,160 parameters, same weights | All five criteria met in 3 of 3; 10 of 10 extinctions by identity | Initial labels shipped; model replayable; per-step data as release assets |
+| Phase-local transfer | 128³, 38 grains | Phase-local, 2,160 parameters, same weights | All five criteria met in 3 of 3; 12 of 12 extinctions by identity | Initial labels shipped; model replayable; per-step data as release assets |
+| Phase-local transfer | 128³, 150 grains | Phase-local, 2,160 parameters, same weights | All 368 extinctions by identity; 0.51/0.70/0.88% label disagreement at t = 135; grain-volume criterion met through t = 80 in all three and t = 135 in microstructure 1 | Initial labels shipped; model replayable; per-step data as release assets |
 
 Each non-transfer row is an individual designed benchmark evaluated with one
 model seed. The N25 transfer row comprises eight unseen initial conditions and
@@ -530,7 +605,7 @@ two stress cases, scored against criteria fixed before those cases existed. The
 N16 transfer row comprises six prospectively fixed unseen 96³ microstructures,
 evaluated with the same fixed development model. The native 128³ rows share one
 model trained on four initial fields; the training-field row is same-field
-extrapolation, and the two cohorts are separate and never pooled.
+extrapolation, and the two cohorts are separate and never pooled. The four phase-local rows use one shared model on three unseen microstructures per regime, with separate criteria and release-asset score data.
 
 ---
 
@@ -545,12 +620,14 @@ python -m pytest -q                              # the full public suite
 python scripts/verify_manifest.py                # every payload file, hashed
 python scripts/verify_source_lineage.py          # every module, against its source digest
 python scripts/check_public_tree.py              # the archive's content rules
-python scripts/verify_checkpoint_identities.py   # all seven weight artifacts, loaded and stepped
+python scripts/verify_checkpoint_identities.py   # all eight weight artifacts, loaded and stepped
 python scripts/smoke_test.py                     # physics, admissibility map, equivariance
 python scripts/reproduce_scalar_reference.py     # curvature-driven shrinkage
 python scripts/reproduce_n25_transfer.py         # the full frozen transfer score
 python scripts/verify_n8_128_transfer.py --records benchmarks/n8_128_transfer/expected_score.json
                                                  # native 128³ record, every verdict re-derived
+python scripts/verify_phaselocal_transfer.py --records benchmarks/phaselocal_transfer/expected_score.json
+                                                 # phase-local criteria and summaries re-derived
 ```
 
 Each result above carries exactly one reproduction level, recorded in
@@ -622,33 +699,38 @@ tests/            public test suite
 | Permutation-equivariant | `PermEquivariantMPFRollout` | 25-grain cascade, dense 64-grain coarsening, unseen-case transfer |
 | First-generation hybrid | `ExplicitMPFHybridRollout` | The four-phase junction, both 3D cubes and the native 128³ model |
 | Scalar | Allen-Cahn reference and rollout utilities | Compact physics checks and method foundations |
+| Phase-local | `PhaseLocalRule` | Shared rule for 16, 38 and 150 grains across 64³ to 128³ domains |
 
-These are named separately because their guarantees differ: only the
-permutation-equivariant family is claimed to be equivariant under relabelling of
-the phases. Boundaries and machine identifiers:
+These are named separately because their guarantees differ. The
+permutation-equivariant and phase-local families support relabelling of the
+phases. Boundaries and machine identifiers:
 [`docs/METHOD_OVERVIEW.md`](docs/METHOD_OVERVIEW.md).
 
 ## Scope and limitations
 
 - PINN-Phase is a research surrogate validated on designed benchmarks. It does not
-  claim statistical grain growth, universal kinetics, or scaling.
+  claim statistical grain growth or universal kinetics. The phase-local transfer covers one synthetic geometry family at fixed grid spacing, from 64³ to 128³ and up to 150 grains.
 - This archive supports inference replay and code audit, not training reproduction:
-  no training command, training configuration or accepted parent checkpoint is
-  distributed.
+  no training command or accepted parent checkpoint is distributed. The phase-local
+  training recipe is documented in its benchmark README, while the training
+  configurations remain identified by digest.
 - On the training path that produced every model distributed here except the native
-  128³ model, `pinn_phase.training.explicit_mpf_trainer`, training uses only the
+  128³ and phase-local models, `pinn_phase.training.explicit_mpf_trainer`, training uses only the
   initial condition; post-`t0` references are used solely for offline evaluation,
   never for the loss, model input, early stopping or checkpoint selection. The native
   128³ model was trained by a later trainer revision that is not distributed; its
-  declared policy is the same and is disclosed by digest in
+  declared policy is the same. The phase-local trainer is also identified by digest,
+  with its own-state training recipe documented in the benchmark README. Both are disclosed in
   [`docs/TRAINING_PATH_DISCLOSURE.json`](docs/TRAINING_PATH_DISCLOSURE.json).
 - The scalar 64³ spherical rung followed a different protocol (its warm-start
   lineage was selected with post-`t0` reference terms) and is provenance only.
 - Extinction timing is reported at saved-frame resolution; the pre-registered timing
   anchor on the 25-grain cascade is not met.
-- For the native 128³ study, the trained weights and a compact score record are
-  distributed; its initial fields, trajectories and training configuration are
-  identified by digest and are not.
+- For the native 128³ eight-grain study, the trained weights and a compact score
+  record are distributed; its initial fields, trajectories and training
+  configuration are identified by digest and are not. The phase-local study
+  distributes initial labels and weights; per-step tables and saved labels are
+  v3.0.0 release assets.
 
 The full statement, including what the reference-usage guard does and does not
 establish, is in [`docs/USING_THIS_ARCHIVE.md`](docs/USING_THIS_ARCHIVE.md#scope-and-limitations).

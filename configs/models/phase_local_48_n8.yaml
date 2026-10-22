@@ -1,0 +1,55 @@
+# Public model-reconstruction configuration.
+#
+# This file carries only the fields needed to rebuild the model class before a
+# strict load of the paired derived public replay weights. It is NOT the training
+# configuration of the run that produced the accepted parent checkpoint; the
+# training recipe is documented, and no training command ships.
+#
+# Two distinct objects are named below and must not be conflated:
+#
+#   accepted parent checkpoint  the scientific training payload. Identified here
+#                               by digest only; it is NOT distributed.
+#   public replay weights       a derived artifact carrying model-state tensors
+#                               and nothing else. Distributed, and the only thing
+#                               the public replay path loads. Its digest and every
+#                               tensor identity live in the adjacent lineage
+#                               record, not in this file.
+#
+# This is the phase-local model: one shared single-channel rule, three bias-free
+# 3x3x3 convolutions with widths 1 -> 8 -> 8 -> 1 and periodic padding, 2,160
+# parameters whatever the number of phases, followed by margin repair and the
+# Euclidean simplex projection (pinn_phase.models.phase_local). It was trained once
+# at 48^3 with eight grains on four initial microstructures, and the same weights
+# are used unchanged at every grid size and phase count. The physics block records
+# the constants of the projected obstacle reference map that defines its target
+# (pinn_phase.physics.obstacle_reference); they are fixed and do not depend on the
+# grid.
+#
+# Verify construction and loading with:
+#   python scripts/verify_checkpoint_identities.py
+
+public_weights: checkpoints/phase_local_48_n8.weights.npz
+weight_lineage: checkpoints/phase_local_48_n8.lineage.json
+parent_checkpoint_sha256: 764f22a548e4372e7627e71f4680bf6c806608ff90b75e8d389a1fcc98afc6e4
+parent_checkpoint_distributed: false
+architecture_family: phase_local
+class_name: PhaseLocalRule
+
+model:
+  architecture: phase_local_rule
+  width: 8
+  kernel_size: 3
+
+physics:
+  reference_map: projected_obstacle
+  projection: euclidean_simplex
+  kappa_o: 6.4845557531096185
+  beta_o: 1.0
+  dx: 1.0
+  dt_o: 0.01
+  boundary_condition: periodic
+  state_dtype: float64
+  increment_dtype: float32
+
+num_phases: 8
+grid: [48, 48, 48]

@@ -1,0 +1,928 @@
+{
+  "array_keys": {
+    "model_labels": "labels uint8 (frames, n, n, n); steps int64",
+    "model_volumes": "volumes float64 (steps, grains); steps int64",
+    "reference_labels": "labels uint8 (frames, n, n, n); steps int64",
+    "reference_volumes": "volumes float64 (steps, grains); steps int64"
+  },
+  "asset_root_layout": "phaselocal_transfer/<regime>/microstructure_<k>/<role>.npz",
+  "asset_verification_command": "python scripts/verify_phaselocal_transfer.py --records benchmarks/phaselocal_transfer/expected_score.json --asset-root /path/to/asset-root",
+  "assets": [
+    {
+      "array": "labels",
+      "bytes": 12922195,
+      "dtype": "uint8",
+      "expected_relative_location": "phaselocal_transfer/r128_n150/microstructure_1/model_labels.npz",
+      "filename": "model_labels.npz",
+      "public_case": "microstructure 1",
+      "regime": "r128_n150",
+      "release_class": "RELEASE_ASSET",
+      "role": "model_labels",
+      "sha256": "bc5df6ac5967a81e231c68e8d1133c1263cd54111ee05a1418763c114ed89710",
+      "shape": [
+        135,
+        128,
+        128,
+        128
+      ],
+      "steps": 135
+    },
+    {
+      "array": "volumes",
+      "bytes": 8181205,
+      "dtype": "float64",
+      "expected_relative_location": "phaselocal_transfer/r128_n150/microstructure_1/model_volumes.npz",
+      "filename": "model_volumes.npz",
+      "public_case": "microstructure 1",
+      "regime": "r128_n150",
+      "release_class": "RELEASE_ASSET",
+      "role": "model_volumes",
+      "sha256": "304502eda03736f24441fda07b9d2bac45dcaeacfc5d2f4caf0fd9029a3d9da9",
+      "shape": [
+        13501,
+        150
+      ],
+      "steps": 13501
+    },
+    {
+      "array": "labels",
+      "bytes": 1391510,
+      "dtype": "uint8",
+      "expected_relative_location": "phaselocal_transfer/r128_n150/microstructure_1/reference_labels.npz",
+      "filename": "reference_labels.npz",
+      "public_case": "microstructure 1",
+      "regime": "r128_n150",
+      "release_class": "RELEASE_ASSET",
+      "role": "reference_labels",
+      "sha256": "c5bbcf7ee5dc93a9f040bef6f0296fd3667f44ae8c38631f7831eb57c2930446",
+      "shape": [
+        13,
+        128,
+        128,
+        128
+      ],
+      "steps": 13
+    },
+    {
+      "array": "volumes",
+      "bytes": 8175222,
+      "dtype": "float64",
+      "expected_relative_location": "phaselocal_transfer/r128_n150/microstructure_1/reference_volumes.npz",
+      "filename": "reference_volumes.npz",
+      "public_case": "microstructure 1",
+      "regime": "r128_n150",
+      "release_class": "RELEASE_ASSET",
+      "role": "reference_volumes",
+      "sha256": "e0e06a960fd6cec872691626d6fe28884f34b4c6c7e4e1efa30017a3dabd7930",
+      "shape": [
+        13501,
+        150
+      ],
+      "steps": 13501
+    },
+    {
+      "array": "labels",
+      "bytes": 13145424,
+      "dtype": "uint8",
+      "expected_relative_location": "phaselocal_transfer/r128_n150/microstructure_2/model_labels.npz",
+      "filename": "model_labels.npz",
+      "public_case": "microstructure 2",
+      "regime": "r128_n150",
+      "release_class": "RELEASE_ASSET",
+      "role": "model_labels",
+      "sha256": "f5287653435bc308a135c7e86ab9a0bdf7f40e86aab35e1a769065bde63301da",
+      "shape": [
+        135,
+        128,
+        128,
+        128
+      ],
+      "steps": 135
+    },
+    {
+      "array": "volumes",
+      "bytes": 7870753,
+      "dtype": "float64",
+      "expected_relative_location": "phaselocal_transfer/r128_n150/microstructure_2/model_volumes.npz",
+      "filename": "model_volumes.npz",
+      "public_case": "microstructure 2",
+      "regime": "r128_n150",
+      "release_class": "RELEASE_ASSET",
+      "role": "model_volumes",
+      "sha256": "f66be09fb737bbd7f0c82873c6c553ef6faab4fe17d6e81b7b989d5e179bead2",
+      "shape": [
+        13501,
+        150
+      ],
+      "steps": 13501
+    },
+    {
+      "array": "labels",
+      "bytes": 1401370,
+      "dtype": "uint8",
+      "expected_relative_location": "phaselocal_transfer/r128_n150/microstructure_2/reference_labels.npz",
+      "filename": "reference_labels.npz",
+      "public_case": "microstructure 2",
+      "regime": "r128_n150",
+      "release_class": "RELEASE_ASSET",
+      "role": "reference_labels",
+      "sha256": "fdb59ca7c9fa9aba0dae62204e0a90a0162a97762b33cbcc231360e6438825dc",
+      "shape": [
+        13,
+        128,
+        128,
+        128
+      ],
+      "steps": 13
+    },
+    {
+      "array": "volumes",
+      "bytes": 7865681,
+      "dtype": "float64",
+      "expected_relative_location": "phaselocal_transfer/r128_n150/microstructure_2/reference_volumes.npz",
+      "filename": "reference_volumes.npz",
+      "public_case": "microstructure 2",
+      "regime": "r128_n150",
+      "release_class": "RELEASE_ASSET",
+      "role": "reference_volumes",
+      "sha256": "06f6e514e6fb43cff3186d2ec2491be7a91b6b41ab6551bfc37a5d56dc1e712d",
+      "shape": [
+        13501,
+        150
+      ],
+      "steps": 13501
+    },
+    {
+      "array": "labels",
+      "bytes": 13532060,
+      "dtype": "uint8",
+      "expected_relative_location": "phaselocal_transfer/r128_n150/microstructure_3/model_labels.npz",
+      "filename": "model_labels.npz",
+      "public_case": "microstructure 3",
+      "regime": "r128_n150",
+      "release_class": "RELEASE_ASSET",
+      "role": "model_labels",
+      "sha256": "eeccd87d7068dc5438af505e8e5a8df3b6e14def362869daf2e7985ca788496d",
+      "shape": [
+        135,
+        128,
+        128,
+        128
+      ],
+      "steps": 135
+    },
+    {
+      "array": "volumes",
+      "bytes": 8173998,
+      "dtype": "float64",
+      "expected_relative_location": "phaselocal_transfer/r128_n150/microstructure_3/model_volumes.npz",
+      "filename": "model_volumes.npz",
+      "public_case": "microstructure 3",
+      "regime": "r128_n150",
+      "release_class": "RELEASE_ASSET",
+      "role": "model_volumes",
+      "sha256": "711ddfef96d71eaa1321837de3ee404d075749e7e04019b8f54b0fae84e6e6e7",
+      "shape": [
+        13501,
+        150
+      ],
+      "steps": 13501
+    },
+    {
+      "array": "labels",
+      "bytes": 1433492,
+      "dtype": "uint8",
+      "expected_relative_location": "phaselocal_transfer/r128_n150/microstructure_3/reference_labels.npz",
+      "filename": "reference_labels.npz",
+      "public_case": "microstructure 3",
+      "regime": "r128_n150",
+      "release_class": "RELEASE_ASSET",
+      "role": "reference_labels",
+      "sha256": "d4094c2ceb0b80a6bb309d231f59790b9b35e8700a9a0c44b42e69021b895d7a",
+      "shape": [
+        13,
+        128,
+        128,
+        128
+      ],
+      "steps": 13
+    },
+    {
+      "array": "volumes",
+      "bytes": 8168473,
+      "dtype": "float64",
+      "expected_relative_location": "phaselocal_transfer/r128_n150/microstructure_3/reference_volumes.npz",
+      "filename": "reference_volumes.npz",
+      "public_case": "microstructure 3",
+      "regime": "r128_n150",
+      "release_class": "RELEASE_ASSET",
+      "role": "reference_volumes",
+      "sha256": "c28599b1a92f27543d47313ab253c1acd040f34ce2675f206cc4019594b47845",
+      "shape": [
+        13501,
+        150
+      ],
+      "steps": 13501
+    },
+    {
+      "array": "labels",
+      "bytes": 6094670,
+      "dtype": "uint8",
+      "expected_relative_location": "phaselocal_transfer/r128_n38/microstructure_1/model_labels.npz",
+      "filename": "model_labels.npz",
+      "public_case": "microstructure 1",
+      "regime": "r128_n38",
+      "release_class": "RELEASE_ASSET",
+      "role": "model_labels",
+      "sha256": "ab0d4c8f5896d768081f7170b3e2f885756636e00caf60a7dc29bdccc8fd14fe",
+      "shape": [
+        69,
+        128,
+        128,
+        128
+      ],
+      "steps": 69
+    },
+    {
+      "array": "volumes",
+      "bytes": 1818076,
+      "dtype": "float64",
+      "expected_relative_location": "phaselocal_transfer/r128_n38/microstructure_1/model_volumes.npz",
+      "filename": "model_volumes.npz",
+      "public_case": "microstructure 1",
+      "regime": "r128_n38",
+      "release_class": "RELEASE_ASSET",
+      "role": "model_volumes",
+      "sha256": "022bcda6053ee26e6191b26a13dccfaa6d2bb0fa71b45b030ef42b93acad2f1f",
+      "shape": [
+        6751,
+        38
+      ],
+      "steps": 6751
+    },
+    {
+      "array": "labels",
+      "bytes": 1173565,
+      "dtype": "uint8",
+      "expected_relative_location": "phaselocal_transfer/r128_n38/microstructure_1/reference_labels.npz",
+      "filename": "reference_labels.npz",
+      "public_case": "microstructure 1",
+      "regime": "r128_n38",
+      "release_class": "RELEASE_ASSET",
+      "role": "reference_labels",
+      "sha256": "0992c52cc68ccf3aaab6a6df13d58b00f691aced21919b4e97be42867acbfddd",
+      "shape": [
+        13,
+        128,
+        128,
+        128
+      ],
+      "steps": 13
+    },
+    {
+      "array": "volumes",
+      "bytes": 1818085,
+      "dtype": "float64",
+      "expected_relative_location": "phaselocal_transfer/r128_n38/microstructure_1/reference_volumes.npz",
+      "filename": "reference_volumes.npz",
+      "public_case": "microstructure 1",
+      "regime": "r128_n38",
+      "release_class": "RELEASE_ASSET",
+      "role": "reference_volumes",
+      "sha256": "34fc3deee19bbc19fe251f43bce0ed68ae9fe778b78c5aabe080fa3aa97441e9",
+      "shape": [
+        6751,
+        38
+      ],
+      "steps": 6751
+    },
+    {
+      "array": "labels",
+      "bytes": 5697708,
+      "dtype": "uint8",
+      "expected_relative_location": "phaselocal_transfer/r128_n38/microstructure_2/model_labels.npz",
+      "filename": "model_labels.npz",
+      "public_case": "microstructure 2",
+      "regime": "r128_n38",
+      "release_class": "RELEASE_ASSET",
+      "role": "model_labels",
+      "sha256": "77e5a081888ac149cb0ae677c48f08f571994ace784fd4e9a51e5c638560548f",
+      "shape": [
+        69,
+        128,
+        128,
+        128
+      ],
+      "steps": 69
+    },
+    {
+      "array": "volumes",
+      "bytes": 1732613,
+      "dtype": "float64",
+      "expected_relative_location": "phaselocal_transfer/r128_n38/microstructure_2/model_volumes.npz",
+      "filename": "model_volumes.npz",
+      "public_case": "microstructure 2",
+      "regime": "r128_n38",
+      "release_class": "RELEASE_ASSET",
+      "role": "model_volumes",
+      "sha256": "f7fe56b17f4ea6ff181f2518b7b7eb58a22d0e392cb0d0a904637eb32219289d",
+      "shape": [
+        6751,
+        38
+      ],
+      "steps": 6751
+    },
+    {
+      "array": "labels",
+      "bytes": 1121523,
+      "dtype": "uint8",
+      "expected_relative_location": "phaselocal_transfer/r128_n38/microstructure_2/reference_labels.npz",
+      "filename": "reference_labels.npz",
+      "public_case": "microstructure 2",
+      "regime": "r128_n38",
+      "release_class": "RELEASE_ASSET",
+      "role": "reference_labels",
+      "sha256": "dab4c68d96908a6b3a58891fe86c81da3d5c9aacfa359e267cbdd7b0ecf802ae",
+      "shape": [
+        13,
+        128,
+        128,
+        128
+      ],
+      "steps": 13
+    },
+    {
+      "array": "volumes",
+      "bytes": 1732405,
+      "dtype": "float64",
+      "expected_relative_location": "phaselocal_transfer/r128_n38/microstructure_2/reference_volumes.npz",
+      "filename": "reference_volumes.npz",
+      "public_case": "microstructure 2",
+      "regime": "r128_n38",
+      "release_class": "RELEASE_ASSET",
+      "role": "reference_volumes",
+      "sha256": "4a87f4ff8ce3a6fbef8a6baabdde09bb28f0af01f9d8c44a47de385a287cd28b",
+      "shape": [
+        6751,
+        38
+      ],
+      "steps": 6751
+    },
+    {
+      "array": "labels",
+      "bytes": 5892162,
+      "dtype": "uint8",
+      "expected_relative_location": "phaselocal_transfer/r128_n38/microstructure_3/model_labels.npz",
+      "filename": "model_labels.npz",
+      "public_case": "microstructure 3",
+      "regime": "r128_n38",
+      "release_class": "RELEASE_ASSET",
+      "role": "model_labels",
+      "sha256": "9548c1164904c80dc09db9cf11057c289f7ffcbada3e984bddd5a1aafec47a97",
+      "shape": [
+        69,
+        128,
+        128,
+        128
+      ],
+      "steps": 69
+    },
+    {
+      "array": "volumes",
+      "bytes": 1821252,
+      "dtype": "float64",
+      "expected_relative_location": "phaselocal_transfer/r128_n38/microstructure_3/model_volumes.npz",
+      "filename": "model_volumes.npz",
+      "public_case": "microstructure 3",
+      "regime": "r128_n38",
+      "release_class": "RELEASE_ASSET",
+      "role": "model_volumes",
+      "sha256": "96c7c49338b1a1f125ef38b4f8142612a5e974e9b471bd7f9a9055d96c702029",
+      "shape": [
+        6751,
+        38
+      ],
+      "steps": 6751
+    },
+    {
+      "array": "labels",
+      "bytes": 1124579,
+      "dtype": "uint8",
+      "expected_relative_location": "phaselocal_transfer/r128_n38/microstructure_3/reference_labels.npz",
+      "filename": "reference_labels.npz",
+      "public_case": "microstructure 3",
+      "regime": "r128_n38",
+      "release_class": "RELEASE_ASSET",
+      "role": "reference_labels",
+      "sha256": "42d4132c3dbadb4d9a2d8320085e213e2e1c6e75b833e09f75a99b1b7556b664",
+      "shape": [
+        13,
+        128,
+        128,
+        128
+      ],
+      "steps": 13
+    },
+    {
+      "array": "volumes",
+      "bytes": 1821317,
+      "dtype": "float64",
+      "expected_relative_location": "phaselocal_transfer/r128_n38/microstructure_3/reference_volumes.npz",
+      "filename": "reference_volumes.npz",
+      "public_case": "microstructure 3",
+      "regime": "r128_n38",
+      "release_class": "RELEASE_ASSET",
+      "role": "reference_volumes",
+      "sha256": "e6643923d14a6c65c8db4d7ec6b81f26f766f0024a48e54e33c96aa4bb93ad0e",
+      "shape": [
+        6751,
+        38
+      ],
+      "steps": 6751
+    },
+    {
+      "array": "volumes",
+      "bytes": 341361,
+      "dtype": "float64",
+      "expected_relative_location": "phaselocal_transfer/r64_n16/microstructure_1/reference_volumes.npz",
+      "filename": "reference_volumes.npz",
+      "public_case": "microstructure 1",
+      "regime": "r64_n16",
+      "release_class": "RELEASE_ASSET",
+      "role": "reference_volumes",
+      "sha256": "07a6a50e7bae15804f1b85dd95895fa5c6d53df405b98fc082bad564ccc53236",
+      "shape": [
+        3001,
+        16
+      ],
+      "steps": 3001
+    },
+    {
+      "array": "volumes",
+      "bytes": 329074,
+      "dtype": "float64",
+      "expected_relative_location": "phaselocal_transfer/r64_n16/microstructure_2/reference_volumes.npz",
+      "filename": "reference_volumes.npz",
+      "public_case": "microstructure 2",
+      "regime": "r64_n16",
+      "release_class": "RELEASE_ASSET",
+      "role": "reference_volumes",
+      "sha256": "15fdbc5089cacabd0ca1a1861c64e1778669fd75515061918286a7d9cac12185",
+      "shape": [
+        3001,
+        16
+      ],
+      "steps": 3001
+    },
+    {
+      "array": "volumes",
+      "bytes": 335709,
+      "dtype": "float64",
+      "expected_relative_location": "phaselocal_transfer/r64_n16/microstructure_3/reference_volumes.npz",
+      "filename": "reference_volumes.npz",
+      "public_case": "microstructure 3",
+      "regime": "r64_n16",
+      "release_class": "RELEASE_ASSET",
+      "role": "reference_volumes",
+      "sha256": "1bca8b93f6fe00b67281b3a37e952ca1b4751c2e780e12ec4e7fc44a7a84b863",
+      "shape": [
+        3001,
+        16
+      ],
+      "steps": 3001
+    },
+    {
+      "array": "labels",
+      "bytes": 2297380,
+      "dtype": "uint8",
+      "expected_relative_location": "phaselocal_transfer/r96_n16/microstructure_1/model_labels.npz",
+      "filename": "model_labels.npz",
+      "public_case": "microstructure 1",
+      "regime": "r96_n16",
+      "release_class": "RELEASE_ASSET",
+      "role": "model_labels",
+      "sha256": "a3795f5e75410c62c5dbd1ace4db301ae70e103b577ec58fedb403c4c609e530",
+      "shape": [
+        69,
+        96,
+        96,
+        96
+      ],
+      "steps": 69
+    },
+    {
+      "array": "volumes",
+      "bytes": 713666,
+      "dtype": "float64",
+      "expected_relative_location": "phaselocal_transfer/r96_n16/microstructure_1/model_volumes.npz",
+      "filename": "model_volumes.npz",
+      "public_case": "microstructure 1",
+      "regime": "r96_n16",
+      "release_class": "RELEASE_ASSET",
+      "role": "model_volumes",
+      "sha256": "715dbc0839b8cc95abacf3b06175e13d74123b19c243396cb8481ec2df430501",
+      "shape": [
+        6751,
+        16
+      ],
+      "steps": 6751
+    },
+    {
+      "array": "labels",
+      "bytes": 445845,
+      "dtype": "uint8",
+      "expected_relative_location": "phaselocal_transfer/r96_n16/microstructure_1/reference_labels.npz",
+      "filename": "reference_labels.npz",
+      "public_case": "microstructure 1",
+      "regime": "r96_n16",
+      "release_class": "RELEASE_ASSET",
+      "role": "reference_labels",
+      "sha256": "0f4ef6a5fae7d85e6acc1832170b3b3292a9cd389ed57cbfcd1492b65cf9d269",
+      "shape": [
+        13,
+        96,
+        96,
+        96
+      ],
+      "steps": 13
+    },
+    {
+      "array": "volumes",
+      "bytes": 713398,
+      "dtype": "float64",
+      "expected_relative_location": "phaselocal_transfer/r96_n16/microstructure_1/reference_volumes.npz",
+      "filename": "reference_volumes.npz",
+      "public_case": "microstructure 1",
+      "regime": "r96_n16",
+      "release_class": "RELEASE_ASSET",
+      "role": "reference_volumes",
+      "sha256": "504063c3f904b1382ef0e1b7b9bfbecd8ede626002fbb76431d314c96ab47632",
+      "shape": [
+        6751,
+        16
+      ],
+      "steps": 6751
+    },
+    {
+      "array": "labels",
+      "bytes": 2370627,
+      "dtype": "uint8",
+      "expected_relative_location": "phaselocal_transfer/r96_n16/microstructure_2/model_labels.npz",
+      "filename": "model_labels.npz",
+      "public_case": "microstructure 2",
+      "regime": "r96_n16",
+      "release_class": "RELEASE_ASSET",
+      "role": "model_labels",
+      "sha256": "eb8a8fb8dbd4e513f0f8ae477eb23105fd897f5da8fc300f9ba48d5fe602154d",
+      "shape": [
+        69,
+        96,
+        96,
+        96
+      ],
+      "steps": 69
+    },
+    {
+      "array": "volumes",
+      "bytes": 711879,
+      "dtype": "float64",
+      "expected_relative_location": "phaselocal_transfer/r96_n16/microstructure_2/model_volumes.npz",
+      "filename": "model_volumes.npz",
+      "public_case": "microstructure 2",
+      "regime": "r96_n16",
+      "release_class": "RELEASE_ASSET",
+      "role": "model_volumes",
+      "sha256": "ad75763410c6712093d68974eabceb6980337bbaec8ed3ed323d7fbfd40e0ed6",
+      "shape": [
+        6751,
+        16
+      ],
+      "steps": 6751
+    },
+    {
+      "array": "labels",
+      "bytes": 458918,
+      "dtype": "uint8",
+      "expected_relative_location": "phaselocal_transfer/r96_n16/microstructure_2/reference_labels.npz",
+      "filename": "reference_labels.npz",
+      "public_case": "microstructure 2",
+      "regime": "r96_n16",
+      "release_class": "RELEASE_ASSET",
+      "role": "reference_labels",
+      "sha256": "085d22812e42f678d99a40bf50bf2bf51e3df987b9e7bf34e0dfead5e4afe6d2",
+      "shape": [
+        13,
+        96,
+        96,
+        96
+      ],
+      "steps": 13
+    },
+    {
+      "array": "volumes",
+      "bytes": 711609,
+      "dtype": "float64",
+      "expected_relative_location": "phaselocal_transfer/r96_n16/microstructure_2/reference_volumes.npz",
+      "filename": "reference_volumes.npz",
+      "public_case": "microstructure 2",
+      "regime": "r96_n16",
+      "release_class": "RELEASE_ASSET",
+      "role": "reference_volumes",
+      "sha256": "3f4a4e0a8456b39b6ef741f3285b44e67ff23df39282259807e0c989dfc3d665",
+      "shape": [
+        6751,
+        16
+      ],
+      "steps": 6751
+    },
+    {
+      "array": "labels",
+      "bytes": 2377491,
+      "dtype": "uint8",
+      "expected_relative_location": "phaselocal_transfer/r96_n16/microstructure_3/model_labels.npz",
+      "filename": "model_labels.npz",
+      "public_case": "microstructure 3",
+      "regime": "r96_n16",
+      "release_class": "RELEASE_ASSET",
+      "role": "model_labels",
+      "sha256": "b9934c1f62c2dc6a94e27cdff31dc1b9f1a39a83fa9f22c3776a855cb8eafac4",
+      "shape": [
+        69,
+        96,
+        96,
+        96
+      ],
+      "steps": 69
+    },
+    {
+      "array": "volumes",
+      "bytes": 728731,
+      "dtype": "float64",
+      "expected_relative_location": "phaselocal_transfer/r96_n16/microstructure_3/model_volumes.npz",
+      "filename": "model_volumes.npz",
+      "public_case": "microstructure 3",
+      "regime": "r96_n16",
+      "release_class": "RELEASE_ASSET",
+      "role": "model_volumes",
+      "sha256": "ff857e16e3f86851b5cab85f82920f9ebec9b3f261346f408192cecfb25b31b5",
+      "shape": [
+        6751,
+        16
+      ],
+      "steps": 6751
+    },
+    {
+      "array": "labels",
+      "bytes": 457419,
+      "dtype": "uint8",
+      "expected_relative_location": "phaselocal_transfer/r96_n16/microstructure_3/reference_labels.npz",
+      "filename": "reference_labels.npz",
+      "public_case": "microstructure 3",
+      "regime": "r96_n16",
+      "release_class": "RELEASE_ASSET",
+      "role": "reference_labels",
+      "sha256": "651ca4d0f6d5f9b8f936fbad93a5c28e99d833f52fa571503f76ad8c1f32195f",
+      "shape": [
+        13,
+        96,
+        96,
+        96
+      ],
+      "steps": 13
+    },
+    {
+      "array": "volumes",
+      "bytes": 728229,
+      "dtype": "float64",
+      "expected_relative_location": "phaselocal_transfer/r96_n16/microstructure_3/reference_volumes.npz",
+      "filename": "reference_volumes.npz",
+      "public_case": "microstructure 3",
+      "regime": "r96_n16",
+      "release_class": "RELEASE_ASSET",
+      "role": "reference_volumes",
+      "sha256": "de90bad3648409e2d4887d60a969f9804f3672586a5c84572cc16d7ddc880b7a",
+      "shape": [
+        6751,
+        16
+      ],
+      "steps": 6751
+    }
+  ],
+  "consumer_command": "python scripts/verify_phaselocal_transfer.py --records benchmarks/phaselocal_transfer/expected_score.json",
+  "initial_labels": [
+    {
+      "bytes": 2097634,
+      "dtype": "uint8",
+      "path": "benchmarks/phaselocal_transfer/initial_labels/r128_n150_microstructure_1.npz",
+      "sha256": "7eebca534dbe659b30ff63b398393dc8138972640603c9b70ef7cb82c271a781",
+      "shape": [
+        128,
+        128,
+        128
+      ]
+    },
+    {
+      "bytes": 2097634,
+      "dtype": "uint8",
+      "path": "benchmarks/phaselocal_transfer/initial_labels/r128_n150_microstructure_2.npz",
+      "sha256": "57fec2f4cf618e1ae205eebebc08d89a5211979b7dfac6ed2e497708f79d865e",
+      "shape": [
+        128,
+        128,
+        128
+      ]
+    },
+    {
+      "bytes": 2097634,
+      "dtype": "uint8",
+      "path": "benchmarks/phaselocal_transfer/initial_labels/r128_n150_microstructure_3.npz",
+      "sha256": "bd62f6b3b5dd536592a29313c91e3deda9439b0e10bb76efaf3eaddb3fdb8cbd",
+      "shape": [
+        128,
+        128,
+        128
+      ]
+    },
+    {
+      "bytes": 2097634,
+      "dtype": "uint8",
+      "path": "benchmarks/phaselocal_transfer/initial_labels/r128_n38_microstructure_1.npz",
+      "sha256": "84ae5089a797ca492093e4f885885b315ba42a6f709a2142e99c3b306efea52d",
+      "shape": [
+        128,
+        128,
+        128
+      ]
+    },
+    {
+      "bytes": 2097634,
+      "dtype": "uint8",
+      "path": "benchmarks/phaselocal_transfer/initial_labels/r128_n38_microstructure_2.npz",
+      "sha256": "25da570e1d769e6124b2db90409ff69d670e04c2e74c6cae74854b7fcaad8567",
+      "shape": [
+        128,
+        128,
+        128
+      ]
+    },
+    {
+      "bytes": 2097634,
+      "dtype": "uint8",
+      "path": "benchmarks/phaselocal_transfer/initial_labels/r128_n38_microstructure_3.npz",
+      "sha256": "ffcd67b50651dd0dab650681d262e4f765653ae248d06c56e5ddc17553e17687",
+      "shape": [
+        128,
+        128,
+        128
+      ]
+    },
+    {
+      "bytes": 262626,
+      "dtype": "uint8",
+      "path": "benchmarks/phaselocal_transfer/initial_labels/r64_n16_microstructure_1.npz",
+      "sha256": "26d6b1b79c64cc8e91f9def46f921f3293f13ea30ed2de03a4735bc813a1f949",
+      "shape": [
+        64,
+        64,
+        64
+      ]
+    },
+    {
+      "bytes": 262626,
+      "dtype": "uint8",
+      "path": "benchmarks/phaselocal_transfer/initial_labels/r64_n16_microstructure_2.npz",
+      "sha256": "d3aeb37ff5a9cfc3108599ab31360c583011909ccf5bd1ab1ec5226e39580361",
+      "shape": [
+        64,
+        64,
+        64
+      ]
+    },
+    {
+      "bytes": 262626,
+      "dtype": "uint8",
+      "path": "benchmarks/phaselocal_transfer/initial_labels/r64_n16_microstructure_3.npz",
+      "sha256": "84ee303fc60df5e6a1575ea9daf3a482a91aa0a3887a4fd7f1718917413c0748",
+      "shape": [
+        64,
+        64,
+        64
+      ]
+    },
+    {
+      "bytes": 885218,
+      "dtype": "uint8",
+      "path": "benchmarks/phaselocal_transfer/initial_labels/r96_n16_microstructure_1.npz",
+      "sha256": "f0cb8cbc27b559ae1a919086c492a1a0e1c43080b8a121c529e508dca9818564",
+      "shape": [
+        96,
+        96,
+        96
+      ]
+    },
+    {
+      "bytes": 885218,
+      "dtype": "uint8",
+      "path": "benchmarks/phaselocal_transfer/initial_labels/r96_n16_microstructure_2.npz",
+      "sha256": "a7a5ac13f4ccdb0b17d9616db4b60ce20294f0e7fa679b3cdc8c13341c50a3a1",
+      "shape": [
+        96,
+        96,
+        96
+      ]
+    },
+    {
+      "bytes": 885218,
+      "dtype": "uint8",
+      "path": "benchmarks/phaselocal_transfer/initial_labels/r96_n16_microstructure_3.npz",
+      "sha256": "0625c6d6bf929b3002cd60609a1ff6c599216f5de4bbcee65b31fad77bbed6e6",
+      "shape": [
+        96,
+        96,
+        96
+      ]
+    },
+    {
+      "bytes": 111074,
+      "dtype": "uint8",
+      "path": "benchmarks/phaselocal_transfer/initial_labels/train_48_n8_microstructure_1.npz",
+      "sha256": "af50f9204430fcc060458842cca3477e3b8b765f09e4d576750c0170e83578db",
+      "shape": [
+        48,
+        48,
+        48
+      ]
+    },
+    {
+      "bytes": 111074,
+      "dtype": "uint8",
+      "path": "benchmarks/phaselocal_transfer/initial_labels/train_48_n8_microstructure_2.npz",
+      "sha256": "f9fff5cf2fca4f7f85bdc5f77ee783fac1835781242bd1ea7c48cd4de499f78e",
+      "shape": [
+        48,
+        48,
+        48
+      ]
+    },
+    {
+      "bytes": 111074,
+      "dtype": "uint8",
+      "path": "benchmarks/phaselocal_transfer/initial_labels/train_48_n8_microstructure_3.npz",
+      "sha256": "d554d42af4204d87daca1453e847206c91a075103a457b787fd4e8e03783ca4b",
+      "shape": [
+        48,
+        48,
+        48
+      ]
+    },
+    {
+      "bytes": 111074,
+      "dtype": "uint8",
+      "path": "benchmarks/phaselocal_transfer/initial_labels/train_48_n8_microstructure_4.npz",
+      "sha256": "8fefb1fabcd63b730486d5ae06f7abcd96e469664421ec3d07d3fd19fa0c0c3d",
+      "shape": [
+        48,
+        48,
+        48
+      ]
+    }
+  ],
+  "record_parent_checkpoint_sha256": "764f22a548e4372e7627e71f4680bf6c806608ff90b75e8d389a1fcc98afc6e4",
+  "release": {
+    "bundles": [
+      {
+        "bytes": 1006790,
+        "filename": "phaselocal_transfer_r64_n16.zip",
+        "members": 3,
+        "regime": "r64_n16",
+        "sha256": "f9a2355ad6d34979b153687ff53d3d4c8bd67b8301a2bedb04b0d2e6b5a19285"
+      },
+      {
+        "bytes": 12717650,
+        "filename": "phaselocal_transfer_r96_n16.zip",
+        "members": 12,
+        "regime": "r96_n16",
+        "sha256": "7d4658a7e5070c099476fa655e6dcacd4c4c6c24f77268aad89f2a12162f47f1"
+      },
+      {
+        "bytes": 31850437,
+        "filename": "phaselocal_transfer_r128_n38.zip",
+        "members": 12,
+        "regime": "r128_n38",
+        "sha256": "878b63478fe714fab2e0d9f1cf0dc8f10767fa21b260ceed861afc029dac8bff"
+      },
+      {
+        "bytes": 92263889,
+        "filename": "phaselocal_transfer_r128_n150.zip",
+        "members": 12,
+        "regime": "r128_n150",
+        "sha256": "91f62c158b044b7f49da3c040f3c49e9c340bb50155d0c8a95fd4db92692457e"
+      }
+    ],
+    "checksums_file": "SHA256SUMS",
+    "download_location": "GitHub release v3.0.0 of this repository, attached assets",
+    "tag": "v3.0.0",
+    "unpack": "unzip every bundle into one directory, the asset root"
+  },
+  "schema": "pinn-phase-phaselocal-transfer-assets-v1"
+}

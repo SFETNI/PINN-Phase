@@ -33,6 +33,7 @@ the tutorials.
 - [`benchmarks/n25_transfer/README.md`](../benchmarks/n25_transfer/README.md),
   [`benchmarks/n16_96_transfer/README.md`](../benchmarks/n16_96_transfer/README.md),
   [`benchmarks/n8_128_transfer/README.md`](../benchmarks/n8_128_transfer/README.md),
+  [`benchmarks/phaselocal_transfer/README.md`](../benchmarks/phaselocal_transfer/README.md),
   [`benchmarks/initial_conditions/README.md`](../benchmarks/initial_conditions/README.md),
   and [`benchmarks/scalar_shrinkage_2d/README.md`](../benchmarks/scalar_shrinkage_2d/README.md);
 - [N16 96^3 prospective evidence](case-studies/n16_prospective_evidence.md), a

@@ -462,5 +462,16 @@
     "renderer": "scripts/render_n8_128_transfer.py",
     "replay_entry_point": null,
     "why_none": "No 128^3 initial field is distributed. The weights are verified, constructed and advanced one admissible step by scripts/verify_checkpoint_identities.py."
+  },
+  "phaselocal_transfer": {
+    "level": "SCORE_RECOMPUTATION",
+    "checkpoint_sha256": "764f22a548e4372e7627e71f4680bf6c806608ff90b75e8d389a1fcc98afc6e4",
+    "public_records": "benchmarks/phaselocal_transfer/expected_score.json",
+    "release_assets": "benchmarks/phaselocal_transfer/manifest.json",
+    "verifier": "scripts/verify_phaselocal_transfer.py",
+    "initial_labels": "benchmarks/phaselocal_transfer/initial_labels/",
+    "public_weights": "checkpoints/phase_local_48_n8.weights.npz",
+    "replay_entry_point": "src/pinn_phase/evaluation/phase_local.py",
+    "replay_note": "The public model and initial labels support local rollout. Release arrays support score recomputation without rerunning inference."
   }
 }

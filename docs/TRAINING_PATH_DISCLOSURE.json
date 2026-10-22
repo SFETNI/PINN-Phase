@@ -320,5 +320,24 @@
       "replayed_through_guard": false,
       "why_not_replayed": "The trainer revision that read this policy is not distributed, and the shipped guard does not know its four-field initial-condition mode. The policy is therefore disclosed here, bound to its configuration by digest, and not replayed."
     }
+  },
+  "phaselocal_transfer": {
+    "level": "SCORE_RECOMPUTATION",
+    "checkpoint_sha256": "764f22a548e4372e7627e71f4680bf6c806608ff90b75e8d389a1fcc98afc6e4",
+    "public_records": "benchmarks/phaselocal_transfer/expected_score.json",
+    "release_assets": "benchmarks/phaselocal_transfer/manifest.json",
+    "verifier": "scripts/verify_phaselocal_transfer.py",
+    "initial_labels": "benchmarks/phaselocal_transfer/initial_labels/",
+    "public_weights": "checkpoints/phase_local_48_n8.weights.npz",
+    "training_path": {
+      "model": "phase_local_48_n8",
+      "training_command_distributed": false,
+      "training_recipe": "benchmarks/phaselocal_transfer/README.md",
+      "initial_microstructures": 4,
+      "training_initial_labels": "benchmarks/phaselocal_transfer/initial_labels/",
+      "supervision": "reference-map targets computed from the model's own evolving states",
+      "reference_trajectories_used_for_training": false,
+      "accepted_parent_checkpoint_distributed": false
+    }
   }
 }

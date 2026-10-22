@@ -50,6 +50,14 @@ where configured. It supports the retained 8-grain 64^3 and N16 96^3 evidence,
 and the native 128^3 eight-grain model trained on four initial fields with the
 clip-and-renormalize map. Its machine identifier is `legacy_pa_hybrid_mpf`.
 
+### Phase-local rule
+
+`PhaseLocalRule` applies the same bias-free three-layer convolution to each
+phase field, followed by margin repair and joint Euclidean simplex projection.
+Its 2,160 parameters are independent of the grain count. The shared rule
+supports phase relabelling and transfer at fixed grid spacing from 64^3 to
+128^3 with 16 to 150 grains. Its machine identifier is `phase_local`.
+
 ### Scalar family
 
 The scalar family provides Allen-Cahn-style reference and neural rollout
@@ -89,6 +97,9 @@ and their digests are not interchangeable. See
 |---|---|
 | Permutation-equivariant model | `src/pinn_phase/models/perm_equivariant_mpf.py` |
 | First-generation hybrid model | `src/pinn_phase/models/explicit_mpf.py` |
+| Phase-local model | `src/pinn_phase/models/phase_local.py` |
+| Obstacle reference map | `src/pinn_phase/physics/obstacle_reference.py` |
+| Phase-local rollout | `src/pinn_phase/evaluation/phase_local.py` |
 | Recurrent cells | `src/pinn_phase/models/cells.py` |
 | Explicit MPF physics | `src/pinn_phase/physics/explicit_mpf.py` |
 | Scalar reference solver | `src/pinn_phase/physics/reference_solver.py` |

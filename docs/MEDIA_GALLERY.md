@@ -76,6 +76,17 @@ active-grain staircases underneath are computed at full per-step resolution. The
 discrepancy panel is empty at step 0 because that frame is the initial condition
 supplied to both the reference and the model.
 
+## Phase-local transfer media
+
+| Asset | Role |
+|---|---|
+| `media/phaselocal_n38/phaselocal_n38_reference_vs_pinn_phase.png` | Terminal reference and model cubes for three 38-grain microstructures at t = 67.5 |
+| `media/phaselocal_n150/phaselocal_n150_reference_vs_pinn_phase.gif` | Paired saved states for three 150-grain microstructures from t = 0 to 135 |
+
+Both media items are rendered from digest-bound release assets by
+`scripts/render_phaselocal_media.py`; their manifests bind the inputs, renderer,
+outputs and recomputed counters to the phase-local record.
+
 ## Retained method and benchmark media
 
 | Asset | Role | Status in this release |

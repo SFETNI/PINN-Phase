@@ -16,12 +16,14 @@ python -m pytest -q                              # the full public suite
 python scripts/verify_manifest.py                # every payload file, hashed
 python scripts/verify_source_lineage.py          # every module, against its source digest
 python scripts/check_public_tree.py              # the archive's content rules
-python scripts/verify_checkpoint_identities.py   # all seven weight artifacts, loaded and stepped
+python scripts/verify_checkpoint_identities.py   # all eight weight artifacts, loaded and stepped
 python scripts/smoke_test.py                     # physics, admissibility map, equivariance
 python scripts/reproduce_scalar_reference.py     # curvature-driven shrinkage
 python scripts/reproduce_n25_transfer.py         # the full frozen transfer score
 python scripts/verify_n8_128_transfer.py --records benchmarks/n8_128_transfer/expected_score.json
                                                  # native 128³ record, every verdict re-derived
+python scripts/verify_phaselocal_transfer.py --records benchmarks/phaselocal_transfer/expected_score.json
+                                                 # phase-local criteria and summaries re-derived
 ```
 
 Then run them again in any order you like. The result does not change, because the
@@ -81,7 +83,7 @@ parameter count and the training-path property — which are named explicitly in
 
 ## Model weights
 
-`checkpoints/` carries seven **derived public replay-weight artifacts** — one per model
+`checkpoints/` carries eight **derived public replay-weight artifacts** — one per model
 behind the permutation-equivariant, 3D-cube and native 128³ results — and a lineage
 record for each. It does not carry a training checkpoint, and nothing in the replay or
 verification path loads one. The single exception is
@@ -192,11 +194,11 @@ accepted artifact by SHA-256 through the evidence ledger.
 ## Scope and limitations
 
 PINN-Phase is a research surrogate validated on designed benchmarks. It does not
-claim statistical grain growth, universal kinetics, or scaling.
+claim statistical grain growth or universal kinetics. The phase-local transfer spans one synthetic geometry family at fixed grid spacing, from 64³ to 128³ and up to 150 grains.
 
 **What this archive supports.** Inference replay and code audit. You can rerun the
-distributed models, examine what they produce, and read every line of the training
-code.
+distributed models, examine what they produce, and inspect the distributed training
+code and the disclosed recipes for trainers identified by digest.
 
 You cannot reproduce **the training runs behind these models**. No training command
 ships — there is no console entry point, no `__main__`, and no script here starts a
@@ -209,8 +211,8 @@ replaying its recorded policies through the shipped guard, not something you
 re-execute here.
 
 **How references were used, stated exactly.** On the training path that produced every
-model distributed here except the native 128³ model —
-`pinn_phase.training.explicit_mpf_trainer` — training uses
+model distributed here except the native 128³ and phase-local models,
+`pinn_phase.training.explicit_mpf_trainer`, training uses
 initial conditions only. Post-`t0` phase-field references do not enter model input, do
 not enter the loss, and do not enter early stopping or checkpoint selection; they are
 read only by offline audit after a run has finished.
@@ -222,6 +224,11 @@ policy, and both are identified by digest in
 [`docs/TRAINING_PATH_DISCLOSURE.json`](TRAINING_PATH_DISCLOSURE.json), where the
 policy is reproduced. For this model the property is therefore disclosed, not
 readable in shipped code.
+
+The phase-local trainer is also identified by digest rather than distributed.
+Its recipe uses physical one-step targets on its own generated states and is
+documented in `benchmarks/phaselocal_transfer/README.md`; its reference-usage
+policy is recorded in `docs/TRAINING_PATH_DISCLOSURE.json`.
 
 That statement names its path deliberately. The shipped source also contains generic
 supervised training utilities — `training/baseline.py` and the supervised modes in
@@ -262,7 +269,7 @@ separating, because only one of them is an execution result:
   It reads a mapping. It does not read a tensor, open a data file, or watch the loop
   run, and it is called at one of the package's training entry points rather than all
   of them — which is why the data-flow audit above, not the guard, is the evidence
-  for reference isolation. Four of the seven models carry a policy in their training
+  for reference isolation. Four of the eight models carry a policy in their training
   configuration and are replayed through the guard by the test suite; the two 3D
   cubes take their policy from benchmark adapter configurations recorded by digest
   and not distributed, and the native 128³ model's policy was read by a trainer
@@ -284,6 +291,8 @@ post-initial-condition physics-training line of evidence.
 Extinction timing is reported at saved-frame resolution, and the pre-registered
 timing anchor on the 25-grain cascade is not met. The admissibility map is
 configuration-specific, and a caption or manifest always states which one
-applies. For the native 128³ study, the trained weights and a compact score record
+applies. For the native 128³ eight-grain study, the trained weights and a compact score record
 are distributed; its initial fields, trajectories and training configuration are
-identified by digest and are not.
+identified by digest and are not. The phase-local study distributes initial labels
+and weights; per-step tables and saved labels are v3.0.0 release assets. Its training
+recipe is documented in `benchmarks/phaselocal_transfer/README.md`.
