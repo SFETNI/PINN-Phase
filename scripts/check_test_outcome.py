@@ -11,6 +11,10 @@ import xml.etree.ElementTree as ET
 EXPECTED_SKIPS: set[str] = {
     "tests.test_artifact_identity_ledger::test_distributed_training_config_digest_matches_bytes",
     "tests.test_media_provenance_bindings::test_n25_transfer_renderer_reproduces_its_media_and_manifest",
+    # Phase-local: the arrays are release assets, not in the tree, and the recorded replay
+    # takes several minutes on CPU; both run with PINN_PHASE_ASSET_ROOT / PINN_PHASE_SLOW_TESTS=1.
+    "tests.test_phaselocal_media::test_release_assets_rerender_the_still_pixel_for_pixel",
+    "tests.test_phaselocal_model::test_short_rollout_reproduces_the_recorded_96_output",
 }
 
 
