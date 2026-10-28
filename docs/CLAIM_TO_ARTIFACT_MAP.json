@@ -52,7 +52,7 @@
     {
       "id": "n25_cascade_timing_anchor_failure",
       "source": "README.md",
-      "claim": "The pre-registered timing anchor does not pass; extinction events are systematically premature, median residuals -53 and -85 steps.",
+      "claim": "The fixed-in-advance timing anchor does not pass; extinction events are systematically premature, median residuals -53 and -85 steps.",
       "benchmark": "n25_cascade_development",
       "level": "PROVENANCE_ONLY",
       "supporting_paths": [
@@ -135,9 +135,9 @@
         "accepted_parent_checkpoint_secondary": "85e920603e69a9c035a585703ca6f12d27fc9050b8332939e38f11e2e6899c7b",
         "public_weights_secondary": "8fd13deb8d72a36d78796d8d26d3164dcdbe9e8ae116de5960e80efdbfbc7e1e",
         "secondary_training_config": "03c5cfb54707ceefc1ee5d1da155ab2d3719757d230549423346ca18743438d0",
-        "frozen_score": "26fbfdefed5278106a16cedf4be2a1db1ed010760cabf54336f6ee6a378e7202"
+        "fixed_score": "26fbfdefed5278106a16cedf4be2a1db1ed010760cabf54336f6ee6a378e7202"
       },
-      "not_supported_here": "Model inference is not rerun. The shipped arrays are the frozen rollouts; the score is recomputed from them."
+      "not_supported_here": "Model inference is not rerun. The shipped arrays are the fixed rollouts; the score is recomputed from them."
     },
     {
       "id": "n25_transfer_case_07_false_death",
@@ -234,7 +234,7 @@
     {
       "id": "reference_isolation",
       "source": "README.md",
-      "claim": "On the training path that produced every model distributed here except the native 128^3 model -- pinn_phase.training.explicit_mpf_trainer -- training uses only the initial condition; reference frames after t0 are used solely for offline audit, never for training, early stopping, or checkpoint selection. The native 128^3 model was trained by a later trainer revision that is not distributed; its declared policy is the same and is disclosed by digest in docs/TRAINING_PATH_DISCLOSURE.json.",
+      "claim": "On the training path that produced every model distributed here except the native 128^3 model -- pinn_phase.training.explicit_mpf_trainer -- training uses only the initial condition; reference frames after t0 are used solely for offline inspection, never for training, early stopping, or checkpoint selection. The native 128^3 model was trained by a later trainer revision that is not distributed; its declared policy is the same and is disclosed by digest in docs/TRAINING_PATH_DISCLOSURE.json.",
       "benchmark": "code_property",
       "level": "FULL_RECOMPUTATION",
       "supporting_paths": [
@@ -415,6 +415,16 @@
     "release_assets": "benchmarks/phaselocal_transfer/manifest.json",
     "verifier": "scripts/verify_phaselocal_transfer.py",
     "initial_labels": "benchmarks/phaselocal_transfer/initial_labels/",
+    "public_weights": "checkpoints/phase_local_48_n8.weights.npz"
+  },
+  "population_scaling": {
+    "level": "SCORE_RECOMPUTATION",
+    "checkpoint_sha256": "764f22a548e4372e7627e71f4680bf6c806608ff90b75e8d389a1fcc98afc6e4",
+    "claim": "The unchanged phase-local weights were evaluated on three 1,000-grain microstructures through t = 135 and one 5,000-grain microstructure through t = 50. In the tested 5,000-grain run, the maximum grain-volume error is 0.038.",
+    "public_records": "benchmarks/population_scaling/expected_score.json",
+    "release_assets": "benchmarks/population_scaling/manifest.json",
+    "verifier": "scripts/verify_population_scaling.py",
+    "initial_labels": "benchmarks/population_scaling/initial_labels/",
     "public_weights": "checkpoints/phase_local_48_n8.weights.npz"
   }
 }

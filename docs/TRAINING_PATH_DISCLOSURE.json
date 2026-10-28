@@ -37,7 +37,7 @@
       "reference_usage_policy": {
         "training_initial_condition": "Phi_ref_t0_only",
         "training_uses_reference_frames_after_t0": false,
-        "reference_after_t0_use": "audit_only",
+        "reference_after_t0_use": "inspection_only",
         "audit_uses_reference_frames_after_t0": true,
         "graph_features_from": "model_phi_only",
         "latent_targets_from_reference_after_t0": false,
@@ -115,7 +115,7 @@
       "reference_usage_policy": {
         "training_initial_condition": "Phi_ref_t0_only",
         "training_uses_reference_frames_after_t0": false,
-        "reference_after_t0_use": "audit_only",
+        "reference_after_t0_use": "inspection_only",
         "audit_uses_reference_frames_after_t0": true,
         "graph_features_from": "model_phi_only",
         "latent_targets_from_reference_after_t0": false,
@@ -149,7 +149,7 @@
       "reference_usage_policy": {
         "training_initial_condition": "Phi_ref_t0_only",
         "training_uses_reference_frames_after_t0": false,
-        "reference_after_t0_use": "audit_only",
+        "reference_after_t0_use": "inspection_only",
         "audit_uses_reference_frames_after_t0": true,
         "graph_features_from": "model_phi_only",
         "latent_targets_from_reference_after_t0": false,
@@ -194,9 +194,9 @@
         "adapter_config_distributed": false,
         "validation_policy": {
           "training_allowed": false,
-          "reference_use": "audit_only",
+          "reference_use": "inspection_only",
           "training_uses_reference_frames_after_t0": false,
-          "reference_after_t0_use": "audit_only",
+          "reference_after_t0_use": "inspection_only",
           "pf_reference_decision": "accepted",
           "reference_status": "ACCEPTED_FROZEN_T0ONLY_SMOKE_ADAPTER"
         }
@@ -207,9 +207,9 @@
         "adapter_config_distributed": false,
         "validation_policy": {
           "training_allowed": false,
-          "reference_use": "audit_only",
+          "reference_use": "inspection_only",
           "training_uses_reference_frames_after_t0": false,
-          "reference_after_t0_use": "audit_only",
+          "reference_after_t0_use": "inspection_only",
           "pf_reference_decision": "accepted",
           "reference_status": "ACCEPTED_FROZEN_T0ONLY_SMOKE_ADAPTER"
         }
@@ -229,11 +229,11 @@
   "verification_coverage": "Four of the six distributed models carry a reference-usage policy in their training configuration, and each of those four is replayed through the shipped fail-closed guard and then mutated to confirm the guard refuses. The two 3D cube runs take their policy from benchmark adapter configurations, recorded here by digest and not distributed; their policies are disclosed but not replayed through the guard.",
   "no_training_entry_point": {
     "what_is_absent": "No command-line or console entry point for training ships. pyproject.toml declares no [project.scripts]; no module under src/ has a __main__ guard; and no script in scripts/ invokes a trainer. Nothing here starts a training run for you.",
-    "what_is_present": "The training functions themselves are shipped and exported, so a caller who imports the package can invoke train_explicit_mpf directly and it will run, take optimizer steps and write a checkpoint. That is a property of shipping the source for audit. It is stated here rather than left to be discovered, because 'training cannot be executed' would be false.",
-    "what_cannot_be_reproduced": "The training runs behind the distributed models. Their training configurations are identified by digest and not distributed (one exception, recorded in docs/ARTIFACT_IDENTITY_LEDGER.json), their initial-condition archives are not distributed, and the accepted parent checkpoints are not distributed. So the archive supports inference replay and code audit, not training reproduction.",
+    "what_is_present": "The training functions themselves are shipped and exported, so a caller who imports the package can invoke train_explicit_mpf directly and it will run, take optimizer steps and write a checkpoint. That is a property of shipping the source for inspection. It is stated here rather than left to be discovered, because 'training cannot be executed' would be false.",
+    "what_cannot_be_reproduced": "The training runs behind the distributed models. Their training configurations are identified by digest and not distributed (one exception, recorded in docs/ARTIFACT_IDENTITY_LEDGER.json), their initial-condition archives are not distributed, and the accepted parent checkpoints are not distributed. So the archive supports inference replay and code inspection, not training reproduction.",
     "consequence_for_the_claims_here": "Every training-path property recorded in this file is established by reading the shipped source and by replaying the recorded policies through the shipped guard. None of it is established by re-running the training that produced a distributed model, and this archive does not claim otherwise."
   },
-  "multi_initial_condition_loader": "The historical six-initial-condition training loader, training/multi_ic_t0_batch.py, admits an archive only if its member set equals exactly {fields, labels, seeds, targets, weights, phase_permutation, provenance_json}. Those members are t0-time quantities and only 'fields' is read into the model; the rest are loaded and discarded. That schema is deliberately NOT the schema of the public replay path, which accepts exactly {phi0} and refuses every one of those member names. The two loaders serve different paths and the difference is intentional: the historical loader was left unchanged rather than retrofitted. Those six training archives are identified by digest and are not distributed, so the contents of their label-shaped members cannot be inspected here.",
+  "multi_initial_condition_loader": "The historical six-initial-condition training loader, training/multi_ic_t0_batch.py, admits an archive only if its member set equals exactly {fields, labels, initializations, targets, weights, phase_permutation, provenance_json}. Those members are t0-time quantities and only 'fields' is read into the model; the rest are loaded and discarded. That schema is deliberately NOT the schema of the public replay path, which accepts exactly {phi0} and refuses every one of those member names. The two loaders serve different paths and the difference is intentional: the historical loader was left unchanged rather than retrofitted. Those six training archives are identified by digest and are not distributed, so the contents of their label-shaped members cannot be inspected here.",
   "supervised_modules_present": {
     "statement": "The shipped source contains generic supervised training utilities that compare a prediction against a post-t0 reference frame inside a differentiable loss. They are disclosed here because a reader who greps the source will find them, and because the reference-usage claims in this archive would read as contradicted if they were left unmentioned.",
     "modules": [
@@ -255,9 +255,9 @@
     "what_the_guard_is": "pinn_phase.training.assert_no_reference_leakage validates the reference-usage declaration in a training configuration. It runs at entry to explicit-MPF training, before any data, model, checkpoint or output is touched.",
     "contract": "Fail closed. It requires the complete required policy key set with exact value types; the three post-t0 reference flags must be the literal False; graph features must come from the model's own field; the initial-condition mode must be one of the two permitted values and the multi-initial-condition contract must hold in both directions; and training_policy must declare initial-condition-only supervision with its three no-reference flags literally True. A missing block, an empty block, a missing key, an unrecognized extra key, a string or numeric stand-in for a boolean, a misspelled key, or a non-mapping argument is refused with ReferenceLeakageError.",
     "what_it_proves": "That a run's declared policy matches the required contract exactly, and that a run declaring anything else does not start.",
-    "what_it_does_not_establish": "What the training loop actually did. This is configuration validation: it reads a mapping. It does not read a tensor, open a data file, or watch the loop execute. The evidence that no post-t0 reference reaches model input, the loss, checkpoint selection or early stopping is the data-flow audit of src/pinn_phase/training/explicit_mpf_trainer.py, which can be read here in full.",
+    "what_it_does_not_establish": "What the training loop actually did. This is configuration validation: it reads a mapping. It does not read a tensor, open a data file, or watch the loop execute. The evidence that no post-t0 reference reaches model input, the loss, checkpoint selection or early stopping is the data-flow inspection of src/pinn_phase/training/explicit_mpf_trainer.py, which can be read here in full.",
     "required_policy_keys": [
-      "audit_uses_reference_frames_after_t0",
+      "inspection_uses_reference_frames_after_t0",
       "graph_features_from",
       "latent_targets_from_reference_after_t0",
       "reference_after_t0_use",
@@ -300,7 +300,7 @@
       "reference_usage_policy": {
         "training_initial_condition": "four_t0_fields_epoch_round_robin",
         "training_uses_reference_frames_after_t0": false,
-        "reference_after_t0_use": "audit_only",
+        "reference_after_t0_use": "inspection_only",
         "graph_features_from": "model_phi_only",
         "no_training_labels_after_t0": true,
         "no_reference_graph_after_t0": true
@@ -309,7 +309,7 @@
         "supervision": "initial_condition_only",
         "no_training_labels_after_t0": true
       },
-      "schedule": "Four initial fields. Each optimizer update accumulates the mean gradient of four independent four-step truncated-backpropagation windows, one per field; field and recurrent states are kept separately per field and are never averaged. 25 epochs of 1,024 updates represent H = 4,096 steps per field. Learning rate 1e-6, constant; seed 42; Adam restarted from a weights-only initialization; terminal epoch selected by position.",
+      "schedule": "Four initial fields. Each optimizer update accumulates the mean gradient of four independent four-step truncated-backpropagation windows, one per field; field and recurrent states are kept separately per field and are never averaged. 25 epochs of 1,024 updates represent H = 4,096 steps per field. Learning rate 1e-6, constant; initialization 42; Adam restarted from a weights-only initialization; terminal epoch selected by position.",
       "initialization": "Continued, weights only, from earlier physics-only training on the first of the four fields. The single-initial-condition model reported in the paper is a separate continuation from the same earlier initialization, not a predecessor of these weights.",
       "training_initial_fields_sha256": [
         "4c3132e0ba50933d174e626ed11f6b57ecc532901c658dcbab5876f1f6ff2b6f",
@@ -338,6 +338,23 @@
       "supervision": "reference-map targets computed from the model's own evolving states",
       "reference_trajectories_used_for_training": false,
       "accepted_parent_checkpoint_distributed": false
+    }
+  },
+  "population_scaling": {
+    "level": "SCORE_RECOMPUTATION",
+    "checkpoint_sha256": "764f22a548e4372e7627e71f4680bf6c806608ff90b75e8d389a1fcc98afc6e4",
+    "no_new_training": true,
+    "public_records": "benchmarks/population_scaling/expected_score.json",
+    "release_assets": "benchmarks/population_scaling/manifest.json",
+    "verifier": "scripts/verify_population_scaling.py",
+    "public_weights": "checkpoints/phase_local_48_n8.weights.npz",
+    "training_path": {
+      "model": "phase_local_48_n8",
+      "training_command_distributed": false,
+      "training_recipe": "benchmarks/phaselocal_transfer/README.md",
+      "new_training_for_population_scaling": false,
+      "supervision": "reference-map targets computed from the model's own evolving states",
+      "reference_trajectories_used_for_training": false
     }
   }
 }

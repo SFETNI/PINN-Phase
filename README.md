@@ -11,14 +11,14 @@ to 12,000 autonomous steps, and the native 128³ evaluations to 24,000 steps,
 training target is evaluated on the model's own evolving field; post-initial
 reference states are reserved for evaluation rather than used as step targets.
 
-The phase-local realization uses the same 2,160-parameter weights across unseen microstructures from 64³ to 128³ and from 16 to 150 grains at fixed grid spacing.
+The phase-local realization uses the same 2,160-parameter weights across unseen microstructures from 64³ to 416³ and from 16 to 5,000 grains at fixed grid spacing. Phase-channel execution applies those unchanged weights to the larger populations on one GPU.
 
 The benchmarks below form a **progressive ladder**, in the order the study was
 built: a single scalar interface, then multiphase relaxation and 2D coarsening,
 then a dense 64-grain field, then a prospectively fixed test on microstructures
 the model has never seen, and finally three dimensions, up to native 128³
 evolution with transfer to blind initial conditions. Each rung adds one kind
-of difficulty — a dimension, a phase count, a topology event, or an unseen
+of difficulty  -  a dimension, a phase count, a topology event, or an unseen
 initial condition.
 
 The repository includes scalar and explicit multiphase-field benchmarks,
@@ -51,13 +51,13 @@ Development initial condition phi_0(dev)
         | physics-residual training on the model's own rollout
         | represented rollout horizon H
         v
-  frozen checkpoint
+  fixed checkpoint
         |
         +-- development IC: autonomous rollout  0 -------- H -------- T
         |                                      represented   extrapolation
         |
         +-- unseen IC phi_0(k), k = 1,...,m
-              same frozen weights, no retraining or adaptation
+              same fixed weights, no retraining or adaptation
               direct autonomous rollout, evaluated within or beyond H
 ```
 
@@ -65,7 +65,7 @@ Development initial condition phi_0(dev)
   model step.
 - **Temporal extrapolation** continues that rollout beyond the represented
   training horizon `H`.
-- **Initial-condition generalisation** applies the same frozen model directly
+- **Initial-condition generalisation** applies the same fixed model directly
   to an unseen initial condition.
 
 An unseen-case evaluation may stay within `H`, or it may test generalisation
@@ -94,7 +94,7 @@ input:
   also permits an older, unbounded parameterization that no shipped checkpoint
   uses (see
   [`docs/tutorials/04_one_pinn_phase_step.md`](docs/tutorials/04_one_pinn_phase_step.md)).
-- **An explicit update step.** The increment advances the field — this step
+- **An explicit update step.** The increment advances the field  -  this step
   does not evaluate the physical multiphase-field operator, which supplies the
   training target
   only ([`docs/tutorials/05_physics_informed_training.md`](docs/tutorials/05_physics_informed_training.md)).
@@ -129,7 +129,7 @@ page you can regenerate end to end from the repository.
 </p>
 
 A circular grain shrinks under curvature flow, and its area falls linearly in
-time — the radius-squared law. This case ships complete and regenerates locally
+time  -  the radius-squared law. This case ships complete and regenerates locally
 in seconds:
 
 ```bash
@@ -139,7 +139,7 @@ python scripts/reproduce_scalar_reference.py
 The reproduction recovers the pre-extinction radius-squared slope to **0.997%**
 relative error, with monotone sampled energy.
 
-**Many-grain shrinkage cascade** — a 44-grain field coarsening to a single domain
+**Many-grain shrinkage cascade**  -  a 44-grain field coarsening to a single domain
 across 41 saved frames.
 
 <p align="center">
@@ -160,7 +160,7 @@ field; they are not persistent grain labels.
 The second rung restores explicit phase identities, so grains can now be tracked,
 mistaken for one another, or lost.
 
-**Four-phase junction relaxation** — a four-phase field relaxed to step 6,000.
+**Four-phase junction relaxation**  -  a four-phase field relaxed to step 6,000.
 
 <p align="center">
   <img src="media/triple_junction_h1024_reference_vs_pinn_phase.gif" width="820"
@@ -171,7 +171,7 @@ Equilibrium junction angles are a standard multiphase-field benchmark. Starting
 from a right-angle configuration, the model relaxes toward the equal-energy
 geometry and holds it: terminal label disagreement is **3.27%** against a 6.54%
 persistence baseline, all four phases stay active, and the junction angles reach
-127.8°, 115.9°, and 116.4° — an RMS deviation of 5.5° from 120°.
+127.8°, 115.9°, and 116.4°  -  an RMS deviation of 5.5° from 120°.
 
 ### The 25-grain cascade
 
@@ -187,7 +187,7 @@ final 7,904 steps lie beyond the horizon it was trained with.
 The diagnostic panel beneath the fields is divided at step **4,096**, the
 horizon the model was trained with, and labels both sides in the figure itself:
 everything left of the mark is **within the represented training horizon**, and
-the **7,904 steps** to its right are **autonomous extrapolation** beyond it — the
+the **7,904 steps** to its right are **autonomous extrapolation** beyond it  -  the
 same division the 64-grain animation below draws at its own horizon of 8,192.
 The whole rollout is autonomous, and the mark describes only the rollout's
 relation to training: "within the represented horizon" does not mean the model
@@ -197,21 +197,21 @@ evaluation only; only the rollout advances.
 
 Twenty-five grains coarsen to sixteen. The model ends **1.46%** of pixels away
 from the reference, against a persistence floor of **44.37%**, and recovers the
-**exact 16-grain terminal survivor set** — no grain lost that should have
+**exact 16-grain terminal survivor set**  -  no grain lost that should have
 survived, none kept that should have died. At step 4,000 the figures are
 **0.81%** against a **26.59%** floor.
 
-The same frozen weights, with no retraining or tuning, were then run on a
+The same fixed weights, with no retraining or tuning, were then run on a
 *different* development initial condition: **0.95%** at step 4,000 against a
 **28.97%** floor, **1.13%** at step 12,000 against **51.25%**, the exact 12-grain
 terminal set, and all 13 reference extinctions reproduced.
 
 **Both cases are development evidence.** The model was trained on the first and
 the second was chosen from the same development suite, so neither is a
-prospectively fixed test — that comes further down the ladder. The active-grain
-count tracks the reference at every audited cadence step but one in each case.
+prospectively fixed test  -  that comes further down the ladder. The active-grain
+count tracks the reference at every checked cadence step but one in each case.
 
-**The disclosed failure.** The pre-registered timing anchor does **not** pass.
+**The disclosed limitation.** The timing criterion fixed in advance does **not** pass.
 Extinction events are systematically **premature**: the model tends to remove a
 grain before the reference does, with median residuals of −53 steps on the
 training case and −85 on the second. Terminal survivor sets are exact; the timing
@@ -224,7 +224,7 @@ of getting there is not.
 The largest phase-count, long-horizon two-dimensional benchmark on the ladder.
 
 **The registered primary result.** The model was trained with a 4,096-step
-horizon, frozen, and evaluated once against criteria fixed beforehand. Rolling
+horizon, fixed, and evaluated once against criteria fixed beforehand. Rolling
 autonomously from one 128², 64-grain initial condition, it reaches **1.35%**,
 **3.50%**, and **6.09%** differing pixels at steps 4,000, 8,000, and 12,000. The
 persistence floor at step 12,000 is **69.89%**. The reference retains 21 grains;
@@ -248,7 +248,7 @@ for training.
 The diagnostic panel beneath the fields is divided at step **8,192** and labels
 both sides in the figure itself: everything left of the mark is **within the
 represented training horizon**, and the **3,808 steps** to its right are
-**autonomous extrapolation** beyond it. The whole rollout is autonomous — the
+**autonomous extrapolation** beyond it. The whole rollout is autonomous  -  the
 label distinguishes the horizon represented during training from the interval
 past it, not a supervised stretch from an unsupervised one.
 
@@ -256,7 +256,7 @@ The boundary describes the rollout's relation to training and nothing else: ther
 is no restart and no physical discontinuity there, and nothing about the field
 panels changes as it is crossed. The phase-field reference is the fixed backdrop
 of the panel: it is drawn complete, does not move, and spans the boundary as a
-**held-out comparator used for evaluation only** — it was never supplied to the
+**held-out comparator used for evaluation only**  -  it was never supplied to the
 model, inside the represented horizon or outside it. Only the rollout advances,
 so what travels across the panel is the model's own trajectory and its
 disagreement with that comparator.
@@ -266,13 +266,13 @@ recovers the **exact 21-grain terminal survivor set**, and matches **43 of 43**
 reference extinctions by identity.
 
 Read that second run for what it is. It is a **sensitivity study of one design
-choice, carried out after the evaluation had finished** — not an independent
+choice, carried out after the evaluation had finished**  -  not an independent
 confirmation, and not the registered result. The horizon and the additional
 training effort co-vary, so the improvement cannot be attributed to the horizon
 alone. The registered primary outcome above is the one that was scored once
 against criteria fixed in advance.
 
-Both are **one initial condition and one seed**. The large fields are not
+Both are **one initial condition and one model initialization**. The large fields are not
 distributed in v0.1; their SHA-256 identities, and those of the arrays behind the
 animation, are recorded in
 [`docs/COMPLETED_EVIDENCE_LEDGER.md`](docs/COMPLETED_EVIDENCE_LEDGER.md).
@@ -283,12 +283,12 @@ animation, are recorded in
 
 Every rung so far is a development benchmark: the model was trained on that
 initial condition, or the case was drawn from the same development suite. They
-measure fidelity on development initial conditions. Whether the frozen model
+measure fidelity on development initial conditions. Whether the fixed model
 transfers to unseen initial conditions is a separate question, answered by an
 evaluation fixed before the result is known.
 
-The primary model was trained from **a single initial condition**, frozen, and
-run autonomously for 12,000 steps on **ten microstructures it had never seen** —
+The primary model was trained from **a single initial condition**, fixed, and
+run autonomously for 12,000 steps on **ten microstructures it had never seen**  - 
 eight drawn from the same generator as training, plus two deliberately harder
 *stress cases* with denser and sparser grain structures. Criteria and the cohort
 bar were fixed in advance, and there was **one scoring pass**. It passed every criterion
@@ -304,7 +304,7 @@ and can neither rescue nor veto it.
 A representative unseen case: twenty-five grains coarsen to thirteen, the model
 reaches the same thirteen, and it ends with **1.38% of pixels differing** from a
 reference it never saw. The discrepancy panel is empty at step 0 by construction
-— that frame is the shared initial condition — and the differences that follow
+ -  that frame is the shared initial condition  -  and the differences that follow
 stay localized on the grain boundaries.
 
 <p align="center">
@@ -320,7 +320,7 @@ every case places its differing pixels inside the diffuse-interface region.
 
 **The one case that fails.** Case 7 is the single strict failure, and it stays
 counted. The model removes one grain before step 12,000 while the reference still
-holds it — a *false death*, which the frozen criteria treat as disqualifying no
+holds it  -  a *false death*, which the fixed criteria treat as disqualifying no
 matter how good the rest of the field looks. Terminal agreement for that case is
 still 96.3% and its survivor F1 is 0.9677. In a separately registered descriptive
 tail, the reference removes the same grain at step 12,933, 933 steps past the
@@ -328,8 +328,8 @@ horizon. **This does not rescue the result.** The horizon was fixed before
 scoring, information after it cannot change a strict verdict, and the score stays
 7 of 8.
 
-Recompute the entire score — every archive hash, every per-case metric, every
-gate — from the shipped data:
+Recompute the entire score  -  every archive hash, every per-case metric, every
+criterion  -  from the shipped data:
 
 ```bash
 python scripts/reproduce_n25_transfer.py
@@ -339,10 +339,10 @@ python scripts/reproduce_n25_transfer.py
 initial conditions within one fixed family of 25-grain coarsening problems: same
 generator, resolution, and physics. It does not establish transfer across
 materials, operators, phase counts, resolutions, or dimensions. Seven of eight is
-a pass at the threshold registered in advance, not evidence of headroom — the 95%
+a pass at the threshold registered in advance, not evidence of headroom  -  the 95%
 interval on that proportion runs from 0.53 to 0.98. An earlier 6-of-8 development
 campaign exists; it is separate evidence and is never pooled with this cohort.
-Details, gate definitions, and scope:
+Details, criterion definitions, and scope:
 [`benchmarks/n25_transfer/README.md`](benchmarks/n25_transfer/README.md).
 
 ---
@@ -351,7 +351,7 @@ Details, gate definitions, and scope:
 
 The last rung adds a dimension. Every frame below is an exact saved state.
 
-**Curvature-driven spherical-grain shrinkage** — a single grain shrinking in 3D.
+**Curvature-driven spherical-grain shrinkage**  -  a single grain shrinking in 3D.
 
 <p align="center">
   <img src="media/scalar_3d_spherical_reference_vs_pinn_phase.gif" width="900"
@@ -361,10 +361,10 @@ The last rung adds a dimension. Every frame below is an exact saved state.
 Reference and PINN-Phase shrink the sphere in lockstep; the equivalent-radius
 slope is **0.991** times the reference slope (fit R² 0.9999). This establishes
 three-dimensional feasibility for the scalar model, under explicit bound
-enforcement — the outcome depends on which bound-enforcement scheme is used.
+enforcement  -  the outcome depends on which bound-enforcement scheme is used.
 
 **Read this rung under a different protocol.** It is the one result on this page
-whose weights were selected with a physical-audit score containing post-`t0`
+whose weights were selected with a physical-check score containing post-`t0`
 reference terms, so it does not support the scoped post-initial-condition
 physics-training claim made for the rest of the ladder. Its checkpoint is not
 distributed and the result is
@@ -372,7 +372,7 @@ provenance-only: the archive records its identity and does not imply you can
 recompute it here. See "Scope and limitations" and
 [`docs/REPRODUCTION_LEVELS.json`](docs/REPRODUCTION_LEVELS.json).
 
-**Single-extinction eight-phase cube** — a 64³ volume through one designed
+**Single-extinction eight-phase cube**  -  a 64³ volume through one designed
 extinction.
 
 <p align="center">
@@ -385,7 +385,7 @@ The designed grain shrinks and disappears. At step 2,000 the model reaches
 exact seven-grain survivor set with no spurious or missing phase, and places the
 extinction one saved frame after the reference event.
 
-**Three-extinction sixteen-phase cube** — a 96³ volume carried along one forward
+**Three-extinction sixteen-phase cube**  -  a 96³ volume carried along one forward
 timeline through three designed extinctions.
 
 <p align="center">
@@ -411,7 +411,7 @@ claimed at the resolution of the saved frames.
        alt="Six unseen 96-cubed sixteen-grain microstructures, each advanced by the same fixed PINN-Phase model from its own initial field. For each one, the same interior section of the phase-field reference and of the prediction evolve side by side over saved steps 0 to 3200, through the loss of three grains, next to a strip comparing label disagreement with static persistence. Step 1600 is the scored terminal step; later steps are monitored continuation.">
 </p>
 
-On six prospectively fixed unseen N=16, 96³ initial microstructures, the same fixed model reaches 95.06–95.83% label agreement at step 1600, recovers the exact 13-grain terminal active set and all three extinction identities in all six cases, and meets the complete predefined qualification in five of six. This is within-family initial-condition transfer at fixed phase count and resolution, not evidence of transfer across materials, resolutions or phase counts. The animation shows all six cases and all 17 saved states as one interior section per case, reference beside prediction, with the section chosen from the reference alone as the plane cutting the most volume of the grains it loses. All three extinctions fall between steps 1000 and 1400; step 1600 is the terminal evaluation, and later frames are monitored continuation, played faster because the microstructure changes slowly there. The final frame shows the one place Unseen microstructure 5 falls behind persistence, at step 3200. See [`benchmarks/n16_96_transfer/README.md`](benchmarks/n16_96_transfer/README.md) for the complete contract and the narrowly defined two unmet conditions for Unseen microstructure 5.
+On six prospectively fixed unseen N=16, 96³ initial microstructures, the same fixed model reaches 95.06–95.83% label agreement at step 1600, recovers the exact 13-grain terminal active set and all three extinction identities in all six cases, and meets the complete predefined qualification in five of six. This is within-family initial-condition transfer at fixed phase count and resolution, not evidence of transfer across materials, resolutions or phase counts. The animation shows all six cases and all 17 saved states as one interior section per case, reference beside prediction, with the section chosen from the reference alone as the plane cutting the most volume of the grains it loses. All three extinctions fall between steps 1000 and 1400; step 1600 is the terminal evaluation, and later frames are monitored continuation, played at a higher frame rate because the microstructure changes slowly there. The final frame shows the one place Unseen microstructure 5 falls behind persistence, at step 3200. See [`benchmarks/n16_96_transfer/README.md`](benchmarks/n16_96_transfer/README.md) for the complete contract and the narrowly defined two unmet conditions for Unseen microstructure 5.
 
 **Inside one unseen cube:** one case from the cohort, selected by a fixed rule.
 
@@ -420,7 +420,7 @@ On six prospectively fixed unseen N=16, 96³ initial microstructures, the same f
        alt="One unseen 96-cubed microstructure, Unseen microstructure 3, shown as paired reference and PINN-Phase rows over saved steps 0 to 3200. Each row pairs an exterior view of the intact cube with an interior view in which only the three disappearing grains are rendered inside a wireframe outline. The three grains shrink and vanish inside the volume, and at its last saved appearance each grain has no voxels on any rendered face of the cube. Step 1600 is the terminal evaluation and later frames are monitored continuation.">
 </p>
 
-The cohort animation above follows one plane per case, so the three-dimensional shape of each disappearing grain is not visible there. Here one case — Unseen microstructure 3, selected by a fixed rule as the case whose three disappearing grains all have zero voxels on the rendered faces at their last saved appearance — is shown at full size: each row pairs the intact exterior of the cube with an interior view in which only the three disappearing grains are rendered, inside a wireframe outline (Grain 1-3 denotes reference disappearance order; Grains 2 and 3 are first absent at the same saved step in the reference). Two of the three grains appear on the rendered faces early in the run and withdraw from them as they shrink; at its last saved appearance each grain has zero voxels on any rendered face, so the disappearances themselves are not visible from outside. The model recovers all three of this case's extinction identities at the 200-step saved-frame resolution, with the final saved appearance of Grain 2 one save interval earlier than the reference, within the ±200-step tolerance; terminal agreement for this case is 95.83% at step 1600. Later frames are monitored continuation through the last saved state at step 3200, during which the interior view remains empty on both sides and the 13-grain active set persists in both. The animation renders the accepted cohort arrays as saved — no re-runs, no re-scoring, no interpolated frames.
+The cohort animation above follows one plane per case, so the three-dimensional shape of each disappearing grain is not visible there. Here one case  -  Unseen microstructure 3, selected by a fixed rule as the case whose three disappearing grains all have zero voxels on the rendered faces at their last saved appearance  -  is shown at full size: each row pairs the intact exterior of the cube with an interior view in which only the three disappearing grains are rendered, inside a wireframe outline (Grain 1-3 denotes reference disappearance order; Grains 2 and 3 are first absent at the same saved step in the reference). Two of the three grains appear on the rendered faces early in the run and withdraw from them as they shrink; at its last saved appearance each grain has zero voxels on any rendered face, so the disappearances themselves are not visible from outside. The model recovers all three of this case's extinction identities at the 200-step saved-frame resolution, with the final saved appearance of Grain 2 one save interval earlier than the reference, within the ±200-step tolerance; terminal agreement for this case is 95.83% at step 1600. Later frames are monitored continuation through the last saved state at step 3200, during which the interior view remains empty on both sides and the 13-grain active set persists in both. The animation renders the accepted cohort arrays as saved  -  no re-runs, no re-scoring, no interpolated frames.
 
 ### Native 128³: one model, four training fields, twelve unseen initial conditions
 
@@ -573,6 +573,41 @@ The full record, criteria and commands are in
 The matched comparator trained on reference-trajectory states is reported there
 by weight digest; its weights are not distributed.
 
+### Population size with phase channels
+
+Phase-channel execution assigns spatially separated grains to shared channels,
+applies the unchanged `phase_local_48_n8` model channel by channel, projects the
+result to an admissible field, and reassigns channels as the support graph
+changes. The public module and driver run from shipped initial labels. The table
+summarizes only the evaluated microstructures and horizons.
+
+| Grid / grains | Evaluated runs and horizon | Grain-resolved result |
+|---|---|---|
+| 128³ / 150 | 3 microstructures, t = 135 | All 368 extinctions reproduced by identity; maximum grain-volume error within 0.05 through t = 80 in all three and through t = 135 in microstructure 1 |
+| 240³ / 1,000 | 3 microstructures, t = 135 | Identities and extinction timing reproduced in all three; maximum grain-volume error within 0.05 through t = 62.5, 57.5 and 67.5 in microstructures 1, 2 and 3 |
+| 416³ / 5,000 | 1 microstructure, t = 50 | Maximum grain-volume error within 0.05 through t = 50, with maximum 0.038; 2,109 extinctions matched by identity and two reference events straddled the horizon |
+
+<p align="center"><img src="media/population_scaling/r240_n1000_reference_vs_pinn_phase.gif" width="900" alt="Reference row above PINN-Phase row for three 1,000-grain microstructures from t = 0 to 135; final reference and model alive-grain counts are 196 and 195, 192 and 192, and 180 and 181, with label disagreement 0.92%, 0.82%, and 0.70%."></p>
+
+Each frame pairs the reference and PINN-Phase states of the three 1,000-grain
+microstructures at the same saved time, from t = 0 to 135, with no interpolated
+frames. The counters give the grains alive in each method and the percentage of
+voxels whose grain label differs.
+
+<p align="center"><img src="media/population_scaling/r416_n5000_reference_vs_pinn_phase.gif" width="900" alt="Reference and PINN-Phase shown side by side for the 5,000-grain microstructure from t = 0 to 50; final reference and model alive-grain counts are 2,889 and 2,891, with label disagreement 0.35%."></p>
+
+The same pairing for the 5,000-grain microstructure, through the evaluated
+horizon t = 50.
+
+The compact records also cover grain-resolved growth and face laws, the mobility
+discrimination control, the 38-grain perturbed-start predictability floor, the
+virtual isothermal-hold screening, and measured computing resources for both
+methods on one NVIDIA H100 GPU. The screening protocol and decision rule were
+fixed before the 5,000-grain data were evaluated. See
+[`benchmarks/population_scaling/`](benchmarks/population_scaling/) and verify the
+records with
+[`scripts/verify_population_scaling.py`](scripts/verify_population_scaling.py).
+
 ---
 
 ## Results at a glance
@@ -585,7 +620,7 @@ The ladder, in order:
 | Four-phase junction | 128², 4 phases | First-generation hybrid | 3.27% disagreement vs 6.54% persistence; 4 phases retained | Provenance only |
 | 25-grain cascade | 128², 25 grains | Permutation-equivariant | 1.46% vs 44.37% persistence; exact 16-grain survivor set; timing anchor not met | Development evidence; model replayable |
 | Dense 64-grain, registered primary | 128², 64 grains | Permutation-equivariant | 6.09% vs 69.89% persistence; survivor F1 0.9767; no false deaths | Model replayable; reference external |
-| Dense 64-grain, sensitivity run | 128², 64 grains | Permutation-equivariant | 3.97%; exact 21-grain set; 43/43 extinctions — post-evaluation, not confirmation | Model replayable; reference external |
+| Dense 64-grain, sensitivity run | 128², 64 grains | Permutation-equivariant | 3.97%; exact 21-grain set; 43/43 extinctions  -  post-evaluation, not confirmation | Model replayable; reference external |
 | Unseen 25-grain transfer | 128², 25 grains | Permutation-equivariant | 7 of 8 unseen and 2 of 2 harder cases pass; 0.97–1.85% on the seven passing cases | Score-complete data shipped |
 | Spherical-grain shrinkage | 64³, 1 grain | Scalar | radius-law slope ratio 0.991, fit R² 0.9999 | Provenance only; different training protocol, see below |
 | Single-extinction cube | 64³, 8 phases | First-generation hybrid | 99.533% agreement; exact 7-grain survivor set | Model replayable; reference external |
@@ -598,9 +633,10 @@ The ladder, in order:
 | Phase-local transfer | 96³, 16 grains | Phase-local, 2,160 parameters, same weights | All five criteria met in 3 of 3; 10 of 10 extinctions by identity | Initial labels shipped; model replayable; per-step data as release assets |
 | Phase-local transfer | 128³, 38 grains | Phase-local, 2,160 parameters, same weights | All five criteria met in 3 of 3; 12 of 12 extinctions by identity | Initial labels shipped; model replayable; per-step data as release assets |
 | Phase-local transfer | 128³, 150 grains | Phase-local, 2,160 parameters, same weights | All 368 extinctions by identity; 0.51/0.70/0.88% label disagreement at t = 135; grain-volume criterion met through t = 80 in all three and t = 135 in microstructure 1 | Initial labels shipped; model replayable; per-step data as release assets |
+| Population-size evaluation | 240³ to 416³, 1,000 to 5,000 grains | Same phase-local weights with phase channels | Three 1,000-grain microstructures through t = 135; one 5,000-grain microstructure within 0.05 through t = 50, maximum 0.038 | Initial labels, compact records and verifier shipped; larger arrays as release assets |
 
 Each non-transfer row is an individual designed benchmark evaluated with one
-model seed. The N25 transfer row comprises eight unseen initial conditions and
+model initialization. The N25 transfer row comprises eight unseen initial conditions and
 two stress cases, scored against criteria fixed before those cases existed. The
 N16 transfer row comprises six prospectively fixed unseen 96³ microstructures,
 evaluated with the same fixed development model. The native 128³ rows share one
@@ -623,11 +659,13 @@ python scripts/check_public_tree.py              # the archive's content rules
 python scripts/verify_checkpoint_identities.py   # all eight weight artifacts, loaded and stepped
 python scripts/smoke_test.py                     # physics, admissibility map, equivariance
 python scripts/reproduce_scalar_reference.py     # curvature-driven shrinkage
-python scripts/reproduce_n25_transfer.py         # the full frozen transfer score
+python scripts/reproduce_n25_transfer.py         # the full fixed transfer score
 python scripts/verify_n8_128_transfer.py --records benchmarks/n8_128_transfer/expected_score.json
                                                  # native 128³ record, every verdict re-derived
 python scripts/verify_phaselocal_transfer.py --records benchmarks/phaselocal_transfer/expected_score.json
                                                  # phase-local criteria and summaries re-derived
+python scripts/verify_population_scaling.py --records benchmarks/population_scaling/expected_score.json
+                                                 # population records and pinned values re-derived
 ```
 
 Each result above carries exactly one reproduction level, recorded in
@@ -659,7 +697,7 @@ cover verification and one benchmark's record in depth.
 
 ## Installation
 
-Installation is optional — needed only to `import pinn_phase` from your own code.
+Installation is optional  -  needed only to `import pinn_phase` from your own code.
 
 ```bash
 # conda, CPU-only, from the environment specification in this archive
@@ -709,8 +747,11 @@ phases. Boundaries and machine identifiers:
 ## Scope and limitations
 
 - PINN-Phase is a research surrogate validated on designed benchmarks. It does not
-  claim statistical grain growth or universal kinetics. The phase-local transfer covers one synthetic geometry family at fixed grid spacing, from 64³ to 128³ and up to 150 grains.
-- This archive supports inference replay and code audit, not training reproduction:
+  claim universal kinetics. The population-size evaluation covers one synthetic
+  geometry family at fixed grid spacing, from 128³ to 416³ and from 150 to
+  5,000 grains, with three microstructures at 150 and 1,000 grains and one at
+  5,000 grains.
+- This archive supports inference replay and code inspection, not training reproduction:
   no training command or accepted parent checkpoint is distributed. The phase-local
   training recipe is documented in its benchmark README, while the training
   configurations remain identified by digest.
@@ -724,7 +765,7 @@ phases. Boundaries and machine identifiers:
   [`docs/TRAINING_PATH_DISCLOSURE.json`](docs/TRAINING_PATH_DISCLOSURE.json).
 - The scalar 64³ spherical rung followed a different protocol (its warm-start
   lineage was selected with post-`t0` reference terms) and is provenance only.
-- Extinction timing is reported at saved-frame resolution; the pre-registered timing
+- Extinction timing is reported at saved-frame resolution; the timing
   anchor on the 25-grain cascade is not met.
 - For the native 128³ eight-grain study, the trained weights and a compact score
   record are distributed; its initial fields, trajectories and training
@@ -751,7 +792,7 @@ autoregressive time-integrator formulation studied here.
 ## License and citation
 
 Code is BSD-3-Clause. Distributed data and media are CC BY 4.0 unless a
-file-specific manifest says otherwise — see [`ASSET_LICENSE.md`](ASSET_LICENSE.md)
+file-specific manifest says otherwise  -  see [`ASSET_LICENSE.md`](ASSET_LICENSE.md)
 for the complete statement. Citation metadata is in
 [`CITATION.cff`](CITATION.cff), and release notes are in
 [`CHANGELOG.md`](CHANGELOG.md).

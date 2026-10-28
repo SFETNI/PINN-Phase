@@ -2,7 +2,7 @@ cff-version: 1.2.0
 message: "If you use PINN-Phase, please cite this software."
 title: "PINN-Phase"
 type: software
-version: 3.0.0
+version: 4.0.0
 license: BSD-3-Clause
 authors:
   - family-names: Elfetni
