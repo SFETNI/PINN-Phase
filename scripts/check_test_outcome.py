@@ -15,6 +15,9 @@ EXPECTED_SKIPS: set[str] = {
     # takes several minutes on CPU; both run with PINN_PHASE_ASSET_ROOT / PINN_PHASE_SLOW_TESTS=1.
     "tests.test_phaselocal_media::test_release_assets_rerender_the_still_pixel_for_pixel",
     "tests.test_phaselocal_model::test_short_rollout_reproduces_the_recorded_96_output",
+    # Windows: these rejection-path tests require symlink creation privilege.
+    "tests.test_n16_96_transfer::test_asset_verifier_refuses_extra_entries_only_inside_the_documented_hierarchy",
+    "tests.test_public_tree_scan::test_release_scan_detects_directory_symlinks_and_generated_trees",
 }
 
 
@@ -34,7 +37,8 @@ def main() -> int:
     if skipped != EXPECTED_SKIPS:
         print(f"test outcome refused: expected skips {sorted(EXPECTED_SKIPS)}, got {sorted(skipped)}")
         return 1
-    print(f"test outcome accepted: {len(cases)} passed, no skips")
+    print(f"test outcome accepted: {len(cases) - len([case for case in cases if case.find('skipped') is not None])} passed, "
+          f"{len([case for case in cases if case.find('skipped') is not None])} skipped, 0 failed")
     return 0
 
 

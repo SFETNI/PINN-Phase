@@ -1,0 +1,91 @@
+{
+  "schema": "pinn-phase-population-analyses-v1",
+  "growth_and_faces": {
+    "r128_n150": {
+      "paired_grain_times": 3251,
+      "growth_rate_pearson": 0.99958,
+      "same_growth_sign_fraction": 0.9994,
+      "identical_face_count_fraction": 0.975,
+      "face_law_intercept_reference": 15.242,
+      "face_law_intercept_model": 15.246,
+      "face_law_slope_reference": 2.864,
+      "face_law_slope_model": 2.857
+    },
+    "r240_n1000": {
+      "paired_grain_times": 89872,
+      "growth_rate_pearson": 0.99948,
+      "face_law_intercept_reference": 15.345,
+      "face_law_intercept_model": 15.347
+    },
+    "r416_n5000": {
+      "paired_grain_times": 93529,
+      "growth_rate_pearson": 0.999946,
+      "paired_face_counts": 92951,
+      "identical_face_count_fraction": 0.981,
+      "face_law_intercept_reference": 15.2507,
+      "face_law_intercept_model": 15.2504
+    }
+  },
+  "time_rescaling_control": {
+    "matched_fraction": 0.60,
+    "generalized_hillert_exponents": {
+      "reference": 4.253,
+      "model": 4.251,
+      "factor_1.03": 4.248,
+      "factor_1.10": 4.247
+    },
+    "maximum_ks_distance_to_reference": 0.0025,
+    "time_to_fraction": {
+      "reference": 47.3,
+      "model": 47.4,
+      "factor_1.03": 45.9,
+      "factor_1.10": 43.0
+    },
+    "volume_error_p90_at_t30": {
+      "model": 0.0039,
+      "factor_1.03": 0.033,
+      "factor_1.10": 0.109
+    },
+    "matched_extinctions_through_t45.45": 1921,
+    "median_extinction_offset_time": {
+      "model": 0.03,
+      "factor_1.03": -0.80,
+      "factor_1.10": -2.50
+    }
+  },
+  "perturbed_start_predictability_floor": {
+    "regime": "r128_n38",
+    "microstructures": 1,
+    "horizon_t": 30.0,
+    "reference_volume_error_p90": 0.00035,
+    "reference_volume_error_max": 0.00091,
+    "reference_extinction_time_difference": 0.02,
+    "model_volume_error_p90": 0.00117,
+    "model_volume_error_max": 0.0023,
+    "model_extinction_time_difference": 0.04
+  },
+  "virtual_isothermal_hold": {
+    "all_case_target_decisions": 34,
+    "model_maximum_absolute_time_error_percent": 0.29,
+    "model_premature_stops": 1,
+    "prospective_5000": {
+      "targets": [1.01, 1.02, 1.25, 1.50],
+      "maximum_model_delay_percent": 0.22,
+      "model_premature_stops": 0,
+      "target_1.50_times": {
+        "reference": 40.1,
+        "model": 40.2,
+        "factor_1.03": 39.0,
+        "factor_1.10": 36.5
+      }
+    },
+    "factor_1.03": {
+      "maximum_absolute_time_error_percent": 2.9,
+      "premature_stops": 34
+    },
+    "factor_1.10": {
+      "maximum_absolute_time_error_percent": 9.1,
+      "premature_stops": 34
+    }
+  }
+}

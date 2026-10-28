@@ -34,7 +34,7 @@
       "initial_field": "benchmarks/initial_conditions/n25_cascade_development_case_b.npz",
       "initial_field_sha256": "32338eb319a3de3c866a707bc69a3389c80c36b31abc37791e08b8270ca3f359",
       "documented_horizon": 12000,
-      "note": "The second development initial condition, run with the same frozen weights."
+      "note": "The second development initial condition, run with the same fixed weights."
     },
     "n64_dense_primary": {
       "architecture_family": "n3_permutation_equivariant_mpf",
@@ -119,7 +119,7 @@
       "initial_field": "benchmarks/initial_conditions/n25_cohort_id_01.npz",
       "initial_field_sha256": "e3f3bbe5bc18b918dbc87bfdfb17c5e2741e6ef73d1f342897eafde274f3f325",
       "documented_horizon": 12000,
-      "note": "Prospective cohort case id_01, primary arm. Replaying this regenerates the inference the frozen score was computed from; the score itself is recomputed by scripts/reproduce_n25_transfer.py."
+      "note": "Prospective cohort case id_01, primary arm. Replaying this regenerates the inference the fixed score was computed from; the score itself is recomputed by scripts/reproduce_n25_transfer.py."
     },
     "n25_cohort_id_01_secondary": {
       "architecture_family": "n3_permutation_equivariant_mpf",
@@ -136,7 +136,7 @@
       "initial_field": "benchmarks/initial_conditions/n25_cohort_id_01.npz",
       "initial_field_sha256": "e3f3bbe5bc18b918dbc87bfdfb17c5e2741e6ef73d1f342897eafde274f3f325",
       "documented_horizon": 12000,
-      "note": "Prospective cohort case id_01, secondary arm. Replaying this regenerates the inference the frozen score was computed from; the score itself is recomputed by scripts/reproduce_n25_transfer.py."
+      "note": "Prospective cohort case id_01, secondary arm. Replaying this regenerates the inference the fixed score was computed from; the score itself is recomputed by scripts/reproduce_n25_transfer.py."
     },
     "n25_cohort_id_02_primary": {
       "architecture_family": "n3_permutation_equivariant_mpf",
@@ -153,7 +153,7 @@
       "initial_field": "benchmarks/initial_conditions/n25_cohort_id_02.npz",
       "initial_field_sha256": "b3c993b9fbf2918d75c60f4c65bf052136c6e6c0b04de7c6b4b2d1b17d766f9e",
       "documented_horizon": 12000,
-      "note": "Prospective cohort case id_02, primary arm. Replaying this regenerates the inference the frozen score was computed from; the score itself is recomputed by scripts/reproduce_n25_transfer.py."
+      "note": "Prospective cohort case id_02, primary arm. Replaying this regenerates the inference the fixed score was computed from; the score itself is recomputed by scripts/reproduce_n25_transfer.py."
     },
     "n25_cohort_id_02_secondary": {
       "architecture_family": "n3_permutation_equivariant_mpf",
@@ -170,7 +170,7 @@
       "initial_field": "benchmarks/initial_conditions/n25_cohort_id_02.npz",
       "initial_field_sha256": "b3c993b9fbf2918d75c60f4c65bf052136c6e6c0b04de7c6b4b2d1b17d766f9e",
       "documented_horizon": 12000,
-      "note": "Prospective cohort case id_02, secondary arm. Replaying this regenerates the inference the frozen score was computed from; the score itself is recomputed by scripts/reproduce_n25_transfer.py."
+      "note": "Prospective cohort case id_02, secondary arm. Replaying this regenerates the inference the fixed score was computed from; the score itself is recomputed by scripts/reproduce_n25_transfer.py."
     },
     "n25_cohort_id_03_primary": {
       "architecture_family": "n3_permutation_equivariant_mpf",
@@ -187,7 +187,7 @@
       "initial_field": "benchmarks/initial_conditions/n25_cohort_id_03.npz",
       "initial_field_sha256": "e516a01516a5e9d51a5c8e45662b4a167b4cf061d2af1932ad48c307cc680720",
       "documented_horizon": 12000,
-      "note": "Prospective cohort case id_03, primary arm. Replaying this regenerates the inference the frozen score was computed from; the score itself is recomputed by scripts/reproduce_n25_transfer.py."
+      "note": "Prospective cohort case id_03, primary arm. Replaying this regenerates the inference the fixed score was computed from; the score itself is recomputed by scripts/reproduce_n25_transfer.py."
     },
     "n25_cohort_id_03_secondary": {
       "architecture_family": "n3_permutation_equivariant_mpf",
@@ -204,7 +204,7 @@
       "initial_field": "benchmarks/initial_conditions/n25_cohort_id_03.npz",
       "initial_field_sha256": "e516a01516a5e9d51a5c8e45662b4a167b4cf061d2af1932ad48c307cc680720",
       "documented_horizon": 12000,
-      "note": "Prospective cohort case id_03, secondary arm. Replaying this regenerates the inference the frozen score was computed from; the score itself is recomputed by scripts/reproduce_n25_transfer.py."
+      "note": "Prospective cohort case id_03, secondary arm. Replaying this regenerates the inference the fixed score was computed from; the score itself is recomputed by scripts/reproduce_n25_transfer.py."
     },
     "n25_cohort_id_04_primary": {
       "architecture_family": "n3_permutation_equivariant_mpf",
@@ -221,7 +221,7 @@
       "initial_field": "benchmarks/initial_conditions/n25_cohort_id_04.npz",
       "initial_field_sha256": "d3467a7f1f6d0fa668784955383d48f6fc138c504e112996d45dad9a2b8625ee",
       "documented_horizon": 12000,
-      "note": "Prospective cohort case id_04, primary arm. Replaying this regenerates the inference the frozen score was computed from; the score itself is recomputed by scripts/reproduce_n25_transfer.py."
+      "note": "Prospective cohort case id_04, primary arm. Replaying this regenerates the inference the fixed score was computed from; the score itself is recomputed by scripts/reproduce_n25_transfer.py."
     },
     "n25_cohort_id_04_secondary": {
       "architecture_family": "n3_permutation_equivariant_mpf",
@@ -238,7 +238,7 @@
       "initial_field": "benchmarks/initial_conditions/n25_cohort_id_04.npz",
       "initial_field_sha256": "d3467a7f1f6d0fa668784955383d48f6fc138c504e112996d45dad9a2b8625ee",
       "documented_horizon": 12000,
-      "note": "Prospective cohort case id_04, secondary arm. Replaying this regenerates the inference the frozen score was computed from; the score itself is recomputed by scripts/reproduce_n25_transfer.py."
+      "note": "Prospective cohort case id_04, secondary arm. Replaying this regenerates the inference the fixed score was computed from; the score itself is recomputed by scripts/reproduce_n25_transfer.py."
     },
     "n25_cohort_id_05_primary": {
       "architecture_family": "n3_permutation_equivariant_mpf",
@@ -255,7 +255,7 @@
       "initial_field": "benchmarks/initial_conditions/n25_cohort_id_05.npz",
       "initial_field_sha256": "b6417aabf94069deeba2cc2c6aefcc7a342347286091eeee419821f14387f7a6",
       "documented_horizon": 12000,
-      "note": "Prospective cohort case id_05, primary arm. Replaying this regenerates the inference the frozen score was computed from; the score itself is recomputed by scripts/reproduce_n25_transfer.py."
+      "note": "Prospective cohort case id_05, primary arm. Replaying this regenerates the inference the fixed score was computed from; the score itself is recomputed by scripts/reproduce_n25_transfer.py."
     },
     "n25_cohort_id_05_secondary": {
       "architecture_family": "n3_permutation_equivariant_mpf",
@@ -272,7 +272,7 @@
       "initial_field": "benchmarks/initial_conditions/n25_cohort_id_05.npz",
       "initial_field_sha256": "b6417aabf94069deeba2cc2c6aefcc7a342347286091eeee419821f14387f7a6",
       "documented_horizon": 12000,
-      "note": "Prospective cohort case id_05, secondary arm. Replaying this regenerates the inference the frozen score was computed from; the score itself is recomputed by scripts/reproduce_n25_transfer.py."
+      "note": "Prospective cohort case id_05, secondary arm. Replaying this regenerates the inference the fixed score was computed from; the score itself is recomputed by scripts/reproduce_n25_transfer.py."
     },
     "n25_cohort_id_06_primary": {
       "architecture_family": "n3_permutation_equivariant_mpf",
@@ -289,7 +289,7 @@
       "initial_field": "benchmarks/initial_conditions/n25_cohort_id_06.npz",
       "initial_field_sha256": "8580fe38a4f9ba0e8d4711aad92b1632c88cdaed2e7c1d3bab7bf44830324090",
       "documented_horizon": 12000,
-      "note": "Prospective cohort case id_06, primary arm. Replaying this regenerates the inference the frozen score was computed from; the score itself is recomputed by scripts/reproduce_n25_transfer.py."
+      "note": "Prospective cohort case id_06, primary arm. Replaying this regenerates the inference the fixed score was computed from; the score itself is recomputed by scripts/reproduce_n25_transfer.py."
     },
     "n25_cohort_id_06_secondary": {
       "architecture_family": "n3_permutation_equivariant_mpf",
@@ -306,7 +306,7 @@
       "initial_field": "benchmarks/initial_conditions/n25_cohort_id_06.npz",
       "initial_field_sha256": "8580fe38a4f9ba0e8d4711aad92b1632c88cdaed2e7c1d3bab7bf44830324090",
       "documented_horizon": 12000,
-      "note": "Prospective cohort case id_06, secondary arm. Replaying this regenerates the inference the frozen score was computed from; the score itself is recomputed by scripts/reproduce_n25_transfer.py."
+      "note": "Prospective cohort case id_06, secondary arm. Replaying this regenerates the inference the fixed score was computed from; the score itself is recomputed by scripts/reproduce_n25_transfer.py."
     },
     "n25_cohort_id_07_primary": {
       "architecture_family": "n3_permutation_equivariant_mpf",
@@ -323,7 +323,7 @@
       "initial_field": "benchmarks/initial_conditions/n25_cohort_id_07.npz",
       "initial_field_sha256": "ae99c58cd2edf74232ae245e55d4c64637923292fe66f6f4b40a23cb8577db1e",
       "documented_horizon": 12000,
-      "note": "Prospective cohort case id_07, primary arm. Replaying this regenerates the inference the frozen score was computed from; the score itself is recomputed by scripts/reproduce_n25_transfer.py."
+      "note": "Prospective cohort case id_07, primary arm. Replaying this regenerates the inference the fixed score was computed from; the score itself is recomputed by scripts/reproduce_n25_transfer.py."
     },
     "n25_cohort_id_07_secondary": {
       "architecture_family": "n3_permutation_equivariant_mpf",
@@ -340,7 +340,7 @@
       "initial_field": "benchmarks/initial_conditions/n25_cohort_id_07.npz",
       "initial_field_sha256": "ae99c58cd2edf74232ae245e55d4c64637923292fe66f6f4b40a23cb8577db1e",
       "documented_horizon": 12000,
-      "note": "Prospective cohort case id_07, secondary arm. Replaying this regenerates the inference the frozen score was computed from; the score itself is recomputed by scripts/reproduce_n25_transfer.py."
+      "note": "Prospective cohort case id_07, secondary arm. Replaying this regenerates the inference the fixed score was computed from; the score itself is recomputed by scripts/reproduce_n25_transfer.py."
     },
     "n25_cohort_id_08_primary": {
       "architecture_family": "n3_permutation_equivariant_mpf",
@@ -357,7 +357,7 @@
       "initial_field": "benchmarks/initial_conditions/n25_cohort_id_08.npz",
       "initial_field_sha256": "dcace1c7d70ff3c694f0bd09e63c940c30aa81e46713667913041be236ed9bcf",
       "documented_horizon": 12000,
-      "note": "Prospective cohort case id_08, primary arm. Replaying this regenerates the inference the frozen score was computed from; the score itself is recomputed by scripts/reproduce_n25_transfer.py."
+      "note": "Prospective cohort case id_08, primary arm. Replaying this regenerates the inference the fixed score was computed from; the score itself is recomputed by scripts/reproduce_n25_transfer.py."
     },
     "n25_cohort_id_08_secondary": {
       "architecture_family": "n3_permutation_equivariant_mpf",
@@ -374,7 +374,7 @@
       "initial_field": "benchmarks/initial_conditions/n25_cohort_id_08.npz",
       "initial_field_sha256": "dcace1c7d70ff3c694f0bd09e63c940c30aa81e46713667913041be236ed9bcf",
       "documented_horizon": 12000,
-      "note": "Prospective cohort case id_08, secondary arm. Replaying this regenerates the inference the frozen score was computed from; the score itself is recomputed by scripts/reproduce_n25_transfer.py."
+      "note": "Prospective cohort case id_08, secondary arm. Replaying this regenerates the inference the fixed score was computed from; the score itself is recomputed by scripts/reproduce_n25_transfer.py."
     },
     "n25_cohort_stress_dense_primary": {
       "architecture_family": "n3_permutation_equivariant_mpf",
@@ -391,7 +391,7 @@
       "initial_field": "benchmarks/initial_conditions/n25_cohort_stress_dense.npz",
       "initial_field_sha256": "0a679ee2973de41f448e00890b1ce72bd0a43bab65ca5cc01bda25fada4224c4",
       "documented_horizon": 12000,
-      "note": "Prospective cohort case stress_dense, primary arm. Replaying this regenerates the inference the frozen score was computed from; the score itself is recomputed by scripts/reproduce_n25_transfer.py."
+      "note": "Prospective cohort case stress_dense, primary arm. Replaying this regenerates the inference the fixed score was computed from; the score itself is recomputed by scripts/reproduce_n25_transfer.py."
     },
     "n25_cohort_stress_dense_secondary": {
       "architecture_family": "n3_permutation_equivariant_mpf",
@@ -408,7 +408,7 @@
       "initial_field": "benchmarks/initial_conditions/n25_cohort_stress_dense.npz",
       "initial_field_sha256": "0a679ee2973de41f448e00890b1ce72bd0a43bab65ca5cc01bda25fada4224c4",
       "documented_horizon": 12000,
-      "note": "Prospective cohort case stress_dense, secondary arm. Replaying this regenerates the inference the frozen score was computed from; the score itself is recomputed by scripts/reproduce_n25_transfer.py."
+      "note": "Prospective cohort case stress_dense, secondary arm. Replaying this regenerates the inference the fixed score was computed from; the score itself is recomputed by scripts/reproduce_n25_transfer.py."
     },
     "n25_cohort_stress_sparse_primary": {
       "architecture_family": "n3_permutation_equivariant_mpf",
@@ -425,7 +425,7 @@
       "initial_field": "benchmarks/initial_conditions/n25_cohort_stress_sparse.npz",
       "initial_field_sha256": "cc97f230a3db302a17611c5c986614ffdf7cff78bd104b806010e94322859f78",
       "documented_horizon": 12000,
-      "note": "Prospective cohort case stress_sparse, primary arm. Replaying this regenerates the inference the frozen score was computed from; the score itself is recomputed by scripts/reproduce_n25_transfer.py."
+      "note": "Prospective cohort case stress_sparse, primary arm. Replaying this regenerates the inference the fixed score was computed from; the score itself is recomputed by scripts/reproduce_n25_transfer.py."
     },
     "n25_cohort_stress_sparse_secondary": {
       "architecture_family": "n3_permutation_equivariant_mpf",
@@ -442,7 +442,7 @@
       "initial_field": "benchmarks/initial_conditions/n25_cohort_stress_sparse.npz",
       "initial_field_sha256": "cc97f230a3db302a17611c5c986614ffdf7cff78bd104b806010e94322859f78",
       "documented_horizon": 12000,
-      "note": "Prospective cohort case stress_sparse, secondary arm. Replaying this regenerates the inference the frozen score was computed from; the score itself is recomputed by scripts/reproduce_n25_transfer.py."
+      "note": "Prospective cohort case stress_sparse, secondary arm. Replaying this regenerates the inference the fixed score was computed from; the score itself is recomputed by scripts/reproduce_n25_transfer.py."
     }
   },
   "n16_96_prospective_transfer": {
@@ -473,5 +473,16 @@
     "public_weights": "checkpoints/phase_local_48_n8.weights.npz",
     "replay_entry_point": "src/pinn_phase/evaluation/phase_local.py",
     "replay_note": "The public model and initial labels support local rollout. Release arrays support score recomputation without rerunning inference."
+  },
+  "population_scaling": {
+    "level": "SCORE_RECOMPUTATION",
+    "checkpoint_sha256": "764f22a548e4372e7627e71f4680bf6c806608ff90b75e8d389a1fcc98afc6e4",
+    "public_records": "benchmarks/population_scaling/expected_score.json",
+    "release_assets": "benchmarks/population_scaling/manifest.json",
+    "verifier": "scripts/verify_population_scaling.py",
+    "initial_labels": "benchmarks/population_scaling/initial_labels/",
+    "public_weights": "checkpoints/phase_local_48_n8.weights.npz",
+    "replay_entry_point": "scripts/run_phase_channel_rollout.py",
+    "replay_note": "The driver advances one evaluation from a shipped initial label array. Release arrays support score recomputation without rerunning inference."
   }
 }

@@ -1,0 +1,41 @@
+{
+  "schema": "pinn-phase-population-scaling-manifest-v1",
+  "assets": [
+    {
+      "filename": "population_scaling_r240_n1000.zip",
+      "bytes": 604323889,
+      "sha256": "0047d32a42be5b5ad122262b6eaabba2883b9af06cc64424f9b9740f8034afc9",
+      "release_class": "RELEASE_ASSET",
+      "contents": "Per-step volume tables, extinction records, timing tables, and saved label arrays for both methods in three 1,000-grain microstructures through t = 135"
+    },
+    {
+      "filename": "population_scaling_r416_n5000.zip",
+      "bytes": 576136809,
+      "sha256": "862430ad8dbb4879eef1308b5d064c5bf9a885626c622c3e1181be4c925f281a",
+      "release_class": "RELEASE_ASSET",
+      "contents": "Per-step volume tables, extinction records, timing tables, and saved label arrays for both methods in one 5,000-grain microstructure through t = 50"
+    }
+  ],
+  "initial_labels": [
+    {
+      "path": "benchmarks/population_scaling/initial_labels/r240_n1000_microstructure_1.npz",
+      "bytes": 1185725,
+      "sha256": "9fa7d331b4db3894f781cc3cc13263aa7bdf2a3bc7ccad4d9c4661572e84b4b6"
+    },
+    {
+      "path": "benchmarks/population_scaling/initial_labels/r240_n1000_microstructure_2.npz",
+      "bytes": 1191387,
+      "sha256": "be82e4d7bc6b5fb7664d071c802d0537a01880587ee812f5885da56359aba233"
+    },
+    {
+      "path": "benchmarks/population_scaling/initial_labels/r240_n1000_microstructure_3.npz",
+      "bytes": 1193169,
+      "sha256": "f4165668f6cb68d5626750f0f4f84e9bcf45e489ba97fdab5912bd7953a8bd12"
+    },
+    {
+      "path": "benchmarks/population_scaling/initial_labels/r416_n5000_microstructure_1.npz",
+      "bytes": 6544510,
+      "sha256": "3778088616c4c68c94533c7d71c25aedf2afd998d45048b1f9a81bde2c87c3bc"
+    }
+  ]
+}

@@ -1,9 +1,10 @@
-"""Guards for the phase-local transfer media (150-grain animation, 38-grain still).
+"""Guards for the phase-local transfer and population-scaling media.
 
 The label and volume arrays behind the media are release assets, not part of the
 repository. Without them these tests check the shipped manifests, outputs and
 renderer; with them (``PINN_PHASE_ASSET_ROOT`` pointing at the directory that holds
-``phaselocal_transfer/``) they also re-render one frame and compare its pixels.
+the extracted asset folders) they also check selected source identities or re-render
+one frame and compare its pixels.
 """
 from __future__ import annotations
 
@@ -21,6 +22,7 @@ from PIL import Image, ImageSequence, features
 
 ROOT = Path(__file__).resolve().parents[1]
 RENDERER = ROOT / "scripts/render_phaselocal_media.py"
+POPULATION_RENDERER = ROOT / "scripts/render_population_scaling_media.py"
 N150 = ROOT / "media/phaselocal_n150"
 N38 = ROOT / "media/phaselocal_n38"
 N150_GIF = N150 / "phaselocal_n150_reference_vs_pinn_phase.gif"
@@ -31,6 +33,17 @@ N150_STEPS = [0, 200, 400, 1000, 2000, 3000, 4000, 5000, 6000, 8000, 10000, 1200
 PALETTE_SHA256 = "0447c04a4563e3f62286644b69a0e8783cafe03c00c8179100ff02522a81462e"
 ASSET_FILES = ("reference_labels.npz", "model_labels.npz", "reference_volumes.npz", "model_volumes.npz")
 HEX_DIGEST = re.compile(r"\b[0-9a-f]{64}\b")
+POPULATION = ROOT / "media/population_scaling"
+POPULATION_OUTPUTS = {
+    "r240_n1000": (
+        POPULATION / "r240_n1000_reference_vs_pinn_phase.gif",
+        POPULATION / "r240_n1000_reference_vs_pinn_phase_poster.png",
+    ),
+    "r416_n5000": (
+        POPULATION / "r416_n5000_reference_vs_pinn_phase.gif",
+        POPULATION / "r416_n5000_reference_vs_pinn_phase_poster.png",
+    ),
+}
 
 
 def _json(path: Path):
@@ -43,6 +56,112 @@ def _sha256(path: Path) -> str:
 
 def _renderer() -> dict:
     return runpy.run_path(str(RENDERER))
+
+
+def _population_renderer() -> dict:
+    return runpy.run_path(str(POPULATION_RENDERER))
+
+
+def test_population_manifest_binds_outputs_renderer_records_and_inputs() -> None:
+    media = _json(POPULATION / "asset_manifest.json")
+    assert media["schema"] == "pinn-phase-population-scaling-media-v1"
+    assert media["license"] == "CC-BY-4.0" and media["no_interpolation"] is True
+    assert media["renderer"] == "scripts/render_population_scaling_media.py"
+    assert media["renderer_sha256"] == _sha256(POPULATION_RENDERER)
+    score = ROOT / media["score_record"]
+    asset_manifest = ROOT / media["asset_manifest"]
+    assert media["score_record_sha256"] == _sha256(score)
+    assert media["asset_manifest_sha256"] == _sha256(asset_manifest)
+    assert set(media["regimes"]) == set(POPULATION_OUTPUTS)
+    assert set(media["outputs"]) == {path.name for paths in POPULATION_OUTPUTS.values() for path in paths}
+    for paths in POPULATION_OUTPUTS.values():
+        for path in paths:
+            assert media["outputs"][path.name] == {"sha256": _sha256(path), "bytes": path.stat().st_size}
+    assert {path.name for path in POPULATION.iterdir() if path.is_file()} == (
+        {"asset_manifest.json"} | set(media["outputs"])
+    )
+    assert media["camera"]["palette_entries"] == 5000
+    assert HEX_DIGEST.fullmatch(media["camera"]["palette_sha256"])
+    assert media["alive_rule"] == "volume > 1e-6 in the per-step volume table"
+    assert media["time_per_step"] == 0.01
+    assert all(HEX_DIGEST.fullmatch(item["sha256"]) for item in media["inputs"])
+
+
+def test_population_manifest_has_every_recorded_saved_time_and_source_binding() -> None:
+    media = _json(POPULATION / "asset_manifest.json")
+    score = _json(ROOT / media["score_record"])
+    expected_cases = {"r240_n1000": ["microstructure 1", "microstructure 2", "microstructure 3"],
+                      "r416_n5000": ["microstructure 1"]}
+    expected_input_paths = set()
+    for regime, cases in expected_cases.items():
+        record = media["regimes"][regime]
+        expected_steps = [int(step) for step in score[regime]["cases"][0][
+            "label_disagreement_fraction_by_step"]]
+        assert record["cases_shown"] == cases and record["steps"] == expected_steps
+        assert record["frames"] == len(expected_steps)
+        assert record["t"] == [round(step * 0.01, 4) for step in expected_steps]
+        assert len(record["frame_pixel_sha256"]) == len(expected_steps)
+        for case_index in range(1, len(cases) + 1):
+            prefix = f"population_scaling/{regime}/microstructure_{case_index}"
+            for side in ("reference", "model"):
+                expected_input_paths |= {f"{prefix}/{side}/volumes.npz", f"{prefix}/{side}/extinctions.json"}
+                expected_input_paths |= {
+                    f"{prefix}/{side}/labels/step_{step:05d}.npz" for step in expected_steps
+                }
+    assert {item["path"] for item in media["inputs"]} == expected_input_paths
+    assert len(media["inputs"]) == len(expected_input_paths)
+
+
+def test_population_animation_timing_size_and_terminal_values() -> None:
+    media = _json(POPULATION / "asset_manifest.json")
+    terminal = {
+        "r240_n1000": ([0.92, 0.82, 0.70], [(196, 195), (192, 192), (180, 181)]),
+        "r416_n5000": ([0.35], [(2889, 2891)]),
+    }
+    for regime, paths in POPULATION_OUTPUTS.items():
+        gif, poster_path = paths
+        record = media["regimes"][regime]
+        with Image.open(gif) as image:
+            durations = [frame.info["duration"] for frame in ImageSequence.Iterator(image)]
+            assert image.size == tuple(record["size"]) and len(durations) == record["frames"]
+        assert durations == record["frame_durations_ms"]
+        assert durations[0] == 900 and durations[-1] == 1800 and set(durations[1:-1]) == {230}
+        assert gif.stat().st_size <= 3 * 1024 * 1024
+        with Image.open(poster_path) as poster:
+            assert poster.size == tuple(record["size"])
+        disagreements, alive = terminal[regime]
+        cases = record["cases_shown"]
+        assert [round(record["recomputed"][case]["disagreement_percent"][-1], 2) for case in cases] == disagreements
+        assert [(record["recomputed"][case]["reference_alive"][-1],
+                 record["recomputed"][case]["model_alive"][-1]) for case in cases] == alive
+
+
+def test_population_renderer_preserves_labels_above_255(tmp_path: Path) -> None:
+    renderer = _population_renderer()
+    palette = renderer["PAL"]
+    assert palette.shape == (5000, 3)
+    assert len(np.unique(np.rint(palette * 255).astype(np.uint8), axis=0)) == 5000
+    labels = np.array([[[0, 255], [256, 4999]], [[4999, 256], [255, 0]]], dtype=np.uint16)
+    source = tmp_path / "labels.npz"
+    np.savez_compressed(source, labels=labels, step=np.int64(7))
+    loaded = renderer["_load_label"](source, 7, 2, 5000)
+    assert loaded.dtype == np.uint16 and set(np.unique(loaded)) == {0, 255, 256, 4999}
+    assert renderer["_cube"](loaded, 24.0).mode == "RGB"
+
+
+def test_population_release_asset_identities_skip_cleanly_when_absent() -> None:
+    value = os.environ.get("PINN_PHASE_ASSET_ROOT")
+    if not value:
+        pytest.skip("PINN_PHASE_ASSET_ROOT is not set; population arrays are release assets")
+    root = Path(value)
+    if not (root / "population_scaling").is_dir():
+        pytest.skip(f"no population_scaling folder under {root}")
+    media = _json(POPULATION / "asset_manifest.json")
+    # Extinction records are compact representatives from every rendered case and role.
+    selected = [item for item in media["inputs"] if item["path"].endswith("extinctions.json")]
+    assert len(selected) == 8
+    for item in selected:
+        assert _sha256(root / item["path"]) == item["sha256"], item["path"]
 
 
 @pytest.mark.parametrize(
@@ -109,15 +228,17 @@ def test_recomputed_values_match_the_article() -> None:
         assert n38[c]["model_alive"][-1] == survivors and n38[c]["steps"][-1] == 6750
 
 
-@pytest.mark.parametrize("path", [N150 / "asset_manifest.json", N38 / "asset_manifest.json", RENDERER,
+@pytest.mark.parametrize("path", [N150 / "asset_manifest.json", N38 / "asset_manifest.json",
+                                  POPULATION / "asset_manifest.json", RENDERER, POPULATION_RENDERER,
                                   Path(__file__)])
 def test_public_text_carries_no_seed_shaped_numbers_or_private_paths(path: Path) -> None:
     text = HEX_DIGEST.sub("", path.read_text(encoding="utf-8"))
+    text = re.sub(r'("bytes":\s*)\d+', r"\1", text)
     assert not re.search(r"\d{8,}", text), "8+ digit run outside a digest"
     assert "\u2014" not in text
     for forbidden in ("/" "home/", "C:" "\\Users", "128" "cubed", "128" "^3/"):
         assert forbidden not in text
-    for media_file in list(N150.iterdir()) + list(N38.iterdir()):
+    for media_file in list(N150.iterdir()) + list(N38.iterdir()) + list(POPULATION.iterdir()):
         assert not re.search(r"128(?:\^3|cubed|x128)|\u00b3", media_file.name)
 
 

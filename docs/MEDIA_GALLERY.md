@@ -87,6 +87,18 @@ Both media items are rendered from digest-bound release assets by
 `scripts/render_phaselocal_media.py`; their manifests bind the inputs, renderer,
 outputs and recomputed counters to the phase-local record.
 
+## Population-size media
+
+| Asset | Role |
+|---|---|
+| `media/population_scaling/r240_n1000_reference_vs_pinn_phase.gif` | Reference and PINN-Phase paired saved states for three 1,000-grain microstructures from t = 0 to 135 |
+| `media/population_scaling/r416_n5000_reference_vs_pinn_phase.gif` | Reference and PINN-Phase paired saved states for the 5,000-grain microstructure from t = 0 to 50 |
+
+Both animations include a static poster. They are rendered from the released
+population arrays by `scripts/render_population_scaling_media.py`; the shared
+manifest binds the source archives, renderer, outputs, pixel identities, and
+recomputed alive-grain and label-disagreement counters.
+
 ## Retained method and benchmark media
 
 | Asset | Role | Status in this release |

@@ -37,6 +37,7 @@ RENDERERS = {
     "media/n8_128_transfer/asset_manifest.json": "scripts/render_n8_128_transfer.py",
     "media/phaselocal_n150/asset_manifest.json": "scripts/render_phaselocal_media.py",
     "media/phaselocal_n38/asset_manifest.json": "scripts/render_phaselocal_media.py",
+    "media/population_scaling/asset_manifest.json": "scripts/render_population_scaling_media.py",
 }
 
 #: Manifests that record rendered files under ``outputs`` rather than ``assets``.
@@ -48,6 +49,7 @@ OUTPUT_KEYED_MANIFESTS = frozenset(
         "media/n8_128_transfer/asset_manifest.json",
         "media/phaselocal_n150/asset_manifest.json",
         "media/phaselocal_n38/asset_manifest.json",
+        "media/population_scaling/asset_manifest.json",
     }
 )
 
@@ -66,13 +68,16 @@ INPUT_MANIFESTS = {
     "media/n8_128_transfer/asset_manifest.json": {},
     "media/phaselocal_n150/asset_manifest.json": {},
     "media/phaselocal_n38/asset_manifest.json": {},
+    "media/population_scaling/asset_manifest.json": {
+        "asset_manifest_sha256": "benchmarks/population_scaling/manifest.json",
+    },
 }
 
-# The N16 renderers bind sealed external JSON identities.  They are not shipped
+# The N16 renderers bind external JSON identities. They are not shipped
 # as public files, so their equality to the compact public score record is checked
 # by test_n16_96_transfer rather than pretending they digest a distributed file.
 # The cohort-manifest digest is syntactically an input-manifest digest; the score
-# digests are separate sealed-source fields and must not be lost by a suffix-only
+# digests are separate external-source fields and must not be lost by a suffix-only
 # discovery rule. The interior renderer additionally binds the per-case score.
 EXTERNAL_MANIFEST_IDENTITIES = {
     "media/n25_transfer/asset_manifest.json": set(),
@@ -86,8 +91,9 @@ EXTERNAL_MANIFEST_IDENTITIES = {
     "media/n8_128_transfer/asset_manifest.json": set(),
     "media/phaselocal_n150/asset_manifest.json": set(),
     "media/phaselocal_n38/asset_manifest.json": set(),
+    "media/population_scaling/asset_manifest.json": set(),
 }
-EXTERNAL_SEALED_IDENTITIES = {
+EXTERNAL_SOURCE_IDENTITIES = {
     "media/n25_transfer/asset_manifest.json": set(),
     "media/current_results/asset_manifest.json": set(),
     "media/n16_96_transfer/asset_manifest.json": {
@@ -99,6 +105,7 @@ EXTERNAL_SEALED_IDENTITIES = {
     "media/n8_128_transfer/asset_manifest.json": set(),
     "media/phaselocal_n150/asset_manifest.json": set(),
     "media/phaselocal_n38/asset_manifest.json": set(),
+    "media/population_scaling/asset_manifest.json": set(),
 }
 
 N25_MEDIA = (
@@ -205,10 +212,10 @@ def test_recorded_input_manifest_digests_match_the_distributed_inputs(
 
 
 @pytest.mark.parametrize("manifest_path", sorted(RENDERERS))
-def test_external_sealed_identity_fields_are_complete(manifest_path: str) -> None:
+def test_external_source_identity_fields_are_complete(manifest_path: str) -> None:
     """Known external identities are explicit rather than silently suffix-filtered."""
     record = json.loads((ROOT / manifest_path).read_text(encoding="utf-8"))
-    expected = EXTERNAL_SEALED_IDENTITIES[manifest_path]
+    expected = EXTERNAL_SOURCE_IDENTITIES[manifest_path]
     actual = {field for field in expected if field in record}
     assert actual == expected
 

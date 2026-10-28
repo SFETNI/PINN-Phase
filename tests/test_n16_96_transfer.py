@@ -240,6 +240,7 @@ def test_whole_tree_renderer_discovery_covers_every_renderer_manifest() -> None:
         "media/n8_128_transfer/asset_manifest.json",
         "media/phaselocal_n150/asset_manifest.json",
         "media/phaselocal_n38/asset_manifest.json",
+        "media/population_scaling/asset_manifest.json",
     ]
 
 

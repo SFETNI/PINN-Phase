@@ -3,6 +3,31 @@
 All notable changes to this project are documented here. This project follows
 [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 4.0.0
+
+### Added
+
+- Phase-channel execution of the unchanged phase-local model, including
+  grain-to-channel assignment, channel reassignment, channel-wise stepping,
+  projection, initial Voronoi microstructures, and support graphs.
+- `benchmarks/population_scaling/`: compact evaluation records for 150, 1,000,
+  and 5,000 grains, initial label arrays, analysis records, and verification
+  tooling for the tested runs and horizons.
+- Public records and computation scripts for growth and face laws, the mobility
+  discrimination control, the 38-grain predictability floor, and virtual
+  isothermal-hold screening.
+- Per-run computing-resource records for both evaluated methods on one NVIDIA
+  H100 GPU, plus hash-bound release assets containing the larger evaluation
+  arrays.
+- Paired reference and PINN-Phase animations and posters for the 1,000-grain
+  and 5,000-grain evaluations, with source-bound manifests and drawn counters.
+- Version 4.0.0 in package metadata and citation information.
+
+### Changed
+
+- The README now summarizes the population-size evaluations and links their
+  records and verifier.
+
 ## 3.0.0
 
 Everything since the first public snapshot (v0.1.0). The version number follows
@@ -130,8 +155,8 @@ the paper's release naming.
 
 - Results come from designed benchmarks. The project makes no claim of
   statistical grain growth or universal kinetics. Phase-local transfer covers one
-  synthetic geometry family at fixed grid spacing, from 64^3 to 128^3 and up to
-  150 grains.
+  synthetic geometry family at fixed grid spacing, from 64^3 to 416^3 and up to
+  5,000 grains.
 - The pre-registered extinction-timing anchor on the 25-grain cascade is not met;
   extinction events are predominantly premature.
 - The prospective cohort passes 7 of 8 unseen cases; the single strict failure is

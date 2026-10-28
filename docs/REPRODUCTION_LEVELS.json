@@ -2,7 +2,7 @@
   "schema": "pinn-phase-reproduction-levels-v1",
   "levels": {
     "FULL_RECOMPUTATION": "The archive contains everything needed to regenerate the reported metric.",
-    "SCORE_RECOMPUTATION": "The archive contains frozen arrays and recomputes the published score, but does not rerun model inference.",
+    "SCORE_RECOMPUTATION": "The archive contains fixed arrays and recomputes the published score, but does not rerun model inference.",
     "CHECKPOINT_AND_CODE_REPLAY": "The derived public replay weights, their lineage record, the model configuration, the registered initial field and executable rollout code are all present, together with an evaluation that runs locally on what the replay produces. The model can therefore be rerun and its output examined here. A large accepted reference trajectory may remain external, and where it does the published number cannot be regenerated from this archive.",
     "PROVENANCE_ONLY": "Only immutable identities and records are present. The archive does not imply that the result is independently recomputable."
   },
@@ -38,13 +38,13 @@
       "artifacts_absent": [
         "the full 12,000-step rollout and reference fields for each of the ten cases"
       ],
-      "note": "The published score is recomputed from frozen per-case arrays; model inference is not rerun by that command, which is why this benchmark is SCORE_RECOMPUTATION rather than something stronger. The ten cohort initial fields ARE distributed, so the inference itself can be replayed separately under both arms via scripts/replay_rollout.py; what remains external is the reference each rollout would be scored against."
+      "note": "The published score is recomputed from fixed per-case arrays; model inference is not rerun by that command, which is why this benchmark is SCORE_RECOMPUTATION rather than something stronger. The ten cohort initial fields ARE distributed, so the inference itself can be replayed separately under both arms via scripts/replay_rollout.py; what remains external is the reference each rollout would be scored against."
     },
     {
       "id": "n25_cascade_development",
       "title": "25-grain cascade, development evidence",
       "level": "CHECKPOINT_AND_CODE_REPLAY",
-      "reported": "1.46% differing pixels at step 12,000 against a 44.37% persistence floor; exact 16-grain terminal survivor set; pre-registered timing anchor not met.",
+      "reported": "1.46% differing pixels at step 12,000 against a 44.37% persistence floor; exact 16-grain terminal survivor set; fixed-in-advance timing anchor not met.",
       "artifacts_present": [
         "benchmarks/initial_conditions/n25_cascade_development_case_a.npz",
         "benchmarks/initial_conditions/n25_cascade_development_case_b.npz",
@@ -409,7 +409,7 @@
       "note": "The score verifier checks the compact record locally and recomputes measures from the release arrays when supplied. The same public weights and model code support rollout from the shipped initial labels. Full continuous fields are not distributed."
     }
   ],
-  "assignment_rule": "A benchmark carries CHECKPOINT_AND_CODE_REPLAY only when the archive contains and tests five things: a registered t0 initial field; the derived public replay weights with their lineage record; the matching model-reconstruction configuration; executable replay code; and an evaluation that can be recomputed locally on the rollout the replay writes. That level asserts REPLAY CAPABILITY, not metric recomputation: the large reference trajectory may remain external, and where it does the published number cannot be regenerated from this archive. FULL_RECOMPUTATION is used only where the reported metric can be regenerated entirely from archive contents. SCORE_RECOMPUTATION is used where a frozen score recomputes from shipped arrays without rerunning inference. PROVENANCE_ONLY means identities only, and never implies recomputability. No accepted parent checkpoint is distributed, and no level here depends on one being distributed.",
+  "assignment_rule": "A benchmark carries CHECKPOINT_AND_CODE_REPLAY only when the archive contains and tests five things: a registered t0 initial field; the derived public replay weights with their lineage record; the matching model-reconstruction configuration; executable replay code; and an evaluation that can be recomputed locally on the rollout the replay writes. That level asserts REPLAY CAPABILITY, not metric recomputation: the large reference trajectory may remain external, and where it does the published number cannot be regenerated from this archive. FULL_RECOMPUTATION is used only where the reported metric can be regenerated entirely from archive contents. SCORE_RECOMPUTATION is used where a fixed score recomputes from shipped arrays without rerunning inference. PROVENANCE_ONLY means identities only, and never implies recomputability. No accepted parent checkpoint is distributed, and no level here depends on one being distributed.",
   "initial_fields": {
     "distributed": true,
     "location": "benchmarks/initial_conditions/",
@@ -453,5 +453,15 @@
     "verifier": "scripts/verify_phaselocal_transfer.py",
     "initial_labels": "benchmarks/phaselocal_transfer/initial_labels/",
     "public_weights": "checkpoints/phase_local_48_n8.weights.npz"
+  },
+  "population_scaling": {
+    "level": "SCORE_RECOMPUTATION",
+    "checkpoint_sha256": "764f22a548e4372e7627e71f4680bf6c806608ff90b75e8d389a1fcc98afc6e4",
+    "public_records": "benchmarks/population_scaling/expected_score.json",
+    "release_assets": "benchmarks/population_scaling/manifest.json",
+    "verifier": "scripts/verify_population_scaling.py",
+    "initial_labels": "benchmarks/population_scaling/initial_labels/",
+    "public_weights": "checkpoints/phase_local_48_n8.weights.npz",
+    "public_driver": "scripts/run_phase_channel_rollout.py"
   }
 }

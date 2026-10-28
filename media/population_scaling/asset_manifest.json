@@ -1,0 +1,4210 @@
+{
+  "alive_rule": "volume > 1e-6 in the per-step volume table",
+  "asset_manifest": "benchmarks/population_scaling/manifest.json",
+  "asset_manifest_sha256": "d05aef7bc991206b0f201a4056ef924168062cebb46b8ff61308070239f993c7",
+  "camera": {
+    "camera_azimuth_deg": 38.0,
+    "camera_elevation_deg": 24.0,
+    "cube_edges": "rgb [0.22, 0.22, 0.22], width 0.0045 of the cube image width",
+    "faces": [
+      "x=n at brightness 0.84",
+      "y=n at brightness 0.70",
+      "z=n at brightness 1.00"
+    ],
+    "grain_boundaries": "darkened by 0.42, width 0.0045 of the cube image width",
+    "lookup": "nearest voxel; no smoothing or interpolation of grain geometry",
+    "palette": "identity-fixed 5,000-colour palette; uint16 labels are indexed without truncation",
+    "palette_entries": 5000,
+    "palette_sha256": "097181dd550b8d973238230ed42df7cb7b989c2413f20f58c2f8bdd1c969a110",
+    "projection": "orthographic view of the three outer faces x = n, y = n, z = n; whole opaque cube",
+    "supersample": 2
+  },
+  "inputs": [
+    {
+      "case": "microstructure 1",
+      "path": "population_scaling/r240_n1000/microstructure_1/reference/volumes.npz",
+      "role": "reference_volumes",
+      "sha256": "a4d14ef7ba6b49d7119da44be04c2161e60768858719568455454e7298ba630a"
+    },
+    {
+      "case": "microstructure 1",
+      "path": "population_scaling/r240_n1000/microstructure_1/reference/extinctions.json",
+      "role": "reference_extinctions",
+      "sha256": "3b813751b6af0c0ee0272b025439ae68005ed641acef0ce1ceadce4a50c61d2c"
+    },
+    {
+      "case": "microstructure 1",
+      "path": "population_scaling/r240_n1000/microstructure_1/model/volumes.npz",
+      "role": "model_volumes",
+      "sha256": "a4c1a88e3018d334c8500c184c0078801afb37a344b87b5809ffe8347c545482"
+    },
+    {
+      "case": "microstructure 1",
+      "path": "population_scaling/r240_n1000/microstructure_1/model/extinctions.json",
+      "role": "model_extinctions",
+      "sha256": "22bb93f9cdcabb6929de51e95078418b90a96329596af1122beee37bc3090e3c"
+    },
+    {
+      "case": "microstructure 1",
+      "path": "population_scaling/r240_n1000/microstructure_1/reference/labels/step_00000.npz",
+      "role": "reference_labels_step_0",
+      "sha256": "84d6dce0205120a06b673d2174213393f63fcafa44e32a4bb2af1b6017309f88"
+    },
+    {
+      "case": "microstructure 1",
+      "path": "population_scaling/r240_n1000/microstructure_1/model/labels/step_00000.npz",
+      "role": "model_labels_step_0",
+      "sha256": "84d6dce0205120a06b673d2174213393f63fcafa44e32a4bb2af1b6017309f88"
+    },
+    {
+      "case": "microstructure 1",
+      "path": "population_scaling/r240_n1000/microstructure_1/reference/labels/step_00100.npz",
+      "role": "reference_labels_step_100",
+      "sha256": "d2c16b1818d99c4cae1a4de12fa73f2581a121869d2906a4681f5ca55acbdf1f"
+    },
+    {
+      "case": "microstructure 1",
+      "path": "population_scaling/r240_n1000/microstructure_1/model/labels/step_00100.npz",
+      "role": "model_labels_step_100",
+      "sha256": "8a24da3f7a91c3cb3a6ba5c6029b8f2607775695c12bb297b5ecc3c00286db1e"
+    },
+    {
+      "case": "microstructure 1",
+      "path": "population_scaling/r240_n1000/microstructure_1/reference/labels/step_00200.npz",
+      "role": "reference_labels_step_200",
+      "sha256": "482e4cbd69ddaff9c4842e2f02de1f719c2c6159f0ec29f0c2482b98bbeefd75"
+    },
+    {
+      "case": "microstructure 1",
+      "path": "population_scaling/r240_n1000/microstructure_1/model/labels/step_00200.npz",
+      "role": "model_labels_step_200",
+      "sha256": "0fee20a1809522c2aff251e0d3f34574dff25f5e7b00b80e4c6e3a77ad287a97"
+    },
+    {
+      "case": "microstructure 1",
+      "path": "population_scaling/r240_n1000/microstructure_1/reference/labels/step_00250.npz",
+      "role": "reference_labels_step_250",
+      "sha256": "7daa30087b09d856a950ee48853fe51b1dfa8a4e0813d7cfb23cc07bc219a21d"
+    },
+    {
+      "case": "microstructure 1",
+      "path": "population_scaling/r240_n1000/microstructure_1/model/labels/step_00250.npz",
+      "role": "model_labels_step_250",
+      "sha256": "03a88c367b8e10b5d213250aa1b2f697b75484d3c61987fd4508b64376d9c5bd"
+    },
+    {
+      "case": "microstructure 1",
+      "path": "population_scaling/r240_n1000/microstructure_1/reference/labels/step_00400.npz",
+      "role": "reference_labels_step_400",
+      "sha256": "376b348b61f67d7da4e18cd5b597fc85223b3396ce4fc45677c471172bcd3581"
+    },
+    {
+      "case": "microstructure 1",
+      "path": "population_scaling/r240_n1000/microstructure_1/model/labels/step_00400.npz",
+      "role": "model_labels_step_400",
+      "sha256": "b0ca32140fed5e158b2d5d2c204fdc96a715a6e46cc47fc48d6034cae25f990c"
+    },
+    {
+      "case": "microstructure 1",
+      "path": "population_scaling/r240_n1000/microstructure_1/reference/labels/step_00500.npz",
+      "role": "reference_labels_step_500",
+      "sha256": "54b3572107770b1650164ad36650f2b98edae838cafab8fb07f63711d6b6ef33"
+    },
+    {
+      "case": "microstructure 1",
+      "path": "population_scaling/r240_n1000/microstructure_1/model/labels/step_00500.npz",
+      "role": "model_labels_step_500",
+      "sha256": "ed54ea1767810e442bf274ffb388cfb66ffc6981a25d4123da1fafb855df77fa"
+    },
+    {
+      "case": "microstructure 1",
+      "path": "population_scaling/r240_n1000/microstructure_1/reference/labels/step_00750.npz",
+      "role": "reference_labels_step_750",
+      "sha256": "97be36d5257b7682cebbc7662d6806537182be62b3cb9099b64e19d07f341f46"
+    },
+    {
+      "case": "microstructure 1",
+      "path": "population_scaling/r240_n1000/microstructure_1/model/labels/step_00750.npz",
+      "role": "model_labels_step_750",
+      "sha256": "332bc8412edf63f7aac4712a5b035330c04adc101890b44ec0e4bc21df14f82c"
+    },
+    {
+      "case": "microstructure 1",
+      "path": "population_scaling/r240_n1000/microstructure_1/reference/labels/step_01000.npz",
+      "role": "reference_labels_step_1000",
+      "sha256": "02d33fe9ce086c26e52ccfdde4fb9a9512080698c317e7d962d9ba399f8c72fb"
+    },
+    {
+      "case": "microstructure 1",
+      "path": "population_scaling/r240_n1000/microstructure_1/model/labels/step_01000.npz",
+      "role": "model_labels_step_1000",
+      "sha256": "513a0cfeeb02aa16d2637734a4c2b542c022d08b898a0f2386bf0b2834b4f38f"
+    },
+    {
+      "case": "microstructure 1",
+      "path": "population_scaling/r240_n1000/microstructure_1/reference/labels/step_01250.npz",
+      "role": "reference_labels_step_1250",
+      "sha256": "2b2db03fbae430c2537253f60d103150688f3a60bd4afc96fd2288a9d3c646e7"
+    },
+    {
+      "case": "microstructure 1",
+      "path": "population_scaling/r240_n1000/microstructure_1/model/labels/step_01250.npz",
+      "role": "model_labels_step_1250",
+      "sha256": "1e025ff7e63df9d112aabcb008115d04e9e3fa04c59efb0b7f1bc9dcfb4efdb4"
+    },
+    {
+      "case": "microstructure 1",
+      "path": "population_scaling/r240_n1000/microstructure_1/reference/labels/step_01500.npz",
+      "role": "reference_labels_step_1500",
+      "sha256": "7f8e8b6cc159767be4fa71e32328c43857f6499720939933c1aa89b177926677"
+    },
+    {
+      "case": "microstructure 1",
+      "path": "population_scaling/r240_n1000/microstructure_1/model/labels/step_01500.npz",
+      "role": "model_labels_step_1500",
+      "sha256": "0da3c0aa19bb6527e07007c196803b78bcc0d26713ff500a8428b703a73df4cb"
+    },
+    {
+      "case": "microstructure 1",
+      "path": "population_scaling/r240_n1000/microstructure_1/reference/labels/step_01750.npz",
+      "role": "reference_labels_step_1750",
+      "sha256": "380e3aaecdcf3172f66026f192337c56118b321547ebe48e438f7da895abdd76"
+    },
+    {
+      "case": "microstructure 1",
+      "path": "population_scaling/r240_n1000/microstructure_1/model/labels/step_01750.npz",
+      "role": "model_labels_step_1750",
+      "sha256": "00d3b775c1feb55b910114bef886385cbbd45702ce8c0137d020d238a6678661"
+    },
+    {
+      "case": "microstructure 1",
+      "path": "population_scaling/r240_n1000/microstructure_1/reference/labels/step_02000.npz",
+      "role": "reference_labels_step_2000",
+      "sha256": "1dba272d67d0856e3dfcf752ad4bb93899d5729f12dfa8e8fd8f97d56151156f"
+    },
+    {
+      "case": "microstructure 1",
+      "path": "population_scaling/r240_n1000/microstructure_1/model/labels/step_02000.npz",
+      "role": "model_labels_step_2000",
+      "sha256": "b8ccde8ef37d8673e2dd15765eb9588b2413c9c275100deee5b29175be4597ea"
+    },
+    {
+      "case": "microstructure 1",
+      "path": "population_scaling/r240_n1000/microstructure_1/reference/labels/step_02250.npz",
+      "role": "reference_labels_step_2250",
+      "sha256": "5551c6d9ea55c0e1ba770e0f5c3898cfea7d316f24df55cb2af4109e5d2f3d72"
+    },
+    {
+      "case": "microstructure 1",
+      "path": "population_scaling/r240_n1000/microstructure_1/model/labels/step_02250.npz",
+      "role": "model_labels_step_2250",
+      "sha256": "3ee3d4bb19e373eb70bb96c1c5ccae121841b857fc49b22cec72f69894a0f1f2"
+    },
+    {
+      "case": "microstructure 1",
+      "path": "population_scaling/r240_n1000/microstructure_1/reference/labels/step_02500.npz",
+      "role": "reference_labels_step_2500",
+      "sha256": "f2f13ceae0b65685727b0bbc3027e02bd79084972391396c26f61b87c4fc60c2"
+    },
+    {
+      "case": "microstructure 1",
+      "path": "population_scaling/r240_n1000/microstructure_1/model/labels/step_02500.npz",
+      "role": "model_labels_step_2500",
+      "sha256": "738a49b4e8b4f52202a7af14e18e71afad0f71ec6a09e4322463c6fe7506ff1e"
+    },
+    {
+      "case": "microstructure 1",
+      "path": "population_scaling/r240_n1000/microstructure_1/reference/labels/step_02750.npz",
+      "role": "reference_labels_step_2750",
+      "sha256": "0d3399c1d2d91ad0d40ba445ca2ba8a4cd4a38706458c3ce4aaa39a71980fcb9"
+    },
+    {
+      "case": "microstructure 1",
+      "path": "population_scaling/r240_n1000/microstructure_1/model/labels/step_02750.npz",
+      "role": "model_labels_step_2750",
+      "sha256": "11d26300418aaa2dfcc32f5e2210d011af5ab2b8550e2b76b6d31c15263b1c40"
+    },
+    {
+      "case": "microstructure 1",
+      "path": "population_scaling/r240_n1000/microstructure_1/reference/labels/step_03000.npz",
+      "role": "reference_labels_step_3000",
+      "sha256": "e194a09f3fc32f27fe0a97b0c5de7c315d80ba65d3d62129c2bcf4d20c2c0dad"
+    },
+    {
+      "case": "microstructure 1",
+      "path": "population_scaling/r240_n1000/microstructure_1/model/labels/step_03000.npz",
+      "role": "model_labels_step_3000",
+      "sha256": "fe268c7a616b5cbe5341d172131cbd4a9ac06e3308f99890a200a7a280ffe612"
+    },
+    {
+      "case": "microstructure 1",
+      "path": "population_scaling/r240_n1000/microstructure_1/reference/labels/step_03250.npz",
+      "role": "reference_labels_step_3250",
+      "sha256": "5abbf352fcfd004b46bb288089de7b92e0def84ddab56b121112eee37395f5cc"
+    },
+    {
+      "case": "microstructure 1",
+      "path": "population_scaling/r240_n1000/microstructure_1/model/labels/step_03250.npz",
+      "role": "model_labels_step_3250",
+      "sha256": "0d6cddcbb8a93967f49fd8c07146b25cdbcfd1a766d30e0292e3546eac5115a0"
+    },
+    {
+      "case": "microstructure 1",
+      "path": "population_scaling/r240_n1000/microstructure_1/reference/labels/step_03500.npz",
+      "role": "reference_labels_step_3500",
+      "sha256": "a51e95f1d2877370127da2cd39d081a1d674d5047b08521f91e0d3412e6cf762"
+    },
+    {
+      "case": "microstructure 1",
+      "path": "population_scaling/r240_n1000/microstructure_1/model/labels/step_03500.npz",
+      "role": "model_labels_step_3500",
+      "sha256": "79d6d1e390b8e3254446dfa6ff673c3e6483506b8790c9d11f4e76f0a5d3eb49"
+    },
+    {
+      "case": "microstructure 1",
+      "path": "population_scaling/r240_n1000/microstructure_1/reference/labels/step_03750.npz",
+      "role": "reference_labels_step_3750",
+      "sha256": "13dcd90e433a34283fde067d2c57409839d32310d87f1d6451e133df659b6bf7"
+    },
+    {
+      "case": "microstructure 1",
+      "path": "population_scaling/r240_n1000/microstructure_1/model/labels/step_03750.npz",
+      "role": "model_labels_step_3750",
+      "sha256": "e9cde71abf55a7dd69c621503b519121718438748dffecdfc924a2760b832cee"
+    },
+    {
+      "case": "microstructure 1",
+      "path": "population_scaling/r240_n1000/microstructure_1/reference/labels/step_04000.npz",
+      "role": "reference_labels_step_4000",
+      "sha256": "782a1609c0db09f4e13cd7f8f2702660929bfd0b30a62da63461462bd0ada598"
+    },
+    {
+      "case": "microstructure 1",
+      "path": "population_scaling/r240_n1000/microstructure_1/model/labels/step_04000.npz",
+      "role": "model_labels_step_4000",
+      "sha256": "2c0f51b4e69f0f48a18a5169e30385ac84040f411f9abba27e371e51993ae4c6"
+    },
+    {
+      "case": "microstructure 1",
+      "path": "population_scaling/r240_n1000/microstructure_1/reference/labels/step_04250.npz",
+      "role": "reference_labels_step_4250",
+      "sha256": "f700556f5360b8416491e04cbb3a6bf692b0205d0f72302185802b3f486c0702"
+    },
+    {
+      "case": "microstructure 1",
+      "path": "population_scaling/r240_n1000/microstructure_1/model/labels/step_04250.npz",
+      "role": "model_labels_step_4250",
+      "sha256": "4495748b3fc35183013dd2a60f914e32ca984b1c238be50517edf7d702f36f00"
+    },
+    {
+      "case": "microstructure 1",
+      "path": "population_scaling/r240_n1000/microstructure_1/reference/labels/step_04500.npz",
+      "role": "reference_labels_step_4500",
+      "sha256": "8db31d2154d88bee5bb34105936f9720cf1f4c4c0e9461d588beef25147629e1"
+    },
+    {
+      "case": "microstructure 1",
+      "path": "population_scaling/r240_n1000/microstructure_1/model/labels/step_04500.npz",
+      "role": "model_labels_step_4500",
+      "sha256": "76e7d63258bd63ad8885cae6941d5a0a0ec8442a74b6643f10ba54f6ca234f56"
+    },
+    {
+      "case": "microstructure 1",
+      "path": "population_scaling/r240_n1000/microstructure_1/reference/labels/step_04750.npz",
+      "role": "reference_labels_step_4750",
+      "sha256": "96accca6b43480302bad2bab69603eed970edb79056bd736bc5bbc1a7ecd528a"
+    },
+    {
+      "case": "microstructure 1",
+      "path": "population_scaling/r240_n1000/microstructure_1/model/labels/step_04750.npz",
+      "role": "model_labels_step_4750",
+      "sha256": "0707e47b452574706ec1ef42ac3db15872940286537822bc602911270b2b0b9b"
+    },
+    {
+      "case": "microstructure 1",
+      "path": "population_scaling/r240_n1000/microstructure_1/reference/labels/step_05000.npz",
+      "role": "reference_labels_step_5000",
+      "sha256": "bda4eae0412363b94f96a8d28322beb68274698fe587e87e86742980be93f9e9"
+    },
+    {
+      "case": "microstructure 1",
+      "path": "population_scaling/r240_n1000/microstructure_1/model/labels/step_05000.npz",
+      "role": "model_labels_step_5000",
+      "sha256": "c599109eef3459b9bb95cea766c45c9fbd0bb657e5ec0623947841c193171532"
+    },
+    {
+      "case": "microstructure 1",
+      "path": "population_scaling/r240_n1000/microstructure_1/reference/labels/step_05250.npz",
+      "role": "reference_labels_step_5250",
+      "sha256": "3222972fd3612d7c943bd490efe9e16bb6562c21e6b095a2fc781bc410acf930"
+    },
+    {
+      "case": "microstructure 1",
+      "path": "population_scaling/r240_n1000/microstructure_1/model/labels/step_05250.npz",
+      "role": "model_labels_step_5250",
+      "sha256": "53c1ecbffa20f3646e815109ed07054bd7a9861cfbe8d66a4e7c744234f03471"
+    },
+    {
+      "case": "microstructure 1",
+      "path": "population_scaling/r240_n1000/microstructure_1/reference/labels/step_05500.npz",
+      "role": "reference_labels_step_5500",
+      "sha256": "7c327773930bf822ef7f7e0f21abf2127abdf7341bb77569ee5146bd410214f2"
+    },
+    {
+      "case": "microstructure 1",
+      "path": "population_scaling/r240_n1000/microstructure_1/model/labels/step_05500.npz",
+      "role": "model_labels_step_5500",
+      "sha256": "32f0ad94b2f6e6a2f9fc61382b7ca755d513241d96210a5f9b469210f0ef8732"
+    },
+    {
+      "case": "microstructure 1",
+      "path": "population_scaling/r240_n1000/microstructure_1/reference/labels/step_05750.npz",
+      "role": "reference_labels_step_5750",
+      "sha256": "3b2e3be07aecc900e107cf3de8aff6987e690ae8b00d45d238113aec7363e68e"
+    },
+    {
+      "case": "microstructure 1",
+      "path": "population_scaling/r240_n1000/microstructure_1/model/labels/step_05750.npz",
+      "role": "model_labels_step_5750",
+      "sha256": "72f2a5535e73aa0b9a4f9af40797834477b023dcb2c48a90ee64822b785475fa"
+    },
+    {
+      "case": "microstructure 1",
+      "path": "population_scaling/r240_n1000/microstructure_1/reference/labels/step_06000.npz",
+      "role": "reference_labels_step_6000",
+      "sha256": "57baa0638ca10638b2e8fd92563a7d29aff12298def05878177fa1a97e581d83"
+    },
+    {
+      "case": "microstructure 1",
+      "path": "population_scaling/r240_n1000/microstructure_1/model/labels/step_06000.npz",
+      "role": "model_labels_step_6000",
+      "sha256": "c95e31334947560e0169fe9d955aba5d36e71a6359b669bff9ede692c9dcc2c2"
+    },
+    {
+      "case": "microstructure 1",
+      "path": "population_scaling/r240_n1000/microstructure_1/reference/labels/step_06250.npz",
+      "role": "reference_labels_step_6250",
+      "sha256": "0f5ef2d418f3202b66525cb49323117e69a7750b5f077fd4aa88516b04a48edf"
+    },
+    {
+      "case": "microstructure 1",
+      "path": "population_scaling/r240_n1000/microstructure_1/model/labels/step_06250.npz",
+      "role": "model_labels_step_6250",
+      "sha256": "d43971d83eabbc664890e734a698cbf6ddaf3ff3cc03a27b27309f0ac2d672be"
+    },
+    {
+      "case": "microstructure 1",
+      "path": "population_scaling/r240_n1000/microstructure_1/reference/labels/step_06500.npz",
+      "role": "reference_labels_step_6500",
+      "sha256": "8a3e94dc06c94bb58387a738297ba0a50cd6877b095cb75c4b450eabb256a532"
+    },
+    {
+      "case": "microstructure 1",
+      "path": "population_scaling/r240_n1000/microstructure_1/model/labels/step_06500.npz",
+      "role": "model_labels_step_6500",
+      "sha256": "56a6c0f46574669fb2a8401761dc1772eac39800dee53b4bb8a87be229a55737"
+    },
+    {
+      "case": "microstructure 1",
+      "path": "population_scaling/r240_n1000/microstructure_1/reference/labels/step_06750.npz",
+      "role": "reference_labels_step_6750",
+      "sha256": "c866066445df515723657b2b8a2f77cb2d727edae23dad058622f7a81b97bd32"
+    },
+    {
+      "case": "microstructure 1",
+      "path": "population_scaling/r240_n1000/microstructure_1/model/labels/step_06750.npz",
+      "role": "model_labels_step_6750",
+      "sha256": "294c77626ddfcf421a80aee731bc5e4cc943a944befd450d179b3c0ff7a1aa86"
+    },
+    {
+      "case": "microstructure 1",
+      "path": "population_scaling/r240_n1000/microstructure_1/reference/labels/step_07000.npz",
+      "role": "reference_labels_step_7000",
+      "sha256": "f9ff96b965bcd9a8f35aa3d94a69f5d50ec7c0dda1e8d68dca624df54e75c679"
+    },
+    {
+      "case": "microstructure 1",
+      "path": "population_scaling/r240_n1000/microstructure_1/model/labels/step_07000.npz",
+      "role": "model_labels_step_7000",
+      "sha256": "712c0b1c05ad5acaf05ca6f1824aee5e2525327dc43f4528745d633c85356ee9"
+    },
+    {
+      "case": "microstructure 1",
+      "path": "population_scaling/r240_n1000/microstructure_1/reference/labels/step_07250.npz",
+      "role": "reference_labels_step_7250",
+      "sha256": "ce83c91df832265e2b56dabfd148817182a363ca22375e56f6a4068b6ea6f8a8"
+    },
+    {
+      "case": "microstructure 1",
+      "path": "population_scaling/r240_n1000/microstructure_1/model/labels/step_07250.npz",
+      "role": "model_labels_step_7250",
+      "sha256": "c7bf357f9b9775eceef7323063bd2fadd5bebd24a1c897a27d6375db4283ae9c"
+    },
+    {
+      "case": "microstructure 1",
+      "path": "population_scaling/r240_n1000/microstructure_1/reference/labels/step_07500.npz",
+      "role": "reference_labels_step_7500",
+      "sha256": "f906c50d4f6bb6c6014fa43af7de8265f0f5cae22ae2bd83e194b1bb0deaea67"
+    },
+    {
+      "case": "microstructure 1",
+      "path": "population_scaling/r240_n1000/microstructure_1/model/labels/step_07500.npz",
+      "role": "model_labels_step_7500",
+      "sha256": "9787570ac720a390c727156cd5e3edfa68d0592aaa3f22f5e0736d1035f62edc"
+    },
+    {
+      "case": "microstructure 1",
+      "path": "population_scaling/r240_n1000/microstructure_1/reference/labels/step_07750.npz",
+      "role": "reference_labels_step_7750",
+      "sha256": "d11a56b766102cd17054dac93a45eec874ef33a701940a800cdf86e4a2ff7b54"
+    },
+    {
+      "case": "microstructure 1",
+      "path": "population_scaling/r240_n1000/microstructure_1/model/labels/step_07750.npz",
+      "role": "model_labels_step_7750",
+      "sha256": "301da9b6ff080228c98b7783f6d284cd8b8ab9f0d6b9712d27b92dbba4d0b02d"
+    },
+    {
+      "case": "microstructure 1",
+      "path": "population_scaling/r240_n1000/microstructure_1/reference/labels/step_08000.npz",
+      "role": "reference_labels_step_8000",
+      "sha256": "d2558a203630f307573364615dbf3f245fc8495d1ea2ba3126d42bfa13456b64"
+    },
+    {
+      "case": "microstructure 1",
+      "path": "population_scaling/r240_n1000/microstructure_1/model/labels/step_08000.npz",
+      "role": "model_labels_step_8000",
+      "sha256": "e09f7e6ca398f1cfc1fe7577d09f20039afc0dfac7b83a58a19614560b700bb4"
+    },
+    {
+      "case": "microstructure 1",
+      "path": "population_scaling/r240_n1000/microstructure_1/reference/labels/step_08250.npz",
+      "role": "reference_labels_step_8250",
+      "sha256": "a2466ebb3c101236d18c3344826869154ec80bbb2d74224285b717c800a07bbd"
+    },
+    {
+      "case": "microstructure 1",
+      "path": "population_scaling/r240_n1000/microstructure_1/model/labels/step_08250.npz",
+      "role": "model_labels_step_8250",
+      "sha256": "607d1ab9faa8a3c6fd0f7114056f3a17baa843c69e8aac9d1ac05c9cdedf3141"
+    },
+    {
+      "case": "microstructure 1",
+      "path": "population_scaling/r240_n1000/microstructure_1/reference/labels/step_08500.npz",
+      "role": "reference_labels_step_8500",
+      "sha256": "dec3fef1a571b48b0c7eab12c11e7ef0749aa841e44106a27e658993a29108df"
+    },
+    {
+      "case": "microstructure 1",
+      "path": "population_scaling/r240_n1000/microstructure_1/model/labels/step_08500.npz",
+      "role": "model_labels_step_8500",
+      "sha256": "7b5a9b0aa5e2562b95f4404b10bf573b4fd90c033f6e800bdc597c403ab64d69"
+    },
+    {
+      "case": "microstructure 1",
+      "path": "population_scaling/r240_n1000/microstructure_1/reference/labels/step_08750.npz",
+      "role": "reference_labels_step_8750",
+      "sha256": "000b9f39d5321f8b2ae5d868fc0386185aca08a7b6fa8306ca996204012d4e7a"
+    },
+    {
+      "case": "microstructure 1",
+      "path": "population_scaling/r240_n1000/microstructure_1/model/labels/step_08750.npz",
+      "role": "model_labels_step_8750",
+      "sha256": "689234d896ed79969d5e2460f11b24fb54862e73bd4b1d2856110a8a9da1081e"
+    },
+    {
+      "case": "microstructure 1",
+      "path": "population_scaling/r240_n1000/microstructure_1/reference/labels/step_09000.npz",
+      "role": "reference_labels_step_9000",
+      "sha256": "fc6f8c9e7b159f438a58ae96cc9f1697abc119cff935068d55e4180a2592b852"
+    },
+    {
+      "case": "microstructure 1",
+      "path": "population_scaling/r240_n1000/microstructure_1/model/labels/step_09000.npz",
+      "role": "model_labels_step_9000",
+      "sha256": "5cdb1eb19c25a97c77901d672f4cef86137b4f379db6215b4bfaed8d773a397b"
+    },
+    {
+      "case": "microstructure 1",
+      "path": "population_scaling/r240_n1000/microstructure_1/reference/labels/step_09250.npz",
+      "role": "reference_labels_step_9250",
+      "sha256": "c9f2763b1e5dc4d83916373dcc93fb56f989ad307cd66510ea737e81bc5b64e7"
+    },
+    {
+      "case": "microstructure 1",
+      "path": "population_scaling/r240_n1000/microstructure_1/model/labels/step_09250.npz",
+      "role": "model_labels_step_9250",
+      "sha256": "b901fb3b71f4c26d7b7d53e899fb680399c8d4642a8934a2820223f3324095d7"
+    },
+    {
+      "case": "microstructure 1",
+      "path": "population_scaling/r240_n1000/microstructure_1/reference/labels/step_09500.npz",
+      "role": "reference_labels_step_9500",
+      "sha256": "d11201a7eebbc7624323a15b63bbb92c31eec1427f2749ab4bec8467b9c99728"
+    },
+    {
+      "case": "microstructure 1",
+      "path": "population_scaling/r240_n1000/microstructure_1/model/labels/step_09500.npz",
+      "role": "model_labels_step_9500",
+      "sha256": "f858d09137715c1f81d6df210d9724b52eb9d0d74794980d6865088c19e5b341"
+    },
+    {
+      "case": "microstructure 1",
+      "path": "population_scaling/r240_n1000/microstructure_1/reference/labels/step_09750.npz",
+      "role": "reference_labels_step_9750",
+      "sha256": "0ecb639223a27d4aaa776a6b9aac15503dadbb6949ec790efb03d37553a80aa3"
+    },
+    {
+      "case": "microstructure 1",
+      "path": "population_scaling/r240_n1000/microstructure_1/model/labels/step_09750.npz",
+      "role": "model_labels_step_9750",
+      "sha256": "912b893ecaf74bd1398bcb35960022dfdcf2a1c0208f11f560f67de6e54821e3"
+    },
+    {
+      "case": "microstructure 1",
+      "path": "population_scaling/r240_n1000/microstructure_1/reference/labels/step_10000.npz",
+      "role": "reference_labels_step_10000",
+      "sha256": "9a4cc8642b5422b5056cdc2e40e65f93c0c2c591f99679dfce63c4153946f9a7"
+    },
+    {
+      "case": "microstructure 1",
+      "path": "population_scaling/r240_n1000/microstructure_1/model/labels/step_10000.npz",
+      "role": "model_labels_step_10000",
+      "sha256": "8ced771e46320bdb68254abef7d9b42111a715ed26f6d1912b2b0484e4f1ef03"
+    },
+    {
+      "case": "microstructure 1",
+      "path": "population_scaling/r240_n1000/microstructure_1/reference/labels/step_10250.npz",
+      "role": "reference_labels_step_10250",
+      "sha256": "12b5e49fb3a8c382ad6ed832be9965cd7123ce3ea6aadd8d625d585a6ee6ce21"
+    },
+    {
+      "case": "microstructure 1",
+      "path": "population_scaling/r240_n1000/microstructure_1/model/labels/step_10250.npz",
+      "role": "model_labels_step_10250",
+      "sha256": "bf489270a9710db18af0abeb5fb1c8514bf915948168b7f1383ec390a99a8a4b"
+    },
+    {
+      "case": "microstructure 1",
+      "path": "population_scaling/r240_n1000/microstructure_1/reference/labels/step_10500.npz",
+      "role": "reference_labels_step_10500",
+      "sha256": "fad0b282eb9abc890878e9e820ea6dcf6ab8b1380790ccef1dc35f80c29bb205"
+    },
+    {
+      "case": "microstructure 1",
+      "path": "population_scaling/r240_n1000/microstructure_1/model/labels/step_10500.npz",
+      "role": "model_labels_step_10500",
+      "sha256": "7ebbe1ef796d4977fca2f5b7f0bd920a6afd87402b7e72e1e48344e0e331fedc"
+    },
+    {
+      "case": "microstructure 1",
+      "path": "population_scaling/r240_n1000/microstructure_1/reference/labels/step_10750.npz",
+      "role": "reference_labels_step_10750",
+      "sha256": "0ffd39cbc9ad32a13a426354f2f42ffac6c2224c65b1825d702aea44d9b5f251"
+    },
+    {
+      "case": "microstructure 1",
+      "path": "population_scaling/r240_n1000/microstructure_1/model/labels/step_10750.npz",
+      "role": "model_labels_step_10750",
+      "sha256": "f937832a10ea1066ed55e68314aacdb81a9ca3c185cc3af0b5d7441784218c2e"
+    },
+    {
+      "case": "microstructure 1",
+      "path": "population_scaling/r240_n1000/microstructure_1/reference/labels/step_11000.npz",
+      "role": "reference_labels_step_11000",
+      "sha256": "bd4965140a6089c15a8a5aaab08ee9dc3f0355bd27bcce17e87322833b9e66be"
+    },
+    {
+      "case": "microstructure 1",
+      "path": "population_scaling/r240_n1000/microstructure_1/model/labels/step_11000.npz",
+      "role": "model_labels_step_11000",
+      "sha256": "620b1fb439c6b69f2907133964d21b7eb17505b83f47adf458ab85bce8550ce4"
+    },
+    {
+      "case": "microstructure 1",
+      "path": "population_scaling/r240_n1000/microstructure_1/reference/labels/step_11250.npz",
+      "role": "reference_labels_step_11250",
+      "sha256": "ed9b8f070cf7bc9af1011fb1161102a277cc4502791114d94cf7542a2b8e5f64"
+    },
+    {
+      "case": "microstructure 1",
+      "path": "population_scaling/r240_n1000/microstructure_1/model/labels/step_11250.npz",
+      "role": "model_labels_step_11250",
+      "sha256": "e26a3e47887250cfac53d91acc91369bf59834f68ead36b322bbe585ee71b5d3"
+    },
+    {
+      "case": "microstructure 1",
+      "path": "population_scaling/r240_n1000/microstructure_1/reference/labels/step_11500.npz",
+      "role": "reference_labels_step_11500",
+      "sha256": "f18e5493da7c6203e55edf9621ff42c6c8cb65d5c2a441f0c964c30b3e54461a"
+    },
+    {
+      "case": "microstructure 1",
+      "path": "population_scaling/r240_n1000/microstructure_1/model/labels/step_11500.npz",
+      "role": "model_labels_step_11500",
+      "sha256": "72aa855885b37e51fe306ae6d8a49da370be9327a66a874d94622855145927ee"
+    },
+    {
+      "case": "microstructure 1",
+      "path": "population_scaling/r240_n1000/microstructure_1/reference/labels/step_11750.npz",
+      "role": "reference_labels_step_11750",
+      "sha256": "90344a786d16a08d5919b6b33e775066f3d80b08cf7693cc77f57a6079ddbee2"
+    },
+    {
+      "case": "microstructure 1",
+      "path": "population_scaling/r240_n1000/microstructure_1/model/labels/step_11750.npz",
+      "role": "model_labels_step_11750",
+      "sha256": "a18072c9fa7b53f9e70b96bd8618d2c4ab7ee77a522a9db8d5b322b0bbc531b0"
+    },
+    {
+      "case": "microstructure 1",
+      "path": "population_scaling/r240_n1000/microstructure_1/reference/labels/step_12000.npz",
+      "role": "reference_labels_step_12000",
+      "sha256": "8e7f79bc998c9a9ed11bbe35be023b4710f4f083dc6e2e882f4ae50e6082af89"
+    },
+    {
+      "case": "microstructure 1",
+      "path": "population_scaling/r240_n1000/microstructure_1/model/labels/step_12000.npz",
+      "role": "model_labels_step_12000",
+      "sha256": "fb2345fecce232710408a493f23e3aa39618ea959d4eb060ca475b8fced9e98c"
+    },
+    {
+      "case": "microstructure 1",
+      "path": "population_scaling/r240_n1000/microstructure_1/reference/labels/step_12250.npz",
+      "role": "reference_labels_step_12250",
+      "sha256": "6c0af1d161d5bc183f773da1e53ad99f496855efbe11612f0ea07880a002a97d"
+    },
+    {
+      "case": "microstructure 1",
+      "path": "population_scaling/r240_n1000/microstructure_1/model/labels/step_12250.npz",
+      "role": "model_labels_step_12250",
+      "sha256": "634f5fd65e1ecbc51daea21fbabee6e71a4d69b99ea8d9e892e9439be9cbd8f6"
+    },
+    {
+      "case": "microstructure 1",
+      "path": "population_scaling/r240_n1000/microstructure_1/reference/labels/step_12500.npz",
+      "role": "reference_labels_step_12500",
+      "sha256": "066bb7e17007a250f572d27d6e7604f8500c00a77cee939f62bbb78cc336ce8a"
+    },
+    {
+      "case": "microstructure 1",
+      "path": "population_scaling/r240_n1000/microstructure_1/model/labels/step_12500.npz",
+      "role": "model_labels_step_12500",
+      "sha256": "35db165052c29adb0afeeac86cc136c0755d982c4ff7a53feb946958b52a310f"
+    },
+    {
+      "case": "microstructure 1",
+      "path": "population_scaling/r240_n1000/microstructure_1/reference/labels/step_12750.npz",
+      "role": "reference_labels_step_12750",
+      "sha256": "f779ef5cc06249ca11b2cfe48d94ef84fafce1e84802ab8738781455e1e71f40"
+    },
+    {
+      "case": "microstructure 1",
+      "path": "population_scaling/r240_n1000/microstructure_1/model/labels/step_12750.npz",
+      "role": "model_labels_step_12750",
+      "sha256": "19f1e1b414ec58b805c695091a4f2fd3b55a41b6fbc3359d931f4cd7e5dc8ff2"
+    },
+    {
+      "case": "microstructure 1",
+      "path": "population_scaling/r240_n1000/microstructure_1/reference/labels/step_13000.npz",
+      "role": "reference_labels_step_13000",
+      "sha256": "d138ae41d3028323f320b267a25e60945a88a4026739e5286a2dee361c5833ea"
+    },
+    {
+      "case": "microstructure 1",
+      "path": "population_scaling/r240_n1000/microstructure_1/model/labels/step_13000.npz",
+      "role": "model_labels_step_13000",
+      "sha256": "680276fcbd564fbd87c011b4953ddac77f849f953132bef2fa0eaf1dea367c21"
+    },
+    {
+      "case": "microstructure 1",
+      "path": "population_scaling/r240_n1000/microstructure_1/reference/labels/step_13250.npz",
+      "role": "reference_labels_step_13250",
+      "sha256": "68b618e7c3d4051232c72cf2a110f5feb362fe2152b9745ef6d6168bd2135b98"
+    },
+    {
+      "case": "microstructure 1",
+      "path": "population_scaling/r240_n1000/microstructure_1/model/labels/step_13250.npz",
+      "role": "model_labels_step_13250",
+      "sha256": "0b95b7f55f1e939585a93282f9a3ae763ac14a90a6d200030c92eb52c482706e"
+    },
+    {
+      "case": "microstructure 1",
+      "path": "population_scaling/r240_n1000/microstructure_1/reference/labels/step_13500.npz",
+      "role": "reference_labels_step_13500",
+      "sha256": "ceebc9048a2d0188ae6f6af412fdab1ea37e5108d1deed180e72f07b8a8624ef"
+    },
+    {
+      "case": "microstructure 1",
+      "path": "population_scaling/r240_n1000/microstructure_1/model/labels/step_13500.npz",
+      "role": "model_labels_step_13500",
+      "sha256": "38b6387c3725076c0d9336c58b2f586a55572577b956145b2e6d6e7805313efb"
+    },
+    {
+      "case": "microstructure 2",
+      "path": "population_scaling/r240_n1000/microstructure_2/reference/volumes.npz",
+      "role": "reference_volumes",
+      "sha256": "8e8296bfe7325fcd979df9ec2607b8b611f20c4633f87827aa5bff1d1c3f3a14"
+    },
+    {
+      "case": "microstructure 2",
+      "path": "population_scaling/r240_n1000/microstructure_2/reference/extinctions.json",
+      "role": "reference_extinctions",
+      "sha256": "6066f3138a8baca99768749813d3acdc8aa5e3c5581796a4ef59d5019c0266b9"
+    },
+    {
+      "case": "microstructure 2",
+      "path": "population_scaling/r240_n1000/microstructure_2/model/volumes.npz",
+      "role": "model_volumes",
+      "sha256": "741078443e4d3e4551de4a66bbb7df9558eeb7f416daff442b14389b4bbf1c24"
+    },
+    {
+      "case": "microstructure 2",
+      "path": "population_scaling/r240_n1000/microstructure_2/model/extinctions.json",
+      "role": "model_extinctions",
+      "sha256": "22d52e61ab4fdeb43000b171374680ff75a06c6d71dc34d33f92a5bf277d16e0"
+    },
+    {
+      "case": "microstructure 2",
+      "path": "population_scaling/r240_n1000/microstructure_2/reference/labels/step_00000.npz",
+      "role": "reference_labels_step_0",
+      "sha256": "411ec77f51af8439efb7dc4fe2ec9075cd3468feb4436cd25fb8c191d5572030"
+    },
+    {
+      "case": "microstructure 2",
+      "path": "population_scaling/r240_n1000/microstructure_2/model/labels/step_00000.npz",
+      "role": "model_labels_step_0",
+      "sha256": "411ec77f51af8439efb7dc4fe2ec9075cd3468feb4436cd25fb8c191d5572030"
+    },
+    {
+      "case": "microstructure 2",
+      "path": "population_scaling/r240_n1000/microstructure_2/reference/labels/step_00100.npz",
+      "role": "reference_labels_step_100",
+      "sha256": "e62633a7b01fb05a273d0b609bd19faa3fa7785952806bc5a4bf378572c8f061"
+    },
+    {
+      "case": "microstructure 2",
+      "path": "population_scaling/r240_n1000/microstructure_2/model/labels/step_00100.npz",
+      "role": "model_labels_step_100",
+      "sha256": "bbe4d5b7fb225c5d01dce369bdbd772fd3c2e8e014472422e8213a2307efe99c"
+    },
+    {
+      "case": "microstructure 2",
+      "path": "population_scaling/r240_n1000/microstructure_2/reference/labels/step_00200.npz",
+      "role": "reference_labels_step_200",
+      "sha256": "e9f9841b7c69e8da30e8b69a0fd6f6c3fd97c77c7a41148043af031eba5f4da1"
+    },
+    {
+      "case": "microstructure 2",
+      "path": "population_scaling/r240_n1000/microstructure_2/model/labels/step_00200.npz",
+      "role": "model_labels_step_200",
+      "sha256": "36b9f7874005784e09c207c4e77e3c190c9b36fde58c595dda991be79368bf21"
+    },
+    {
+      "case": "microstructure 2",
+      "path": "population_scaling/r240_n1000/microstructure_2/reference/labels/step_00250.npz",
+      "role": "reference_labels_step_250",
+      "sha256": "43f7c4be26d0b57d85e85202fbec0eaef7192021dbba81a07244e4e4bffdc6c1"
+    },
+    {
+      "case": "microstructure 2",
+      "path": "population_scaling/r240_n1000/microstructure_2/model/labels/step_00250.npz",
+      "role": "model_labels_step_250",
+      "sha256": "9a01492d2edd5ba1d838637351ce23ea4d7da451bccb0739253eef5b7368df3a"
+    },
+    {
+      "case": "microstructure 2",
+      "path": "population_scaling/r240_n1000/microstructure_2/reference/labels/step_00400.npz",
+      "role": "reference_labels_step_400",
+      "sha256": "c245f1a5abee5c408deb21f3ef64108d46f0ec493d9b7c2be5863e65a614a32e"
+    },
+    {
+      "case": "microstructure 2",
+      "path": "population_scaling/r240_n1000/microstructure_2/model/labels/step_00400.npz",
+      "role": "model_labels_step_400",
+      "sha256": "15cd4ad53eea76d0847615659c904b2eb70002cce9362e3978f39354a052ce15"
+    },
+    {
+      "case": "microstructure 2",
+      "path": "population_scaling/r240_n1000/microstructure_2/reference/labels/step_00500.npz",
+      "role": "reference_labels_step_500",
+      "sha256": "651c71867a76d709778105c2380fbe4b5a45f74d26db97a2d66fbeefb36049a4"
+    },
+    {
+      "case": "microstructure 2",
+      "path": "population_scaling/r240_n1000/microstructure_2/model/labels/step_00500.npz",
+      "role": "model_labels_step_500",
+      "sha256": "46746f2b3537ea53a78bae7280499a2129a5bf3a907d345cb350d80a117e4b49"
+    },
+    {
+      "case": "microstructure 2",
+      "path": "population_scaling/r240_n1000/microstructure_2/reference/labels/step_00750.npz",
+      "role": "reference_labels_step_750",
+      "sha256": "141d43c414cef1c7f32f2e41d8d00d4af44413dc99a2a449aa41d49224f801f8"
+    },
+    {
+      "case": "microstructure 2",
+      "path": "population_scaling/r240_n1000/microstructure_2/model/labels/step_00750.npz",
+      "role": "model_labels_step_750",
+      "sha256": "4b5f8df09cd0d869577ef0f215082bfb9dc3a407e8f499225bf6bf0d67c716c4"
+    },
+    {
+      "case": "microstructure 2",
+      "path": "population_scaling/r240_n1000/microstructure_2/reference/labels/step_01000.npz",
+      "role": "reference_labels_step_1000",
+      "sha256": "ac61b1e48f171a56c84ccf61702594638987a678e016a318c0324be339c47a7c"
+    },
+    {
+      "case": "microstructure 2",
+      "path": "population_scaling/r240_n1000/microstructure_2/model/labels/step_01000.npz",
+      "role": "model_labels_step_1000",
+      "sha256": "25a0043448b410ef87f4853b84668ce56a95e903be4171c011cd2d0cef950d02"
+    },
+    {
+      "case": "microstructure 2",
+      "path": "population_scaling/r240_n1000/microstructure_2/reference/labels/step_01250.npz",
+      "role": "reference_labels_step_1250",
+      "sha256": "b5028b732340b0d47b4ca766fd24e648c7e95ef6733ccb0a166bd82b04a7e727"
+    },
+    {
+      "case": "microstructure 2",
+      "path": "population_scaling/r240_n1000/microstructure_2/model/labels/step_01250.npz",
+      "role": "model_labels_step_1250",
+      "sha256": "8f0399e02218cb8520d86e7e6f2a168177d070fd9e9f6f28ecbf342c360726e7"
+    },
+    {
+      "case": "microstructure 2",
+      "path": "population_scaling/r240_n1000/microstructure_2/reference/labels/step_01500.npz",
+      "role": "reference_labels_step_1500",
+      "sha256": "ba1b5370d05f6b5303a6330b667fc9e75677ecf1458627c3fc04e224a0ae6937"
+    },
+    {
+      "case": "microstructure 2",
+      "path": "population_scaling/r240_n1000/microstructure_2/model/labels/step_01500.npz",
+      "role": "model_labels_step_1500",
+      "sha256": "04f01185b662a06d08acf8c16d24dcc96727b262924d5b9bb4bf11c5a5a10546"
+    },
+    {
+      "case": "microstructure 2",
+      "path": "population_scaling/r240_n1000/microstructure_2/reference/labels/step_01750.npz",
+      "role": "reference_labels_step_1750",
+      "sha256": "13f43ad27dd86696eccd2493e9e1de578cb19eb8cffaa018c5eb378a17370692"
+    },
+    {
+      "case": "microstructure 2",
+      "path": "population_scaling/r240_n1000/microstructure_2/model/labels/step_01750.npz",
+      "role": "model_labels_step_1750",
+      "sha256": "75768d835fcc86c0aa116bdd65bb62714adcc636f25a91194f9c3cd13690e107"
+    },
+    {
+      "case": "microstructure 2",
+      "path": "population_scaling/r240_n1000/microstructure_2/reference/labels/step_02000.npz",
+      "role": "reference_labels_step_2000",
+      "sha256": "70727f51ff0e0a9678b097ff96e1d623dab0674df08295ea1f0e05cf07dc1fb3"
+    },
+    {
+      "case": "microstructure 2",
+      "path": "population_scaling/r240_n1000/microstructure_2/model/labels/step_02000.npz",
+      "role": "model_labels_step_2000",
+      "sha256": "f5650c54d6b3c25d3988457e9105fb3ccd662176fedc0402831580f40b6df60b"
+    },
+    {
+      "case": "microstructure 2",
+      "path": "population_scaling/r240_n1000/microstructure_2/reference/labels/step_02250.npz",
+      "role": "reference_labels_step_2250",
+      "sha256": "92f1521094d7050df1b3158228ad8f1cd0f49453138f26e7363d99ec66bbe6c0"
+    },
+    {
+      "case": "microstructure 2",
+      "path": "population_scaling/r240_n1000/microstructure_2/model/labels/step_02250.npz",
+      "role": "model_labels_step_2250",
+      "sha256": "a4593f5b2cf6951b61230591521e34ef6711d39480166c9541a685fb52f21cb3"
+    },
+    {
+      "case": "microstructure 2",
+      "path": "population_scaling/r240_n1000/microstructure_2/reference/labels/step_02500.npz",
+      "role": "reference_labels_step_2500",
+      "sha256": "c8e01f2330b3c7207535a08666a6e53c2caeecba6d6fe1757eb282bc690b491f"
+    },
+    {
+      "case": "microstructure 2",
+      "path": "population_scaling/r240_n1000/microstructure_2/model/labels/step_02500.npz",
+      "role": "model_labels_step_2500",
+      "sha256": "05dcee87cdd53c8ae51303dc30d129b2a7af20b54bc94cf7dace9b7690c71131"
+    },
+    {
+      "case": "microstructure 2",
+      "path": "population_scaling/r240_n1000/microstructure_2/reference/labels/step_02750.npz",
+      "role": "reference_labels_step_2750",
+      "sha256": "eeb7063601f992da85036750277067e867b3fb8068fd2fa731374b1be721c7d9"
+    },
+    {
+      "case": "microstructure 2",
+      "path": "population_scaling/r240_n1000/microstructure_2/model/labels/step_02750.npz",
+      "role": "model_labels_step_2750",
+      "sha256": "399d9a744b30f0f4c6bd22dbf7c32fef50e79d68062dd328a2af2fb58b898997"
+    },
+    {
+      "case": "microstructure 2",
+      "path": "population_scaling/r240_n1000/microstructure_2/reference/labels/step_03000.npz",
+      "role": "reference_labels_step_3000",
+      "sha256": "d95e0f5a886eb2f3c44fd0878cad74ccddfddc042b803f5898b79edf4c696881"
+    },
+    {
+      "case": "microstructure 2",
+      "path": "population_scaling/r240_n1000/microstructure_2/model/labels/step_03000.npz",
+      "role": "model_labels_step_3000",
+      "sha256": "132bdb6fc4cffb8904749002fa699bda9a40e72e0b4b02f9b3fe73336967717b"
+    },
+    {
+      "case": "microstructure 2",
+      "path": "population_scaling/r240_n1000/microstructure_2/reference/labels/step_03250.npz",
+      "role": "reference_labels_step_3250",
+      "sha256": "b98805ce65c3312cf06763cf50b983ba12556c1375b4ebfe37f8ad36618dd0e3"
+    },
+    {
+      "case": "microstructure 2",
+      "path": "population_scaling/r240_n1000/microstructure_2/model/labels/step_03250.npz",
+      "role": "model_labels_step_3250",
+      "sha256": "e9fb80bd1115f1ea2719267db5984ea7580380b5daea5f6fc038afcae57dc6eb"
+    },
+    {
+      "case": "microstructure 2",
+      "path": "population_scaling/r240_n1000/microstructure_2/reference/labels/step_03500.npz",
+      "role": "reference_labels_step_3500",
+      "sha256": "5ff9b583b1baecc33c0859a469b295eeb70bcd33bbeca0ab2caf69772b81c1fa"
+    },
+    {
+      "case": "microstructure 2",
+      "path": "population_scaling/r240_n1000/microstructure_2/model/labels/step_03500.npz",
+      "role": "model_labels_step_3500",
+      "sha256": "191b1d745830ca65a8730b90824b57b62061c30b326143bd9bcf5534db37b933"
+    },
+    {
+      "case": "microstructure 2",
+      "path": "population_scaling/r240_n1000/microstructure_2/reference/labels/step_03750.npz",
+      "role": "reference_labels_step_3750",
+      "sha256": "b857e1e802e8c71754c342e0a354cc757eb90008570db8d51906054cc4d917cd"
+    },
+    {
+      "case": "microstructure 2",
+      "path": "population_scaling/r240_n1000/microstructure_2/model/labels/step_03750.npz",
+      "role": "model_labels_step_3750",
+      "sha256": "2696299b457087ee32d18935002697e56f3eb423c3b99c24e5f2e9aaf944a8b9"
+    },
+    {
+      "case": "microstructure 2",
+      "path": "population_scaling/r240_n1000/microstructure_2/reference/labels/step_04000.npz",
+      "role": "reference_labels_step_4000",
+      "sha256": "0166a242e0cf55b29e9f2eb750dce826881ec71a93ecf53dcc8ac0d3f477abcd"
+    },
+    {
+      "case": "microstructure 2",
+      "path": "population_scaling/r240_n1000/microstructure_2/model/labels/step_04000.npz",
+      "role": "model_labels_step_4000",
+      "sha256": "4567b63f0392a6c01a4893a0d25d711642efc09954a4ee54810236ee1c857e9d"
+    },
+    {
+      "case": "microstructure 2",
+      "path": "population_scaling/r240_n1000/microstructure_2/reference/labels/step_04250.npz",
+      "role": "reference_labels_step_4250",
+      "sha256": "a0bfbecdbf29106f940f2279b43c90ca399b6feea3787c102fa098d512483d3d"
+    },
+    {
+      "case": "microstructure 2",
+      "path": "population_scaling/r240_n1000/microstructure_2/model/labels/step_04250.npz",
+      "role": "model_labels_step_4250",
+      "sha256": "6489455bcc50457366836dfb84f9d66eb864f654e8effc511a6bd81fa81ca865"
+    },
+    {
+      "case": "microstructure 2",
+      "path": "population_scaling/r240_n1000/microstructure_2/reference/labels/step_04500.npz",
+      "role": "reference_labels_step_4500",
+      "sha256": "c7da7415dd300e52563c346556d1ac7af2ee0ba745354ef32e65c909d762a733"
+    },
+    {
+      "case": "microstructure 2",
+      "path": "population_scaling/r240_n1000/microstructure_2/model/labels/step_04500.npz",
+      "role": "model_labels_step_4500",
+      "sha256": "88434042dac93879a8f60018708a0d2a92dc9f6d4498fe4e606fe4c9936f35c1"
+    },
+    {
+      "case": "microstructure 2",
+      "path": "population_scaling/r240_n1000/microstructure_2/reference/labels/step_04750.npz",
+      "role": "reference_labels_step_4750",
+      "sha256": "453ec66adbaf2056704926e96597af7ae1e6209633e9f1c857c54365c1609420"
+    },
+    {
+      "case": "microstructure 2",
+      "path": "population_scaling/r240_n1000/microstructure_2/model/labels/step_04750.npz",
+      "role": "model_labels_step_4750",
+      "sha256": "4d487858bb0572715d32430b9c04783e7eb06857000a368aaad3661bae7086f0"
+    },
+    {
+      "case": "microstructure 2",
+      "path": "population_scaling/r240_n1000/microstructure_2/reference/labels/step_05000.npz",
+      "role": "reference_labels_step_5000",
+      "sha256": "312513337842accd189443835f31f0c7b5a1358f368bc46dc2d073bafebe1e30"
+    },
+    {
+      "case": "microstructure 2",
+      "path": "population_scaling/r240_n1000/microstructure_2/model/labels/step_05000.npz",
+      "role": "model_labels_step_5000",
+      "sha256": "f80753a7861030a88a42ec75cf354f9f9f34fd7a7451af9e0887d91e773e4dd2"
+    },
+    {
+      "case": "microstructure 2",
+      "path": "population_scaling/r240_n1000/microstructure_2/reference/labels/step_05250.npz",
+      "role": "reference_labels_step_5250",
+      "sha256": "97837d9da8e088363bbcd6bb077fd736455627926f789958c337b0e3d1cdaff7"
+    },
+    {
+      "case": "microstructure 2",
+      "path": "population_scaling/r240_n1000/microstructure_2/model/labels/step_05250.npz",
+      "role": "model_labels_step_5250",
+      "sha256": "3c3d6252eed3f6f6f39781f0994b83e8b396330718d582858d801f36c94c3d0d"
+    },
+    {
+      "case": "microstructure 2",
+      "path": "population_scaling/r240_n1000/microstructure_2/reference/labels/step_05500.npz",
+      "role": "reference_labels_step_5500",
+      "sha256": "2d93d0604ad66ca39e0d0f9270eea89748d1ed0b8d70871ba91daa6d1f1e4754"
+    },
+    {
+      "case": "microstructure 2",
+      "path": "population_scaling/r240_n1000/microstructure_2/model/labels/step_05500.npz",
+      "role": "model_labels_step_5500",
+      "sha256": "6622f6beb3ae1832cc11b7b5655adc7ad5dd29a84d83edb5660531effd827827"
+    },
+    {
+      "case": "microstructure 2",
+      "path": "population_scaling/r240_n1000/microstructure_2/reference/labels/step_05750.npz",
+      "role": "reference_labels_step_5750",
+      "sha256": "85e1917ac080f60599758fb388d97cfa73eb4eafabd2ac506f2fa69e1426ee89"
+    },
+    {
+      "case": "microstructure 2",
+      "path": "population_scaling/r240_n1000/microstructure_2/model/labels/step_05750.npz",
+      "role": "model_labels_step_5750",
+      "sha256": "c81187fd89f0f07a77f34b3260645125c154ad8245e3d1a3f3f853f9d02e708c"
+    },
+    {
+      "case": "microstructure 2",
+      "path": "population_scaling/r240_n1000/microstructure_2/reference/labels/step_06000.npz",
+      "role": "reference_labels_step_6000",
+      "sha256": "a3c9c4607033b5b386e54931327000be2f30b74ab132e6493d198671ec9f8ef5"
+    },
+    {
+      "case": "microstructure 2",
+      "path": "population_scaling/r240_n1000/microstructure_2/model/labels/step_06000.npz",
+      "role": "model_labels_step_6000",
+      "sha256": "cdaa84fbf8aba9cec686f711bd7f7b21efaea8e348060b22b388d710ee9654f4"
+    },
+    {
+      "case": "microstructure 2",
+      "path": "population_scaling/r240_n1000/microstructure_2/reference/labels/step_06250.npz",
+      "role": "reference_labels_step_6250",
+      "sha256": "5c036e33d7b8a4ffdac7bfdcf21148e4e8e11ba4f34e917a79540754340eb579"
+    },
+    {
+      "case": "microstructure 2",
+      "path": "population_scaling/r240_n1000/microstructure_2/model/labels/step_06250.npz",
+      "role": "model_labels_step_6250",
+      "sha256": "17f5c9d9b1f6697d91d6849ed813063f947ec7a69a7ed6a824cb9ae9e73dbf49"
+    },
+    {
+      "case": "microstructure 2",
+      "path": "population_scaling/r240_n1000/microstructure_2/reference/labels/step_06500.npz",
+      "role": "reference_labels_step_6500",
+      "sha256": "648abbc21e87bf7f167cba32325a52ccf87f3211f57118a2dc358c8982666b25"
+    },
+    {
+      "case": "microstructure 2",
+      "path": "population_scaling/r240_n1000/microstructure_2/model/labels/step_06500.npz",
+      "role": "model_labels_step_6500",
+      "sha256": "c3ea6a2434c66e1b0b62a930cc1ac85e6a5185b5e03b7dde93ea398b85c55a6d"
+    },
+    {
+      "case": "microstructure 2",
+      "path": "population_scaling/r240_n1000/microstructure_2/reference/labels/step_06750.npz",
+      "role": "reference_labels_step_6750",
+      "sha256": "501a49e04819c412571b1b4087dd17ae5173e40a1f8f7b2c1952fb51d87aa9ee"
+    },
+    {
+      "case": "microstructure 2",
+      "path": "population_scaling/r240_n1000/microstructure_2/model/labels/step_06750.npz",
+      "role": "model_labels_step_6750",
+      "sha256": "bdbf80e91421e7cdfce3091541c0945fb73435c9227a5a924a20ce5586ed7fe8"
+    },
+    {
+      "case": "microstructure 2",
+      "path": "population_scaling/r240_n1000/microstructure_2/reference/labels/step_07000.npz",
+      "role": "reference_labels_step_7000",
+      "sha256": "b0d33f21bd8545b8bee5a18bb08fdae857fcfd14121e67f293bf40408b8e8e55"
+    },
+    {
+      "case": "microstructure 2",
+      "path": "population_scaling/r240_n1000/microstructure_2/model/labels/step_07000.npz",
+      "role": "model_labels_step_7000",
+      "sha256": "39716c8e5b33a4522a8c46ca8933599ec3c082e1d3befc470f12cf9e7e17fe49"
+    },
+    {
+      "case": "microstructure 2",
+      "path": "population_scaling/r240_n1000/microstructure_2/reference/labels/step_07250.npz",
+      "role": "reference_labels_step_7250",
+      "sha256": "10e4c74496068961c0f9f5f8eea797a9303a30a460606cd33f3ee5765cfd354e"
+    },
+    {
+      "case": "microstructure 2",
+      "path": "population_scaling/r240_n1000/microstructure_2/model/labels/step_07250.npz",
+      "role": "model_labels_step_7250",
+      "sha256": "cdc49a1ab53cdc64da56a0980bfe771cafb03b84586aeae48f43341a2da2e60a"
+    },
+    {
+      "case": "microstructure 2",
+      "path": "population_scaling/r240_n1000/microstructure_2/reference/labels/step_07500.npz",
+      "role": "reference_labels_step_7500",
+      "sha256": "bb9dc0b9689ccf390604b22efce69e2eb325675104a794371c3591908943e9d0"
+    },
+    {
+      "case": "microstructure 2",
+      "path": "population_scaling/r240_n1000/microstructure_2/model/labels/step_07500.npz",
+      "role": "model_labels_step_7500",
+      "sha256": "b59c75591180fb9b19cce92ff38929c87b98d4ac4dca0f004854adeb796dfd40"
+    },
+    {
+      "case": "microstructure 2",
+      "path": "population_scaling/r240_n1000/microstructure_2/reference/labels/step_07750.npz",
+      "role": "reference_labels_step_7750",
+      "sha256": "32373fffe0bd86a336694ad55059fdcc9ddba16031f1a746f1987559740ee458"
+    },
+    {
+      "case": "microstructure 2",
+      "path": "population_scaling/r240_n1000/microstructure_2/model/labels/step_07750.npz",
+      "role": "model_labels_step_7750",
+      "sha256": "dc512b9bf47047fd162b2ec09337cdc438c70b0b52d49172d9fa3129bb2bd7fd"
+    },
+    {
+      "case": "microstructure 2",
+      "path": "population_scaling/r240_n1000/microstructure_2/reference/labels/step_08000.npz",
+      "role": "reference_labels_step_8000",
+      "sha256": "e490e256d2d9fc0836cb3f640635c89954c2f56066c3a2a181689595f124a22e"
+    },
+    {
+      "case": "microstructure 2",
+      "path": "population_scaling/r240_n1000/microstructure_2/model/labels/step_08000.npz",
+      "role": "model_labels_step_8000",
+      "sha256": "e47882a546f721aad4dbfec299ebb85ea8f4e5c0ae68d9a2f43d6a67b72fd265"
+    },
+    {
+      "case": "microstructure 2",
+      "path": "population_scaling/r240_n1000/microstructure_2/reference/labels/step_08250.npz",
+      "role": "reference_labels_step_8250",
+      "sha256": "52217b97f07bf499d29412fb384ceaada02a07162cad8c8671694f6b6f072b72"
+    },
+    {
+      "case": "microstructure 2",
+      "path": "population_scaling/r240_n1000/microstructure_2/model/labels/step_08250.npz",
+      "role": "model_labels_step_8250",
+      "sha256": "444da168b044ab6e029cd7f7885ec785b39b13126a48c756efcd0e00e267cad0"
+    },
+    {
+      "case": "microstructure 2",
+      "path": "population_scaling/r240_n1000/microstructure_2/reference/labels/step_08500.npz",
+      "role": "reference_labels_step_8500",
+      "sha256": "dd68db6cbf3374ef783e2b4becc0f68ca791fce451ea6a06bef6953c3fe971e6"
+    },
+    {
+      "case": "microstructure 2",
+      "path": "population_scaling/r240_n1000/microstructure_2/model/labels/step_08500.npz",
+      "role": "model_labels_step_8500",
+      "sha256": "79b5ac2df37eb04b9af6a8e17e53da83c18626895b7c7e34f998ff4f044729ce"
+    },
+    {
+      "case": "microstructure 2",
+      "path": "population_scaling/r240_n1000/microstructure_2/reference/labels/step_08750.npz",
+      "role": "reference_labels_step_8750",
+      "sha256": "a830d4b658323a081c99f2fc2fb9e6cb28d86ca9323c70ef4f0271ddd05a471b"
+    },
+    {
+      "case": "microstructure 2",
+      "path": "population_scaling/r240_n1000/microstructure_2/model/labels/step_08750.npz",
+      "role": "model_labels_step_8750",
+      "sha256": "6385ec38882d6d17baff17f7bd90305e7e4fadc1dee01feaf4838edc58eb1240"
+    },
+    {
+      "case": "microstructure 2",
+      "path": "population_scaling/r240_n1000/microstructure_2/reference/labels/step_09000.npz",
+      "role": "reference_labels_step_9000",
+      "sha256": "69e3bc905f9a2488cbebbd831a3fbaa56a7b043e98e4a1a621f20c8a33576d21"
+    },
+    {
+      "case": "microstructure 2",
+      "path": "population_scaling/r240_n1000/microstructure_2/model/labels/step_09000.npz",
+      "role": "model_labels_step_9000",
+      "sha256": "ed16149844b01ca173ac0c85a6c080df235e1c9224437021f67252db6257ffef"
+    },
+    {
+      "case": "microstructure 2",
+      "path": "population_scaling/r240_n1000/microstructure_2/reference/labels/step_09250.npz",
+      "role": "reference_labels_step_9250",
+      "sha256": "a94d5eac9f30880e0fdc6a0c72ffb36bb0a170ca131aed9a001979ef56c2addc"
+    },
+    {
+      "case": "microstructure 2",
+      "path": "population_scaling/r240_n1000/microstructure_2/model/labels/step_09250.npz",
+      "role": "model_labels_step_9250",
+      "sha256": "56e323cbcbe15a6c6ba61fd7ac522c05ea38a940f456827079a15fb78c45d28d"
+    },
+    {
+      "case": "microstructure 2",
+      "path": "population_scaling/r240_n1000/microstructure_2/reference/labels/step_09500.npz",
+      "role": "reference_labels_step_9500",
+      "sha256": "60113e894fabcb27439e55ed63031d13961187511809c91632643deda24db879"
+    },
+    {
+      "case": "microstructure 2",
+      "path": "population_scaling/r240_n1000/microstructure_2/model/labels/step_09500.npz",
+      "role": "model_labels_step_9500",
+      "sha256": "e619090b7b3d694012f4bc49edb2fd6b664aad2c18763a142071592fbfc532ab"
+    },
+    {
+      "case": "microstructure 2",
+      "path": "population_scaling/r240_n1000/microstructure_2/reference/labels/step_09750.npz",
+      "role": "reference_labels_step_9750",
+      "sha256": "86da991d128e8f2f131fe324aa10df6a38a305889e8b4c8bfe21dfb583c334bc"
+    },
+    {
+      "case": "microstructure 2",
+      "path": "population_scaling/r240_n1000/microstructure_2/model/labels/step_09750.npz",
+      "role": "model_labels_step_9750",
+      "sha256": "4814057f189147e5dcb581a4f147c65a34ef1431e78a7541682d6cdb3bb85b09"
+    },
+    {
+      "case": "microstructure 2",
+      "path": "population_scaling/r240_n1000/microstructure_2/reference/labels/step_10000.npz",
+      "role": "reference_labels_step_10000",
+      "sha256": "bc6c7018ac9a926fde906d1f1f13512d9aa7116edc9bf14f1594c3cfd8dc69b2"
+    },
+    {
+      "case": "microstructure 2",
+      "path": "population_scaling/r240_n1000/microstructure_2/model/labels/step_10000.npz",
+      "role": "model_labels_step_10000",
+      "sha256": "2ff0fe4e1ece1f721ae6efd88c11d2d777f1a10932711e9d6a0c5b6dd1d7b5b8"
+    },
+    {
+      "case": "microstructure 2",
+      "path": "population_scaling/r240_n1000/microstructure_2/reference/labels/step_10250.npz",
+      "role": "reference_labels_step_10250",
+      "sha256": "ac929a14c0bb6dd7aa5b33e3a5a952ad4a995996deb7a73d8b445fbfbb2ad024"
+    },
+    {
+      "case": "microstructure 2",
+      "path": "population_scaling/r240_n1000/microstructure_2/model/labels/step_10250.npz",
+      "role": "model_labels_step_10250",
+      "sha256": "725ec1cac0c4d04958868b7f4c3bb205193ecd8bae65f84abd7d6a67ace38094"
+    },
+    {
+      "case": "microstructure 2",
+      "path": "population_scaling/r240_n1000/microstructure_2/reference/labels/step_10500.npz",
+      "role": "reference_labels_step_10500",
+      "sha256": "d7192b4c4988fd1c0427b4df3c5891628b7efef974c955be37f92a8e542f71f9"
+    },
+    {
+      "case": "microstructure 2",
+      "path": "population_scaling/r240_n1000/microstructure_2/model/labels/step_10500.npz",
+      "role": "model_labels_step_10500",
+      "sha256": "83cb234705a95442ee9675c91d081933f5d15fd24f130e3b7775d31dc554083a"
+    },
+    {
+      "case": "microstructure 2",
+      "path": "population_scaling/r240_n1000/microstructure_2/reference/labels/step_10750.npz",
+      "role": "reference_labels_step_10750",
+      "sha256": "224f29b82fec07e4bf85bad0a41e53aedb5f9409b42ca928cab9002d925e193d"
+    },
+    {
+      "case": "microstructure 2",
+      "path": "population_scaling/r240_n1000/microstructure_2/model/labels/step_10750.npz",
+      "role": "model_labels_step_10750",
+      "sha256": "c291b9f90509f6b234dc288e5a62b4f0037f3b50b649060dbf09fbaa63472c59"
+    },
+    {
+      "case": "microstructure 2",
+      "path": "population_scaling/r240_n1000/microstructure_2/reference/labels/step_11000.npz",
+      "role": "reference_labels_step_11000",
+      "sha256": "021d4247d67f4deea5d542366a5de2862b94f183c95105e672c97ecec2fc88bb"
+    },
+    {
+      "case": "microstructure 2",
+      "path": "population_scaling/r240_n1000/microstructure_2/model/labels/step_11000.npz",
+      "role": "model_labels_step_11000",
+      "sha256": "94304253bfb290fd14a876307fef0004b21ae4956a92f9fa17409dd6bda0fb21"
+    },
+    {
+      "case": "microstructure 2",
+      "path": "population_scaling/r240_n1000/microstructure_2/reference/labels/step_11250.npz",
+      "role": "reference_labels_step_11250",
+      "sha256": "9ce31ca71da7ace3af85327d7c70b8ffe5dd0db6a728884a888fb2b45e90e226"
+    },
+    {
+      "case": "microstructure 2",
+      "path": "population_scaling/r240_n1000/microstructure_2/model/labels/step_11250.npz",
+      "role": "model_labels_step_11250",
+      "sha256": "fa2d453899f7764ecb6fa276f1f9787e39e366e872c27e892303ccb380c4ed6a"
+    },
+    {
+      "case": "microstructure 2",
+      "path": "population_scaling/r240_n1000/microstructure_2/reference/labels/step_11500.npz",
+      "role": "reference_labels_step_11500",
+      "sha256": "3702afb100aee18b1b497fc0fb9f9db1efed883ba5ef861e838f49831a8abc0b"
+    },
+    {
+      "case": "microstructure 2",
+      "path": "population_scaling/r240_n1000/microstructure_2/model/labels/step_11500.npz",
+      "role": "model_labels_step_11500",
+      "sha256": "d686c0f1966b0d5aea10c6cc049ae65ef27446c9bae6669424dd9caa73937293"
+    },
+    {
+      "case": "microstructure 2",
+      "path": "population_scaling/r240_n1000/microstructure_2/reference/labels/step_11750.npz",
+      "role": "reference_labels_step_11750",
+      "sha256": "e23ce6e1ebe27f4b1790ad2d7cdb92cd7ddd1b281cd0cfc4d3aaf495a7488e1e"
+    },
+    {
+      "case": "microstructure 2",
+      "path": "population_scaling/r240_n1000/microstructure_2/model/labels/step_11750.npz",
+      "role": "model_labels_step_11750",
+      "sha256": "d76bbd0e570079bf110a9624beb1ceec4f21006d9849a13b64d927255cc893db"
+    },
+    {
+      "case": "microstructure 2",
+      "path": "population_scaling/r240_n1000/microstructure_2/reference/labels/step_12000.npz",
+      "role": "reference_labels_step_12000",
+      "sha256": "eb80affdabdc07562d351d25ff04d4745e0acf5fd7960f9b2f05c1f40c12845b"
+    },
+    {
+      "case": "microstructure 2",
+      "path": "population_scaling/r240_n1000/microstructure_2/model/labels/step_12000.npz",
+      "role": "model_labels_step_12000",
+      "sha256": "5fa70f00c88d07046bd2cc211c79e4d6848dafaf3e86b02cb21079688139e9ed"
+    },
+    {
+      "case": "microstructure 2",
+      "path": "population_scaling/r240_n1000/microstructure_2/reference/labels/step_12250.npz",
+      "role": "reference_labels_step_12250",
+      "sha256": "7facdacf6e40fc49776eb49744430b17d704aea262cc6cc226dffb9089b1364b"
+    },
+    {
+      "case": "microstructure 2",
+      "path": "population_scaling/r240_n1000/microstructure_2/model/labels/step_12250.npz",
+      "role": "model_labels_step_12250",
+      "sha256": "142bc02cd6576abdae1ceb083b8a933219e85052b931df187314f0210e998946"
+    },
+    {
+      "case": "microstructure 2",
+      "path": "population_scaling/r240_n1000/microstructure_2/reference/labels/step_12500.npz",
+      "role": "reference_labels_step_12500",
+      "sha256": "9d3622d97236c86db8024bcb05dab06b301489d67c38d7bcd5b28da68646bcd9"
+    },
+    {
+      "case": "microstructure 2",
+      "path": "population_scaling/r240_n1000/microstructure_2/model/labels/step_12500.npz",
+      "role": "model_labels_step_12500",
+      "sha256": "07d8b8fe97c776ec61817317d538e454f2a662ec2d1755c7b73e8cf085223f6b"
+    },
+    {
+      "case": "microstructure 2",
+      "path": "population_scaling/r240_n1000/microstructure_2/reference/labels/step_12750.npz",
+      "role": "reference_labels_step_12750",
+      "sha256": "445e9d88b8a4c59d78553bff6375ad17f9e1f885806b324da6979518e0890ec4"
+    },
+    {
+      "case": "microstructure 2",
+      "path": "population_scaling/r240_n1000/microstructure_2/model/labels/step_12750.npz",
+      "role": "model_labels_step_12750",
+      "sha256": "693cc27a0bf451568f4b28b9c2c9058f113965319ef9092165e5c9bd76dfe13b"
+    },
+    {
+      "case": "microstructure 2",
+      "path": "population_scaling/r240_n1000/microstructure_2/reference/labels/step_13000.npz",
+      "role": "reference_labels_step_13000",
+      "sha256": "ec0dfdf28ba0cf62580cfc9a3a07a352819f85bd569056df56ff47fa7d56b394"
+    },
+    {
+      "case": "microstructure 2",
+      "path": "population_scaling/r240_n1000/microstructure_2/model/labels/step_13000.npz",
+      "role": "model_labels_step_13000",
+      "sha256": "f2e15a46795b16258358aa625af01dbe5e8ef96bf8fe43113eea1102633b3fff"
+    },
+    {
+      "case": "microstructure 2",
+      "path": "population_scaling/r240_n1000/microstructure_2/reference/labels/step_13250.npz",
+      "role": "reference_labels_step_13250",
+      "sha256": "140ac40e2928c9ddf3b39ced5225b605bc8a8ae094b4abd0306bd740ede4e479"
+    },
+    {
+      "case": "microstructure 2",
+      "path": "population_scaling/r240_n1000/microstructure_2/model/labels/step_13250.npz",
+      "role": "model_labels_step_13250",
+      "sha256": "4b76568a8eebea97350adbc2724ca229cf4ab3f6b192d68e1761270786454e38"
+    },
+    {
+      "case": "microstructure 2",
+      "path": "population_scaling/r240_n1000/microstructure_2/reference/labels/step_13500.npz",
+      "role": "reference_labels_step_13500",
+      "sha256": "f5261736a9659f228b915588c0f8a68fef40e65470926b89e55040f584b9361f"
+    },
+    {
+      "case": "microstructure 2",
+      "path": "population_scaling/r240_n1000/microstructure_2/model/labels/step_13500.npz",
+      "role": "model_labels_step_13500",
+      "sha256": "9840655da4e2cd38903ca41af0a6fc2bfc4b104e75b4b731c774d643c561c607"
+    },
+    {
+      "case": "microstructure 3",
+      "path": "population_scaling/r240_n1000/microstructure_3/reference/volumes.npz",
+      "role": "reference_volumes",
+      "sha256": "ec2b3d7591f39613f869e690d996e2af993b311ff8872d8dc9b1cf4af995a298"
+    },
+    {
+      "case": "microstructure 3",
+      "path": "population_scaling/r240_n1000/microstructure_3/reference/extinctions.json",
+      "role": "reference_extinctions",
+      "sha256": "c69291e6ff05b19e3be8aeb42dddf08bffafc7d0271499c6fb6924cf62610731"
+    },
+    {
+      "case": "microstructure 3",
+      "path": "population_scaling/r240_n1000/microstructure_3/model/volumes.npz",
+      "role": "model_volumes",
+      "sha256": "a38aaece8a6556279e3c592bced52794ee37503b9a4b2fc25da32d7faf2a4189"
+    },
+    {
+      "case": "microstructure 3",
+      "path": "population_scaling/r240_n1000/microstructure_3/model/extinctions.json",
+      "role": "model_extinctions",
+      "sha256": "1e47536bdd5f947f41f17d28ea38021b1512946d52af82ff540373aaeaf23b64"
+    },
+    {
+      "case": "microstructure 3",
+      "path": "population_scaling/r240_n1000/microstructure_3/reference/labels/step_00000.npz",
+      "role": "reference_labels_step_0",
+      "sha256": "82eb2119df443ca705d26f4cf02d8258a5d03752b3bce8cf1eceee8851ce9c1c"
+    },
+    {
+      "case": "microstructure 3",
+      "path": "population_scaling/r240_n1000/microstructure_3/model/labels/step_00000.npz",
+      "role": "model_labels_step_0",
+      "sha256": "82eb2119df443ca705d26f4cf02d8258a5d03752b3bce8cf1eceee8851ce9c1c"
+    },
+    {
+      "case": "microstructure 3",
+      "path": "population_scaling/r240_n1000/microstructure_3/reference/labels/step_00100.npz",
+      "role": "reference_labels_step_100",
+      "sha256": "5e67ce17a11267f960d7bd8910528eaeae540302135222c1ca33ba1b0895c09c"
+    },
+    {
+      "case": "microstructure 3",
+      "path": "population_scaling/r240_n1000/microstructure_3/model/labels/step_00100.npz",
+      "role": "model_labels_step_100",
+      "sha256": "acd353b60f964a27e38c7b10cca1b5cb715585afba1a6261b7cfd659a06d4d59"
+    },
+    {
+      "case": "microstructure 3",
+      "path": "population_scaling/r240_n1000/microstructure_3/reference/labels/step_00200.npz",
+      "role": "reference_labels_step_200",
+      "sha256": "6896bb7d6240493f9a646336885383613b5d2263e8668cfe5f675995bc7195e9"
+    },
+    {
+      "case": "microstructure 3",
+      "path": "population_scaling/r240_n1000/microstructure_3/model/labels/step_00200.npz",
+      "role": "model_labels_step_200",
+      "sha256": "63d3c4e045b2a96b70869503fbcc82243c4688a272ad74d98754f3498f25e39c"
+    },
+    {
+      "case": "microstructure 3",
+      "path": "population_scaling/r240_n1000/microstructure_3/reference/labels/step_00250.npz",
+      "role": "reference_labels_step_250",
+      "sha256": "edec6da24dcba5780f83364cf395f66afc9b750a45759564cb8c5e021f51a73e"
+    },
+    {
+      "case": "microstructure 3",
+      "path": "population_scaling/r240_n1000/microstructure_3/model/labels/step_00250.npz",
+      "role": "model_labels_step_250",
+      "sha256": "a139b6194ef345eb0190211192821dedb8f165717932393a9d6c19885c93117f"
+    },
+    {
+      "case": "microstructure 3",
+      "path": "population_scaling/r240_n1000/microstructure_3/reference/labels/step_00400.npz",
+      "role": "reference_labels_step_400",
+      "sha256": "6674b46e396effb5b043f61f56e5c3debc147d977c2e3c8e9e1425833d5b8c38"
+    },
+    {
+      "case": "microstructure 3",
+      "path": "population_scaling/r240_n1000/microstructure_3/model/labels/step_00400.npz",
+      "role": "model_labels_step_400",
+      "sha256": "cb3a6f4573421cd1bfa3023a2843171c6e2e516c359eac70f0e5e1283a46dc37"
+    },
+    {
+      "case": "microstructure 3",
+      "path": "population_scaling/r240_n1000/microstructure_3/reference/labels/step_00500.npz",
+      "role": "reference_labels_step_500",
+      "sha256": "e47efe188a707d246655c9526ab3c5229cc42f7a449dbcd05e07d40d7ac91dc3"
+    },
+    {
+      "case": "microstructure 3",
+      "path": "population_scaling/r240_n1000/microstructure_3/model/labels/step_00500.npz",
+      "role": "model_labels_step_500",
+      "sha256": "24972b16f711e7abcfbb1dc159694db438e60b975d5743696ff1ed9225fe37f5"
+    },
+    {
+      "case": "microstructure 3",
+      "path": "population_scaling/r240_n1000/microstructure_3/reference/labels/step_00750.npz",
+      "role": "reference_labels_step_750",
+      "sha256": "6b18059da274c3e12856d8d0aba9a86a3f6bb09104587bb6c78427618eb90505"
+    },
+    {
+      "case": "microstructure 3",
+      "path": "population_scaling/r240_n1000/microstructure_3/model/labels/step_00750.npz",
+      "role": "model_labels_step_750",
+      "sha256": "e74af74853c9fa85158cf210afcac38429c94cfa72c1faeeab0f9ebdfa88a8cc"
+    },
+    {
+      "case": "microstructure 3",
+      "path": "population_scaling/r240_n1000/microstructure_3/reference/labels/step_01000.npz",
+      "role": "reference_labels_step_1000",
+      "sha256": "5ab90ad4ef6b8bc5419821cb6170b17ec503cd9c7f4ee8404c8e2bf8d530a0d0"
+    },
+    {
+      "case": "microstructure 3",
+      "path": "population_scaling/r240_n1000/microstructure_3/model/labels/step_01000.npz",
+      "role": "model_labels_step_1000",
+      "sha256": "3238fbe70c188a04e2a11c0c7d04b80ceb1f0ea5801387f2355057c86ca53e3b"
+    },
+    {
+      "case": "microstructure 3",
+      "path": "population_scaling/r240_n1000/microstructure_3/reference/labels/step_01250.npz",
+      "role": "reference_labels_step_1250",
+      "sha256": "ea63ae81001670b014c12b275ad33316dae04540e625d6b7327a259cf9650a90"
+    },
+    {
+      "case": "microstructure 3",
+      "path": "population_scaling/r240_n1000/microstructure_3/model/labels/step_01250.npz",
+      "role": "model_labels_step_1250",
+      "sha256": "3b424f8335e9b99d32129bcb5fd3aedda911b0eed4f87be5527ff73bcca2b492"
+    },
+    {
+      "case": "microstructure 3",
+      "path": "population_scaling/r240_n1000/microstructure_3/reference/labels/step_01500.npz",
+      "role": "reference_labels_step_1500",
+      "sha256": "62225d24f5f15fd5bf17b1fd221a34255a201fdd140ce6fe1b751166618aa69c"
+    },
+    {
+      "case": "microstructure 3",
+      "path": "population_scaling/r240_n1000/microstructure_3/model/labels/step_01500.npz",
+      "role": "model_labels_step_1500",
+      "sha256": "5d8fd833289860bef4f62e545b82b55389c94aa1eb1de85a73121f5aa4e7ddaf"
+    },
+    {
+      "case": "microstructure 3",
+      "path": "population_scaling/r240_n1000/microstructure_3/reference/labels/step_01750.npz",
+      "role": "reference_labels_step_1750",
+      "sha256": "b6d758a3425aeaa9efb12daa86c461c6e76412888f6e6e27dddaad02c1b5f2ef"
+    },
+    {
+      "case": "microstructure 3",
+      "path": "population_scaling/r240_n1000/microstructure_3/model/labels/step_01750.npz",
+      "role": "model_labels_step_1750",
+      "sha256": "027c0efe3dcd18981758c62377196526fb74ca252bfaf746f52b0300b0f8a46d"
+    },
+    {
+      "case": "microstructure 3",
+      "path": "population_scaling/r240_n1000/microstructure_3/reference/labels/step_02000.npz",
+      "role": "reference_labels_step_2000",
+      "sha256": "57578cb1df2904f3f83b288569c7b60972e64dd65e1d4443084c198ee302c315"
+    },
+    {
+      "case": "microstructure 3",
+      "path": "population_scaling/r240_n1000/microstructure_3/model/labels/step_02000.npz",
+      "role": "model_labels_step_2000",
+      "sha256": "cc8c9f243ab76fe6f8e484b4752587ec2f5baa38d7652ae3919abf3666ba7029"
+    },
+    {
+      "case": "microstructure 3",
+      "path": "population_scaling/r240_n1000/microstructure_3/reference/labels/step_02250.npz",
+      "role": "reference_labels_step_2250",
+      "sha256": "f0bd71dbddc2f2c14db47e7f332ac9113385833d6e195b8c2be0028fc1c9308a"
+    },
+    {
+      "case": "microstructure 3",
+      "path": "population_scaling/r240_n1000/microstructure_3/model/labels/step_02250.npz",
+      "role": "model_labels_step_2250",
+      "sha256": "665ca96dec12be222141ec4d98258af3aa83996103d46f5ea51369d6e942e6ca"
+    },
+    {
+      "case": "microstructure 3",
+      "path": "population_scaling/r240_n1000/microstructure_3/reference/labels/step_02500.npz",
+      "role": "reference_labels_step_2500",
+      "sha256": "52f5057f6e6324ba8e99b8359bf9e5770361dc6aeb1617d106f136358e4ff0aa"
+    },
+    {
+      "case": "microstructure 3",
+      "path": "population_scaling/r240_n1000/microstructure_3/model/labels/step_02500.npz",
+      "role": "model_labels_step_2500",
+      "sha256": "080fd712b991c5d39f1567edbc5f95d562ecb1178d48bf7de5f56381a5c1a80b"
+    },
+    {
+      "case": "microstructure 3",
+      "path": "population_scaling/r240_n1000/microstructure_3/reference/labels/step_02750.npz",
+      "role": "reference_labels_step_2750",
+      "sha256": "67fc335ec8802e7007993217c329f5d89593f68c812c5f08511ed064c3624e95"
+    },
+    {
+      "case": "microstructure 3",
+      "path": "population_scaling/r240_n1000/microstructure_3/model/labels/step_02750.npz",
+      "role": "model_labels_step_2750",
+      "sha256": "9481e6c2d6f5fbaf55bb1cc97c25196f40f2cb874698818d0762ca3386fcf872"
+    },
+    {
+      "case": "microstructure 3",
+      "path": "population_scaling/r240_n1000/microstructure_3/reference/labels/step_03000.npz",
+      "role": "reference_labels_step_3000",
+      "sha256": "e79ae3746dca2f3d4f310a129a5a715d3d503a43176f869d42413989edfa39ec"
+    },
+    {
+      "case": "microstructure 3",
+      "path": "population_scaling/r240_n1000/microstructure_3/model/labels/step_03000.npz",
+      "role": "model_labels_step_3000",
+      "sha256": "9d3c24f39bda4c2515c1014df69ee2087447018962c7acf120f156244c189604"
+    },
+    {
+      "case": "microstructure 3",
+      "path": "population_scaling/r240_n1000/microstructure_3/reference/labels/step_03250.npz",
+      "role": "reference_labels_step_3250",
+      "sha256": "7c901e805fcf506e4262c50cab0acb29eaf0c431af832c2985e4f4baed0c3ecc"
+    },
+    {
+      "case": "microstructure 3",
+      "path": "population_scaling/r240_n1000/microstructure_3/model/labels/step_03250.npz",
+      "role": "model_labels_step_3250",
+      "sha256": "4a4e0521b8c234d4728efd55b90a4a10f3bf62327a15bbdf53a72230fa6a743a"
+    },
+    {
+      "case": "microstructure 3",
+      "path": "population_scaling/r240_n1000/microstructure_3/reference/labels/step_03500.npz",
+      "role": "reference_labels_step_3500",
+      "sha256": "12c8fa5494e76c69fb6e3826d4d61cc0aedde6c3186484900c53f9b78b472bc9"
+    },
+    {
+      "case": "microstructure 3",
+      "path": "population_scaling/r240_n1000/microstructure_3/model/labels/step_03500.npz",
+      "role": "model_labels_step_3500",
+      "sha256": "d425f7cfdc0c4a3a6e49c22809753a1025a88427e01d9c4cfa6fc50c190d2186"
+    },
+    {
+      "case": "microstructure 3",
+      "path": "population_scaling/r240_n1000/microstructure_3/reference/labels/step_03750.npz",
+      "role": "reference_labels_step_3750",
+      "sha256": "505f61407e3ef81c30d7743762e28ff7c485fbcb5aa84723e45f4bfac89fb804"
+    },
+    {
+      "case": "microstructure 3",
+      "path": "population_scaling/r240_n1000/microstructure_3/model/labels/step_03750.npz",
+      "role": "model_labels_step_3750",
+      "sha256": "13ea9941043ecb2ef2fb8b203a3be030a9428b1e1d5690448f0bae6129a8d0b1"
+    },
+    {
+      "case": "microstructure 3",
+      "path": "population_scaling/r240_n1000/microstructure_3/reference/labels/step_04000.npz",
+      "role": "reference_labels_step_4000",
+      "sha256": "9d8cf3606cf7fb0af7db1e73c51fecb8ec52317e92b9926aa21fe81a574f9a32"
+    },
+    {
+      "case": "microstructure 3",
+      "path": "population_scaling/r240_n1000/microstructure_3/model/labels/step_04000.npz",
+      "role": "model_labels_step_4000",
+      "sha256": "d3e65fd678daf4cc8b6659f727fb5c903e96084ef784b943963dbc3e8a57e10a"
+    },
+    {
+      "case": "microstructure 3",
+      "path": "population_scaling/r240_n1000/microstructure_3/reference/labels/step_04250.npz",
+      "role": "reference_labels_step_4250",
+      "sha256": "0d4548ec29d461abf07d5fd50f2c38288691b76f83805ac997c8e3c1dc05542e"
+    },
+    {
+      "case": "microstructure 3",
+      "path": "population_scaling/r240_n1000/microstructure_3/model/labels/step_04250.npz",
+      "role": "model_labels_step_4250",
+      "sha256": "d7e1bfd36ef5ce59875c2e8cfdeb406b2238dd4d68f317b314bd676e2dfa4f61"
+    },
+    {
+      "case": "microstructure 3",
+      "path": "population_scaling/r240_n1000/microstructure_3/reference/labels/step_04500.npz",
+      "role": "reference_labels_step_4500",
+      "sha256": "21856e146eb8eed2248b4434055d078dbd8c18120e93937759cad843cdc55f18"
+    },
+    {
+      "case": "microstructure 3",
+      "path": "population_scaling/r240_n1000/microstructure_3/model/labels/step_04500.npz",
+      "role": "model_labels_step_4500",
+      "sha256": "2c5549f64359145cded1ae13bb8ee699c509c670de54e9e2840c2cdace603fa3"
+    },
+    {
+      "case": "microstructure 3",
+      "path": "population_scaling/r240_n1000/microstructure_3/reference/labels/step_04750.npz",
+      "role": "reference_labels_step_4750",
+      "sha256": "ffef2ed204186a1f9df642e439c9ba6ec2435d45fdbb3c1308dbc08789a68d5f"
+    },
+    {
+      "case": "microstructure 3",
+      "path": "population_scaling/r240_n1000/microstructure_3/model/labels/step_04750.npz",
+      "role": "model_labels_step_4750",
+      "sha256": "ab3d7789669ee330219519ba96b95fda958b180936ac94847fadb0ce960c40ea"
+    },
+    {
+      "case": "microstructure 3",
+      "path": "population_scaling/r240_n1000/microstructure_3/reference/labels/step_05000.npz",
+      "role": "reference_labels_step_5000",
+      "sha256": "33af1d4b7f541a072d4032ee8c35b7a29b4e2bd61fd131f2e7d2a3f58bb46249"
+    },
+    {
+      "case": "microstructure 3",
+      "path": "population_scaling/r240_n1000/microstructure_3/model/labels/step_05000.npz",
+      "role": "model_labels_step_5000",
+      "sha256": "916f3d2203e7488db55fc919d9bd934731ca8fc0b957d4c0c7aa17d3a6db2a44"
+    },
+    {
+      "case": "microstructure 3",
+      "path": "population_scaling/r240_n1000/microstructure_3/reference/labels/step_05250.npz",
+      "role": "reference_labels_step_5250",
+      "sha256": "7a6b3c7794884ed5ab36e5a4befb666a202df8d0d48c1cfed42ad2f853a736e3"
+    },
+    {
+      "case": "microstructure 3",
+      "path": "population_scaling/r240_n1000/microstructure_3/model/labels/step_05250.npz",
+      "role": "model_labels_step_5250",
+      "sha256": "018fc29900f82360f54e0c47a678cd70ef844626dc066c379eb06367f193105f"
+    },
+    {
+      "case": "microstructure 3",
+      "path": "population_scaling/r240_n1000/microstructure_3/reference/labels/step_05500.npz",
+      "role": "reference_labels_step_5500",
+      "sha256": "30e4b8a639e7d749bed2e57cc61d8556c6166bae9c21006eee572b0438126e50"
+    },
+    {
+      "case": "microstructure 3",
+      "path": "population_scaling/r240_n1000/microstructure_3/model/labels/step_05500.npz",
+      "role": "model_labels_step_5500",
+      "sha256": "7b906b71d884006f5f1dad20b5461ed6bb50a63ddca279af7adae4ebed036875"
+    },
+    {
+      "case": "microstructure 3",
+      "path": "population_scaling/r240_n1000/microstructure_3/reference/labels/step_05750.npz",
+      "role": "reference_labels_step_5750",
+      "sha256": "c4f6693b47236d787edb5ed081658653e38dc06f5c6136689cdaba60b41aab5f"
+    },
+    {
+      "case": "microstructure 3",
+      "path": "population_scaling/r240_n1000/microstructure_3/model/labels/step_05750.npz",
+      "role": "model_labels_step_5750",
+      "sha256": "711a5cb8742e24241d35e7c8794d5f14d60efb886fb959827017dab2711a5f59"
+    },
+    {
+      "case": "microstructure 3",
+      "path": "population_scaling/r240_n1000/microstructure_3/reference/labels/step_06000.npz",
+      "role": "reference_labels_step_6000",
+      "sha256": "9db2ff16744fd894731344616c8e704a18a46234e7fa736499fb215b86de6a1e"
+    },
+    {
+      "case": "microstructure 3",
+      "path": "population_scaling/r240_n1000/microstructure_3/model/labels/step_06000.npz",
+      "role": "model_labels_step_6000",
+      "sha256": "a52c0c86bc2945275e8ad594f1f8267654b5a08a48eadaa91dea645f332da960"
+    },
+    {
+      "case": "microstructure 3",
+      "path": "population_scaling/r240_n1000/microstructure_3/reference/labels/step_06250.npz",
+      "role": "reference_labels_step_6250",
+      "sha256": "e32a9ca3373d52cba4aa3bd6eb9735a55d0fa8666f551a01173e8839d4494f41"
+    },
+    {
+      "case": "microstructure 3",
+      "path": "population_scaling/r240_n1000/microstructure_3/model/labels/step_06250.npz",
+      "role": "model_labels_step_6250",
+      "sha256": "50abe1377d085e5a0da0fa10547ea5c89088d9dceeec646daeabac2caf0f3906"
+    },
+    {
+      "case": "microstructure 3",
+      "path": "population_scaling/r240_n1000/microstructure_3/reference/labels/step_06500.npz",
+      "role": "reference_labels_step_6500",
+      "sha256": "45e1afc10410cfc3d5775643257ad3ef40989dab42fc0c1046fcac7b606130b0"
+    },
+    {
+      "case": "microstructure 3",
+      "path": "population_scaling/r240_n1000/microstructure_3/model/labels/step_06500.npz",
+      "role": "model_labels_step_6500",
+      "sha256": "d2accb9ee3b3a29caf97b4499dbfc662a2006590286e506c0e9ab97a85cfebd3"
+    },
+    {
+      "case": "microstructure 3",
+      "path": "population_scaling/r240_n1000/microstructure_3/reference/labels/step_06750.npz",
+      "role": "reference_labels_step_6750",
+      "sha256": "143e63440c3d4f1d5848790d11c4b0b463684947f342e6cf3afd3017e431b380"
+    },
+    {
+      "case": "microstructure 3",
+      "path": "population_scaling/r240_n1000/microstructure_3/model/labels/step_06750.npz",
+      "role": "model_labels_step_6750",
+      "sha256": "90c972121ba173c9644a28005e9826334638da67bccbe591a94e94d7a5a1f7e1"
+    },
+    {
+      "case": "microstructure 3",
+      "path": "population_scaling/r240_n1000/microstructure_3/reference/labels/step_07000.npz",
+      "role": "reference_labels_step_7000",
+      "sha256": "d8799df643bc958e2a276500d6d40505850b8b2a7dc0555da61a19d38db4baf4"
+    },
+    {
+      "case": "microstructure 3",
+      "path": "population_scaling/r240_n1000/microstructure_3/model/labels/step_07000.npz",
+      "role": "model_labels_step_7000",
+      "sha256": "f7978a973a4c88c9144e31ee1b8949e99e3c200e1aaa1e43ba59da796558d912"
+    },
+    {
+      "case": "microstructure 3",
+      "path": "population_scaling/r240_n1000/microstructure_3/reference/labels/step_07250.npz",
+      "role": "reference_labels_step_7250",
+      "sha256": "acd14a22ba2efa725719a5c1abc3b00a994df7878dcb8f443c137639d88e373d"
+    },
+    {
+      "case": "microstructure 3",
+      "path": "population_scaling/r240_n1000/microstructure_3/model/labels/step_07250.npz",
+      "role": "model_labels_step_7250",
+      "sha256": "26460b0a1642688526d034c13af8c5483b74f5024d8593bedce153530a7085cf"
+    },
+    {
+      "case": "microstructure 3",
+      "path": "population_scaling/r240_n1000/microstructure_3/reference/labels/step_07500.npz",
+      "role": "reference_labels_step_7500",
+      "sha256": "5370066d33b17aa3afdcbd4c83b36b01c2466f2a3a6a71c5763deb9771d78403"
+    },
+    {
+      "case": "microstructure 3",
+      "path": "population_scaling/r240_n1000/microstructure_3/model/labels/step_07500.npz",
+      "role": "model_labels_step_7500",
+      "sha256": "c104166e6f45d70de8d992f6e42feffcab5ee80f2a99f90a8409f59759b70185"
+    },
+    {
+      "case": "microstructure 3",
+      "path": "population_scaling/r240_n1000/microstructure_3/reference/labels/step_07750.npz",
+      "role": "reference_labels_step_7750",
+      "sha256": "d9d4c5993b46731311ad725d45daafa7fa261f218556abc620dbdc5bb5980a87"
+    },
+    {
+      "case": "microstructure 3",
+      "path": "population_scaling/r240_n1000/microstructure_3/model/labels/step_07750.npz",
+      "role": "model_labels_step_7750",
+      "sha256": "25be1b904497644ba429ae5c648fd520b3ddd6d4f5f8a6472ef253527f946b01"
+    },
+    {
+      "case": "microstructure 3",
+      "path": "population_scaling/r240_n1000/microstructure_3/reference/labels/step_08000.npz",
+      "role": "reference_labels_step_8000",
+      "sha256": "3040664a17b05014675102e3d6d21ae4bd18c23ebd3f8e2f07f095d6a89b7b94"
+    },
+    {
+      "case": "microstructure 3",
+      "path": "population_scaling/r240_n1000/microstructure_3/model/labels/step_08000.npz",
+      "role": "model_labels_step_8000",
+      "sha256": "b63887d1d06c7048fb20906ded548a7016b2f95b25a8b810d81548a952561179"
+    },
+    {
+      "case": "microstructure 3",
+      "path": "population_scaling/r240_n1000/microstructure_3/reference/labels/step_08250.npz",
+      "role": "reference_labels_step_8250",
+      "sha256": "91fea30fb9652a6c78eae9f15ae42ebac44d35b300c6ebce36ced16d8a850050"
+    },
+    {
+      "case": "microstructure 3",
+      "path": "population_scaling/r240_n1000/microstructure_3/model/labels/step_08250.npz",
+      "role": "model_labels_step_8250",
+      "sha256": "18c8fa5e6b55a3e04480d6d393e136c5a88590251b0b9e6456d0648b8563aee1"
+    },
+    {
+      "case": "microstructure 3",
+      "path": "population_scaling/r240_n1000/microstructure_3/reference/labels/step_08500.npz",
+      "role": "reference_labels_step_8500",
+      "sha256": "a90a2f5880ea931e170a37419d6f71b2f5873a1f9a1f1b86da4e567c8f72f6ac"
+    },
+    {
+      "case": "microstructure 3",
+      "path": "population_scaling/r240_n1000/microstructure_3/model/labels/step_08500.npz",
+      "role": "model_labels_step_8500",
+      "sha256": "82081cad34f3ab96975b9aa5998f759bdba8ecf24ba03b7b12822b0402446d6b"
+    },
+    {
+      "case": "microstructure 3",
+      "path": "population_scaling/r240_n1000/microstructure_3/reference/labels/step_08750.npz",
+      "role": "reference_labels_step_8750",
+      "sha256": "05f3d2bc8c61d8b4710362241a631eff6498a122bb467a385c2059a66f0b4b57"
+    },
+    {
+      "case": "microstructure 3",
+      "path": "population_scaling/r240_n1000/microstructure_3/model/labels/step_08750.npz",
+      "role": "model_labels_step_8750",
+      "sha256": "03f45027a266dff4e303ad31b2fc9698b13e18eb0b8575f2263371207f4c03b4"
+    },
+    {
+      "case": "microstructure 3",
+      "path": "population_scaling/r240_n1000/microstructure_3/reference/labels/step_09000.npz",
+      "role": "reference_labels_step_9000",
+      "sha256": "e66cd11ff42943edac69c02a4762928011a9d07198519e497e3b69a79d2450a8"
+    },
+    {
+      "case": "microstructure 3",
+      "path": "population_scaling/r240_n1000/microstructure_3/model/labels/step_09000.npz",
+      "role": "model_labels_step_9000",
+      "sha256": "5432daaa72a8a7ee2313d43ed7d52fa800b01261cc8db9500d84f9dd146f99b8"
+    },
+    {
+      "case": "microstructure 3",
+      "path": "population_scaling/r240_n1000/microstructure_3/reference/labels/step_09250.npz",
+      "role": "reference_labels_step_9250",
+      "sha256": "694374b301bb673c1bf37f61426b9b42782f1d9d27e49f0023c4aac30c7a5811"
+    },
+    {
+      "case": "microstructure 3",
+      "path": "population_scaling/r240_n1000/microstructure_3/model/labels/step_09250.npz",
+      "role": "model_labels_step_9250",
+      "sha256": "927b88e8f287cf409f6eac6fa5dfd93607dae751ceb7d16d5ffe4651c0975b15"
+    },
+    {
+      "case": "microstructure 3",
+      "path": "population_scaling/r240_n1000/microstructure_3/reference/labels/step_09500.npz",
+      "role": "reference_labels_step_9500",
+      "sha256": "e38292daa787774befbc440b015675d798520787ba61b1d3f674b3a20c558444"
+    },
+    {
+      "case": "microstructure 3",
+      "path": "population_scaling/r240_n1000/microstructure_3/model/labels/step_09500.npz",
+      "role": "model_labels_step_9500",
+      "sha256": "ac05dfed87df0bc3a06875204e403d06aef9b4a5baee2d2668fc26a4cec086f5"
+    },
+    {
+      "case": "microstructure 3",
+      "path": "population_scaling/r240_n1000/microstructure_3/reference/labels/step_09750.npz",
+      "role": "reference_labels_step_9750",
+      "sha256": "67ab864f5699c354a40961d90842553b9a49925cdb2b3b51aaa04dd17a67e431"
+    },
+    {
+      "case": "microstructure 3",
+      "path": "population_scaling/r240_n1000/microstructure_3/model/labels/step_09750.npz",
+      "role": "model_labels_step_9750",
+      "sha256": "5d01d9d4e8314da9389a5eb70f8dd38d8ffda567ef81973f8226321ef8dea50a"
+    },
+    {
+      "case": "microstructure 3",
+      "path": "population_scaling/r240_n1000/microstructure_3/reference/labels/step_10000.npz",
+      "role": "reference_labels_step_10000",
+      "sha256": "1c0e748b673c7093888fea2e3793ee1de1b00091fb9062ad7cb3ee72fae8694b"
+    },
+    {
+      "case": "microstructure 3",
+      "path": "population_scaling/r240_n1000/microstructure_3/model/labels/step_10000.npz",
+      "role": "model_labels_step_10000",
+      "sha256": "dfc6244f675d82687c91733a1b66d67f295cd915c3c78b973360d0f8d55266c4"
+    },
+    {
+      "case": "microstructure 3",
+      "path": "population_scaling/r240_n1000/microstructure_3/reference/labels/step_10250.npz",
+      "role": "reference_labels_step_10250",
+      "sha256": "bffef23a35503bb454c24c9683d05def05b2a7e377fd1b557fe7109de9d849e1"
+    },
+    {
+      "case": "microstructure 3",
+      "path": "population_scaling/r240_n1000/microstructure_3/model/labels/step_10250.npz",
+      "role": "model_labels_step_10250",
+      "sha256": "26eb14c6dca5178dd63e5a075167a23e0b44e478167040b187d338501b1eca2a"
+    },
+    {
+      "case": "microstructure 3",
+      "path": "population_scaling/r240_n1000/microstructure_3/reference/labels/step_10500.npz",
+      "role": "reference_labels_step_10500",
+      "sha256": "b219f5c02057b6105f165d4fbb898f0355caacae586c75c5231ae51327df20f9"
+    },
+    {
+      "case": "microstructure 3",
+      "path": "population_scaling/r240_n1000/microstructure_3/model/labels/step_10500.npz",
+      "role": "model_labels_step_10500",
+      "sha256": "b61d9a38361cd8c90567419311053f253c24aaa30661a6ae47f56266e30aa325"
+    },
+    {
+      "case": "microstructure 3",
+      "path": "population_scaling/r240_n1000/microstructure_3/reference/labels/step_10750.npz",
+      "role": "reference_labels_step_10750",
+      "sha256": "2ac06f58289522f853d8a5f7cd3bfd6cb204764170f51bedbc4918d5f21aec5d"
+    },
+    {
+      "case": "microstructure 3",
+      "path": "population_scaling/r240_n1000/microstructure_3/model/labels/step_10750.npz",
+      "role": "model_labels_step_10750",
+      "sha256": "b7617bc049a69b03df137b0aa253b4a6bbb5fa9b5dec4ffb87d59ede5aa9a8aa"
+    },
+    {
+      "case": "microstructure 3",
+      "path": "population_scaling/r240_n1000/microstructure_3/reference/labels/step_11000.npz",
+      "role": "reference_labels_step_11000",
+      "sha256": "09dd76e3f7180a137675d881b77787a526f970557f8c0afebc1c434d1bd86edb"
+    },
+    {
+      "case": "microstructure 3",
+      "path": "population_scaling/r240_n1000/microstructure_3/model/labels/step_11000.npz",
+      "role": "model_labels_step_11000",
+      "sha256": "e1dfeb05401f8c2c32d5791bd8e8d911647bf4b37cc9d5f56c51bfcfe0100509"
+    },
+    {
+      "case": "microstructure 3",
+      "path": "population_scaling/r240_n1000/microstructure_3/reference/labels/step_11250.npz",
+      "role": "reference_labels_step_11250",
+      "sha256": "4320cccdf796478d8ca8cfe45694f68f9bffc3ce093735cac9707df780a2ddc8"
+    },
+    {
+      "case": "microstructure 3",
+      "path": "population_scaling/r240_n1000/microstructure_3/model/labels/step_11250.npz",
+      "role": "model_labels_step_11250",
+      "sha256": "1243d55a71016a4e184e376232dedc64a235a0eb033a0eab7dfdb07273861487"
+    },
+    {
+      "case": "microstructure 3",
+      "path": "population_scaling/r240_n1000/microstructure_3/reference/labels/step_11500.npz",
+      "role": "reference_labels_step_11500",
+      "sha256": "fbcca522469b16d0908855ce01d8489afd1363a1623e6a8c0e91f77c9fe97791"
+    },
+    {
+      "case": "microstructure 3",
+      "path": "population_scaling/r240_n1000/microstructure_3/model/labels/step_11500.npz",
+      "role": "model_labels_step_11500",
+      "sha256": "95faa55bbd7a51236576eebd6093e40fc0727241f1512ddb113cef1153ca763a"
+    },
+    {
+      "case": "microstructure 3",
+      "path": "population_scaling/r240_n1000/microstructure_3/reference/labels/step_11750.npz",
+      "role": "reference_labels_step_11750",
+      "sha256": "f646acc39a4f786af3e7304c9c1357d745c3e63504afa7768ba6defb91b6a7b4"
+    },
+    {
+      "case": "microstructure 3",
+      "path": "population_scaling/r240_n1000/microstructure_3/model/labels/step_11750.npz",
+      "role": "model_labels_step_11750",
+      "sha256": "423f5cfcbe53dd6f49d03a32b977cdd05828c95392cde49a2ee707b6ce4be1c5"
+    },
+    {
+      "case": "microstructure 3",
+      "path": "population_scaling/r240_n1000/microstructure_3/reference/labels/step_12000.npz",
+      "role": "reference_labels_step_12000",
+      "sha256": "77264b88f97563f9722761c78cf930532d3e4935d6dba3de7fca4f174eac110e"
+    },
+    {
+      "case": "microstructure 3",
+      "path": "population_scaling/r240_n1000/microstructure_3/model/labels/step_12000.npz",
+      "role": "model_labels_step_12000",
+      "sha256": "42fd019409415c781f81fd99bd3e71cd0cf021a13cd9ee7f965134494a9d594d"
+    },
+    {
+      "case": "microstructure 3",
+      "path": "population_scaling/r240_n1000/microstructure_3/reference/labels/step_12250.npz",
+      "role": "reference_labels_step_12250",
+      "sha256": "90eb8efdcb2a918fe09d7cc51e0bdca8d1999ee1462fd61827dcc3e467acbf90"
+    },
+    {
+      "case": "microstructure 3",
+      "path": "population_scaling/r240_n1000/microstructure_3/model/labels/step_12250.npz",
+      "role": "model_labels_step_12250",
+      "sha256": "30d7ecbc2774f1a5d337f8a3ec727e0be3c25eef610a017dbf986de9073ca09b"
+    },
+    {
+      "case": "microstructure 3",
+      "path": "population_scaling/r240_n1000/microstructure_3/reference/labels/step_12500.npz",
+      "role": "reference_labels_step_12500",
+      "sha256": "e25b0e62e85a47b294a63852114e40e943e6d6ed7b4e1441c106eedbd6ed44ff"
+    },
+    {
+      "case": "microstructure 3",
+      "path": "population_scaling/r240_n1000/microstructure_3/model/labels/step_12500.npz",
+      "role": "model_labels_step_12500",
+      "sha256": "2a62b0726fc00bf0842d256822e79c87e97c395786db77090bd3eccb9a8ed967"
+    },
+    {
+      "case": "microstructure 3",
+      "path": "population_scaling/r240_n1000/microstructure_3/reference/labels/step_12750.npz",
+      "role": "reference_labels_step_12750",
+      "sha256": "f790fba1e7136ab85f597c5ac1935ca3d8b32c08e50e5750c58ece7e68635055"
+    },
+    {
+      "case": "microstructure 3",
+      "path": "population_scaling/r240_n1000/microstructure_3/model/labels/step_12750.npz",
+      "role": "model_labels_step_12750",
+      "sha256": "1ee6b602b3379edf19e9c11c9654d78c169c818f5483a82cb042f11733d6934f"
+    },
+    {
+      "case": "microstructure 3",
+      "path": "population_scaling/r240_n1000/microstructure_3/reference/labels/step_13000.npz",
+      "role": "reference_labels_step_13000",
+      "sha256": "6b5568f4fb9d6dd2f414ded01e59565b5fbb52cfe06e2e63d25bde6e05f913b4"
+    },
+    {
+      "case": "microstructure 3",
+      "path": "population_scaling/r240_n1000/microstructure_3/model/labels/step_13000.npz",
+      "role": "model_labels_step_13000",
+      "sha256": "b36c242c310b865d46b4f1264646d48b29bab08d4d70c58efad666374c2051bd"
+    },
+    {
+      "case": "microstructure 3",
+      "path": "population_scaling/r240_n1000/microstructure_3/reference/labels/step_13250.npz",
+      "role": "reference_labels_step_13250",
+      "sha256": "dcdf64556169a37741a71cf340aa60d05ed6200860d4d03136153c60770b8714"
+    },
+    {
+      "case": "microstructure 3",
+      "path": "population_scaling/r240_n1000/microstructure_3/model/labels/step_13250.npz",
+      "role": "model_labels_step_13250",
+      "sha256": "3bca5df08c7c0e94df337e380e56e8021dae2c4be7107b19fb1651b13d54c72a"
+    },
+    {
+      "case": "microstructure 3",
+      "path": "population_scaling/r240_n1000/microstructure_3/reference/labels/step_13500.npz",
+      "role": "reference_labels_step_13500",
+      "sha256": "d1f0f53900610bde13af822f2ccefd2481c17ca14754e9fca6ffac8ff78a7522"
+    },
+    {
+      "case": "microstructure 3",
+      "path": "population_scaling/r240_n1000/microstructure_3/model/labels/step_13500.npz",
+      "role": "model_labels_step_13500",
+      "sha256": "d1809d56ba7bbc561e40cfcad3e35334e80968e5cba8c984f9d59358ce1acb35"
+    },
+    {
+      "case": "microstructure 1",
+      "path": "population_scaling/r416_n5000/microstructure_1/reference/volumes.npz",
+      "role": "reference_volumes",
+      "sha256": "77f93cb41bcf1a87e580bfa41b797b33c70bfbe9e661a74616a832d32e4aae73"
+    },
+    {
+      "case": "microstructure 1",
+      "path": "population_scaling/r416_n5000/microstructure_1/reference/extinctions.json",
+      "role": "reference_extinctions",
+      "sha256": "c7518e2ab1b3242c5259c3d733f6b44e0b0cd1c6c595d47f0918d50c497c39c8"
+    },
+    {
+      "case": "microstructure 1",
+      "path": "population_scaling/r416_n5000/microstructure_1/model/volumes.npz",
+      "role": "model_volumes",
+      "sha256": "99e1d5329afe7f696cbe07e170f398a33f67ae9a719562ddfa0bb0349b0b903a"
+    },
+    {
+      "case": "microstructure 1",
+      "path": "population_scaling/r416_n5000/microstructure_1/model/extinctions.json",
+      "role": "model_extinctions",
+      "sha256": "6e255e50b939cdefd766c81b1fe80d7ac9a34788b6d10fc10a06521aa27a20a7"
+    },
+    {
+      "case": "microstructure 1",
+      "path": "population_scaling/r416_n5000/microstructure_1/reference/labels/step_00000.npz",
+      "role": "reference_labels_step_0",
+      "sha256": "f6ab280a2facae2c55b8904711f5a7069ca0a431b2801e40bda22a4c6498196f"
+    },
+    {
+      "case": "microstructure 1",
+      "path": "population_scaling/r416_n5000/microstructure_1/model/labels/step_00000.npz",
+      "role": "model_labels_step_0",
+      "sha256": "f6ab280a2facae2c55b8904711f5a7069ca0a431b2801e40bda22a4c6498196f"
+    },
+    {
+      "case": "microstructure 1",
+      "path": "population_scaling/r416_n5000/microstructure_1/reference/labels/step_00100.npz",
+      "role": "reference_labels_step_100",
+      "sha256": "7359427889b2a0d160398d3cead9e3c7e857c9141eda804d252149a396ecc1e5"
+    },
+    {
+      "case": "microstructure 1",
+      "path": "population_scaling/r416_n5000/microstructure_1/model/labels/step_00100.npz",
+      "role": "model_labels_step_100",
+      "sha256": "76858a1601dd3aa9e000448d17b3c2b0c24ae259d87d00b1fd4af44e8dfa093d"
+    },
+    {
+      "case": "microstructure 1",
+      "path": "population_scaling/r416_n5000/microstructure_1/reference/labels/step_00200.npz",
+      "role": "reference_labels_step_200",
+      "sha256": "93784e78041e78cdbd3972599a69162a368049cd06e73292e48a3ff5925d74b7"
+    },
+    {
+      "case": "microstructure 1",
+      "path": "population_scaling/r416_n5000/microstructure_1/model/labels/step_00200.npz",
+      "role": "model_labels_step_200",
+      "sha256": "ba75d39030840369189cb20e06526cbf4daab28935a9d52933684cf8035612a9"
+    },
+    {
+      "case": "microstructure 1",
+      "path": "population_scaling/r416_n5000/microstructure_1/reference/labels/step_00250.npz",
+      "role": "reference_labels_step_250",
+      "sha256": "380416d45d5a78ae899a082b1222fa1f176ef8ff38e2c42bfcf3ed20c1c435ab"
+    },
+    {
+      "case": "microstructure 1",
+      "path": "population_scaling/r416_n5000/microstructure_1/model/labels/step_00250.npz",
+      "role": "model_labels_step_250",
+      "sha256": "62931a477fb2f35da872a1654791cc47029ec7a467ecb6f72dfe2f805f146568"
+    },
+    {
+      "case": "microstructure 1",
+      "path": "population_scaling/r416_n5000/microstructure_1/reference/labels/step_00400.npz",
+      "role": "reference_labels_step_400",
+      "sha256": "74606bc5d879317e6c640dabff60b26109e60ed332c5e5563f4f105326c79b25"
+    },
+    {
+      "case": "microstructure 1",
+      "path": "population_scaling/r416_n5000/microstructure_1/model/labels/step_00400.npz",
+      "role": "model_labels_step_400",
+      "sha256": "f3ec92e2d707ad68b995e7767c2e14d8d46d464d68b6be8f2638eb7e0b4cc556"
+    },
+    {
+      "case": "microstructure 1",
+      "path": "population_scaling/r416_n5000/microstructure_1/reference/labels/step_00500.npz",
+      "role": "reference_labels_step_500",
+      "sha256": "d85521d44ebb3ef650f4a9af913f38b7e76c3fd0a10722b606b71e8ac70cc6fd"
+    },
+    {
+      "case": "microstructure 1",
+      "path": "population_scaling/r416_n5000/microstructure_1/model/labels/step_00500.npz",
+      "role": "model_labels_step_500",
+      "sha256": "0a95e7ce3e1af63717564a092b77584518ae1354aba63064691c679c5c42678f"
+    },
+    {
+      "case": "microstructure 1",
+      "path": "population_scaling/r416_n5000/microstructure_1/reference/labels/step_00750.npz",
+      "role": "reference_labels_step_750",
+      "sha256": "040c5f3319e35036b5d81171b695bccb34ca8b54788c482c064d97421ae5df9c"
+    },
+    {
+      "case": "microstructure 1",
+      "path": "population_scaling/r416_n5000/microstructure_1/model/labels/step_00750.npz",
+      "role": "model_labels_step_750",
+      "sha256": "953bb42f4ad7c59c1db95dcf1c7542d634db6aacd7bfce64c6ef991319ba04ab"
+    },
+    {
+      "case": "microstructure 1",
+      "path": "population_scaling/r416_n5000/microstructure_1/reference/labels/step_01000.npz",
+      "role": "reference_labels_step_1000",
+      "sha256": "854c2561efb52ed87c37b2900210478b11239fb4e16b29762e02124586048b33"
+    },
+    {
+      "case": "microstructure 1",
+      "path": "population_scaling/r416_n5000/microstructure_1/model/labels/step_01000.npz",
+      "role": "model_labels_step_1000",
+      "sha256": "9e1e4487a62274d28ec065909d4c0dbb91022310bd40a1ce41a4048e00a91d11"
+    },
+    {
+      "case": "microstructure 1",
+      "path": "population_scaling/r416_n5000/microstructure_1/reference/labels/step_01250.npz",
+      "role": "reference_labels_step_1250",
+      "sha256": "7e29c5b8af5483007b7d2887012671b6323dc308d4a166fc15d356efb31a92eb"
+    },
+    {
+      "case": "microstructure 1",
+      "path": "population_scaling/r416_n5000/microstructure_1/model/labels/step_01250.npz",
+      "role": "model_labels_step_1250",
+      "sha256": "078cb6f493d8c513e3d57d23583f41c71304518a524f1d0e04a17ba23e9915e3"
+    },
+    {
+      "case": "microstructure 1",
+      "path": "population_scaling/r416_n5000/microstructure_1/reference/labels/step_01500.npz",
+      "role": "reference_labels_step_1500",
+      "sha256": "b974c03f877200ef71f933f89d1c273f8fdbacb2df351d595db805da29ef12d9"
+    },
+    {
+      "case": "microstructure 1",
+      "path": "population_scaling/r416_n5000/microstructure_1/model/labels/step_01500.npz",
+      "role": "model_labels_step_1500",
+      "sha256": "5632fa3dbd65cd061e795c162a0b951bdaca7af545e0155f37f5bebe10d34a1d"
+    },
+    {
+      "case": "microstructure 1",
+      "path": "population_scaling/r416_n5000/microstructure_1/reference/labels/step_01750.npz",
+      "role": "reference_labels_step_1750",
+      "sha256": "fdda553377807648a17e23e75e42fbd30eb30f542a816312b1f11266d3da1383"
+    },
+    {
+      "case": "microstructure 1",
+      "path": "population_scaling/r416_n5000/microstructure_1/model/labels/step_01750.npz",
+      "role": "model_labels_step_1750",
+      "sha256": "a420e8b56b139306f9c9bb44063117dc2f9b6ca6aa1f2f8f6e1efe21d05ace23"
+    },
+    {
+      "case": "microstructure 1",
+      "path": "population_scaling/r416_n5000/microstructure_1/reference/labels/step_02000.npz",
+      "role": "reference_labels_step_2000",
+      "sha256": "3423a815994e4db19bc3d917ea720006f4c1902eab92587fb2fc4c1a95faeec5"
+    },
+    {
+      "case": "microstructure 1",
+      "path": "population_scaling/r416_n5000/microstructure_1/model/labels/step_02000.npz",
+      "role": "model_labels_step_2000",
+      "sha256": "4950acf6386edca6dc5ed847c50ea311b6052937a575991b549e69f66cb386b3"
+    },
+    {
+      "case": "microstructure 1",
+      "path": "population_scaling/r416_n5000/microstructure_1/reference/labels/step_02250.npz",
+      "role": "reference_labels_step_2250",
+      "sha256": "6d1f768f8c6ee29acf820c9846488a0ab83034574861864a6c75fe80b4cbe40e"
+    },
+    {
+      "case": "microstructure 1",
+      "path": "population_scaling/r416_n5000/microstructure_1/model/labels/step_02250.npz",
+      "role": "model_labels_step_2250",
+      "sha256": "7c55231070fb56145d89854068e88b148db06c3898dcf695d6c7c1ed9b514440"
+    },
+    {
+      "case": "microstructure 1",
+      "path": "population_scaling/r416_n5000/microstructure_1/reference/labels/step_02500.npz",
+      "role": "reference_labels_step_2500",
+      "sha256": "aa7f60f9c01daa8ad4541ce3468481eb8057602d68b1a6ffebcdd7c7858892ba"
+    },
+    {
+      "case": "microstructure 1",
+      "path": "population_scaling/r416_n5000/microstructure_1/model/labels/step_02500.npz",
+      "role": "model_labels_step_2500",
+      "sha256": "9443bb6da57d21d05e4d44e84578b8519da12f32dcbc478e14e7d103a5f8bb66"
+    },
+    {
+      "case": "microstructure 1",
+      "path": "population_scaling/r416_n5000/microstructure_1/reference/labels/step_02750.npz",
+      "role": "reference_labels_step_2750",
+      "sha256": "4ca84a72e90305155aeebbbda3a8150421edf11a580d1498223ef2e9f185ad51"
+    },
+    {
+      "case": "microstructure 1",
+      "path": "population_scaling/r416_n5000/microstructure_1/model/labels/step_02750.npz",
+      "role": "model_labels_step_2750",
+      "sha256": "911ee6b7ca938830f3fbde16b404ca97e296ef08dce0384d83890a35930180bb"
+    },
+    {
+      "case": "microstructure 1",
+      "path": "population_scaling/r416_n5000/microstructure_1/reference/labels/step_03000.npz",
+      "role": "reference_labels_step_3000",
+      "sha256": "c5d030ac85b16f69520d6e8a764a46b07798da21d93e4acdcd2bcd8a66b4b9f7"
+    },
+    {
+      "case": "microstructure 1",
+      "path": "population_scaling/r416_n5000/microstructure_1/model/labels/step_03000.npz",
+      "role": "model_labels_step_3000",
+      "sha256": "8ce868354c83ce4045725eae555b8da88a2fb635945df4615d6dfb99f247a0c8"
+    },
+    {
+      "case": "microstructure 1",
+      "path": "population_scaling/r416_n5000/microstructure_1/reference/labels/step_03250.npz",
+      "role": "reference_labels_step_3250",
+      "sha256": "b3c3c5397cf0158097177ff0649356a7ea030e8f0cf9353d9cf562afab210841"
+    },
+    {
+      "case": "microstructure 1",
+      "path": "population_scaling/r416_n5000/microstructure_1/model/labels/step_03250.npz",
+      "role": "model_labels_step_3250",
+      "sha256": "07f4a5fc0c07bb8d56285a38e58b7eca7d06c6fa18e34e9096b17bd35c2bdd52"
+    },
+    {
+      "case": "microstructure 1",
+      "path": "population_scaling/r416_n5000/microstructure_1/reference/labels/step_03500.npz",
+      "role": "reference_labels_step_3500",
+      "sha256": "438ba64331ff2fb33e4c96d9bd6b82407b1ef7bfb1326bdc49b682833819a334"
+    },
+    {
+      "case": "microstructure 1",
+      "path": "population_scaling/r416_n5000/microstructure_1/model/labels/step_03500.npz",
+      "role": "model_labels_step_3500",
+      "sha256": "15281ca4df490a6bf1a7db52d7276168d15d6ee83ead7727f2cd76db75224061"
+    },
+    {
+      "case": "microstructure 1",
+      "path": "population_scaling/r416_n5000/microstructure_1/reference/labels/step_03750.npz",
+      "role": "reference_labels_step_3750",
+      "sha256": "3262dd07a9f41cfa5a787896879a23252c8f545c356928c27e02bc49692358d7"
+    },
+    {
+      "case": "microstructure 1",
+      "path": "population_scaling/r416_n5000/microstructure_1/model/labels/step_03750.npz",
+      "role": "model_labels_step_3750",
+      "sha256": "916da24e972c15bf7e5fb511acaa79f30d5be47611098ea309768b6996c6bf16"
+    },
+    {
+      "case": "microstructure 1",
+      "path": "population_scaling/r416_n5000/microstructure_1/reference/labels/step_04000.npz",
+      "role": "reference_labels_step_4000",
+      "sha256": "da1f509502bf20d8c55b3aaed3fe04147c8a6fe5c193f10b0bfbd799141366f5"
+    },
+    {
+      "case": "microstructure 1",
+      "path": "population_scaling/r416_n5000/microstructure_1/model/labels/step_04000.npz",
+      "role": "model_labels_step_4000",
+      "sha256": "6b6e658253685bbe78335cf04f5613271a80d0d2e0692cdda9d615b07605ba24"
+    },
+    {
+      "case": "microstructure 1",
+      "path": "population_scaling/r416_n5000/microstructure_1/reference/labels/step_04250.npz",
+      "role": "reference_labels_step_4250",
+      "sha256": "8b64519b38bbf2176b964f39eec1edc66dfbef2301af43c6a2a8a4e52b243d0f"
+    },
+    {
+      "case": "microstructure 1",
+      "path": "population_scaling/r416_n5000/microstructure_1/model/labels/step_04250.npz",
+      "role": "model_labels_step_4250",
+      "sha256": "33a4e268c62f31958b3ad8c33661e1f5523b913ef5973a0f1b102cc02cc397b4"
+    },
+    {
+      "case": "microstructure 1",
+      "path": "population_scaling/r416_n5000/microstructure_1/reference/labels/step_04500.npz",
+      "role": "reference_labels_step_4500",
+      "sha256": "6521a38550a4cd3d4b9106a16954b27fa382c6c801dd6b4d588fe5cf1d94c150"
+    },
+    {
+      "case": "microstructure 1",
+      "path": "population_scaling/r416_n5000/microstructure_1/model/labels/step_04500.npz",
+      "role": "model_labels_step_4500",
+      "sha256": "eaaf26890a2e0a53330440dd414a16af6e14935c3de0e893dc9282e9b5a0f0b7"
+    },
+    {
+      "case": "microstructure 1",
+      "path": "population_scaling/r416_n5000/microstructure_1/reference/labels/step_04750.npz",
+      "role": "reference_labels_step_4750",
+      "sha256": "0d168387a9290d7d98a79b1b77fc609cc2f379d92c6046b2d2f7f1dd9dc8675a"
+    },
+    {
+      "case": "microstructure 1",
+      "path": "population_scaling/r416_n5000/microstructure_1/model/labels/step_04750.npz",
+      "role": "model_labels_step_4750",
+      "sha256": "88cf168269becc1d42c21c6b921c78264dbdd78f8c2dab836e14c3f377d4ccb1"
+    },
+    {
+      "case": "microstructure 1",
+      "path": "population_scaling/r416_n5000/microstructure_1/reference/labels/step_05000.npz",
+      "role": "reference_labels_step_5000",
+      "sha256": "9849503730e7d1aade94f2126596710d82195d74bc71c04ffed99bb3cc7455cd"
+    },
+    {
+      "case": "microstructure 1",
+      "path": "population_scaling/r416_n5000/microstructure_1/model/labels/step_05000.npz",
+      "role": "model_labels_step_5000",
+      "sha256": "2a10f38dc1f664c9ecc44927d93fa77d6a96de4b0c6909f763f2da3df68f44c7"
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "no_interpolation": true,
+  "outputs": {
+    "r240_n1000_reference_vs_pinn_phase.gif": {
+      "bytes": 3006161,
+      "sha256": "6df0d4d4e3ff6002ccdc0f249da27022ff311a169ca71384237ab36e0a419e4a"
+    },
+    "r240_n1000_reference_vs_pinn_phase_poster.png": {
+      "bytes": 103799,
+      "sha256": "68f624e6118202168cd18584163dc2ada6031538a1a83621201c07f8733110cd"
+    },
+    "r416_n5000_reference_vs_pinn_phase.gif": {
+      "bytes": 1407187,
+      "sha256": "192663bb643773793e9a371e5a9a8c7ee1ab3abef9e098705302f47dc45f1872"
+    },
+    "r416_n5000_reference_vs_pinn_phase_poster.png": {
+      "bytes": 98658,
+      "sha256": "854bd2e436286ca3bfcf0c948e320c2343eeaae06ca9ccb85f8df69a901ec3f1"
+    }
+  },
+  "pairing": "every frame pairs reference and PINN-Phase labels saved at the same step",
+  "regimes": {
+    "r240_n1000": {
+      "alt_text": "Animation of three 240-cubed, 1,000-grain microstructures in columns, with reference labels above paired PINN-Phase labels at all 58 saved times from t = 0 to t = 135. At t = 135, reference/PINN-Phase alive counts are 196/195, 192/192, 180/181, and label disagreements are 0.92%, 0.82%, 0.70%.",
+      "camera": {
+        "camera_azimuth_deg": 38.0,
+        "camera_elevation_deg": 24.0,
+        "cube_edges": "rgb [0.22, 0.22, 0.22], width 0.0045 of the cube image width",
+        "cube_width_px": 140.0,
+        "faces": [
+          "x=n at brightness 0.84",
+          "y=n at brightness 0.70",
+          "z=n at brightness 1.00"
+        ],
+        "grain_boundaries": "darkened by 0.42, width 0.0045 of the cube image width",
+        "grid": [
+          240,
+          240,
+          240
+        ],
+        "lookup": "nearest voxel; no smoothing or interpolation of grain geometry",
+        "palette": "identity-fixed, grain k -> colour k: tab20 then tab20b (40 colours), then 120 colours stepping hue by the golden ratio with saturation (0.5, 0.7, 0.9) and value (0.65, 0.8, 0.95)",
+        "palette_sha256": "097181dd550b8d973238230ed42df7cb7b989c2413f20f58c2f8bdd1c969a110",
+        "projection": "orthographic view of the three outer faces x = n, y = n, z = n; whole opaque cube",
+        "supersample": 2
+      },
+      "cases_shown": [
+        "microstructure 1",
+        "microstructure 2",
+        "microstructure 3"
+      ],
+      "frame_durations_ms": [
+        900,
+        230,
+        230,
+        230,
+        230,
+        230,
+        230,
+        230,
+        230,
+        230,
+        230,
+        230,
+        230,
+        230,
+        230,
+        230,
+        230,
+        230,
+        230,
+        230,
+        230,
+        230,
+        230,
+        230,
+        230,
+        230,
+        230,
+        230,
+        230,
+        230,
+        230,
+        230,
+        230,
+        230,
+        230,
+        230,
+        230,
+        230,
+        230,
+        230,
+        230,
+        230,
+        230,
+        230,
+        230,
+        230,
+        230,
+        230,
+        230,
+        230,
+        230,
+        230,
+        230,
+        230,
+        230,
+        230,
+        230,
+        1800
+      ],
+      "frame_pixel_sha256": [
+        "ac9410338acb37c49774517a06c5164a30640f899839e2725a8ef2eea1ae0d8c",
+        "ab9b3751cbdbaf18c48e47429467781944f7784cd3ff17d792f14df506f46468",
+        "c81f3f02ca8655f9a03653051bc626a8957efab23f5b94a7d0825db2a6eb81ae",
+        "0aedd95d6b27f3970a28215c82a8856ae134662bee9b8cd53c79ec3dcbb801c6",
+        "97daee71639c44f13eb87145666da664c1971f2aa67fdb361d1b4166fc203d72",
+        "0f5a5fbbb6b6408c4b7715a1bfbcd297fd18ac051cd434781491c27265479993",
+        "eab26201a045228e7fef1589624886da61499a838ea5ac3530da977598a038eb",
+        "38a28a587d967f5320f673868082e2e8ab32551c44eb6487df7d3fe0d8563b4a",
+        "f8dbed153fe49e93e219b9039e889135507b79d59abf996caa2a78ef8ead6c70",
+        "1a706eae80982095b1fd6b5133aaa16e33adc9c7296ab9e0b9f99cb3181b4871",
+        "c152dea3fdd0c789985829ee469dc1546019e6cdeb702f63d3488b4c4bee8c00",
+        "a25354b3c25f6ac6a76f680df43ca4134b2fd5268e2be937a62fb0e6bb6e98ce",
+        "bd5eceff7dd59148a9ed22b7df42e9dc68f678f1cc287015c07489e769f99298",
+        "0434f06eef35420de8e1b6db7e3cd316209bdb91b55280ff19642667916b4fcd",
+        "f7975e4c33adbc67a92b9058afcd17404a4d6674bb2ec20992782f75bdd1732c",
+        "cf10bcacab812db51e58d017abaaeb18513fdd3908f6bb7cb003cf48edc29e3d",
+        "6d5ca7fd2ca022c93633f3b88c05271db2dcdc0a2ba0bf47d52e2616a2c2cb79",
+        "32d1b4df3e4c320f61c6f5c8739650234729a918ebbadb4f25fc6ea9b3c63a2e",
+        "aa47a181577e4c2dbb0edc375e33462ed247924552e0cdf266cfbe037b61be26",
+        "69c3ef938a07a76b6e797b5142dae5240f045423b077097e8e082c3e4785d75e",
+        "f59d47955615a7d58d6e8b1080c7e8cb31d2237e901e33787316bc619e743a3e",
+        "dddddf64c6207738a995c0617ffca774ef28f9d48aae4bf5dac45d45c41dfa66",
+        "ea8d3e1c8922694e528428dff97dc03b3890fd3da876a939a792fae083676cce",
+        "330901fa491100fffdc443f9331967a34955b73774fd7a53a685a578cd5b3b21",
+        "dd1fb6ffe444a254df060ddf17ad69e1df32c57ca33b6f361e3b60823cf2ce7d",
+        "f3d98bcc288853434f6d3b243c46c51ff6577fd98ac5948278fa70e177196b82",
+        "1806e6a31e3635c6431ac507edde50f20933f79fda078cf1bf829233742a4633",
+        "a2400646299e17804c949f678fa96a2efb0abcfc7dcb880383166fae004f63dd",
+        "aa0289f84571ade5c9b0da927a71b5ea289a59399d238fcb05052be85c91676f",
+        "aa81a13193e84cef53f40edcefd939066c3fe048871e1129307747050a9845ca",
+        "da7e20d04ced97812797f74d4309d5d9314bc0ce37058f2850db6cea9c0aeea9",
+        "82f1dc2c21cc5822f9da30fd4080e238011a641c5d56559f5cf63689bafd33ca",
+        "05a7e893172e99a27e6c8fed5b9b4ff59ae98a8f8709fbc4eddda4a2201c29be",
+        "353e3fdb786b8227d9082bda49652cd4173994bc9092b4e107a48880e3d38b2f",
+        "d7a1d6ca47b9f0c2dda30c7226a7ed81c540f0f7d925cfef862ac8b094f49a76",
+        "bbacb364aff6bb03e01ca475c19d36edd63ed872115c1d0a6b94de0422cc5f69",
+        "1425a2dfce9a89fe1b04b4c1553f38aca0bbeabd29230a5f12aeb3c7166ef21c",
+        "dbe60f3d8833ae25236c58408948e6a328a55f1bb5e65d2277b01d8c208050d8",
+        "b50a83c249ce2d896c4085300198b0a717439d877739513a09f599b1afc4ce76",
+        "ae270fe7ab6f2975eab52d7ff1d6318cd52614ad933000eb451481935281e5f3",
+        "f6417302b9fd6aa99e39cd0ab7b874b3b62719e56f5b33bf5f76d0d585554813",
+        "efc16754757167be66c876b008805d4bbf9935aa3740be16777e8235c9536047",
+        "27914d87bd37d504a8ec1f5cf7ab58d8aaadda694ec4e19d33c724a223bb9f3a",
+        "c292e280c966b28731d57b77dd82d4e30faecf6fd2109bec4294079186e5d798",
+        "23563f4ed74318a719ae0de45502d980be12f7060ffa97a72c5f8cf87d3cde02",
+        "14575f9aff3ccab9163211632f2643e5eab9fa024cd2752c7593a6d2826ce82a",
+        "20bff2d8b2d21abb249a9c1c0c60331ab8e72a8dfdf904345fc9c38bf937b077",
+        "42e49bf28dff349b1e34b775030fda5642b3dd6451b3ab7fcf2435b366555ab0",
+        "129f7075c11d59fc1b53f98331928bc135c92414a686d5a9a574cd9689641114",
+        "b3ac69b8633fe700bf4ee8704450c4e68f35d26b024680365afabf0e6cd92c25",
+        "0efcfd7068ceabc9140f16502d54390e293bb3e2108c76880ba23d264e69f104",
+        "10fe7a6a77e50838aa7dbba85560b6a15a35b69b7e306102625126b0a12a5be2",
+        "abfc8fdc785b91ce4f73c95dbc2e79435ab57190f42f21bee11b2f9c575a5a29",
+        "98b4d2cc00cc23624936a4a18dff7bcc6a9e2512e69d16190529b1fcf4bce8f2",
+        "ad97adb1b5e18cbee1626e1a163e737b71903ee36ca364f55ad9f20318186f35",
+        "6a8df7eb3498b10308598c3c7c0f92eab64421b71664a3536090893aecb64c2a",
+        "7ce7328b18fe99fd371bf055e1eb644ff97078d6940baf61def7eeb280a2bf1d",
+        "345516c3e188f2cf3f7d38ce913fed91ef172879ef2dce3abc348d15e3911229"
+      ],
+      "frames": 58,
+      "layout": "two rows by three columns",
+      "recomputed": {
+        "microstructure 1": {
+          "differing_voxels": [
+            0,
+            2083,
+            3289,
+            3942,
+            5682,
+            6897,
+            9820,
+            12778,
+            15494,
+            17923,
+            20569,
+            22909,
+            25480,
+            28134,
+            30533,
+            32889,
+            35066,
+            37049,
+            39525,
+            41675,
+            43475,
+            45353,
+            47295,
+            49918,
+            51870,
+            54468,
+            56910,
+            58881,
+            61366,
+            63178,
+            65830,
+            68325,
+            70701,
+            73740,
+            76710,
+            79516,
+            82827,
+            84698,
+            86087,
+            88006,
+            90484,
+            92893,
+            95366,
+            97768,
+            99807,
+            101378,
+            101159,
+            103479,
+            105424,
+            108045,
+            110526,
+            112705,
+            115762,
+            118312,
+            121363,
+            123477,
+            124731,
+            127390
+          ],
+          "disagreement_percent": [
+            0.0,
+            0.015068,
+            0.023792,
+            0.028516,
+            0.041102,
+            0.049891,
+            0.071036,
+            0.092433,
+            0.11208,
+            0.129651,
+            0.148792,
+            0.165719,
+            0.184317,
+            0.203516,
+            0.22087,
+            0.237912,
+            0.25366,
+            0.268005,
+            0.285916,
+            0.301468,
+            0.314489,
+            0.328074,
+            0.342122,
+            0.361097,
+            0.375217,
+            0.39401,
+            0.411675,
+            0.425933,
+            0.443909,
+            0.457017,
+            0.476201,
+            0.494249,
+            0.511437,
+            0.53342,
+            0.554905,
+            0.575203,
+            0.599154,
+            0.612688,
+            0.622736,
+            0.636617,
+            0.654543,
+            0.671969,
+            0.689858,
+            0.707234,
+            0.721984,
+            0.733348,
+            0.731764,
+            0.748546,
+            0.762616,
+            0.781576,
+            0.799523,
+            0.815285,
+            0.837399,
+            0.855845,
+            0.877915,
+            0.893207,
+            0.902279,
+            0.921513
+          ],
+          "model_alive": [
+            1000,
+            1000,
+            1000,
+            1000,
+            1000,
+            1000,
+            994,
+            985,
+            969,
+            954,
+            923,
+            896,
+            863,
+            834,
+            807,
+            782,
+            740,
+            709,
+            679,
+            650,
+            629,
+            601,
+            578,
+            564,
+            545,
+            529,
+            513,
+            495,
+            471,
+            448,
+            436,
+            428,
+            408,
+            401,
+            387,
+            369,
+            358,
+            350,
+            339,
+            324,
+            315,
+            304,
+            294,
+            285,
+            276,
+            269,
+            259,
+            247,
+            241,
+            234,
+            231,
+            225,
+            218,
+            215,
+            213,
+            207,
+            200,
+            195
+          ],
+          "reference_alive": [
+            1000,
+            1000,
+            1000,
+            1000,
+            1000,
+            1000,
+            994,
+            985,
+            969,
+            953,
+            922,
+            896,
+            863,
+            834,
+            806,
+            782,
+            740,
+            709,
+            679,
+            650,
+            628,
+            600,
+            578,
+            564,
+            542,
+            528,
+            513,
+            494,
+            470,
+            446,
+            435,
+            426,
+            407,
+            401,
+            385,
+            368,
+            355,
+            350,
+            339,
+            325,
+            317,
+            304,
+            294,
+            285,
+            276,
+            269,
+            256,
+            246,
+            240,
+            233,
+            232,
+            224,
+            218,
+            216,
+            212,
+            208,
+            199,
+            196
+          ],
+          "steps": [
+            0,
+            100,
+            200,
+            250,
+            400,
+            500,
+            750,
+            1000,
+            1250,
+            1500,
+            1750,
+            2000,
+            2250,
+            2500,
+            2750,
+            3000,
+            3250,
+            3500,
+            3750,
+            4000,
+            4250,
+            4500,
+            4750,
+            5000,
+            5250,
+            5500,
+            5750,
+            6000,
+            6250,
+            6500,
+            6750,
+            7000,
+            7250,
+            7500,
+            7750,
+            8000,
+            8250,
+            8500,
+            8750,
+            9000,
+            9250,
+            9500,
+            9750,
+            10000,
+            10250,
+            10500,
+            10750,
+            11000,
+            11250,
+            11500,
+            11750,
+            12000,
+            12250,
+            12500,
+            12750,
+            13000,
+            13250,
+            13500
+          ],
+          "t": [
+            0.0,
+            1.0,
+            2.0,
+            2.5,
+            4.0,
+            5.0,
+            7.5,
+            10.0,
+            12.5,
+            15.0,
+            17.5,
+            20.0,
+            22.5,
+            25.0,
+            27.5,
+            30.0,
+            32.5,
+            35.0,
+            37.5,
+            40.0,
+            42.5,
+            45.0,
+            47.5,
+            50.0,
+            52.5,
+            55.0,
+            57.5,
+            60.0,
+            62.5,
+            65.0,
+            67.5,
+            70.0,
+            72.5,
+            75.0,
+            77.5,
+            80.0,
+            82.5,
+            85.0,
+            87.5,
+            90.0,
+            92.5,
+            95.0,
+            97.5,
+            100.0,
+            102.5,
+            105.0,
+            107.5,
+            110.0,
+            112.5,
+            115.0,
+            117.5,
+            120.0,
+            122.5,
+            125.0,
+            127.5,
+            130.0,
+            132.5,
+            135.0
+          ]
+        },
+        "microstructure 2": {
+          "differing_voxels": [
+            0,
+            2075,
+            3258,
+            3949,
+            5708,
+            6843,
+            10032,
+            12638,
+            15289,
+            17945,
+            20578,
+            23213,
+            25765,
+            28093,
+            30576,
+            32994,
+            35654,
+            37575,
+            39688,
+            42267,
+            43934,
+            46500,
+            48491,
+            51170,
+            53249,
+            55475,
+            57901,
+            60177,
+            62803,
+            65143,
+            67064,
+            69361,
+            71771,
+            73482,
+            74438,
+            75952,
+            77088,
+            79380,
+            81065,
+            83270,
+            84130,
+            86012,
+            87969,
+            90514,
+            92557,
+            94976,
+            95782,
+            97702,
+            99714,
+            100504,
+            102544,
+            104637,
+            106016,
+            107060,
+            108778,
+            110127,
+            112862,
+            113866
+          ],
+          "disagreement_percent": [
+            0.0,
+            0.01501,
+            0.023568,
+            0.028566,
+            0.041291,
+            0.049501,
+            0.072569,
+            0.091421,
+            0.110598,
+            0.12981,
+            0.148857,
+            0.167918,
+            0.186379,
+            0.203219,
+            0.221181,
+            0.238672,
+            0.257914,
+            0.27181,
+            0.287095,
+            0.305751,
+            0.31781,
+            0.336372,
+            0.350774,
+            0.370153,
+            0.385192,
+            0.401295,
+            0.418844,
+            0.435308,
+            0.454304,
+            0.471231,
+            0.485127,
+            0.501743,
+            0.519177,
+            0.531554,
+            0.538469,
+            0.549421,
+            0.557639,
+            0.574219,
+            0.586408,
+            0.602358,
+            0.608579,
+            0.622193,
+            0.63635,
+            0.65476,
+            0.669538,
+            0.687037,
+            0.692867,
+            0.706756,
+            0.721311,
+            0.727025,
+            0.741782,
+            0.756923,
+            0.766898,
+            0.77445,
+            0.786878,
+            0.796636,
+            0.816421,
+            0.823683
+          ],
+          "model_alive": [
+            1000,
+            1000,
+            1000,
+            1000,
+            999,
+            999,
+            994,
+            981,
+            963,
+            939,
+            911,
+            886,
+            861,
+            831,
+            804,
+            772,
+            740,
+            702,
+            675,
+            654,
+            632,
+            605,
+            578,
+            560,
+            544,
+            525,
+            503,
+            494,
+            480,
+            465,
+            439,
+            421,
+            409,
+            396,
+            381,
+            364,
+            347,
+            340,
+            331,
+            322,
+            311,
+            301,
+            291,
+            287,
+            282,
+            274,
+            263,
+            254,
+            248,
+            241,
+            234,
+            228,
+            220,
+            214,
+            210,
+            200,
+            195,
+            192
+          ],
+          "reference_alive": [
+            1000,
+            1000,
+            1000,
+            1000,
+            999,
+            999,
+            994,
+            981,
+            962,
+            939,
+            911,
+            886,
+            860,
+            831,
+            803,
+            771,
+            739,
+            702,
+            675,
+            653,
+            631,
+            604,
+            578,
+            560,
+            544,
+            524,
+            503,
+            494,
+            480,
+            464,
+            438,
+            422,
+            409,
+            395,
+            380,
+            363,
+            347,
+            340,
+            331,
+            322,
+            310,
+            301,
+            291,
+            286,
+            282,
+            274,
+            261,
+            252,
+            246,
+            240,
+            233,
+            225,
+            222,
+            214,
+            210,
+            199,
+            195,
+            192
+          ],
+          "steps": [
+            0,
+            100,
+            200,
+            250,
+            400,
+            500,
+            750,
+            1000,
+            1250,
+            1500,
+            1750,
+            2000,
+            2250,
+            2500,
+            2750,
+            3000,
+            3250,
+            3500,
+            3750,
+            4000,
+            4250,
+            4500,
+            4750,
+            5000,
+            5250,
+            5500,
+            5750,
+            6000,
+            6250,
+            6500,
+            6750,
+            7000,
+            7250,
+            7500,
+            7750,
+            8000,
+            8250,
+            8500,
+            8750,
+            9000,
+            9250,
+            9500,
+            9750,
+            10000,
+            10250,
+            10500,
+            10750,
+            11000,
+            11250,
+            11500,
+            11750,
+            12000,
+            12250,
+            12500,
+            12750,
+            13000,
+            13250,
+            13500
+          ],
+          "t": [
+            0.0,
+            1.0,
+            2.0,
+            2.5,
+            4.0,
+            5.0,
+            7.5,
+            10.0,
+            12.5,
+            15.0,
+            17.5,
+            20.0,
+            22.5,
+            25.0,
+            27.5,
+            30.0,
+            32.5,
+            35.0,
+            37.5,
+            40.0,
+            42.5,
+            45.0,
+            47.5,
+            50.0,
+            52.5,
+            55.0,
+            57.5,
+            60.0,
+            62.5,
+            65.0,
+            67.5,
+            70.0,
+            72.5,
+            75.0,
+            77.5,
+            80.0,
+            82.5,
+            85.0,
+            87.5,
+            90.0,
+            92.5,
+            95.0,
+            97.5,
+            100.0,
+            102.5,
+            105.0,
+            107.5,
+            110.0,
+            112.5,
+            115.0,
+            117.5,
+            120.0,
+            122.5,
+            125.0,
+            127.5,
+            130.0,
+            132.5,
+            135.0
+          ]
+        },
+        "microstructure 3": {
+          "differing_voxels": [
+            0,
+            2078,
+            3249,
+            3908,
+            5669,
+            6979,
+            9738,
+            12893,
+            15153,
+            17621,
+            20842,
+            23616,
+            26082,
+            28372,
+            30332,
+            33120,
+            35127,
+            36936,
+            38960,
+            40938,
+            42794,
+            44601,
+            47141,
+            49298,
+            51183,
+            53438,
+            55800,
+            58354,
+            60128,
+            62320,
+            64014,
+            65631,
+            66816,
+            68315,
+            70570,
+            72861,
+            75185,
+            76332,
+            78725,
+            80419,
+            81497,
+            83007,
+            84151,
+            85122,
+            86456,
+            87640,
+            89209,
+            89137,
+            89881,
+            90604,
+            91345,
+            91892,
+            92826,
+            94477,
+            95866,
+            96818,
+            96816,
+            97126
+          ],
+          "disagreement_percent": [
+            0.0,
+            0.015032,
+            0.023503,
+            0.02827,
+            0.041008,
+            0.050485,
+            0.070443,
+            0.093265,
+            0.109614,
+            0.127467,
+            0.150767,
+            0.170833,
+            0.188672,
+            0.205237,
+            0.219416,
+            0.239583,
+            0.254102,
+            0.267188,
+            0.281829,
+            0.296137,
+            0.309563,
+            0.322635,
+            0.341008,
+            0.356612,
+            0.370247,
+            0.38656,
+            0.403646,
+            0.422121,
+            0.434954,
+            0.45081,
+            0.463064,
+            0.474761,
+            0.483333,
+            0.494177,
+            0.510489,
+            0.527062,
+            0.543873,
+            0.55217,
+            0.569481,
+            0.581735,
+            0.589533,
+            0.600456,
+            0.608731,
+            0.615755,
+            0.625405,
+            0.63397,
+            0.64532,
+            0.644799,
+            0.650181,
+            0.655411,
+            0.660771,
+            0.664728,
+            0.671484,
+            0.683427,
+            0.693475,
+            0.700362,
+            0.700347,
+            0.70259
+          ],
+          "model_alive": [
+            1000,
+            1000,
+            1000,
+            1000,
+            1000,
+            1000,
+            997,
+            990,
+            972,
+            952,
+            921,
+            897,
+            876,
+            835,
+            803,
+            771,
+            731,
+            691,
+            665,
+            632,
+            608,
+            580,
+            559,
+            534,
+            515,
+            506,
+            492,
+            476,
+            459,
+            438,
+            431,
+            412,
+            394,
+            381,
+            369,
+            360,
+            347,
+            343,
+            328,
+            319,
+            312,
+            301,
+            287,
+            281,
+            270,
+            261,
+            252,
+            245,
+            236,
+            229,
+            224,
+            217,
+            208,
+            205,
+            199,
+            195,
+            184,
+            181
+          ],
+          "reference_alive": [
+            1000,
+            1000,
+            1000,
+            1000,
+            1000,
+            1000,
+            997,
+            990,
+            972,
+            952,
+            921,
+            897,
+            874,
+            835,
+            802,
+            771,
+            730,
+            691,
+            664,
+            632,
+            608,
+            579,
+            558,
+            534,
+            515,
+            505,
+            491,
+            476,
+            460,
+            439,
+            428,
+            411,
+            393,
+            381,
+            368,
+            359,
+            347,
+            339,
+            326,
+            319,
+            312,
+            300,
+            287,
+            280,
+            271,
+            262,
+            253,
+            243,
+            235,
+            228,
+            223,
+            216,
+            210,
+            205,
+            197,
+            194,
+            185,
+            180
+          ],
+          "steps": [
+            0,
+            100,
+            200,
+            250,
+            400,
+            500,
+            750,
+            1000,
+            1250,
+            1500,
+            1750,
+            2000,
+            2250,
+            2500,
+            2750,
+            3000,
+            3250,
+            3500,
+            3750,
+            4000,
+            4250,
+            4500,
+            4750,
+            5000,
+            5250,
+            5500,
+            5750,
+            6000,
+            6250,
+            6500,
+            6750,
+            7000,
+            7250,
+            7500,
+            7750,
+            8000,
+            8250,
+            8500,
+            8750,
+            9000,
+            9250,
+            9500,
+            9750,
+            10000,
+            10250,
+            10500,
+            10750,
+            11000,
+            11250,
+            11500,
+            11750,
+            12000,
+            12250,
+            12500,
+            12750,
+            13000,
+            13250,
+            13500
+          ],
+          "t": [
+            0.0,
+            1.0,
+            2.0,
+            2.5,
+            4.0,
+            5.0,
+            7.5,
+            10.0,
+            12.5,
+            15.0,
+            17.5,
+            20.0,
+            22.5,
+            25.0,
+            27.5,
+            30.0,
+            32.5,
+            35.0,
+            37.5,
+            40.0,
+            42.5,
+            45.0,
+            47.5,
+            50.0,
+            52.5,
+            55.0,
+            57.5,
+            60.0,
+            62.5,
+            65.0,
+            67.5,
+            70.0,
+            72.5,
+            75.0,
+            77.5,
+            80.0,
+            82.5,
+            85.0,
+            87.5,
+            90.0,
+            92.5,
+            95.0,
+            97.5,
+            100.0,
+            102.5,
+            105.0,
+            107.5,
+            110.0,
+            112.5,
+            115.0,
+            117.5,
+            120.0,
+            122.5,
+            125.0,
+            127.5,
+            130.0,
+            132.5,
+            135.0
+          ]
+        }
+      },
+      "size": [
+        584,
+        516
+      ],
+      "steps": [
+        0,
+        100,
+        200,
+        250,
+        400,
+        500,
+        750,
+        1000,
+        1250,
+        1500,
+        1750,
+        2000,
+        2250,
+        2500,
+        2750,
+        3000,
+        3250,
+        3500,
+        3750,
+        4000,
+        4250,
+        4500,
+        4750,
+        5000,
+        5250,
+        5500,
+        5750,
+        6000,
+        6250,
+        6500,
+        6750,
+        7000,
+        7250,
+        7500,
+        7750,
+        8000,
+        8250,
+        8500,
+        8750,
+        9000,
+        9250,
+        9500,
+        9750,
+        10000,
+        10250,
+        10500,
+        10750,
+        11000,
+        11250,
+        11500,
+        11750,
+        12000,
+        12250,
+        12500,
+        12750,
+        13000,
+        13250,
+        13500
+      ],
+      "t": [
+        0.0,
+        1.0,
+        2.0,
+        2.5,
+        4.0,
+        5.0,
+        7.5,
+        10.0,
+        12.5,
+        15.0,
+        17.5,
+        20.0,
+        22.5,
+        25.0,
+        27.5,
+        30.0,
+        32.5,
+        35.0,
+        37.5,
+        40.0,
+        42.5,
+        45.0,
+        47.5,
+        50.0,
+        52.5,
+        55.0,
+        57.5,
+        60.0,
+        62.5,
+        65.0,
+        67.5,
+        70.0,
+        72.5,
+        75.0,
+        77.5,
+        80.0,
+        82.5,
+        85.0,
+        87.5,
+        90.0,
+        92.5,
+        95.0,
+        97.5,
+        100.0,
+        102.5,
+        105.0,
+        107.5,
+        110.0,
+        112.5,
+        115.0,
+        117.5,
+        120.0,
+        122.5,
+        125.0,
+        127.5,
+        130.0,
+        132.5,
+        135.0
+      ]
+    },
+    "r416_n5000": {
+      "alt_text": "Animation of one 416-cubed, 5,000-grain microstructure with reference and PINN-Phase labels side by side at all 24 saved times from t = 0 to t = 50. At t = 50, reference/PINN-Phase alive counts are 2889/2891, and label disagreement is 0.35%.",
+      "camera": {
+        "camera_azimuth_deg": 38.0,
+        "camera_elevation_deg": 24.0,
+        "cube_edges": "rgb [0.22, 0.22, 0.22], width 0.0045 of the cube image width",
+        "cube_width_px": 245.0,
+        "faces": [
+          "x=n at brightness 0.84",
+          "y=n at brightness 0.70",
+          "z=n at brightness 1.00"
+        ],
+        "grain_boundaries": "darkened by 0.42, width 0.0045 of the cube image width",
+        "grid": [
+          416,
+          416,
+          416
+        ],
+        "lookup": "nearest voxel; no smoothing or interpolation of grain geometry",
+        "palette": "identity-fixed, grain k -> colour k: tab20 then tab20b (40 colours), then 120 colours stepping hue by the golden ratio with saturation (0.5, 0.7, 0.9) and value (0.65, 0.8, 0.95)",
+        "palette_sha256": "097181dd550b8d973238230ed42df7cb7b989c2413f20f58c2f8bdd1c969a110",
+        "projection": "orthographic view of the three outer faces x = n, y = n, z = n; whole opaque cube",
+        "supersample": 2
+      },
+      "cases_shown": [
+        "microstructure 1"
+      ],
+      "frame_durations_ms": [
+        900,
+        230,
+        230,
+        230,
+        230,
+        230,
+        230,
+        230,
+        230,
+        230,
+        230,
+        230,
+        230,
+        230,
+        230,
+        230,
+        230,
+        230,
+        230,
+        230,
+        230,
+        230,
+        230,
+        1800
+      ],
+      "frame_pixel_sha256": [
+        "96b2fd8d309d752ed2c27c9c330f7c536178c0c5bbfb7d4ff9d7dab1834709f0",
+        "c833b1c4b848dc7564d4470ddf431ec32cec5872c4bd9168e65d5481190ae4cd",
+        "85b8e4c7c04f8f7996b7b00ba914c1e8ebafe539c0859779e44a808778140369",
+        "e7d00240ceeadd4a4b9ef532db5cb57bc09680fd6114bf24c2a56b613d36056b",
+        "ad58e4216b3112a22a832e4a718e5f99d100c789b997786959034058d96a7acc",
+        "6ee330b1c9d05c94c641a318448e8b1104c27019e0a2acde734c96a5f0997ee7",
+        "e25e61bd02bd6753c7a8b30b680a6dcb91f3f4c0c05cc0506c345af0b1c10c7b",
+        "53d96f3a29848a352c90a5b7a396aaaecf3598362dc9f28a553cccc14920e4e7",
+        "7b3cff3560ab76a1be90f897f0c3111d949b91bb92bcee3e910bafd87629fa10",
+        "d232348f5ee93900bd2573dacd57c5885734776673d3d8386280594d1dd90eea",
+        "8c57789569cb07f658eae2eb6d0c6372bcf7f62479e093405f28823d60226af7",
+        "537f8b7289a810ef8a869f6fdcfaa912d5d0d16f06c5d9775ce3fcf67d24b5d5",
+        "92119ddf6cd401de2b6d4e5cec6d1e9f5e3ea068d24f0a57862b70c5270dc169",
+        "c04bce96ef9273dfeb7bb49d2346ca077becffe2fe3510e248d4e23f4a618583",
+        "bd753a14090cd612eb7e2cb395d35485676aee07b59aeb92485d97ebfbe1a229",
+        "eaceacdfa29e1944480e16e92129683c56b15130782ec0820ca532b66fd4c567",
+        "39ea9761a4823824358379cf93a2c4add2e92f433663e75aba84353dc99924f1",
+        "c15e58351dd7690d285acb30b4bb1ddf82bb6e425381bf41f5ab27ca122f806b",
+        "262cee0d81cbb8bd59ee4b371a5f8769c1c796d99b8f791674197786f1b15dfd",
+        "2c6d2685f3bcc018880ba1355460cf706a5ad8d614c079409e114f47a1845bc9",
+        "5a299f9f746d8b6fe7a134fcea4a65188e0b443d7057dcacfe9fbf0d2b6c8978",
+        "1de80992ffe2584ab92b4df2517e114ba417845450dd25fbcc4d40691b73454c",
+        "50034e09f6d7242db0741b83c9ebe7f04b3d526e2ee63c6bf161675a522ab45d",
+        "1acd3c9a3961421076e9afd30032a1e9234baa154225e03e7244754fd3323d38"
+      ],
+      "frames": 24,
+      "layout": "reference and PINN-Phase side by side",
+      "recomputed": {
+        "microstructure 1": {
+          "differing_voxels": [
+            0,
+            10834,
+            16947,
+            20122,
+            29456,
+            36054,
+            51068,
+            64770,
+            79265,
+            92994,
+            105388,
+            118562,
+            131881,
+            144066,
+            155351,
+            167626,
+            178759,
+            190121,
+            201896,
+            211575,
+            222491,
+            233326,
+            244128,
+            253831
+          ],
+          "disagreement_percent": [
+            0.0,
+            0.015049,
+            0.02354,
+            0.027951,
+            0.040916,
+            0.050081,
+            0.070936,
+            0.089969,
+            0.110104,
+            0.129174,
+            0.14639,
+            0.164689,
+            0.18319,
+            0.200116,
+            0.215791,
+            0.232842,
+            0.248306,
+            0.264089,
+            0.280445,
+            0.29389,
+            0.309053,
+            0.324103,
+            0.339108,
+            0.352586
+          ],
+          "model_alive": [
+            5000,
+            5000,
+            5000,
+            5000,
+            4999,
+            4995,
+            4977,
+            4927,
+            4847,
+            4743,
+            4625,
+            4466,
+            4334,
+            4198,
+            4040,
+            3889,
+            3751,
+            3622,
+            3488,
+            3337,
+            3219,
+            3101,
+            2993,
+            2891
+          ],
+          "reference_alive": [
+            5000,
+            5000,
+            5000,
+            5000,
+            4999,
+            4995,
+            4977,
+            4927,
+            4847,
+            4743,
+            4624,
+            4464,
+            4331,
+            4196,
+            4040,
+            3887,
+            3751,
+            3621,
+            3487,
+            3337,
+            3215,
+            3100,
+            2991,
+            2889
+          ],
+          "steps": [
+            0,
+            100,
+            200,
+            250,
+            400,
+            500,
+            750,
+            1000,
+            1250,
+            1500,
+            1750,
+            2000,
+            2250,
+            2500,
+            2750,
+            3000,
+            3250,
+            3500,
+            3750,
+            4000,
+            4250,
+            4500,
+            4750,
+            5000
+          ],
+          "t": [
+            0.0,
+            1.0,
+            2.0,
+            2.5,
+            4.0,
+            5.0,
+            7.5,
+            10.0,
+            12.5,
+            15.0,
+            17.5,
+            20.0,
+            22.5,
+            25.0,
+            27.5,
+            30.0,
+            32.5,
+            35.0,
+            37.5,
+            40.0,
+            42.5,
+            45.0,
+            47.5,
+            50.0
+          ]
+        }
+      },
+      "size": [
+        588,
+        469
+      ],
+      "steps": [
+        0,
+        100,
+        200,
+        250,
+        400,
+        500,
+        750,
+        1000,
+        1250,
+        1500,
+        1750,
+        2000,
+        2250,
+        2500,
+        2750,
+        3000,
+        3250,
+        3500,
+        3750,
+        4000,
+        4250,
+        4500,
+        4750,
+        5000
+      ],
+      "t": [
+        0.0,
+        1.0,
+        2.0,
+        2.5,
+        4.0,
+        5.0,
+        7.5,
+        10.0,
+        12.5,
+        15.0,
+        17.5,
+        20.0,
+        22.5,
+        25.0,
+        27.5,
+        30.0,
+        32.5,
+        35.0,
+        37.5,
+        40.0,
+        42.5,
+        45.0,
+        47.5,
+        50.0
+      ]
+    }
+  },
+  "release_assets": [
+    {
+      "bytes": 604323889,
+      "filename": "population_scaling_r240_n1000.zip",
+      "sha256": "0047d32a42be5b5ad122262b6eaabba2883b9af06cc64424f9b9740f8034afc9"
+    },
+    {
+      "bytes": 576136809,
+      "filename": "population_scaling_r416_n5000.zip",
+      "sha256": "862430ad8dbb4879eef1308b5d064c5bf9a885626c622c3e1181be4c925f281a"
+    }
+  ],
+  "renderer": "scripts/render_population_scaling_media.py",
+  "renderer_environment": {
+    "bold_font_sha256": "b184b89e3c1075f22f6b71575b6fc20d4972b3cfd3b23322ca6fd596dcaef167",
+    "font_file": "DejaVuSans.ttf",
+    "font_sha256": "3fdf69cabf06049ea70a00b5919340e2ce1e6d02b0cc3c4b44fb6801bd1e0d22",
+    "freetype": "2.14.3",
+    "matplotlib": "3.10.7",
+    "numpy": "2.2.6",
+    "pillow": "12.2.0",
+    "python": "3.11.9",
+    "text_rasterizer": "Pillow ImageDraw with FreeType"
+  },
+  "renderer_sha256": "067a7fc56d9bc2d4bd185a946c2f6e2d2aee323c9ede01bd87f3b7b1c68962e4",
+  "schema": "pinn-phase-population-scaling-media-v1",
+  "score_record": "benchmarks/population_scaling/expected_score.json",
+  "score_record_sha256": "4a4011f2ad8c5bce58113e662aba588a786cffefa29abf808e4b38fc53ff18f9",
+  "time_per_step": 0.01
+}
