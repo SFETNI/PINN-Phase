@@ -589,14 +589,15 @@ summarizes only the evaluated microstructures and horizons.
 
 <p align="center"><img src="media/population_scaling/r240_n1000_reference_vs_pinn_phase.gif" width="900" alt="Reference row above PINN-Phase row for three 1,000-grain microstructures from t = 0 to 135; final reference and model alive-grain counts are 196 and 195, 192 and 192, and 180 and 181, with label disagreement 0.92%, 0.82%, and 0.70%."></p>
 
-The paired frames show every released saved label time for the three 1,000-grain
-microstructures. Alive-grain counts use the published volume threshold of
-1e-6, and label disagreement is recomputed from each paired label array.
+Each frame pairs the reference and PINN-Phase states of the three 1,000-grain
+microstructures at the same saved time, from t = 0 to 135, with no interpolated
+frames. The counters give the grains alive in each method and the percentage of
+voxels whose grain label differs.
 
 <p align="center"><img src="media/population_scaling/r416_n5000_reference_vs_pinn_phase.gif" width="900" alt="Reference and PINN-Phase shown side by side for the 5,000-grain microstructure from t = 0 to 50; final reference and model alive-grain counts are 2,889 and 2,891, with label disagreement 0.35%."></p>
 
-The paired frames cover the complete released 5,000-grain horizon through
-t = 50. The final label disagreement is 0.3526% before rounding.
+The same pairing for the 5,000-grain microstructure, through the evaluated
+horizon t = 50.
 
 The compact records also cover grain-resolved growth and face laws, the mobility
 discrimination control, the 38-grain perturbed-start predictability floor, the

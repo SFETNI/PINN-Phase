@@ -126,7 +126,7 @@ def test_population_animation_timing_size_and_terminal_values() -> None:
             assert image.size == tuple(record["size"]) and len(durations) == record["frames"]
         assert durations == record["frame_durations_ms"]
         assert durations[0] == 900 and durations[-1] == 1800 and set(durations[1:-1]) == {230}
-        assert gif.stat().st_size <= 3 * 1024 * 1024
+        assert gif.stat().st_size <= 8 * 1024 * 1024
         with Image.open(poster_path) as poster:
             assert poster.size == tuple(record["size"])
         disagreements, alive = terminal[regime]

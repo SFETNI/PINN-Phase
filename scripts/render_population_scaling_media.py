@@ -34,6 +34,9 @@ _legacy_spec.loader.exec_module(legacy)
 DT = 0.01
 ALIVE_THRESHOLD = 1e-6
 FRAME_MS = 230
+#: Every pixel size below is multiplied by SCALE, so the animations are shown at about
+#: 880 pixels wide, close to the README display width, without upscaling.
+SCALE = 1.5
 FIRST_MS = 900
 LAST_MS = 1800
 INK = (34, 34, 34)
@@ -221,8 +224,12 @@ def _check_published(regime: str, recomputed: dict[str, dict]) -> None:
             raise SourceConflict(f"{regime} {name}: terminal alive counts differ from the article")
 
 
+def _px(value: float) -> int:
+    return int(round(value * SCALE))
+
+
 def _cube(labels: np.ndarray, width: float) -> Image.Image:
-    return legacy._on_white(legacy.cube_image(labels, width))
+    return legacy._on_white(legacy.cube_image(labels, width * SCALE))
 
 
 def _frame(regime: str, asset_root: Path, step: int, recomputed: dict[str, dict]) -> Image.Image:
@@ -235,28 +242,29 @@ def _frame(regime: str, asset_root: Path, step: int, recomputed: dict[str, dict]
                       _cube(_load_label(_label_path(case_dir, "model", step), step, spec["grid"], spec["grains"]), spec["cube_width"])))
     cw, ch = cubes[0][0].size
     if len(cases) == 3:
-        left, gap, top, row_gap = 116, 18, 118, 26
-        width = left + 3 * cw + 2 * gap + 12
-        counters_y = top + 2 * ch + row_gap + 9
-        height = counters_y + 65
+        left, gap, top, row_gap = _px(116), _px(18), _px(136), _px(26)
+        width = left + 3 * cw + 2 * gap + _px(12)
+        counters_y = top + 2 * ch + row_gap + _px(9)
+        height = counters_y + _px(65)
         positions = [((left + k * (cw + gap), top), (left + k * (cw + gap), top + ch + row_gap)) for k in range(3)]
     else:
-        left, gap, top = 36, 26, 126
+        left, gap, top = _px(36), _px(26), _px(140)
         width = left * 2 + 2 * cw + gap
-        counters_y = top + ch + 12
-        height = counters_y + 71
+        counters_y = top + ch + _px(12)
+        height = counters_y + _px(71)
         positions = [((left, top), (left + cw + gap, top))]
     image = Image.new("RGB", (width, height), "white")
     draw = ImageDraw.Draw(image)
-    draw.text((14, 10), spec["title"], font=_font(18, True), fill=INK)
-    draw.text((14, 40), f"paired saved labels, t = {step * DT:g}; no interpolation", font=_font(13), fill=SOFT)
-    x0, x1, y = 105, width - 24, 82
-    draw.line((x0, y, x1, y), fill=(205, 205, 205), width=4)
+    draw.text((_px(14), _px(10)), spec["title"], font=_font(_px(18), True), fill=INK)
+    draw.text((_px(14), _px(40)), f"paired saved labels, t = {step * DT:g}; no interpolation", font=_font(_px(13)), fill=SOFT)
+    x0, x1, y = _px(105), width - _px(24), _px(82)
+    draw.line((x0, y, x1, y), fill=(205, 205, 205), width=_px(4))
     marker = x0 + (x1 - x0) * step / spec["final_step"]
-    draw.line((x0, y, marker, y), fill=(70, 70, 70), width=4)
-    draw.ellipse((marker - 5, y - 5, marker + 5, y + 5), fill=(70, 70, 70))
-    draw.text((x0, y + 8), "t = 0", font=_font(11), fill=SOFT, anchor="ma")
-    draw.text((x1, y + 8), f"t = {spec['final_step'] * DT:g}", font=_font(11), fill=SOFT, anchor="ma")
+    draw.line((x0, y, marker, y), fill=(70, 70, 70), width=_px(4))
+    r = _px(5)
+    draw.ellipse((marker - r, y - r, marker + r, y + r), fill=(70, 70, 70))
+    draw.text((x0, y + _px(8)), "t = 0", font=_font(_px(11)), fill=SOFT, anchor="ma")
+    draw.text((x1, y + _px(8)), f"t = {spec['final_step'] * DT:g}", font=_font(_px(11)), fill=SOFT, anchor="ma")
     for index, (name, pair, locations) in enumerate(zip(cases, cubes, positions)):
         reference_xy, model_xy = locations
         image.paste(pair[0], reference_xy)
@@ -265,21 +273,21 @@ def _frame(regime: str, asset_root: Path, step: int, recomputed: dict[str, dict]
         at = data["steps"].index(step)
         if len(cases) == 3:
             centre = reference_xy[0] + cw // 2
-            draw.text((centre, top - 7), name, font=_font(13, True), fill=INK, anchor="md")
+            draw.text((centre, top - _px(7)), name, font=_font(_px(13), True), fill=INK, anchor="md")
             draw.text((centre, counters_y), f"alive: ref {data['reference_alive'][at]} | model {data['model_alive'][at]}",
-                      font=_font(11), fill=INK, anchor="ma")
-            draw.text((centre, counters_y + 22), f"disagreement {data['disagreement_percent'][at]:.2f}%",
-                      font=_font(11), fill=INK, anchor="ma")
+                      font=_font(_px(11)), fill=INK, anchor="ma")
+            draw.text((centre, counters_y + _px(22)), f"disagreement {data['disagreement_percent'][at]:.2f}%",
+                      font=_font(_px(11)), fill=INK, anchor="ma")
         else:
-            draw.text((reference_xy[0] + cw // 2, top - 7), "Reference", font=_font(14, True), fill=INK, anchor="md")
-            draw.text((model_xy[0] + cw // 2, top - 7), "PINN-Phase", font=_font(14, True), fill=INK, anchor="md")
+            draw.text((reference_xy[0] + cw // 2, top - _px(14)), "Reference", font=_font(_px(14), True), fill=INK, anchor="md")
+            draw.text((model_xy[0] + cw // 2, top - _px(14)), "PINN-Phase", font=_font(_px(14), True), fill=INK, anchor="md")
             draw.text((width // 2, counters_y), f"grains alive: reference {data['reference_alive'][at]}  |  PINN-Phase {data['model_alive'][at]}",
-                      font=_font(13), fill=INK, anchor="ma")
-            draw.text((width // 2, counters_y + 25), f"label disagreement {data['disagreement_percent'][at]:.2f} %",
-                      font=_font(13), fill=INK, anchor="ma")
+                      font=_font(_px(13)), fill=INK, anchor="ma")
+            draw.text((width // 2, counters_y + _px(25)), f"label disagreement {data['disagreement_percent'][at]:.2f} %",
+                      font=_font(_px(13)), fill=INK, anchor="ma")
     if len(cases) == 3:
-        draw.text((14, top + ch // 2), "Reference", font=_font(13, True), fill=INK, anchor="lm")
-        draw.text((14, top + ch + row_gap + ch // 2), "PINN-Phase", font=_font(13, True), fill=INK, anchor="lm")
+        draw.text((_px(14), top + ch // 2), "Reference", font=_font(_px(13), True), fill=INK, anchor="lm")
+        draw.text((_px(14), top + ch + row_gap + ch // 2), "PINN-Phase", font=_font(_px(13), True), fill=INK, anchor="lm")
     return image
 
 
@@ -337,8 +345,8 @@ def render(asset_root: Path, release_asset_dir: Path, output: Path) -> Path:
         poster = output / spec["poster"]
         delays = _save_gif(frames, gif)
         frames[-1].save(poster, format="PNG", optimize=True)
-        if gif.stat().st_size > 3 * 1024 * 1024:
-            raise SourceConflict(f"{gif.name}: GIF is larger than 3 MiB")
+        if gif.stat().st_size > 8 * 1024 * 1024:
+            raise SourceConflict(f"{gif.name}: GIF is larger than 8 MiB")
         written.extend((gif, poster))
         if len(spec["cases"]) == 3:
             terminal_pairs = ", ".join(

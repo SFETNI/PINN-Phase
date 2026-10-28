@@ -52,4 +52,4 @@ scripts/package_population_scaling.py	NEW	3b15b2788f905b538d529fce3bbfde84417d42
 scripts/package_population_scaling_records.py	NEW	92a388f51c971a57d32f48c006b7ca25c3d46ca829b098a506fef2674b83a5f2	public compact-record and initial-label packaging
 scripts/verify_population_scaling.py	NEW	7519f1565cb18005083e416b2cd4c1db36b39b747e3e170765a418aa6fcdcfc5	public compact and release-asset verifier with array recomputation
 scripts/analyze_population_assets.py	NEW	5ce232686613a946a35cb958f144d33e7c3fe4577309d0fd7f05c0d31f77d8d9	public population analysis from release volume tables
-scripts/render_population_scaling_media.py	NEW	067a7fc56d9bc2d4bd185a946c2f6e2d2aee323c9ede01bd87f3b7b1c68962e4	public paired-state animations for the 1,000- and 5,000-grain evaluations, with record and source checks
+scripts/render_population_scaling_media.py	NEW	89684508a583ba3d50e11122ecc89753f347987c649f01cc59057db6a50f0e66	public paired-state animations for the 1,000- and 5,000-grain evaluations, with record and source checks
