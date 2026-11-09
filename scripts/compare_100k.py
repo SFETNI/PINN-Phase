@@ -105,7 +105,7 @@ def main() -> int:
     args = parser.parse_args()
     result = compare(args.record_dir.resolve(), args.reference_5000_volumes.resolve())
     args.out_json.parent.mkdir(parents=True, exist_ok=True)
-    args.out_json.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    args.out_json.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8", newline="\n")
     return 0
 
 

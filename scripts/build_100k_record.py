@@ -147,7 +147,7 @@ def write_record(evidence_dir: Path, out_dir: Path) -> None:
         "source_sha256": {name: sha256(evidence_dir / name) for name in required},
     }
     (out_dir / "metadata.json").write_text(
-        json.dumps(public_metadata, indent=2, sort_keys=True) + "\n", encoding="utf-8"
+        json.dumps(public_metadata, indent=2, sort_keys=True) + "\n", encoding="utf-8", newline="\n"
     )
 
     record_text = f"""# {n0:,}-grain population record
@@ -165,7 +165,7 @@ This compact record describes one reference-free {int(metadata_source['side']):,
 
 NumPy archives contain numeric arrays only and load with `allow_pickle=False`.
 """
-    (out_dir / "RECORD.md").write_text(record_text, encoding="utf-8")
+    (out_dir / "RECORD.md").write_text(record_text, encoding="utf-8", newline="\n")
 
     payloads = sorted(path for path in out_dir.iterdir() if path.is_file() and path.name != "SHA256SUMS")
     checksums = "".join(f"{sha256(path)}  {path.name}\n" for path in payloads)
