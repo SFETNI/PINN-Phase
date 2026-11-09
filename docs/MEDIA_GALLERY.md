@@ -95,6 +95,7 @@ outputs and recomputed counters to the phase-local record.
 | `media/population_scaling/r416_n5000_reference_vs_pinn_phase.gif` | Reference and PINN-Phase paired saved states for the 5,000-grain microstructure from t = 0 to 50 |
 | `media/population_scaling/r1120_n100000_cutaway.gif` | Initial and evolving cutaway views for the reference-free 100,000-grain run |
 | `media/population_scaling/r1120_n100000_cutaway3d_final.png` | Three-dimensional cutaway of the whole domain at the end of the reference-free 100,000-grain run, drawn from the stored grain labels |
+| `media/population_scaling/r1120_n100000_midplane_pinn_phase.gif` | Full central plane of the reference-free 100,000-grain run from the initial state to the end of the run, drawn from saved labels |
 
 Both animations include a static poster. They are rendered from the released
 population arrays by `scripts/render_population_scaling_media.py`; the shared

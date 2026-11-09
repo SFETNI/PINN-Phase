@@ -46,6 +46,7 @@ POPULATION_OUTPUTS = {
 }
 POPULATION_REFERENCE_FREE_VISUAL = "r1120_n100000_cutaway.gif"
 POPULATION_REFERENCE_FREE_STILL = "r1120_n100000_cutaway3d_final.png"
+POPULATION_REFERENCE_FREE_DENSE = "r1120_n100000_midplane_pinn_phase.gif"
 
 
 def _json(path: Path):
@@ -80,7 +81,8 @@ def test_population_manifest_binds_outputs_renderer_records_and_inputs() -> None
         for path in paths:
             assert media["outputs"][path.name] == {"sha256": _sha256(path), "bytes": path.stat().st_size}
     assert {path.name for path in POPULATION.iterdir() if path.is_file()} == (
-        {"asset_manifest.json", POPULATION_REFERENCE_FREE_VISUAL, POPULATION_REFERENCE_FREE_STILL}
+        {"asset_manifest.json", POPULATION_REFERENCE_FREE_VISUAL, POPULATION_REFERENCE_FREE_STILL,
+         POPULATION_REFERENCE_FREE_DENSE}
         | set(media["outputs"])
     )
     cutaway_path = f"media/population_scaling/{POPULATION_REFERENCE_FREE_VISUAL}"
@@ -91,6 +93,10 @@ def test_population_manifest_binds_outputs_renderer_records_and_inputs() -> None
     assert still_path in (ROOT / "docs" / "TECHNICAL_REPORT.md").read_text(encoding="utf-8").replace("../media/", "media/")
     assert still_path in (ROOT / "docs" / "MEDIA_GALLERY.md").read_text(encoding="utf-8")
     assert f"  {still_path}" in manifest
+    dense_path = f"media/population_scaling/{POPULATION_REFERENCE_FREE_DENSE}"
+    assert dense_path in (ROOT / "README.md").read_text(encoding="utf-8")
+    assert dense_path in (ROOT / "docs" / "MEDIA_GALLERY.md").read_text(encoding="utf-8")
+    assert f"  {dense_path}" in manifest
     assert media["camera"]["palette_entries"] == 5000
     assert HEX_DIGEST.fullmatch(media["camera"]["palette_sha256"])
     assert media["alive_rule"] == "volume > 1e-6 in the per-step volume table"
