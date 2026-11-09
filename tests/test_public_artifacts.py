@@ -259,6 +259,7 @@ def test_readme_exposes_current_and_retained_animations() -> None:
         "media/phaselocal_n150/phaselocal_n150_reference_vs_pinn_phase.gif",
         "media/population_scaling/r416_n5000_reference_vs_pinn_phase.gif",
         "media/population_scaling/r1120_n100000_cutaway.gif",
+        "media/population_scaling/r1120_n100000_midplane_pinn_phase.gif",
     ]
     assert "docs/MEDIA_GALLERY.md" in readme
     reachable = readme + gallery

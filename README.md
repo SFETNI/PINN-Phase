@@ -119,6 +119,13 @@ Each row is scoped to the named runs; criteria, horizons, and limitations are in
 
 *This reference-free animation places the initial state beside the evolving state. Over the common range with the 5,000-grain reference, the maximum absolute N(t)/N0 difference is 0.00865; see the [population-size report section](docs/TECHNICAL_REPORT.md#population-size-with-phase-channels).*
 
+<p align="center">
+  <img src="media/population_scaling/r1120_n100000_midplane_pinn_phase.gif" width="760"
+       alt="Full central plane of the 100,000-grain run from the initial state to the end of the run, every grain cut by the plane drawn from saved labels.">
+</p>
+
+*The full central plane of the same run, from the initial state to the end of the run. Every grain cut by the plane is drawn from saved labels; the counter gives the grains alive in the whole domain.*
+
 The [media gallery](docs/MEDIA_GALLERY.md) indexes the complete visual record, including companion cases omitted from this shorter results sequence.
 
 ## Quick start
