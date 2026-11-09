@@ -14,7 +14,7 @@ they do not replace the quantitative records in
 | `media/current_results/n64_dense_reference_vs_pinn_phase.gif` | Dense 64-grain coarsening, horizon-extension sensitivity run |
 
 The two `current_results` animations are rendered by
-`scripts/render_current_results.py` from frozen arrays that are too large to
+`scripts/render_current_results.py` from source arrays that are too large to
 distribute in this release. Their `asset_manifest.json` records the SHA-256 of
 every source artifact, the renderer digest, and every number drawn on the frames,
 each recomputed at render time rather than transcribed. Grain colours are fixed
@@ -42,7 +42,7 @@ autonomous extrapolation beyond it. Read that mark correctly:
 - **Both regions are labelled inside the panel**, so the animation carries its
   own explanation when it travels away from this page.
 - **Only the rollout advances.** The reference grain count is drawn **complete
-  and fixed** across the whole axis — it is the backdrop the prediction is read
+  and fixed** across the whole axis â€” it is the backdrop the prediction is read
   against, not part of the animation, and it spans the boundary as a **held-out
   comparator, used for evaluation only** that was never supplied to the model on
   either side. What moves is the model's own trajectory: the prediction and the
@@ -70,7 +70,7 @@ under `benchmarks/n25_transfer/`, and bound by
 input manifest digest alongside each asset.
 
 Read the animations with two facts in mind. The field panels are argmax label
-maps at the saved cadence — 13 non-uniformly spaced steps between 0 and 12,000 —
+maps at the saved cadence â€” 13 non-uniformly spaced steps between 0 and 12,000 â€”
 not a continuous rollout, and the step number is printed on every frame. The
 active-grain staircases underneath are computed at full per-step resolution. The
 discrepancy panel is empty at step 0 because that frame is the initial condition
@@ -93,11 +93,16 @@ outputs and recomputed counters to the phase-local record.
 |---|---|
 | `media/population_scaling/r240_n1000_reference_vs_pinn_phase.gif` | Reference and PINN-Phase paired saved states for three 1,000-grain microstructures from t = 0 to 135 |
 | `media/population_scaling/r416_n5000_reference_vs_pinn_phase.gif` | Reference and PINN-Phase paired saved states for the 5,000-grain microstructure from t = 0 to 50 |
+| `media/population_scaling/r1120_n100000_cutaway.gif` | Initial and evolving cutaway views for the reference-free 100,000-grain run |
+| `media/population_scaling/r1120_n100000_cutaway3d_final.png` | Three-dimensional cutaway of the whole domain at the end of the reference-free 100,000-grain run, drawn from the stored grain labels |
 
 Both animations include a static poster. They are rendered from the released
 population arrays by `scripts/render_population_scaling_media.py`; the shared
 manifest binds the source archives, renderer, outputs, pixel identities, and
 recomputed alive-grain and label-disagreement counters.
+
+The 100,000-grain cutaway is reference-free and is bound by the root release
+manifest. Its quantitative curves come from the compact population record.
 
 ## Retained method and benchmark media
 
@@ -105,8 +110,8 @@ recomputed alive-grain and label-disagreement counters.
 |---|---|---|
 | `media/method_loop_hybrid_rollout.gif` | Autoregressive update loop of the first-generation hybrid model | Architecture context; not a diagram of the permutation-equivariant encoder |
 | `media/framework_hybrid_rollout.png` | Static schematic of the same family | Retained architecture context |
-| `media/n8_64_reference_vs_pinn_phase.gif` | 64³ eight-phase cube, one designed extinction | Current completed single-case evidence |
-| `media/n16_96_reference_vs_pinn_phase.gif` | 96³ sixteen-phase cube, three designed extinctions | Current completed single-case evidence |
+| `media/n8_64_reference_vs_pinn_phase.gif` | 64Â³ eight-phase cube, one designed extinction | Current completed single-case evidence |
+| `media/n16_96_reference_vs_pinn_phase.gif` | 96Â³ sixteen-phase cube, three designed extinctions | Current completed single-case evidence |
 | `media/triple_junction_h1024_reference_vs_pinn_phase.gif` | Four-phase junction relaxation | Retained completed demonstration |
 | `media/scalar_3d_spherical_reference_vs_pinn_phase.gif` | Spherical-grain shrinkage in 3D | Retained completed demonstration |
 | `media/scalar_shrinkage_reference.gif` | Scalar reference evolution | Reference-only onboarding visual |
@@ -127,7 +132,7 @@ public snapshot.
   the two must never be conflated or averaged.
 - The 25-grain cascade animation is development evidence: the model was trained
   on that initial condition. Only the transfer cohort was prospectively fixed.
-- The 64³ and 96³ cubes are individual designed cases, not evidence of
+- The 64Â³ and 96Â³ cubes are individual designed cases, not evidence of
   statistical 3D transfer.
 - Saved-frame extinction agreement has the resolution of the saved cadence; it
   is not a continuous-time equality claim.

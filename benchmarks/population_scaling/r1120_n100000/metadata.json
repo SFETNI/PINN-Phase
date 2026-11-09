@@ -1,0 +1,19 @@
+{
+  "alive_threshold_voxels": 1e-06,
+  "final_alive": 41104,
+  "final_extinctions": 58896,
+  "final_step": 7208,
+  "final_time": 72.08,
+  "grid_side": 1120,
+  "hardware_scope": "one node with four GPUs",
+  "initial_grains": 100000,
+  "returns": 0,
+  "schema": "PINN_PHASE_POPULATION_100K_RECORD_V1",
+  "size_distribution_min_volume_voxels": 1.0,
+  "source_sha256": {
+    "evidence.json": "bf55a159fc63f6a9b24d2b49478fb4ea216f922d654dd027ec88a5a2eacf24b8",
+    "extinction.npz": "5de8b7c279cce1187230ea42a091190dfa6b7cabd65e5107c19b0cf975550e6b",
+    "volumes.npz": "ac46cef9c0a8e38a74b7078e46945866e8248f8bdea12211eee65fad45833e4c"
+  },
+  "time_step": 0.01
+}

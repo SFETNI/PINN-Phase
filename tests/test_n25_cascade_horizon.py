@@ -153,9 +153,9 @@ def test_extrapolation_interval_is_stated_as_7904_steps_everywhere() -> None:
     beyond = " ".join(annotation["beyond_detail"])
     assert "4,097" in beyond and "12,000" in beyond
     assert "0–4,096" in " ".join(annotation["within_detail"])
-    readme = (ROOT / "README.md").read_text(encoding="utf-8")
-    assert readme.count("7,904") >= 2
-    assert "4,096-step horizon" in readme
+    report = (ROOT / "docs/TECHNICAL_REPORT.md").read_text(encoding="utf-8")
+    assert report.count("7,904") >= 2
+    assert "4,096-step horizon" in report
 
 
 def test_both_regions_carry_a_persistent_label_in_every_frame() -> None:
@@ -230,8 +230,12 @@ def test_nothing_claims_training_or_labels_during_the_displayed_rollout() -> Non
     assert "development evidence" in frame_text
     assert "trained on this initial condition" in frame_text
 
-    readme = " ".join((ROOT / "README.md").read_text(encoding="utf-8").split())
-    section = readme[readme.index("### The 25-grain cascade"):readme.index("## Dense 64-grain")]
+    report = " ".join(
+        (ROOT / "docs/TECHNICAL_REPORT.md").read_text(encoding="utf-8").split()
+    )
+    section = report[
+        report.index("### The 25-grain cascade"):report.index("## Dense 64-grain")
+    ]
     assert "within the represented training horizon" in section
     assert "autonomous extrapolation" in section
     assert "The whole rollout is autonomous" in section
