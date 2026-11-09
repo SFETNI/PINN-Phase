@@ -1,0 +1,82 @@
+{
+  "normalized_radius_comparison": {
+    "definition": "two-sample KS distance for R/<R>, using grains above one voxel",
+    "matched_times": [
+      {
+        "ks_distance": 0.011276831956041941,
+        "samples_100k": 99874,
+        "samples_5000_reference": 4994,
+        "step": 500,
+        "time": 5.0
+      },
+      {
+        "ks_distance": 0.010336135661527968,
+        "samples_100k": 98430,
+        "samples_5000_reference": 4927,
+        "step": 1000,
+        "time": 10.0
+      },
+      {
+        "ks_distance": 0.00649742757663041,
+        "samples_100k": 89694,
+        "samples_5000_reference": 4460,
+        "step": 2000,
+        "time": 20.0
+      },
+      {
+        "ks_distance": 0.011451215664034287,
+        "samples_100k": 77908,
+        "samples_5000_reference": 3878,
+        "step": 3000,
+        "time": 30.0
+      },
+      {
+        "ks_distance": 0.013086329566947164,
+        "samples_100k": 66628,
+        "samples_5000_reference": 3332,
+        "step": 4000,
+        "time": 40.0
+      },
+      {
+        "ks_distance": 0.011758806093620455,
+        "samples_100k": 57051,
+        "samples_5000_reference": 2885,
+        "step": 5000,
+        "time": 50.0
+      },
+      {
+        "ks_distance": 0.009871190586450196,
+        "samples_100k": 50746,
+        "samples_5000_reference": 2560,
+        "step": 5750,
+        "time": 57.5
+      },
+      {
+        "ks_distance": 0.011464690608247285,
+        "samples_100k": 41048,
+        "samples_5000_reference": 2061,
+        "step": 7208,
+        "time": 72.08
+      }
+    ],
+    "maximum_ks_distance": 0.013086329566947164,
+    "minimum_ks_distance": 0.00649742757663041
+  },
+  "population_fraction_comparison": {
+    "common_end_time": 72.08,
+    "common_points": 7209,
+    "common_start_time": 0.0,
+    "comparator": "5,000-grain reference simulation",
+    "maximum_absolute_difference": 0.008650000000000047,
+    "maximum_at_step": 5273,
+    "maximum_at_time": 52.730000000000004
+  },
+  "run": {
+    "grid_side": 1120,
+    "horizon_step": 7208,
+    "horizon_time": 72.08,
+    "initial_grains": 100000,
+    "survivors": 41104
+  },
+  "schema": "PINN_PHASE_POPULATION_100K_COMPARISON_V1"
+}

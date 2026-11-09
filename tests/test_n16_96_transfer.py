@@ -121,15 +121,15 @@ def test_public_names_are_complete_and_internal_ids_are_confined_to_provenance()
 
 
 def test_readme_and_benchmark_record_are_numerically_synchronized() -> None:
-    readme = (ROOT / "README.md").read_text(encoding="utf-8")
+    report = (ROOT / "docs/TECHNICAL_REPORT.md").read_text(encoding="utf-8")
     benchmark = (ROOT / "benchmarks/n16_96_transfer/README.md").read_text(encoding="utf-8")
-    for text in (readme, benchmark):
+    for text in (report, benchmark):
         assert "step 1600" in text
         assert "3200" in text
         assert "Five of six" in text or "five of six" in text
-    assert "95.06" in readme and "95.83" in readme
-    assert "exact 13-grain terminal active set" in readme
-    assert "all three extinction identities" in readme
+    assert "95.06" in report and "95.83" in report
+    assert "exact 13-grain terminal active set" in report
+    assert "all three extinction identities" in report
 
 
 def test_same_checkpoint_is_reused_without_duplicate_public_weights() -> None:

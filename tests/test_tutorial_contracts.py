@@ -41,7 +41,8 @@ def test_tutorial_files_and_local_links_exist() -> None:
                 assert (path.parent / relative).is_file(), (
                     f"broken local tutorial link in {path.relative_to(ROOT)}: {target}"
                 )
-    assert "docs/tutorials/README.md" in _text(ROOT / "README.md")
+    report = _text(ROOT / "docs/TECHNICAL_REPORT.md")
+    assert "tutorials/README.md" in report
 
 
 def test_physics_first_curriculum_structure_and_core_terms() -> None:

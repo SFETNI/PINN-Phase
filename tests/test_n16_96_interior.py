@@ -33,9 +33,9 @@ COHORT_MANIFEST_SHA256 = "973357384e676123b16c2cc17dcb5b7f2486dc898116ac062dfffd
 CASE_SCORE_SHA256 = "dcdc25d9aa6b1da4c571f4451ec02a3fa46e0bb5ca0d02676a4975a76086d699"
 EXPECTED_SCORE_SHA256 = "9f12027fa05063df7e9dd0f6abcb5135a302fd07fe66b304905cf25fa30aaaed"
 
-#: The README block this asset is published in. The claim locks are applied to it,
+#: The report block this asset is published in. The claim locks are applied to it,
 #: because a caption is a claim surface exactly as the canvas and the manifest are.
-README_MARKER = "**Inside one unseen cube:**"
+REPORT_MARKER = "**Inside one unseen cube:**"
 
 # Outer-face voxel counts per saved step for the three dying channels — verified
 # against the sealed arrays independently three times (analysis, implementation,
@@ -65,17 +65,17 @@ def manifest() -> dict:
     return json.loads(MANIFEST.read_text(encoding="utf-8"))
 
 
-def readme_section() -> str:
-    """The published README block for this asset, from its lead-in to the next rule."""
-    text = (ROOT / "README.md").read_text(encoding="utf-8")
-    assert README_MARKER in text, "the interior asset has no README block"
-    section = text[text.index(README_MARKER):]
+def report_section() -> str:
+    """The published report block for this asset, from its lead-in to the next rule."""
+    text = (ROOT / "docs/TECHNICAL_REPORT.md").read_text(encoding="utf-8")
+    assert REPORT_MARKER in text, "the interior asset has no technical-report block"
+    section = text[text.index(REPORT_MARKER):]
     for stop in ("\n---\n", "\n## "):
         cut = section.find(stop)
         if cut != -1:
             section = section[:cut]
-    assert f"media/n16_96_interior/{GIF_NAME}" in section, (
-        "the README block does not reference the shipped animation"
+    assert f"../media/n16_96_interior/{GIF_NAME}" in section, (
+        "the technical-report block does not reference the shipped animation"
     )
     return section
 
@@ -110,7 +110,7 @@ def test_claim_locks() -> None:
 
     corpus = {"renderer string literals": "\n".join(literals),
               "asset_manifest.json": MANIFEST.read_text(encoding="utf-8"),
-              "README.md interior section": readme_section()}
+              "TECHNICAL_REPORT.md interior section": report_section()}
 
     for doc, text in corpus.items():
         low = text.lower()

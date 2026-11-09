@@ -249,29 +249,45 @@ def test_retained_media_roles_prevent_cross_release_claim_substitution() -> None
 def test_readme_exposes_current_and_retained_animations() -> None:
     root = Path(__file__).resolve().parents[1]
     readme = (root / "README.md").read_text(encoding="utf-8")
-    for asset in (
+    gallery = (root / "docs/MEDIA_GALLERY.md").read_text(encoding="utf-8")
+    readme_visuals = re.findall(r'<img src="([^"]+)"', readme)
+    assert readme_visuals == [
         "media/method_loop_hybrid_rollout.gif",
+        "media/current_results/n25_cascade_reference_vs_pinn_phase.gif",
+        "media/n25_transfer/id_02_reference_vs_pinn_phase.gif",
+        "media/n8_128_transfer/n8_128_unseen_reference_vs_pinn_phase.gif",
+        "media/phaselocal_n150/phaselocal_n150_reference_vs_pinn_phase.gif",
+        "media/population_scaling/r416_n5000_reference_vs_pinn_phase.gif",
+        "media/population_scaling/r1120_n100000_cutaway.gif",
+    ]
+    assert "docs/MEDIA_GALLERY.md" in readme
+    reachable = readme + gallery
+    for asset in (
+        "media/current_results/n25_cascade_reference_vs_pinn_phase.gif",
+        "media/current_results/n64_dense_reference_vs_pinn_phase.gif",
         "media/n25_transfer/id_02_reference_vs_pinn_phase.gif",
         "media/n25_transfer/terminal_atlas.png",
+        "media/method_loop_hybrid_rollout.gif",
         "media/triple_junction_h1024_reference_vs_pinn_phase.gif",
         "media/multigrain_denser_n44_reference_vs_pinn_phase.gif",
         "media/scalar_3d_spherical_reference_vs_pinn_phase.gif",
         "media/n8_64_reference_vs_pinn_phase.gif",
         "media/n16_96_reference_vs_pinn_phase.gif",
     ):
-        assert asset in readme
+        assert asset in reachable
         assert (root / asset).is_file()
-    assert "docs/MEDIA_GALLERY.md" in readme
-    assert "superseded" in readme.lower()
+    assert "superseded" in gallery.lower()
 
 
 def test_readme_legacy_numbers_are_bound_in_the_public_evidence_ledger() -> None:
     root = Path(__file__).resolve().parents[1]
     readme = (root / "README.md").read_text(encoding="utf-8")
+    report = (root / "docs/TECHNICAL_REPORT.md").read_text(encoding="utf-8")
+    public_evidence = readme + report
     ledger = (root / "docs/COMPLETED_EVIDENCE_LEDGER.md").read_text(
         encoding="utf-8"
     )
-    # Values still shown on the front page must be bound in the ledger.
+    # Values shown in the public narrative must remain bound in the ledger.
     for value in (
         "3.27%",
         "6.54%",
@@ -283,13 +299,13 @@ def test_readme_legacy_numbers_are_bound_in_the_public_evidence_ledger() -> None
         "R² 0.9999",
         "94.01%",
     ):
-        assert value in readme, value
+        assert value in public_evidence, value
         assert value in ledger, value
     # Values belonging to superseded model variants are ledger-only.
     for value in ("17.20%", "39.70%", "18.3%", "38.8%"):
-        assert value not in readme, value
+        assert value not in public_evidence, value
         assert value in ledger, value
-    assert "bound-enforcement" in readme
+    assert "bound-enforcement" in public_evidence
     assert "bound-enforcement" in ledger
     # The provenance root is the digest of each earlier-public source document,
     # which identifies it independently of any repository or revision.
@@ -303,12 +319,12 @@ def test_readme_legacy_numbers_are_bound_in_the_public_evidence_ledger() -> None
 
 
 def test_readme_states_the_failed_case_and_refuses_the_post_horizon_rescue() -> None:
-    readme = (Path(__file__).resolve().parents[1] / "README.md").read_text(
+    report = (Path(__file__).resolve().parents[1] / "docs/TECHNICAL_REPORT.md").read_text(
         encoding="utf-8"
     )
-    assert "12,933" in readme
-    assert "does not rescue" in readme.lower()
-    assert "7 of 8" in readme
+    assert "12,933" in report
+    assert "does not rescue" in report.lower()
+    assert "7 of 8" in report
 
 
 CURRENT_RESULT_ASSETS = (
@@ -324,12 +340,15 @@ def test_current_result_media_are_present_bound_and_referenced() -> None:
     media = root / "media/current_results"
     manifest = json.loads((media / "asset_manifest.json").read_text(encoding="utf-8"))
     readme = (root / "README.md").read_text(encoding="utf-8")
+    report = (root / "docs/TECHNICAL_REPORT.md").read_text(encoding="utf-8")
+    gallery = (root / "docs/MEDIA_GALLERY.md").read_text(encoding="utf-8")
+    reachable = readme + report + gallery
     assert set(manifest["assets"]) == set(CURRENT_RESULT_ASSETS)
     for name in CURRENT_RESULT_ASSETS:
         assert _sha256(media / name) == manifest["assets"][name]["sha256"]
     for name in ("n25_cascade_reference_vs_pinn_phase.gif",
                  "n64_dense_reference_vs_pinn_phase.gif"):
-        assert f"media/current_results/{name}" in readme
+        assert f"media/current_results/{name}" in reachable
     present = {path.name for path in media.iterdir() if path.is_file()}
     assert present == set(CURRENT_RESULT_ASSETS) | {"asset_manifest.json"}
     assert manifest["renderer_sha256"] == _sha256(root / "scripts/render_current_results.py")
@@ -383,11 +402,27 @@ def test_front_page_prose_avoids_superseded_checkpoint_language() -> None:
 
 
 def test_readme_headings_follow_the_required_ladder() -> None:
-    readme = (Path(__file__).resolve().parents[1] / "README.md").read_text(
-        encoding="utf-8"
-    )
+    root = Path(__file__).resolve().parents[1]
+    readme = (root / "README.md").read_text(encoding="utf-8")
     headings = [line[3:].strip() for line in readme.splitlines() if line.startswith("## ")]
-    expected = [
+    assert headings == [
+        "What PINN-Phase does",
+        "Formulation in brief",
+        "Highlights",
+        "Selected results",
+        "Quick start",
+        "Verify this archive",
+        "Repository map",
+        "Predecessor work",
+        "Paper and citation",
+        "License",
+    ]
+
+    report = (root / "docs/TECHNICAL_REPORT.md").read_text(encoding="utf-8")
+    report_headings = [
+        line[3:].strip() for line in report.splitlines() if line.startswith("## ")
+    ]
+    scientific_ladder = [
         "Related Paper",
         "Rollout, temporal extrapolation, and generalisation",
         "How PINN-Phase advances a phase field",
@@ -398,19 +433,19 @@ def test_readme_headings_follow_the_required_ladder() -> None:
         "Three-dimensional progression",
         "Results at a glance",
     ]
-    assert headings[: len(expected)] == expected
-    assert headings.count("Dense 64-grain coarsening") == 1
+    assert report_headings[: len(scientific_ladder)] == scientific_ladder
+    assert report_headings.count("Dense 64-grain coarsening") == 1
 
 
 def test_primary_and_sensitivity_64_grain_results_cannot_be_conflated() -> None:
     root = Path(__file__).resolve().parents[1]
-    readme = (root / "README.md").read_text(encoding="utf-8")
+    report = (root / "docs/TECHNICAL_REPORT.md").read_text(encoding="utf-8")
     ledger = (root / "docs/COMPLETED_EVIDENCE_LEDGER.md").read_text(encoding="utf-8")
     for primary in ("1.35%", "3.50%", "6.09%", "69.89%", "0.9767"):
-        assert primary in readme, primary
+        assert primary in report, primary
     for sensitivity in ("0.85%", "2.07%", "3.97%", "43 of 43"):
-        assert sensitivity in readme, sensitivity
-    lowered = readme.lower()
+        assert sensitivity in report, sensitivity
+    lowered = report.lower()
     assert "registered primary" in lowered
     assert "sensitivity" in lowered
     assert "not independent confirmation" in lowered or "not an independent" in lowered
@@ -421,23 +456,24 @@ def test_primary_and_sensitivity_64_grain_results_cannot_be_conflated() -> None:
 
 
 def test_readme_marks_development_versus_prospective_evidence() -> None:
-    readme = (Path(__file__).resolve().parents[1] / "README.md").read_text(
+    report = (Path(__file__).resolve().parents[1] / "docs/TECHNICAL_REPORT.md").read_text(
         encoding="utf-8"
     )
-    assert "development evidence" in readme.lower()
-    assert "timing anchor" in readme.lower()
+    assert "development evidence" in report.lower()
+    assert "timing anchor" in report.lower()
     for value in ("1.46%", "44.37%", "0.81%", "26.59%", "0.95%", "1.13%", "51.25%"):
-        assert value in readme, value
+        assert value in report, value
 
 
 def test_release_summary_distinguishes_the_transfer_cohort_and_stays_timeless() -> None:
     root = Path(__file__).resolve().parents[1]
     readme = (root / "README.md").read_text(encoding="utf-8")
+    report = (root / "docs/TECHNICAL_REPORT.md").read_text(encoding="utf-8")
     scope = (root / "docs/RELEASE_SCOPE.md").read_text(encoding="utf-8")
-    assert "N25 transfer row comprises eight unseen initial conditions and\ntwo stress cases" in readme
-    assert "N16 transfer row comprises six prospectively fixed unseen 96³ microstructures" in readme
-    assert "runs from the root of a fresh extraction" in readme
-    assert "still running" not in readme.lower()
+    assert "N25 transfer row comprises eight unseen initial conditions and\ntwo stress cases" in report
+    assert "N=16 transfer row comprises six prospectively fixed unseen 96³ microstructures" in report
+    assert "runs from the root of a fresh extraction" in report
+    assert "still running" not in (readme + report).lower()
     assert "unfinished native" not in scope.lower()
 
 
@@ -449,10 +485,10 @@ def test_the_documented_workflow_declares_no_environment_prerequisites() -> None
     plus folklore. This pins the two things a reader would otherwise have to know.
     """
     root = Path(__file__).resolve().parents[1]
-    readme = (root / "README.md").read_text(encoding="utf-8")
-    section = readme[readme.index("## Verify this archive"):readme.index("## Installation")]
+    report = (root / "docs/TECHNICAL_REPORT.md").read_text(encoding="utf-8")
+    section = report[report.index("## Verify this archive"):report.index("## Installation")]
     flowed = section.replace("\n", " ")
-    assert "PYTHONDONTWRITEBYTECODE" not in readme, (
+    assert "PYTHONDONTWRITEBYTECODE" not in report, (
         "the documented workflow must not depend on a bytecode environment setting"
     )
     assert "PYTHONPATH" not in section, (
@@ -746,9 +782,9 @@ def test_extrapolation_interval_is_stated_as_3808_steps_everywhere() -> None:
     assert "8,193" in beyond and "12,000" in beyond
     within = " ".join(module.HORIZON_ANNOTATION["within_detail"])
     assert "0–8,192" in within
-    readme = (root / "README.md").read_text(encoding="utf-8")
-    assert readme.count("3,808") >= 2
-    assert "8,192" in readme
+    report = (root / "docs/TECHNICAL_REPORT.md").read_text(encoding="utf-8")
+    assert report.count("3,808") >= 2
+    assert "8,192" in report
 
 
 def test_both_regions_carry_a_persistent_label_in_every_frame() -> None:
@@ -782,8 +818,8 @@ def test_region_and_boundary_labels_are_readable_at_the_readme_width() -> None:
 
     root = Path(__file__).resolve().parents[1]
     module = _renderer()
-    readme = (root / "README.md").read_text(encoding="utf-8")
-    assert 'n64_dense_reference_vs_pinn_phase.gif" width="900"' in readme
+    report = (root / "docs/TECHNICAL_REPORT.md").read_text(encoding="utf-8")
+    assert 'n64_dense_reference_vs_pinn_phase.gif" width="900"' in report
     with Image.open(root / N64_POSTER) as poster:
         native_width = poster.width
     scale = 900 / native_width
@@ -811,11 +847,11 @@ def test_autonomous_rollout_is_stated_on_both_sides_of_the_boundary() -> None:
     assert "autonomous rollout" in " ".join(annotation["within_detail"]).lower()
     assert "autonomous" in annotation["beyond_title"].lower()
     assert annotation["model_label"] == "PINN-Phase autonomous rollout"
-    readme = (Path(__file__).resolve().parents[1] / "README.md").read_text(
+    report = (Path(__file__).resolve().parents[1] / "docs/TECHNICAL_REPORT.md").read_text(
         encoding="utf-8"
     )
-    assert "rolled\nautonomously to step 12,000" in readme
-    assert "The whole rollout is autonomous" in readme
+    assert "rolled\nautonomously to step 12,000" in report
+    assert "The whole rollout is autonomous" in report
 
 
 def test_nothing_claims_training_or_labels_during_the_displayed_rollout() -> None:
@@ -851,10 +887,12 @@ def test_nothing_claims_training_or_labels_during_the_displayed_rollout() -> Non
     # Matched against the flowed text, not the source lines: these sentences are
     # rewrapped whenever a word changes, and a test that pins the line breaks
     # fails for reasons that have nothing to do with what it is checking.
-    readme = " ".join((root / "README.md").read_text(encoding="utf-8").split())
-    assert "no post-t0 reference states were used" in readme
-    assert "held-out comparator used for evaluation only" in readme
-    assert "never supplied to the model" in readme
+    report = " ".join(
+        (root / "docs/TECHNICAL_REPORT.md").read_text(encoding="utf-8").split()
+    )
+    assert "no post-t0 reference states were used" in report
+    assert "held-out comparator used for evaluation only" in report
+    assert "never supplied to the model" in report
 
 
 def test_only_the_rollout_advances_and_the_reference_stays_fixed() -> None:
@@ -1108,12 +1146,12 @@ def test_current_64_grain_media_match_their_recorded_digests() -> None:
 def test_registered_primary_and_horizon_sensitivity_stay_separate() -> None:
     root = Path(__file__).resolve().parents[1]
     module = _renderer()
-    readme = (root / "README.md").read_text(encoding="utf-8")
+    report = (root / "docs/TECHNICAL_REPORT.md").read_text(encoding="utf-8")
     assert module.HORIZON_ANNOTATION["status_qualifier"] == "not the registered primary result"
-    assert readme.index("The registered primary result") < readme.index(
+    assert report.index("The registered primary result") < report.index(
         "A post-evaluation sensitivity run"
     )
-    lowered = readme.lower()
+    lowered = report.lower()
     assert "not an independent" in lowered or "not independent confirmation" in lowered
     assert "co-vary" in lowered
     assert module.EXPECTED_SHA256["n64_model"] == (
@@ -1124,15 +1162,15 @@ def test_registered_primary_and_horizon_sensitivity_stay_separate() -> None:
 
 
 def test_every_documented_script_runs_without_installation() -> None:
-    """A script the README tells a reader to run must run in a fresh extraction.
+    """A script the technical report tells a reader to run works without install.
 
     Three of these needed an editable install before R2.2, which made the documented
     sequence fail from an ordinary extraction. Each now puts this repository's src/
     on the path itself, so the property is structural rather than remembered.
     """
     root = Path(__file__).resolve().parents[1]
-    readme = (root / "README.md").read_text(encoding="utf-8")
-    section = readme[readme.index("## Verify this archive"):readme.index("## Installation")]
+    report = (root / "docs/TECHNICAL_REPORT.md").read_text(encoding="utf-8")
+    section = report[report.index("## Verify this archive"):report.index("## Installation")]
     documented = sorted(set(re.findall(r"python (scripts/[a-z0-9_]+\.py)", section)))
     assert len(documented) >= 6, f"expected the workflow to print several scripts: {documented}"
     for relative in documented:
